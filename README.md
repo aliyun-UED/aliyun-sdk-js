@@ -20,6 +20,7 @@ npm install aliyun-sdk
  - 将 sample/oss.js 中需要的参数修改
  - 打开需要执行的某个实例文件，如 GetBucket.js，将其中的参数改成你自己的 oss 实例参数
  - 执行示例文件即可, 如:
+
  ```javascript
  cd samples/oss
  node GetBucket.js
