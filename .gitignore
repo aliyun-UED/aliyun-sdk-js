@@ -1,0 +1,16 @@
+configuration
+node_modules
+npm-debug.log
+coverage.html
+vendor
+.yardoc
+doc
+dist/appinfo.js
+dist/aws-sdk*.js
+dist/tests.js
+
+.idea
+.DS_Store
+config.json
+
+test.js
