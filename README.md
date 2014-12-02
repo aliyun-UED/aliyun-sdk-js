@@ -1,7 +1,5 @@
 # 阿里云 SDK for NodeJS
 
-阿里云 SDK for NodeJS，基于 AWS SDK 开发
-
 ## 技术支持
 请加旺旺群：1489391962
 
@@ -41,6 +39,8 @@ SDK 目前支持下列服务:
 | :------------ |:---------------:| -----:|
 | Aliyun OSS      | ALY.OSS | 2013-10-15 |
 | Aliyun OCS memcached      | ALY.MEMCACHED        |   [BinaryProtocolRevamped](https://code.google.com/p/memcached/wiki/BinaryProtocolRevamped) |
+
+## 我们在代码中参考了 AWS SDK，在此声明。
 
 ## License
 
