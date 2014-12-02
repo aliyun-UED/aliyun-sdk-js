@@ -36,17 +36,10 @@ npm install aliyun-sdk
 
 SDK 目前支持下列服务:
 
-<table>
-  <thead>
-    <th>服务名</th>
-    <th>类名</th>
-    <th>API 版本</th>
-  </thead>
-  <tbody>
-    <tr><td>Aliyun OSS</td><td>ALY.OSS</td><td>2013-10-15</td></tr>
-    <tr><td>MEMCACHED</td><td>ALY.MEMCACHED</td><td>[BinaryProtocolRevamped](https://code.google.com/p/memcached/wiki/BinaryProtocolRevamped)</td></tr>
-  </tbody>
-</table>
+| 服务名  | 类名  | API 版本 |
+| :------------ |:---------------:| -----:|
+| Aliyun OSS      | ALY.OSS | 2013-10-15 |
+| Aliyun OCS memcached      | ALY.MEMCACHED        |   [BinaryProtocolRevamped](https://code.google.com/p/memcached/wiki/BinaryProtocolRevamped) |
 
 ## License
 
