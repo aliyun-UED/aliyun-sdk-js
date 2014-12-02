@@ -51,7 +51,7 @@ memcached.replace('hello', 'new world', function(err, data) {
       return;
     }
 
-    console.log('get success:', data.val.toString());
+    console.log('get success:', data);
 
     memcached.end();
   });

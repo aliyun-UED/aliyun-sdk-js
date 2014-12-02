@@ -2,6 +2,9 @@
 
 阿里云 SDK for NodeJS，基于 AWS SDK 开发
 
+## 技术支持
+请加旺旺群：1489391962
+
 ## 安装
 
 ### Node.js 安装
@@ -14,16 +17,20 @@ npm install aliyun-sdk
 
 ### OSS
 在 samples/oss 目录下的代码示例，使用方法：
- - 将 sample/oss/config_sample.json 另存为 sample/oss/config.json，填入代码中所需参数
- - 用编辑器打开需要执行的示例文件，修改其中的参数满足个人特定环境，然后保存
- - 执行示例文件即可
+ - 将 sample/oss.js 中需要的参数修改
+ - 打开需要执行的某个实例文件，如 GetBucket.js，将其中的参数改成你自己的 oss 实例参数
+ - 执行示例文件即可, 如:
+ ```javascript
+ cd samples/oss
+ node GetBucket.js
+ ```
 
 ### MEMCACHED
 在 samples/memcached 目录下的代码示例，使用方法：
  - 修改 sample/memcached/memcached.js，填入代码中所需参数
  - 执行示例文件即可
 
-更多帮助参考 https://github.com/alevy/memjs, https://github.com/chylvina/node_memcached
+更多帮助参考 https://github.com/chylvina/node_memcached
 
 ## 目前支持的服务
 
@@ -37,7 +44,7 @@ SDK 目前支持下列服务:
   </thead>
   <tbody>
     <tr><td>Aliyun OSS</td><td>ALY.OSS</td><td>2013-10-15</td></tr>
-    <tr><td>MEMCACHED</td><td>ALY.MEMCACHED</td><td></td></tr>
+    <tr><td>MEMCACHED</td><td>ALY.MEMCACHED</td><td>[BinaryProtocolRevamped](https://code.google.com/p/memcached/wiki/BinaryProtocolRevamped)</td></tr>
   </tbody>
 </table>
 
