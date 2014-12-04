@@ -1,7 +1,5 @@
 # 阿里云 SDK for NodeJS
 
-阿里云 SDK for NodeJS，基于 AWS SDK 开发
-
 ## 技术支持
 请加旺旺群：1489391962
 
@@ -20,6 +18,7 @@ npm install aliyun-sdk
  - 将 sample/oss.js 中需要的参数修改
  - 打开需要执行的某个实例文件，如 GetBucket.js，将其中的参数改成你自己的 oss 实例参数
  - 执行示例文件即可, 如:
+
  ```javascript
  cd samples/oss
  node GetBucket.js
@@ -36,17 +35,12 @@ npm install aliyun-sdk
 
 SDK 目前支持下列服务:
 
-<table>
-  <thead>
-    <th>服务名</th>
-    <th>类名</th>
-    <th>API 版本</th>
-  </thead>
-  <tbody>
-    <tr><td>Aliyun OSS</td><td>ALY.OSS</td><td>2013-10-15</td></tr>
-    <tr><td>MEMCACHED</td><td>ALY.MEMCACHED</td><td>[BinaryProtocolRevamped](https://code.google.com/p/memcached/wiki/BinaryProtocolRevamped)</td></tr>
-  </tbody>
-</table>
+| 服务名  | 类名  | API 版本 |
+| :------------ |:---------------:| -----:|
+| Aliyun OSS      | ALY.OSS | 2013-10-15 |
+| Aliyun OCS memcached      | ALY.MEMCACHED        |   [BinaryProtocolRevamped](https://code.google.com/p/memcached/wiki/BinaryProtocolRevamped) |
+
+## 我们在代码中参考了 AWS SDK，在此声明。
 
 ## License
 
