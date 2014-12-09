@@ -24,31 +24,6 @@ npm install aliyun-sdk
  node GetBucket.js
  ```
 
-注意，在版本 1.0.2 后支持 putObject 中 Key 为中文，但是需要将 Key 进行 [utf8](https://github.com/mathiasbynens/utf8.js.git) 编码。如下：
-
- ```javascript
-   oss.putObject({
-       Bucket: 'chylvina',
-       Key: utf8.encode("你好"),          // 注意，在这里需要进行 utf8 编码
-       Body: data,
-       AccessControlAllowOrigin: '',
-       ContentType: 'text/plain',
-       CacheControl: 'no-cache',
-       ContentDisposition: '',
-       ContentEncoding: 'utf-8'
-     },
-     function (err, data) {
-
-       if (err) {
-         console.log('error:', err);
-         return;
-       }
-
-       console.log('success:', data);
-
-     });
- ```
-
 ### MEMCACHED
 在 samples/memcached 目录下的代码示例，使用方法：
  - 修改 sample/memcached/memcached.js，填入代码中所需参数
