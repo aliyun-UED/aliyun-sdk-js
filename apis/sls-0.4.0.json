@@ -1,0 +1,31 @@
+{
+  "format": "rest-json",
+  "apiVersion": "0.4.0",
+  "checksumFormat": "md5",
+  "endpointPrefix": "sls",
+  "globalEndpoint":"cn-hangzhou.sls.aliyuncs.com",
+  "serviceAbbreviation": "Aliyun OSS",
+  "serviceFullName": "Aliyun Simple Log Service",
+  "signatureVersion": "sls",
+  "timestampFormat": "rfc822",
+  "xmlnamespace": "",
+  "operations": {
+    "listLogStores": {
+      "name": "listLogStores",
+      "http": {
+        "method": "GET",
+        "uri": "/projects/{projectName}/logstores/{logStoreName}"
+      },
+      "input": {
+
+      },
+      "output": {
+        "count": 2,
+        "logstores": ["st1", "st2"]
+      }
+    }
+  },
+  "pagination": {
+
+  }
+}
