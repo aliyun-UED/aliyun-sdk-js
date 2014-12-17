@@ -1,0 +1,50 @@
+{
+  "format": "rest-xml",
+  "apiVersion": "2014-11-18",
+  "checksumFormat": "md5",
+  "endpointPrefix": "sls",
+  "globalEndpoint":"oss-cn-hangzhou.aliyuncs.com",
+  "serviceAbbreviation": "Aliyun OSS",
+  "serviceFullName": "Aliyun Simple Log Service",
+  "signatureVersion": "oss",
+  "timestampFormat": "rfc822",
+  "xmlnamespace": "",
+  "operations": {
+    "listLogStores": {
+      "name": "listLogStores",
+      "http": {
+        "method": "GET",
+        "uri": "/logstores"
+      },
+      "input": {
+        "type": "structure",
+        "members": {}
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Buckets": {
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "name": "Bucket",
+              "members": {
+                "CreationDate": {
+                  "type": "timestamp"
+                },
+                "Name": {}
+              }
+            }
+          },
+          "Owner": {
+            "type": "structure",
+            "members": {
+              "DisplayName": {},
+              "ID": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
