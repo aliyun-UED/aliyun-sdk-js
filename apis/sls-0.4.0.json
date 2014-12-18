@@ -3,7 +3,6 @@
   "apiVersion": "0.4.0",
   "checksumFormat": "md5",
   "endpointPrefix": "sls",
-  "globalEndpoint":"cn-hangzhou.sls.aliyuncs.com",
   "serviceAbbreviation": "Aliyun SLS",
   "serviceFullName": "Aliyun Simple Log Service",
   "signatureVersion": "sls",

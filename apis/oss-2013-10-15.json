@@ -3,7 +3,6 @@
   "apiVersion": "2013-10-15",
   "checksumFormat": "md5",
   "endpointPrefix": "oss",
-  "globalEndpoint":"oss-cn-hangzhou.aliyuncs.com",
   "serviceAbbreviation": "Aliyun OSS",
   "serviceFullName": "Aliyun Open Storage Service",
   "signatureVersion": "oss",
