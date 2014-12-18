@@ -4,24 +4,34 @@
   "checksumFormat": "md5",
   "endpointPrefix": "sls",
   "globalEndpoint":"cn-hangzhou.sls.aliyuncs.com",
-  "serviceAbbreviation": "Aliyun OSS",
+  "serviceAbbreviation": "Aliyun SLS",
   "serviceFullName": "Aliyun Simple Log Service",
   "signatureVersion": "sls",
   "timestampFormat": "rfc822",
   "xmlnamespace": "",
   "operations": {
     "listLogStores": {
-      "name": "listLogStores",
+      "name": "ListLogStores",
       "http": {
         "method": "GET",
-        "uri": "/projects/{projectName}/logstores/{logStoreName}"
+        "uri": "/logstores"
       },
       "input": {
-
+        "type": "structure",
+        "members": {}
       },
       "output": {
-        "count": 2,
-        "logstores": ["st1", "st2"]
+        "type": "structure",
+        "members": {
+          "count": {
+            "type": "integer"
+          },
+          "logstores": {
+            "type": "list",
+            "members": {
+            }
+          }
+        }
       }
     }
   },
