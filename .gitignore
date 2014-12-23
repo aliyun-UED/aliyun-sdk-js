@@ -13,5 +13,6 @@ dist/tests.js
 config.json
 
 test.js
+test_ecs.js
 test_oss.js
 test_sls.js
