@@ -1,16 +1,16 @@
 {
   "format": "query",
-  "apiVersion": "0.4.0",
+  "apiVersion": "2014-05-26",
   "checksumFormat": "md5",
-  "endpointPrefix": "sls",
-  "serviceAbbreviation": "Aliyun SLS",
-  "serviceFullName": "Aliyun Simple Log Service",
-  "signatureVersion": "sls",
+  "endpointPrefix": "ecs",
+  "serviceAbbreviation": "Aliyun ECS",
+  "serviceFullName": "Aliyun Elastic Compute Service",
+  "signatureVersion": "top",
   "timestampFormat": "rfc822",
   "xmlnamespace": "",
   "operations": {
     "describeDisks": {
-      "name": "DescribeDisks",
+      "name": "ecs.aliyuncs.com.DescribeDisks.2014-05-26",
       "http": {
         "method": "GET",
         "uri": "/logstores"
