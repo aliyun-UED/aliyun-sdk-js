@@ -10,10 +10,10 @@
   "xmlnamespace": "",
   "operations": {
     "describeDisks": {
-      "name": "ecs.aliyuncs.com.DescribeDisks.2014-05-26",
+      "name": "DescribeDisks",
       "http": {
         "method": "GET",
-        "uri": "/logstores"
+        "uri": "/"
       },
       "input": {
         "type": "structure",
