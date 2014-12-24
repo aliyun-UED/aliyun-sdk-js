@@ -17,7 +17,9 @@
       },
       "input": {
         "type": "structure",
-        "members": {}
+        "members": {
+
+        }
       },
       "output": {
         "type": "structure",
