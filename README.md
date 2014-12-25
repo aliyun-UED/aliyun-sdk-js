@@ -9,8 +9,8 @@
 
 ```javascript
 ALY.config.update({
-  "accessKeyId": "在阿里云OSS申请的 accessKeyId",
-  "secretAccessKey": "在阿里云OSS申请的 secretAccessKey"
+  accessKeyId: "在阿里云OSS申请的 accessKeyId",
+  secretAccessKey: "在阿里云OSS申请的 secretAccessKey"
 });
 
 var oss = new ALY.OSS({
@@ -22,8 +22,8 @@ var oss = new ALY.OSS({
 
 ```javascript
 var oss = new ALY.OSS({
-  "accessKeyId": "在阿里云OSS申请的 accessKeyId",
-  "secretAccessKey": "在阿里云OSS申请的 secretAccessKey",
+  accessKeyId: "在阿里云OSS申请的 accessKeyId",
+  secretAccessKey: "在阿里云OSS申请的 secretAccessKey",
   endpoint: 'http://oss-cn-hangzhou.aliyuncs.com',
   apiVersion: '2013-10-15'
 });
@@ -52,6 +52,7 @@ npm install aliyun-sdk
  cd samples/oss
  node GetBucket.js
  ```
+
 ### CDN
 在 samples/cdn 目录下的代码示例，使用方法：
  - 将 sample/test.js 中需要的参数修改
@@ -77,9 +78,9 @@ SDK 目前支持下列服务:
 | :------------ |:---------------:| -----:| -----:|
 | Aliyun OSS      | ALY.OSS | 2013-10-15 | [OSS API手册](http://imgs-storage.cdn.aliyuncs.com/help/oss/oss%20api%2020140828.pdf) |
 | Aliyun CDN      | ALY.CDN | 2013-11-11 | [CDN API手册](http://imgs-storage.cdn.aliyuncs.com/help/cdn/cdn%20open%20api%20v1.6.pdf) |
-| Aliyun OCS memcached      | ALY.MEMCACHED        |   [BinaryProtocolRevamped](https://code.google.com/p/memcached/wiki/BinaryProtocolRevamped) |
+| Aliyun OCS memcached      | ALY.MEMCACHED        | | [BinaryProtocolRevamped](https://code.google.com/p/memcached/wiki/BinaryProtocolRevamped) |
 
-### 我们在代码中参考了 AWS SDK，在此声明。
+#### 我们在代码中参考了 AWS SDK，在此声明。
 
 ## License
 
