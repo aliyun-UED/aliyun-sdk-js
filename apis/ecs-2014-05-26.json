@@ -1,0 +1,44 @@
+{
+  "format": "query",
+  "apiVersion": "2014-05-26",
+  "checksumFormat": "md5",
+  "endpointPrefix": "ecs",
+  "serviceAbbreviation": "Aliyun ECS",
+  "serviceFullName": "Aliyun Elastic Compute Service",
+  "signatureVersion": "top",
+  "timestampFormat": "rfc822",
+  "xmlnamespace": "",
+  "operations": {
+    "describeDisks": {
+      "name": "DescribeDisks",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "RegionId": {
+            "required": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "count": {
+            "type": "integer"
+          },
+          "logstores": {
+            "type": "list",
+            "members": {
+            }
+          }
+        }
+      }
+    }
+  },
+  "pagination": {
+
+  }
+}

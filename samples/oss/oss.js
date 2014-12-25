@@ -1,11 +1,8 @@
 var ALY = require('../../index.js');
 
-ALY.config.update({
-  "accessKeyId": "在阿里云OSS申请的 accessKeyId",
-  "secretAccessKey": "在阿里云OSS申请的 secretAccessKey"
-});
-
 var oss = new ALY.OSS({
+  "accessKeyId": "在阿里云OSS申请的 accessKeyId",
+  "secretAccessKey": "在阿里云OSS申请的 secretAccessKey",
   // 根据你的 oss 实例所在地区选择填入
   // 杭州：http://oss-cn-hangzhou.aliyuncs.com
   // 北京：http://oss-cn-beijing.aliyuncs.com

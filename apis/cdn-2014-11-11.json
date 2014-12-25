@@ -1,0 +1,138 @@
+{
+  "format": "query",
+  "apiVersion": "2014-11-11",
+  "checksumFormat": "md5",
+  "endpointPrefix": "cdn",
+  "serviceAbbreviation": "Aliyun CDN",
+  "serviceFullName": "Aliyun Content Delivery Network",
+  "signatureVersion": "top",
+  "timestampFormat": "top",
+  "xmlnamespace": "",
+  "operations": {
+    "refreshObjectCaches": {
+      "name": "RefreshObjectCaches",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "ObjectType": {
+            "required": true
+          },
+          "ObjectPath": {
+            "required": true
+          }
+        }
+      }
+    },
+    "describeCdnService": {
+      "name": "DescribeCdnService",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
+    "describeCdnMonitorData": {
+      "name": "DescribeCdnMonitorData",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DomainName": {
+            "required": true
+          },
+          "StartTime": {
+            "type": "timestamp",
+            "format": "top"
+          },
+          "EndTime": {
+            "type": "timestamp",
+            "format": "top"
+          }
+        }
+      }
+    },
+    "describeRefreshTasks": {
+      "name": "DescribeRefreshTasks",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "TaskId": {
+          },
+          "ObjectPath": {
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "describeUserDomains": {
+      "name": "DescribeUserDomains",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "modifyCdnService": {
+      "name": "ModifyCdnService",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "InternetChargeType": {
+            "type": "integer",
+            "required": true
+          }
+        }
+      }
+    },
+    "openCdnService": {
+      "name": "OpenCdnService",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "InternetChargeType": {
+            "type": "integer",
+            "required": true
+          }
+        }
+      }
+    }
+  }
+}
