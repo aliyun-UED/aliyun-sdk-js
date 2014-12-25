@@ -6,7 +6,7 @@
   "serviceAbbreviation": "Aliyun CDN",
   "serviceFullName": "Aliyun Content Delivery Network",
   "signatureVersion": "top",
-  "timestampFormat": "rfc822",
+  "timestampFormat": "top",
   "xmlnamespace": "",
   "operations": {
     "refreshObjectCaches": {
@@ -53,12 +53,82 @@
           },
           "StartTime": {
             "type": "timestamp",
-            "format": "iso8601",
-            "required": true
+            "format": "top"
           },
           "EndTime": {
             "type": "timestamp",
-            "format": "iso8601",
+            "format": "top"
+          }
+        }
+      }
+    },
+    "describeRefreshTasks": {
+      "name": "DescribeRefreshTasks",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "TaskId": {
+          },
+          "ObjectPath": {
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "describeUserDomains": {
+      "name": "DescribeUserDomains",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "modifyCdnService": {
+      "name": "ModifyCdnService",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "InternetChargeType": {
+            "type": "integer",
+            "required": true
+          }
+        }
+      }
+    },
+    "openCdnService": {
+      "name": "OpenCdnService",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "InternetChargeType": {
+            "type": "integer",
             "required": true
           }
         }
