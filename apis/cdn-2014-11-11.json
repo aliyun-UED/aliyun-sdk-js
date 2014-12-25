@@ -1,6 +1,6 @@
 {
   "format": "query",
-  "apiVersion": "2014-05-26",
+  "apiVersion": "2014-11-11",
   "checksumFormat": "md5",
   "endpointPrefix": "ecs",
   "serviceAbbreviation": "Aliyun ECS",
@@ -9,8 +9,8 @@
   "timestampFormat": "rfc822",
   "xmlnamespace": "",
   "operations": {
-    "describeDisks": {
-      "name": "DescribeDisks",
+    "refreshObjectCaches": {
+      "name": "RefreshObjectCaches",
       "http": {
         "method": "GET",
         "uri": "/"
@@ -18,7 +18,10 @@
       "input": {
         "type": "structure",
         "members": {
-          "RegionId": {
+          "ObjectType": {
+            "required": true
+          },
+          "ObjectPath": {
             "required": true
           }
         }
