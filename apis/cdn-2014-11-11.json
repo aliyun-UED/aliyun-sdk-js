@@ -2,9 +2,9 @@
   "format": "query",
   "apiVersion": "2014-11-11",
   "checksumFormat": "md5",
-  "endpointPrefix": "ecs",
-  "serviceAbbreviation": "Aliyun ECS",
-  "serviceFullName": "Aliyun Elastic Compute Service",
+  "endpointPrefix": "cdn",
+  "serviceAbbreviation": "Aliyun CDN",
+  "serviceFullName": "Aliyun Content Delivery Network",
   "signatureVersion": "top",
   "timestampFormat": "rfc822",
   "xmlnamespace": "",
@@ -25,23 +25,44 @@
             "required": true
           }
         }
+      }
+    },
+    "describeCdnService": {
+      "name": "DescribeCdnService",
+      "http": {
+        "method": "GET",
+        "uri": "/"
       },
-      "output": {
+      "input": {
         "type": "structure",
         "members": {
-          "count": {
-            "type": "integer"
+        }
+      }
+    },
+    "describeCdnMonitorData": {
+      "name": "DescribeCdnMonitorData",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DomainName": {
+            "required": true
           },
-          "logstores": {
-            "type": "list",
-            "members": {
-            }
+          "StartTime": {
+            "type": "timestamp",
+            "format": "iso8601",
+            "required": true
+          },
+          "EndTime": {
+            "type": "timestamp",
+            "format": "iso8601",
+            "required": true
           }
         }
       }
     }
-  },
-  "pagination": {
-
   }
 }
