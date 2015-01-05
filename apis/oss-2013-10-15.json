@@ -589,6 +589,10 @@
             "required": true,
             "location": "uri"
           },
+          "ContentMD5": {
+            "location": "header",
+            "name": "Content-MD5"
+          },
           "Delete": {
             "type": "structure",
             "required": true,
