@@ -17,3 +17,5 @@ test_ecs.js
 test_oss.js
 test_sls.js
 test_cdn.js
+
+tools
