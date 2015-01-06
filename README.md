@@ -53,13 +53,13 @@ npm install aliyun-sdk
  node GetBucket.js
  ```
 
-### CDN
-在 samples/cdn 目录下的代码示例，使用方法：
- - 将 sample/test.js 中需要的参数修改
+### ECS, RDS, SLB, CDN
+在 samples 对应目录下的有代码示例，使用方法：
+ - 将 sample/ecs/test.js 中需要的参数修改
  - 执行示例文件即可, 如:
 
  ```javascript
- cd samples/cdn
+ cd samples/ecs
  node test.js
  ```
 
@@ -76,6 +76,9 @@ SDK 目前支持下列服务:
 
 | 服务名  | 类名  | API 版本 | API 文档
 | :------------ |:---------------:| -----:| -----:|
+| Aliyun ECS      | ALY.ECS | 2013-05-26 | [ECS API手册](http://aliyunecs.oss.aliyuncs.com/ECS-API-Reference%202014-05-26.pdf) |
+| Aliyun RDS      | ALY.RDS | 2013-08-15 | [RDS API手册](http://imgs-storage.cdn.aliyuncs.com/help/rds/RDS-API-Reference.pdf) |
+| Aliyun SLB      | ALY.SLB | 2013-05-15 | [SLB API手册](http://imgs-storage.cdn.aliyuncs.com/help/slb/SLB-API-Reference_2014-05-15.pdf) |
 | Aliyun OSS      | ALY.OSS | 2013-10-15 | [OSS API手册](http://imgs-storage.cdn.aliyuncs.com/help/oss/oss%20api%2020140828.pdf) |
 | Aliyun CDN      | ALY.CDN | 2013-11-11 | [CDN API手册](http://imgs-storage.cdn.aliyuncs.com/help/cdn/cdn%20open%20api%20v1.6.pdf) |
 | Aliyun OCS memcached      | ALY.MEMCACHED        | | [BinaryProtocolRevamped](https://code.google.com/p/memcached/wiki/BinaryProtocolRevamped) |
