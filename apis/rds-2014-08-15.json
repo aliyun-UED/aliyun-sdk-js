@@ -1,0 +1,1504 @@
+{
+  "format": "query",
+  "apiVersion": "2014-08-15",
+  "checksumFormat": "md5",
+  "endpointPrefix": "rds",
+  "serviceAbbreviation": "RDS",
+  "serviceFullName": "Aliyun Relational Database Service",
+  "signatureVersion": "top",
+  "timestampFormat": "top",
+  "xmlnamespace": "",
+  "operations": {
+    "createPostpaidDBInstanceForChannel": {
+      "name": "CreatePostpaidDBInstanceForChannel",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "Engine": {
+            "required": true,
+            "type": "string"
+          },
+          "EngineVersion": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceClass": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceStorage": {
+            "required": true,
+            "type": "integer"
+          },
+          "DBInstanceNetType": {
+            "required": true,
+            "type": "string"
+          },
+          "SecurityIPList": {
+            "required": true,
+            "type": "string"
+          },
+          "ClientToken": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceDescription": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyPostpaidDBInstanceSpec": {
+      "name": "ModifyPostpaidDBInstanceSpec",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceClass": {
+            "type": "string"
+          },
+          "DBInstanceStorage": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "createPostpaidDBInstance": {
+      "name": "CreatePostpaidDBInstance",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "Engine": {
+            "required": true,
+            "type": "string"
+          },
+          "EngineVersion": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceClass": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceStorage": {
+            "required": true,
+            "type": "integer"
+          },
+          "DBInstanceNetType": {
+            "required": true,
+            "type": "string"
+          },
+          "SecurityIPList": {
+            "required": true,
+            "type": "string"
+          },
+          "ClientToken": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceDescription": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createDBInstanceforFirstPay": {
+      "name": "CreateDBInstanceforFirstPay",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "Engine": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceClass": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceStorage": {
+            "required": true,
+            "type": "integer"
+          },
+          "DBInstanceNetType": {
+            "required": true,
+            "type": "string"
+          },
+          "ClientToken": {
+            "required": true,
+            "type": "string"
+          },
+          "EngineVersion": {
+            "type": "string"
+          },
+          "CharacterSetName": {
+            "type": "string"
+          },
+          "DBInstanceRemarks": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeOptimizeAdviceByDBA": {
+      "name": "DescribeOptimizeAdviceByDBA",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "modifyDBInstanceSpec": {
+      "name": "ModifyDBInstanceSpec",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "PayType": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceClass": {
+            "type": "string"
+          },
+          "DBInstanceStorage": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "modifyAccountDescription": {
+      "name": "ModifyAccountDescription",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountName": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountDescription": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyDBDescription": {
+      "name": "ModifyDBDescription",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DBName": {
+            "required": true,
+            "type": "string"
+          },
+          "DBDescription": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "resetAccountPassword": {
+      "name": "ResetAccountPassword",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountName": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountPassword": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "revokeAccountPrivilege": {
+      "name": "RevokeAccountPrivilege",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountName": {
+            "required": true,
+            "type": "string"
+          },
+          "DBName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "switchDBInstanceNetType": {
+      "name": "SwitchDBInstanceNetType",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "ConnectionStringPrefix": {
+            "required": true,
+            "type": "string"
+          },
+          "Port": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "importDatabaseBetweenInstances": {
+      "name": "ImportDatabaseBetweenInstances",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "SourceDBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInfo": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "restartDBInstance": {
+      "name": "RestartDBInstance",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "grantAccountPrivilege": {
+      "name": "GrantAccountPrivilege",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountName": {
+            "required": true,
+            "type": "string"
+          },
+          "DBName": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountPrivilege": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeImportsForSQLServer": {
+      "name": "DescribeImportsForSQLServer",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "ImportId": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "createAccount": {
+      "name": "CreateAccount",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountName": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountPassword": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountDescription": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeBinlogFiles": {
+      "name": "DescribeBinlogFiles",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "createDatabase": {
+      "name": "CreateDatabase",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DBName": {
+            "required": true,
+            "type": "string"
+          },
+          "CharacterSetName": {
+            "required": true,
+            "type": "string"
+          },
+          "CreateDatabase": {
+            "type": "string"
+          },
+          "DBDescription": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDBInstancePerformance": {
+      "name": "DescribeDBInstancePerformance",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "Key": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createUploadPathForSQLServer": {
+      "name": "CreateUploadPathForSQLServer",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DBName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeResourceUsage": {
+      "name": "DescribeResourceUsage",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteAccount": {
+      "name": "DeleteAccount",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteDatabase": {
+      "name": "DeleteDatabase",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DBName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "upgradeDBInstanceEngineVersion": {
+      "name": "UpgradeDBInstanceEngineVersion",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "EngineVersion": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyDBInstanceMaintainTime": {
+      "name": "ModifyDBInstanceMaintainTime",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "MaintainTime": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeAccounts": {
+      "name": "DescribeAccounts",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDatabases": {
+      "name": "DescribeDatabases",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DBName": {
+            "type": "string"
+          },
+          "DBStatus": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifySecurityIps": {
+      "name": "ModifySecurityIps",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "SecurityIps": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeFilesForSQLServer": {
+      "name": "DescribeFilesForSQLServer",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "modifyDBInstanceDescription": {
+      "name": "ModifyDBInstanceDescription",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceDescription": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeBackups": {
+      "name": "DescribeBackups",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "BackupStatus": {
+            "type": "string"
+          },
+          "BackupMode": {
+            "type": "string"
+          },
+          "BackupId": {
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "cancelImport": {
+      "name": "CancelImport",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "ImportId": {
+            "required": true,
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "describeSQLLogReports": {
+      "name": "DescribeSQLLogReports",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "ReportType": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createBackup": {
+      "name": "CreateBackup",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "BackupMethod": {
+            "type": "string"
+          },
+          "BackupType": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createTempDBInstance": {
+      "name": "CreateTempDBInstance",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "BackupId": {
+            "type": "integer"
+          },
+          "RestoreTime": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeBackupPolicy": {
+      "name": "DescribeBackupPolicy",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyBackupPolicy": {
+      "name": "ModifyBackupPolicy",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "PreferredBackupTime": {
+            "required": true,
+            "type": "string"
+          },
+          "PreferredBackupPeriod": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeSlowLogs": {
+      "name": "DescribeSlowLogs",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "DBName": {
+            "type": "string"
+          },
+          "SortKey": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeSQLLogRecords": {
+      "name": "DescribeSQLLogRecords",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "QueryKeywords": {
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "describeSlowLogRecords": {
+      "name": "DescribeSlowLogRecords",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "DBName": {
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "describeOptimizeAdviceOnStorage": {
+      "name": "DescribeOptimizeAdviceOnStorage",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "describeOptimizeAdviceOnBigTable": {
+      "name": "DescribeOptimizeAdviceOnBigTable",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "describeOptimizeAdviceOnMissPK": {
+      "name": "DescribeOptimizeAdviceOnMissPK",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "describeErrorLogs": {
+      "name": "DescribeErrorLogs",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "describeOptimizeAdviceOnExcessIndex": {
+      "name": "DescribeOptimizeAdviceOnExcessIndex",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "describeOptimizeAdviceOnMissIndex": {
+      "name": "DescribeOptimizeAdviceOnMissIndex",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "describeParameterTemplates": {
+      "name": "DescribeParameterTemplates",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Engine": {
+            "required": true,
+            "type": "string"
+          },
+          "EngineVersion": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeParameters": {
+      "name": "DescribeParameters",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyParameter": {
+      "name": "ModifyParameter",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "Parameters": {
+            "required": true,
+            "type": "string"
+          },
+          "Forcerestart": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "purgeDBInstanceLog": {
+      "name": "PurgeDBInstanceLog",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteDBInstance": {
+      "name": "DeleteDBInstance",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createDBInstanceForChannel": {
+      "name": "CreateDBInstanceForChannel",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "Engine": {
+            "required": true,
+            "type": "string"
+          },
+          "EngineVersion": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceClass": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceStorage": {
+            "required": true,
+            "type": "integer"
+          },
+          "DBInstanceNetType": {
+            "required": true,
+            "type": "string"
+          },
+          "SecurityIPList": {
+            "required": true,
+            "type": "string"
+          },
+          "ClientToken": {
+            "required": true,
+            "type": "string"
+          },
+          "PayType": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountName": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountPassword": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceDescription": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "importDataForSQLServer": {
+      "name": "ImportDataForSQLServer",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "FileName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createDBInstance": {
+      "name": "CreateDBInstance",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "Engine": {
+            "required": true,
+            "type": "string"
+          },
+          "EngineVersion": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceClass": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceStorage": {
+            "required": true,
+            "type": "integer"
+          },
+          "DBInstanceNetType": {
+            "required": true,
+            "type": "string"
+          },
+          "SecurityIPList": {
+            "required": true,
+            "type": "string"
+          },
+          "ClientToken": {
+            "required": true,
+            "type": "string"
+          },
+          "PayType": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceDescription": {
+            "type": "string"
+          },
+          "ZoneId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDBInstances": {
+      "name": "DescribeDBInstances",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceStatus": {
+            "type": "string"
+          },
+          "Engine": {
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "DBInstanceType": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDBInstanceAttribute": {
+      "name": "DescribeDBInstanceAttribute",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeRegions": {
+      "name": "DescribeRegions",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "migrateToOtherZone": {
+      "name": "MigrateToOtherZone",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "ZoneId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
