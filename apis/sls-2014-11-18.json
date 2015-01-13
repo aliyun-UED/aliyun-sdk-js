@@ -9,15 +9,73 @@
   "timestampFormat": "rfc822",
   "xmlnamespace": "",
   "operations": {
-    "listLogStores": {
-      "name": "ListLogStores",
+    "putLogs": {
+      "name": "putLogs",
       "http": {
-        "method": "GET",
-        "uri": "/logstores"
+        "method": "POST",
+        "uri": "/logstores/{logStoreName}"
       },
       "input": {
+        "payload": "logGroup",
         "type": "structure",
-        "members": {}
+        "ContentMD5": true,
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logStoreName": {
+            "required": true,
+            "location": "uri"
+          },
+          "logGroup": {
+            "required":true,
+            "type": "structure",
+            "members": {
+              "logs": {
+                "required":true,
+                "type": "list",
+                "members": {
+
+                  "type":"structure",
+                  "members": {
+                    "time": {
+                      "type": "integer",
+                      "required": true
+                    },
+                    "contents": {
+                      "type": "list",
+                      "required": true,
+                      "members": {
+                        "type":"structure",
+                        "members": {
+                          "key": {
+                            "type": "string",
+                            "required": true
+                          },
+                          "value": {
+                            "type": "string",
+                            "required": true
+                          }
+                        }
+                      }
+                    }
+                  }
+
+                }
+              },
+              "topic": {
+                "type": "string",
+                "required": false
+              },
+              "source": {
+                "type": "string",
+                "required": false
+              }
+            }
+          }
+        }
       },
       "output": {
         "type": "structure",
@@ -29,7 +87,196 @@
             "type": "list",
             "members": {
             }
+          },
+          "RequestId": {
+            "location": "header",
+            "name": "x-sls-requestid"
           }
+        }
+      }
+    },
+    "listLogStores": {
+      "name": "ListLogStores",
+      "http": {
+        "method": "GET",
+        "uri": "/logstores"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "count": {
+            "type": "integer"
+          },
+          "logstores": {
+            "type": "list",
+            "members": {
+            }
+          },
+          "RequestId": {
+            "location": "header",
+            "name": "x-sls-requestid"
+          }
+        }
+      }
+    },
+    "listTopics": {
+      "name": "ListTopics",
+      "http": {
+        "method": "GET",
+        "uri": "/logstores/{logStoreName}?type=topic&line={line}&token={token}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logStoreName": {
+            "required": true,
+            "location": "uri"
+          },
+
+          "token": {
+            "required": false,
+            "location": "uri",
+            "type": "string"
+          },
+          "line": {
+            "required": false,
+            "location": "uri",
+            "type": "integer"
+          }
+        }
+      },
+      "output":{
+        "type": "structure",
+        "members": {
+
+        }
+      }
+    },
+    "getHistograms": {
+      "name": "GetHistograms",
+      "http": {
+        "method": "GET",
+        "uri": "/logstores/{logStoreName}?type=histogram&from={from}&to={to}&topic={topic}&query={query}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logStoreName": {
+            "required": true,
+            "location": "uri"
+          },
+
+          "topic": {
+            "required": false,
+            "location": "uri",
+            "type": "string"
+          },
+          "from": {
+            "required": false,
+            "location": "uri",
+            "type": "integer"
+          },
+          "to": {
+            "required": false,
+            "location": "uri",
+            "type": "integer"
+          },
+          "query": {
+            "required": false,
+            "location": "uri",
+            "type": "string"
+          }
+        }
+      },
+      "output":{
+        "type": "structure",
+        "members": {
+
+        }
+      }
+    },
+    "getLogs": {
+      "name": "GetLogs",
+      "http": {
+        "method": "GET",
+        "uri": "/logstores/{logStoreName}?type=log&from={from}&to={to}&topic={topic}&query={query}&line={line}&offset={offset}&reverse={reverse}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logStoreName": {
+            "required": true,
+            "location": "uri"
+          },
+
+          "topic": {
+            "required": false,
+            "location": "uri",
+            "type": "string"
+          },
+          "from": {
+            "required": false,
+            "location": "uri",
+            "type": "integer"
+          },
+          "to": {
+            "required": false,
+            "location": "uri",
+            "type": "integer"
+          },
+          "query": {
+            "required": false,
+            "location": "uri",
+            "type": "string"
+          },
+
+          "line": {
+            "required": false,
+            "location": "uri",
+            "type": "integer"
+          },
+
+          "offset": {
+            "required": false,
+            "location": "uri",
+            "type": "integer"
+          },
+          "reverse":{
+            "required": false,
+            "location": "uri",
+            "type": "boolean"
+          }
+        }
+      },
+      "output":{
+        "type": "structure",
+        "members": {
+
         }
       }
     }
