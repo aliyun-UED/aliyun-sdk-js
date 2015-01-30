@@ -44,7 +44,7 @@ npm install aliyun-sdk
 
 ### OSS
 在 samples/oss 目录下的代码示例，使用方法：
- - 将 sample/oss.js 中需要的参数修改
+ - 将 sample/oss/oss.js 中需要的参数修改
  - 打开需要执行的某个实例文件，如 GetBucket.js，将其中的参数改成你自己的 oss 实例参数
  - 执行示例文件即可, 如:
 
@@ -52,6 +52,16 @@ npm install aliyun-sdk
  cd samples/oss
  node GetBucket.js
  ```
+
+### SLS
+在 samples/sls 目录下的代码示例，使用方法：
+ - 将 sample/sls/sls.js 中需要的参数修改
+ - 打开需要执行的某个实例文件，如 ListLogStores.js，将其中的参数改成你自己的 sls 实例参数
+ - 执行示例文件即可, 如:
+
+ ```javascript
+ cd samples/sls
+ node ListLogStores.js
 
 ### ECS, RDS, SLB, CDN
 在 samples 对应目录下的有代码示例，使用方法：
@@ -81,6 +91,7 @@ SDK 目前支持下列服务:
 | Aliyun SLB      | ALY.SLB | 2014-05-15 | [SLB API手册](http://imgs-storage.cdn.aliyuncs.com/help/slb/SLB-API-Reference_2014-05-15.pdf) |
 | Aliyun OSS      | ALY.OSS | 2013-10-15 | [OSS API手册](http://imgs-storage.cdn.aliyuncs.com/help/oss/oss%20api%2020140828.pdf) |
 | Aliyun CDN      | ALY.CDN | 2014-11-11 | [CDN API手册](http://imgs-storage.cdn.aliyuncs.com/help/cdn/cdn%20open%20api%20v1.6.pdf) |
+| Aliyun SLS      | ALY.SLS | 2014-11-18 | [SLS API手册](http://docs.aliyun.com/?spm=5176.383723.9.6.MBliNk#/sls/api/overview) |
 | Aliyun OCS memcached      | ALY.MEMCACHED        | | [BinaryProtocolRevamped](https://code.google.com/p/memcached/wiki/BinaryProtocolRevamped) |
 
 #### 我们在代码中参考了 AWS SDK，在此声明。
