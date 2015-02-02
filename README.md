@@ -62,6 +62,7 @@ npm install aliyun-sdk
  ```javascript
  cd samples/sls
  node ListLogStores.js
+ ```
 
 ### ECS, RDS, SLB, CDN
 在 samples 对应目录下的有代码示例，使用方法：
