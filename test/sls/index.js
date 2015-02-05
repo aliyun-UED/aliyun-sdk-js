@@ -58,7 +58,7 @@ describe('SLS Function Test', function(){
                     }
 
                     should(err === null).be.true;
-                    data.should.have.property('RequestId');
+                    data.should.have.properties(['request_id','headers']);
 
                     fn();
                 });
@@ -84,7 +84,7 @@ describe('SLS Function Test', function(){
         });
 
 
-        it('should put logs failed with not exists logstore', function(done){
+        it('should put logs failed with logstore does not exists ', function(done){
 
             var logGroup = {
                 logs : [{
@@ -109,9 +109,10 @@ describe('SLS Function Test', function(){
                 logStoreName: 'not_exists_logstore',
                 logGroup: logGroup
             }, function (err, data) {
+
                 err.code.should.be.exactly(404);
-                err.error.should.have.property('error_code','SLSLogStoreNotExist');
-                err.error.should.have.property('RequestId');
+                err.should.have.property('error_code','SLSLogStoreNotExist');
+                err.should.have.properties(['request_id','headers','error_message']);
                 done();
             });
         });
@@ -127,7 +128,8 @@ describe('SLS Function Test', function(){
 
                 should(err===null).be.true;
                 data.count.should.be.above(0);
-                data.logstores.should.containEql('laok');
+                data.logstores.should.containEql(logStoreName);
+                data.should.have.properties(['request_id','headers']);
 
                 done();
             });
@@ -146,6 +148,7 @@ describe('SLS Function Test', function(){
                 should(err===null).be.true;
                 data.count.should.be.above(0);
                 data.topics.should.containEql(TOPIC);
+                data.should.have.properties(['request_id','headers']);
 
                 done();
             });
@@ -170,8 +173,7 @@ describe('SLS Function Test', function(){
                 data.count.should.be.above(1);
                 data.histograms.should.be.an.Array;
 
-
-                data.should.have.properties(['progress','RequestId']);
+                data.should.have.properties(['progress','request_id','headers']);
 
                 done();
             });
@@ -197,6 +199,29 @@ describe('SLS Function Test', function(){
 
                 should(err===null).be.true;
                 data.count.should.be.below(3);
+
+                data.should.have.properties(['logs','request_id','headers']);
+
+                done();
+            });
+        });
+        it('should get logs failed with logstore does not exists ', function(done){
+            var to =Math.floor(new Date().getTime()/1000);
+            var from = to-1000;
+
+            sls.getLogs({
+                projectName: projectName,
+                logStoreName: 'xxoo_not_exists_aslds',
+                from: from,
+                to: to,
+                topic: TOPIC,
+                offset: 0,
+                line: 2
+            }, function(err, data){
+
+                err.code.should.be.exactly(404);
+                err.should.have.property('error_code','SLSLogStoreNotExist');
+                err.should.have.properties(['request_id','headers','error_message']);
                 done();
             });
         });
