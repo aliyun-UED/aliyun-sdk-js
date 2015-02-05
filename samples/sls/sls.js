@@ -8,6 +8,7 @@ var sls = new ALY.SLS({
     // 杭州：http://cn-hangzhou.sls.aliyuncs.com
     // 青岛：http://cn-qingdao.sls.aliyuncs.com
     endpoint: 'http://cn-hangzhou.sls.aliyuncs.com',
+
     // 这是 sls sdk 目前支持最新的 api 版本, 不需要修改
     apiVersion: '2014-11-18'
 });

@@ -8,9 +8,11 @@ var logStoreName = "logstore_name1";
 var to = Math.floor(new Date().getTime() / 1000);
 var from = to - 900; //15min
 
-sls.getHistogram(projectName, logStoreName, {
+sls.getHistogram({
 
-    //必选字段
+    //必选字段 
+    projectName: projectName,
+    logStoreName: logStoreName,
     from: from, //开始时间(精度为秒,从 1970-1-1 00:00:00 UTC 计算起的秒数)
     to: to,    //结束时间(精度为秒,从 1970-1-1 00:00:00 UTC 计算起的秒数)
 
