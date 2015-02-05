@@ -14,8 +14,10 @@
     "cucumber": "",
     "jasmine-node": "",
     "jshint": "",
+    "mocha": "~2.1.0",
     "repl.history": "",
-    "semver": ""
+    "semver": "",
+    "should": "~4.6.3"
   },
   "dependencies": {
     "node_memcached": "1.1.3",
@@ -39,5 +41,7 @@
     "mail": ""
   },
   "keywords": [],
-  "scripts": {}
+  "scripts": {
+    "test": "mocha test"
+  }
 }

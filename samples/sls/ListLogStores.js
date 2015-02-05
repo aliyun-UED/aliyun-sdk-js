@@ -5,7 +5,10 @@ var sls = require('./sls');
 // -------------------------------
 var projectName = "project_name1";
 
-sls.listLogStores(projectName, function (err, data) {
+sls.listLogStores({
+  //必选字段
+    projectName: projectName 
+}, function (err, data) {
 
     if (err) {
         console.log('error:', err);
