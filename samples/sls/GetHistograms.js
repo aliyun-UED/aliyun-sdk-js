@@ -8,7 +8,7 @@ var logStoreName = "logstore_name1";
 var to = Math.floor(new Date().getTime() / 1000);
 var from = to - 900; //15min
 
-sls.getHistogram({
+sls.getHistograms({
 
     //必选字段 
     projectName: projectName,
