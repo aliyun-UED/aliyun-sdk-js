@@ -15,7 +15,7 @@ var sls = new ALY.SLS({
 
     //以下是可选配置
     //,httpOptions: {
-    //    timeout: 1000  //1sec, 默认不timeout
+    //    timeout: 1000  //1sec, 默认没有timeout
     //}
 });
 
