@@ -38,13 +38,14 @@ sls.getLogs(opt, function(error, data){
 ```
 ## 2. sls的方法
 
-|方法名|描述|
-|---|---|
-|listLogStores|列出Project下的所有Logstore名称。|
-|putLogs|向指定的Logstore写入日志。|
-|listTopics|列出Logstore中的日志主题。|
-|getHistograms|查询Logstore中的日志在时间轴上的分布。|
-|getLogs|查询Logstore中的日志数据。|
+| 方法名 | 描述 |
+| ------| ----|
+| listLogStores | 列出Project下的所有Logstore名称。|
+| putLogs | 向指定的Logstore写入日志。|
+| listTopics | 列出Logstore中的日志主题。|
+| getHistograms | 查询Logstore中的日志在时间轴上的分布。|
+| getLogs | 查询Logstore中的日志数据。|
+
 其他细节请看 [SLS API](http://docs.aliyun.com/#/sls/api/overview)
 
 ## 3. 参数详解
@@ -52,22 +53,23 @@ sls.getLogs(opt, function(error, data){
 ### (1) sls.listLogStores(opt, fn)
 
 #### 参数:
-|参数|类型|描述|
-|---|---|
-|opt|object|必选参数|
-|opt.projectName|string|必选参数, project名称|
-|fn|function|回调方法,有2个参数(err, data), 详情请看下面的返回格式|
+
+| 参数 | 类型 | 描述 |
+| ------ | ---- | ----- |
+| opt | object | 必选参数 |
+| opt.projectName | string | 必选参数, project名称 |
+| fn | function | 回调方法,有2个参数(err, data), 详情请看下面的返回格式 |
 
 #### 返回data格式
-|参数|类型|描述|
-|---|---|
-|request_id|string|request id|
-|count|int|返回logstores总数|
-|logstores|array|字符串数组|
-|headers|object|返回响应头，map|
+| 参数 | 类型 | 描述 |
+| ------ | ---- | ----- |
+| request_id | string | request id |
+| count | int | 返回logstores总数 |
+| logstores | array | 字符串数组 |
+| headers | object | 返回响应头，map |
 
 #### 返回data样例:
-```json
+```js
 { 
   request_id: '54D46D27250A9F81061F5725',
   count: 1,
@@ -78,13 +80,13 @@ sls.getLogs(opt, function(error, data){
 
 ### (2) sls.putLogs(opt, fn)
 #### 参数
-|参数|描述|
-|---|---|
-|opt|object,必选参数|
-|opt.projectName|string,必选参数,project名称|
-|opt.logStoreName|string,必选参数,logStore名称|
-|opt.logGroup|object,必选参数,写入日志的JSON格式|
-|fn|function,回调方法,有2个参数(err, data), 详情请看下面的返回格式|
+| 参数 | 类型 | 描述 | 
+| ------ | ---- | ----- |
+| opt | object | 必选参数 |
+| opt.projectName | string | 必选参数,project名称 |
+| opt.logStoreName | string | 必选参数,logStore名称 |
+| opt.logGroup | object | 必选参数,写入日志的JSON格式 |
+| fn | function | 回调方法,有2个参数(err, data), 详情请看下面的返回格式 |
 
 #### logGroup样例:
 ```js
@@ -112,13 +114,13 @@ var logGroup = {
 
 
 #### 返回data格式
-|参数|类型|描述|
-|---|---|
-|request_id|string|request id|
-|headers|object|返回响应头，map|
+| 参数 | 类型 | 描述 | 
+| ------ | ---- | ----- |
+| request_id | string | request id |
+| headers | object | 返回响应头，map |
 
 #### 返回data样例:
-```json
+```js
 { 
   request_id: '54D46D2766F2C420111F398A',
   headers: {...}
@@ -128,26 +130,26 @@ var logGroup = {
 
 ### (3) sls.listTopics(opt, fn)
 #### 参数
-|参数|类型|描述|
-|---|--|---|
-|opt|object|必选参数|
-|opt.projectName|string|必选参数,project名称|
-|opt.logStoreName|string|必选参数,logStore名称|
-|opt.token|string|可选参数，从某个 topic开始列出,按照字典序,默认为空|
-|opt.line|int|可选参数，读取的行数,默认值为 100;范围 0-100|
-|fn|function|回调方法,有2个参数(err, data), 详情请看下面的返回格式|
+| 参数 | 类型 | 描述 |
+| ------ | ---- | ----- |
+| opt | object | 必选参数 |
+| opt.projectName | string | 必选参数,project名称 |
+| opt.logStoreName | string | 必选参数,logStore名称 |
+| opt.token | string | 可选参数，从某个 topic开始列出,按照字典序,默认为空 |
+| opt.line | int | 可选参数，读取的行数,默认值为 100;范围 0-100 |
+| fn | function | 回调方法,有2个参数(err, data), 详情请看下面的返回格式 |
 
 
 #### 返回data格式
-|参数|类型|描述|
-|---|---|
-|request_id|string|request id|
-|count|int|返回topic总数|
-|topics|array|字符串数组|
-|headers|object|返回响应头，map|
+| 参数 | 类型 | 描述 | 
+| ------ | ---- | ----- |
+| request_id | string | request id |
+| count | int | 返回topic总数 |
+| topics | array | 字符串数组 |
+| headers | object | 返回响应头，map |
 
 #### 返回data样例:
-```json
+```js
 {
   request_id: '54D46D27410323AE311F5A2E',
   count: 2,
@@ -158,20 +160,20 @@ var logGroup = {
 
 ### (4) sls.getHistograms(opt, fn)
 #### 参数
-|参数|类型|描述|
-|---|--|---|
-|opt|object|必选参数|
-|opt.progress|string|必选参数,project名称|
-|opt.logStoreName|string|必选参数,logStore名称|
-|opt.from|int|必选参数, 开始时间(精度为秒,从 1970-1-1 00:00:00 UTC 计算起的秒数)|
-|opt.to|int|必选参数,结束时间(精度为秒,从 1970-1-1 00:00:00 UTC 计算起的秒数)|
-|opt.topic|string|可选参数,指定日志主题(用户所有主题可以通过listTopics获得)|
-|opt.query|string|查询的关键词,不输入关键词,则查询全部日志数据|
-|fn|function|回调方法,有2个参数(err, data), 详情请看下面的返回格式|
+| 参数 | 类型 | 描述 | 
+| ------ | ---- | ----- |
+| opt | object | 必选参数 |
+| opt.progress|string|必选参数,project名称|
+| opt.logStoreName|string|必选参数,logStore名称|
+| opt.from | int | 必选参数, 开始时间(精度为秒,从 1970-1-1 00:00:00 UTC 计算起的秒数)|
+| opt.to|int | 必选参数,结束时间(精度为秒,从 1970-1-1 00:00:00 UTC 计算起的秒数)|
+| opt.topic | string|可选参数,指定日志主题(用户所有主题可以通过listTopics获得)|
+| opt.query | string|查询的关键词,不输入关键词,则查询全部日志数据|
+| fn | function|回调方法,有2个参数(err, data), 详情请看下面的返回格式|
 
 #### 返回data格式
-|名称|类型|描述|
-|--|--|--|
+|名称|类型|描述| 
+| ------ | ---- | ----- |
 |request_id|string|请求ID, 样例: "54D44ABAD458BB6A011F183C" |
 |headers|object|返回响应头，是一个map|
 |progress|string|查询结果的状态。可以有Incomplete和Complete两个选值，表示结果是否完整。|
@@ -179,7 +181,7 @@ var logGroup = {
 |histograms|array|	当前查询结果在划分的子时间区间上的分布状况，具体结构见:[GetHistograms API的描述](http://docs.aliyun.com/#/sls/api/apilist&GetHistograms)|
 
 #### 返回data样例：
-```json
+```js
 { 
   request_id: '54D46D273A9D57A61E1F219F',
   count: 0,
@@ -202,8 +204,8 @@ var logGroup = {
 
 ### (5) sls.getLogs(opt, fn)
 #### 参数
-|参数|类型|描述|
-|---|--|---|
+|参数|类型|描述| 
+| ------ | ---- | ----- |
 |opt|object|必选参数|
 |opt.progress|string|必选参数,project名称|
 |opt.logStoreName|string|必选参数,logStore名称|
@@ -216,8 +218,8 @@ var logGroup = {
 |fn|function|回调方法,有2个参数(err, data), 详情请看下面的返回格式|
 
 #### 返回data格式
-|名称|类型|描述|
-|--|--|--|
+|名称|类型|描述| 
+| ------ | ---- | ----- |
 |request_id|string|请求ID, 样例: "54D44ABAD458BB6A011F183C" |
 |headers|object|返回响应头，是一个map|
 |progress|string|查询结果的状态。可以有Incomplete和Complete两个选值，表示结果是否完整。|
@@ -225,7 +227,7 @@ var logGroup = {
 |logs|array|	当前查询结果在划分的子时间区间上的分布状况，具体结构见:[GetHistograms API的描述](http://docs.aliyun.com/#/sls/api/apilist&GetHistograms)|
 
 #### 返回data样例：
-```json
+```js
 { 
   request_id: '54D48F58410323A9311FBE2C',
   count: 2,
@@ -249,8 +251,8 @@ var logGroup = {
 ## 4. 错误返回格式
 
 #### 返回的error格式
-|名称|类型|描述|
-|--|--|--|
+|名称|类型|描述| 
+| ------ | ---- | ----- |
 |request_id|string|请求ID, 样例: "54D44ABAD458BB6A011F183C" |
 |headers|object|返回响应头，是一个map|
 |code|int|返回响应的statusCode，如：404。|
@@ -259,7 +261,7 @@ var logGroup = {
 |error_message|string|API返回的错误信息|
 
 #### error 格式样例：
-```json
+```js
 {
     request_id: '54D33044AB9AC49D2E1D2274',
     error_code: 'SLSLogStoreNotExist',
