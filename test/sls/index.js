@@ -116,6 +116,12 @@ describe('SLS Function Test', function(){
                 done();
             });
         });
+
+
+        afterEach(function(done){
+            setTimeout(done, 2000);
+        });
+
     });
 
     describe('ListLogStores', function(){
