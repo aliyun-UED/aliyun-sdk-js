@@ -1,10 +1,10 @@
 var ALY = require('./index.js');
 
 var opensearch = new ALY.OpenSearch({
-    accessKeyId: '7yOP1OXtt6QeGfVn',
-    secretAccessKey: 'Q7k6qLtmcEfyOmwFtXVfxtzg2Vd1kA',
-    endpoint: 'https://cdn.aliyuncs.com',
-    apiVersion: '2014-11-11'
+    accessKeyId: 'CgJ9zTi6HmvcZdqt',
+    secretAccessKey: 'WVCyvLQ92cnkz5WwYmdgKmrdDYRs58',
+    endpoint: 'http://opensearch.aliyuncs.com',
+    apiVersion: '2015-01-01'
   }
 );
 
