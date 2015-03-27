@@ -1,0 +1,32 @@
+{
+  "format": "rest-json",
+  "apiVersion": "v2",
+  "checksumFormat": "md5",
+  "endpointPrefix": "opensearch",
+  "serviceAbbreviation": "Aliyun OpenSearch",
+  "serviceFullName": "Aliyun OpenSearch",
+  "signatureVersion": "opensearch",
+  "timestampFormat": "rfc822",
+  "xmlnamespace": "",
+  "operations": {
+    "listApp": {
+      "name": "ListApp",
+      "http": {
+        "method": "GET",
+        "uri": "/index"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "location": "header"
+          }
+        }
+      }
+    }
+  },
+  "pagination": {
+
+  }
+}
