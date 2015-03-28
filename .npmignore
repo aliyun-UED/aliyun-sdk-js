@@ -1,11 +1,6 @@
-samples
-test
+samples/
+test/
+tools/
 
-test.js
-test_ecs.js
-test_rds.js
-test_slb.js
-test_oss.js
-test_sls.js
-test_cdn.js
-test_opensearch.js
+test*
+
