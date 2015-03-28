@@ -19,6 +19,7 @@ test_slb.js
 test_oss.js
 test_sls.js
 test_cdn.js
+test_opensearch.js
 
 tools
 !tools/open_api_translator.js
