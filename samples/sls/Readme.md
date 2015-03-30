@@ -9,9 +9,16 @@ var sls = new ALY.SLS({
     "secretAccessKey": "在阿里云sls申请的 secretAccessKey",
 
     // 根据你的 sls project所在地区选择填入
-    // 北京：http://cn-beijing.sls.aliyuncs.com
-    // 杭州：http://cn-hangzhou.sls.aliyuncs.com
-    // 青岛：http://cn-qingdao.sls.aliyuncs.com
+  	// 北京：http://cn-beijing.sls.aliyuncs.com
+  	// 杭州：http://cn-hangzhou.sls.aliyuncs.com
+  	// 青岛：http://cn-qingdao.sls.aliyuncs.com
+    // 深圳：http://cn-shenzhen.sls.aliyuncs.com
+
+    // 注意：如果你是在 ECS 上连接 SLS，可以使用内网地址，速度快，没有带宽限制。
+  	// 北京：cn-hangzhou-intranet.sls.aliyuncs.com
+  	// 杭州：cn-beijing-intranet.sls.aliyuncs.com
+  	// 青岛：cn-qingdao-intranet.sls.aliyuncs.com
+    // 深圳：cn-shenzhen-intranet.sls.aliyuncs.com
     endpoint: 'http://cn-hangzhou.sls.aliyuncs.com',
 
     // 这是 sls sdk 目前支持最新的 api 版本, 不需要修改
@@ -34,7 +41,7 @@ var opt= {
 */
 sls.getLogs(opt, function(error, data){
     console.log(error, data);
-}); 
+});
 ```
 ## 2. sls的方法
 
@@ -70,7 +77,7 @@ sls.getLogs(opt, function(error, data){
 
 #### 返回data样例:
 ```js
-{ 
+{
   request_id: '54D46D27250A9F81061F5725',
   count: 1,
   logstores: [ 'logStoreName1' ],
@@ -80,7 +87,7 @@ sls.getLogs(opt, function(error, data){
 
 ### (2) sls.putLogs(opt, fn)
 #### 参数
-| 参数 | 类型 | 描述 | 
+| 参数 | 类型 | 描述 |
 | ------ | ---- | ----- |
 | opt | object | 必选参数 |
 | opt.projectName | string | 必选参数,project名称 |
@@ -108,20 +115,20 @@ var logGroup = {
     source: '127.0.0.1' //optional
 };
 ```
-注意限制: 
+注意限制:
 * 1. logGroup.logs.length 不能大于4096行。
 * 2. 每个logGroup通过protobuf方法压缩后，大小不超过3MB。
 
 
 #### 返回data格式
-| 参数 | 类型 | 描述 | 
+| 参数 | 类型 | 描述 |
 | ------ | ---- | ----- |
 | request_id | string | request id |
 | headers | object | 返回响应头，map |
 
 #### 返回data样例:
 ```js
-{ 
+{
   request_id: '54D46D2766F2C420111F398A',
   headers: {...}
 }
@@ -141,7 +148,7 @@ var logGroup = {
 
 
 #### 返回data格式
-| 参数 | 类型 | 描述 | 
+| 参数 | 类型 | 描述 |
 | ------ | ---- | ----- |
 | request_id | string | request id |
 | count | int | 返回topic总数 |
@@ -154,13 +161,13 @@ var logGroup = {
   request_id: '54D46D27410323AE311F5A2E',
   count: 2,
   topics: [ 'topic1', 'topic2' ],
-  headers: { ... } 
+  headers: { ... }
 }
 ```
 
 ### (4) sls.getHistograms(opt, fn)
 #### 参数
-| 参数 | 类型 | 描述 | 
+| 参数 | 类型 | 描述 |
 | ------ | ---- | ----- |
 | opt | object | 必选参数 |
 | opt.progress|string|必选参数,project名称|
@@ -172,7 +179,7 @@ var logGroup = {
 | fn | function|回调方法,有2个参数(err, data), 详情请看下面的返回格式|
 
 #### 返回data格式
-|名称|类型|描述| 
+|名称|类型|描述|
 | ------ | ---- | ----- |
 |request_id|string|请求ID, 样例: "54D44ABAD458BB6A011F183C" |
 |headers|object|返回响应头，是一个map|
@@ -182,10 +189,10 @@ var logGroup = {
 
 #### 返回data样例：
 ```js
-{ 
+{
   request_id: '54D46D273A9D57A61E1F219F',
   count: 0,
-  histograms: 
+  histograms:
    [ { count: 0,
        from: 1423204127,
        progress: 'Complete',
@@ -204,7 +211,7 @@ var logGroup = {
 
 ### (5) sls.getLogs(opt, fn)
 #### 参数
-|参数|类型|描述| 
+|参数|类型|描述|
 | ------ | ---- | ----- |
 |opt|object|必选参数|
 |opt.progress|string|必选参数,project名称|
@@ -218,7 +225,7 @@ var logGroup = {
 |fn|function|回调方法,有2个参数(err, data), 详情请看下面的返回格式|
 
 #### 返回data格式
-|名称|类型|描述| 
+|名称|类型|描述|
 | ------ | ---- | ----- |
 |request_id|string|请求ID, 样例: "54D44ABAD458BB6A011F183C" |
 |headers|object|返回响应头，是一个map|
@@ -228,10 +235,10 @@ var logGroup = {
 
 #### 返回data样例：
 ```js
-{ 
+{
   request_id: '54D48F58410323A9311FBE2C',
   count: 2,
-  logs: 
+  logs:
    [ { __source__: '127.0.0.1',
        __time__: '1423216219',
        a: '1',
@@ -251,7 +258,7 @@ var logGroup = {
 ## 4. 错误返回格式
 
 #### 返回的error格式
-|名称|类型|描述| 
+|名称|类型|描述|
 | ------ | ---- | ----- |
 |request_id|string|请求ID, 样例: "54D44ABAD458BB6A011F183C" |
 |headers|object|返回响应头，是一个map|
@@ -271,5 +278,3 @@ var logGroup = {
     headers: { ... }
 }
 ```
-
-
