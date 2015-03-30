@@ -29,45 +29,42 @@
       "name": "UploadDoc",
       "http": {
         "method": "POST",
-        "uri": "/index/doc/{AppName}"
+        "uri": "/index/doc/{app_name}"
       },
       "input": {
+        "payload": ["action", "items", "table_name"],
         "type": "structure",
         "members": {
-          "AppName": {
+          "app_name": {
             "required": true,
             "location": "uri"
           },
-          "Action": {
+          "action": {
             "type": "string",
             "required": true
           },
-          "Items": {
+          "items": {
             "type": "list",
-            "name": "items",
             "required": true,
             "members": {
               "type": "structure",
               "members": {
-                "CMD": {
-                  "name": "cmd",
+                "cmd": {
                   "type": "string",
                   "required": true
                 },
-                "Timestamp": {
-                  "name": "timestamp",
+                "timestamp": {
+                  "format": "unixTimestamp",
                   "type": "timestamp"
                 },
-                "Fields": {
-                  "name": "fields",
+                "fields": {
                   "type": "map",
                   "required": true
                 }
               }
             }
           },
-          "TableName": {
-            "name": "table_name",
+          "table_name": {
             "required": true
           }
         }
