@@ -24,6 +24,54 @@
           }
         }
       }
+    },
+    "uploadDoc": {
+      "name": "UploadDoc",
+      "http": {
+        "method": "POST",
+        "uri": "/index/doc/{AppName}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "AppName": {
+            "required": true,
+            "location": "uri"
+          },
+          "Action": {
+            "type": "string",
+            "required": true
+          },
+          "Items": {
+            "type": "list",
+            "name": "items",
+            "required": true,
+            "members": {
+              "type": "structure",
+              "members": {
+                "CMD": {
+                  "name": "cmd",
+                  "type": "string",
+                  "required": true
+                },
+                "Timestamp": {
+                  "name": "timestamp",
+                  "type": "timestamp"
+                },
+                "Fields": {
+                  "name": "fields",
+                  "type": "map",
+                  "required": true
+                }
+              }
+            }
+          },
+          "TableName": {
+            "name": "table_name",
+            "required": true
+          }
+        }
+      }
     }
   },
   "pagination": {
