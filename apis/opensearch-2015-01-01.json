@@ -54,7 +54,7 @@
                   "required": true
                 },
                 "timestamp": {
-                  "format": "unixTimestamp",
+                  "format": "unixMilliseconds",
                   "type": "timestamp"
                 },
                 "fields": {
