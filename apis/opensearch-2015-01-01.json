@@ -1,5 +1,5 @@
 {
-  "format": "rest-json",
+  "format": "rest",
   "apiVersion": "v2",
   "checksumFormat": "md5",
   "endpointPrefix": "opensearch",
