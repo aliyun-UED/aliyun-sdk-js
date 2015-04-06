@@ -11,8 +11,8 @@ var sls = new ALY.SLS({
 	// 深圳：http://cn-shenzhen.sls.aliyuncs.com
 
 	// 注意：如果你是在 ECS 上连接 SLS，可以使用内网地址，速度快，没有带宽限制。
-	// 北京：cn-hangzhou-intranet.sls.aliyuncs.com
-	// 杭州：cn-beijing-intranet.sls.aliyuncs.com
+	// 杭州：cn-hangzhou-intranet.sls.aliyuncs.com
+	// 北京：cn-beijing-intranet.sls.aliyuncs.com
 	// 青岛：cn-qingdao-intranet.sls.aliyuncs.com
 	// 深圳：cn-shenzhen-intranet.sls.aliyuncs.com
 	endpoint: 'http://cn-hangzhou.sls.aliyuncs.com',
