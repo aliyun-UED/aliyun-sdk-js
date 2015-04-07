@@ -69,6 +69,52 @@
           }
         }
       }
+    },
+    "search": {
+      "name": "Search",
+      "http": {
+        "method": "GET",
+        "uri": "/search?query={query}&index_name={index_name}&fetch_fields={fetch_fields}&qp={qp}&disable={disable}&first_formula_name={first_formula_name}&formula_name={formula_name}&summary={summary}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "query":{
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "index_name": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "fetch_fields": {
+            "type": "string",
+            "location": "uri"
+          },
+          "qp": {
+            "type": "string",
+            "location": "uri"
+          },
+          "disable": {
+            "type": "string",
+            "location": "uri"
+          },
+          "first_formula_name": {
+            "type": "string",
+            "location": "uri"
+          },
+          "formula_name": {
+            "type": "string",
+            "location": "uri"
+          },
+          "summary": {
+            "type": "string",
+            "location": "uri"
+          }
+        }
+      }
     }
   },
   "pagination": {
