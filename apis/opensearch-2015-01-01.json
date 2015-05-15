@@ -1,0 +1,123 @@
+{
+  "format": "rest",
+  "apiVersion": "v2",
+  "checksumFormat": "md5",
+  "endpointPrefix": "opensearch",
+  "serviceAbbreviation": "Aliyun OpenSearch",
+  "serviceFullName": "Aliyun OpenSearch",
+  "signatureVersion": "opensearch",
+  "timestampFormat": "rfc822",
+  "xmlnamespace": "",
+  "operations": {
+    "listApp": {
+      "name": "ListApp",
+      "http": {
+        "method": "GET",
+        "uri": "/index"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "location": "header"
+          }
+        }
+      }
+    },
+    "uploadDoc": {
+      "name": "UploadDoc",
+      "http": {
+        "method": "POST",
+        "uri": "/index/doc/{app_name}"
+      },
+      "input": {
+        "payload": ["action", "items", "table_name"],
+        "type": "structure",
+        "members": {
+          "app_name": {
+            "required": true,
+            "location": "uri"
+          },
+          "action": {
+            "type": "string",
+            "required": true
+          },
+          "items": {
+            "type": "list",
+            "required": true,
+            "members": {
+              "type": "structure",
+              "members": {
+                "cmd": {
+                  "type": "string",
+                  "required": true
+                },
+                "timestamp": {
+                  "format": "unixMilliseconds",
+                  "type": "timestamp"
+                },
+                "fields": {
+                  "type": "map",
+                  "required": true
+                }
+              }
+            }
+          },
+          "table_name": {
+            "required": true
+          }
+        }
+      }
+    },
+    "search": {
+      "name": "Search",
+      "http": {
+        "method": "GET",
+        "uri": "/search?query={query}&index_name={index_name}&fetch_fields={fetch_fields}&qp={qp}&disable={disable}&first_formula_name={first_formula_name}&formula_name={formula_name}&summary={summary}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "query":{
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "index_name": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "fetch_fields": {
+            "type": "string",
+            "location": "uri"
+          },
+          "qp": {
+            "type": "string",
+            "location": "uri"
+          },
+          "disable": {
+            "type": "string",
+            "location": "uri"
+          },
+          "first_formula_name": {
+            "type": "string",
+            "location": "uri"
+          },
+          "formula_name": {
+            "type": "string",
+            "location": "uri"
+          },
+          "summary": {
+            "type": "string",
+            "location": "uri"
+          }
+        }
+      }
+    }
+  },
+  "pagination": {
+
+  }
+}
