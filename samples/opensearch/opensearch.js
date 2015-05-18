@@ -3,6 +3,8 @@ var ALY = require('./index.js');
 var opensearch = new ALY.OpenSearch({
       accessKeyId: '在阿里云 opensearch 申请的 accessKeyId',
       secretAccessKey: '在阿里云 opensearch 申请的 secretAccessKey',
+
+      // 参考 opensearch 控制台，获取 endpoint
       endpoint: 'http://opensearch-cn-hangzhou.aliyuncs.com',
 
       // 这是 opensearch sdk 目前支持最新的 api 版本, 不需要修改
