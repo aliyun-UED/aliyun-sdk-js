@@ -1,19 +1,18 @@
-var ALY = require('./index.js');
+var ALY = require('../../index.js');
 
 var opensearch = new ALY.OpenSearch({
-      accessKeyId: '在阿里云 opensearch 申请的 accessKeyId',
-      secretAccessKey: '在阿里云 opensearch 申请的 secretAccessKey',
+  accessKeyId: '在阿里云 opensearch 申请的 accessKeyId',
+  secretAccessKey: '在阿里云 opensearch 申请的 secretAccessKey',
+  // 参考 opensearch 控制台，获取 endpoint
+  endpoint: 'http://opensearch-cn-hangzhou.aliyuncs.com',
+  // 这是 opensearch sdk 目前支持最新的 api 版本, 不需要修改
+  apiVersion: '2015-01-01'
+});
 
-      // 参考 opensearch 控制台，获取 endpoint
-      endpoint: 'http://opensearch-cn-hangzhou.aliyuncs.com',
-
-      // 这是 opensearch sdk 目前支持最新的 api 版本, 不需要修改
-      apiVersion: '2015-01-01'
-    }
-);
+var test_app_name = 'sdk_test';
 
 opensearch.uploadDoc({
-  "app_name": "sdk_test",
+  "app_name": test_app_name,
   "action": "push",
   "items": [
     {
@@ -40,7 +39,13 @@ opensearch.uploadDoc({
   console.log(err, res);
 });
 
-opensearch.listApp({
-}, function(err, res) {
+opensearch.listApp({}, function(err, res) {
   console.log(err, res);
+});
+
+opensearch.search({
+  'index_name': test_app_name,
+  'query': 'default:\'搜索\''
+}, function() {
+  console.log(arguments);
 });
