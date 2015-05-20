@@ -18,6 +18,8 @@ opensearch.uploadDoc({
     {
       "cmd": "add",
       "timestamp":(new Date()).getTime(),
+      // 注意, fields 下面的所有属性必须全部序列化为字符串, 包括整型. 如 4 必须转换为 "4",
+      // 否则 sdk 会报验证错误.
       "fields":{
         "id":"12113313131", //更新文档主键，必填
         "title":"This is the title",//add为全字段更新，必须给出所有字段值
