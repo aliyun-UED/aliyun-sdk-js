@@ -55,7 +55,7 @@ npm install aliyun-sdk
 
 ### SLS
 在 samples/sls 目录下的代码示例，使用方法：
- - 将 sample/sls/sls.js 中需要的参数修改
+ - 将 samples/sls/sls.js 中需要的参数修改
  - 打开需要执行的某个实例文件，如 ListLogStores.js，将其中的参数改成你自己的 sls 实例参数
  - 执行示例文件即可, 如:
 
@@ -66,7 +66,7 @@ npm install aliyun-sdk
 
 ### ECS, RDS, SLB, CDN
 在 samples 对应目录下的有代码示例，使用方法：
- - 将 sample/ecs/test.js 中需要的参数修改
+ - 将 samples/ecs/test.js 中需要的参数修改
  - 执行示例文件即可, 如:
 
  ```javascript
@@ -74,9 +74,14 @@ npm install aliyun-sdk
  node test.js
  ```
 
+### OpenSearch
+在 samples/opensearch 目录下的代码示例，使用方法：
+ - 修改 samples/opensearch/opensearch.js，填入代码中所需参数
+ - 执行示例文件即可
+
 ### MEMCACHED
 在 samples/memcached 目录下的代码示例，使用方法：
- - 修改 sample/memcached/memcached.js，填入代码中所需参数
+ - 修改 samples/memcached/memcached.js，填入代码中所需参数
  - 执行示例文件即可
 
 更多帮助参考 https://github.com/chylvina/node_memcached
