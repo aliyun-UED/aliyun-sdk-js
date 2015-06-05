@@ -1,3 +1,9 @@
+/**
+ * ！！！此示例不可直接执行！！！
+ *
+ * 此示例包含了上传文档、获取所有应用和进行搜索的简单示例代码，请根据需要选择运行
+ * 运行之前确保代码前面的相关变量都根据你的项目情况填写清楚
+ */
 var ALY = require('../../index.js');
 
 var opensearch = new ALY.OpenSearch({
@@ -9,8 +15,10 @@ var opensearch = new ALY.OpenSearch({
   apiVersion: '2015-01-01'
 });
 
+// 你自己的可用app名称
 var test_app_name = 'sdk_test';
 
+// 上传文档
 opensearch.uploadDoc({
   "app_name": test_app_name,
   "action": "push",
@@ -28,7 +36,7 @@ opensearch.uploadDoc({
     },
     {
       "cmd": "add",
-      "timestamp":new Date(),
+      "timestamp":(new Date()).getTime(),
       "fields":{
         "id":"12113933132",
         "title":"This is the title",
@@ -41,13 +49,15 @@ opensearch.uploadDoc({
   console.log(err, res);
 });
 
+// 列表
 opensearch.listApp({}, function(err, res) {
   console.log(err, res);
 });
 
+// 搜索
 opensearch.search({
   'index_name': test_app_name,
-  'query': 'default:\'搜索\''
-}, function() {
-  console.log(arguments);
+  'query': 'query=default:\'搜索\'' // query子句，详细格式请参考API文档
+}, function(err, res) {
+  console.log(err, res);
 });
