@@ -1,0 +1,42 @@
+{
+  "format": "pop",
+  "apiVersion": "2015-04-01",
+  "checksumFormat": "md5",
+  "endpointPrefix": "sts",
+  "serviceAbbreviation": "Aliyun STS",
+  "serviceFullName": "Aliyun Secure Token Service",
+  "signatureVersion": "pop",
+  "timestampFormat": "top",
+  "xmlnamespace": "",
+  "operations": {
+    "getFederationToken": {
+      "name": "GetFederationToken",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "payload": ["StsVersion", "Action", "Name", "Policy", "DurationSeconds"],
+        "type": "structure",
+        "members": {
+          "StsVersion": {
+            "required": true
+          },
+          "Action": {
+            "required": true
+          },
+          "Name": {
+            "required": true
+          },
+          "Policy": {
+            "required": true
+          },
+          "DurationSeconds": {
+            "type": "integer",
+            "required": true
+          }
+        }
+      }
+    }
+  }
+}
