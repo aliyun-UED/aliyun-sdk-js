@@ -14,7 +14,7 @@ fs.readFile('test.json', function (err, data) {
 
   oss.putObject({
       Bucket: 'chylvina',
-      Key: 'test.json',
+      Key: 'test.json',                 // 注意, Key 的值不能以 / 开头, 否则会返回错误.
       Body: data,
       AccessControlAllowOrigin: '',
       ContentType: 'text/plain',
