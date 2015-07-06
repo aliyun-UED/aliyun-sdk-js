@@ -13,6 +13,8 @@ dist/tests.js
 config.json
 
 test*
+t.js
+t.html
 
 tools
 !tools/open_api_translator.js
