@@ -11,7 +11,7 @@ var sls = new ALY.SLS({
 
 var projectName = config.projectName;
 var logStoreName = config.logStoreName;
-var TOPIC = 'VV';
+var TOPIC = 'test/test2';
 
 
 describe('SLS Function Test', function(){
