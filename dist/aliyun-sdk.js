@@ -9178,6 +9178,7 @@ ALY.SequentialExecutor.prototype.addAsyncListener = ALY.SequentialExecutor.proto
 
 }).call(this,require('_process'))
 },{"./core":10,"_process":227}],18:[function(require,module,exports){
+(function (__dirname){
 var ALY = require('./core');
 var inherit = ALY.util.inherit;
 
@@ -9536,6 +9537,9 @@ ALY.util.update(ALY.Service, {
     });
 
     if (typeof version === 'string') {
+      var file = superclass.serviceIdentifier + '-' + version;
+      var path = __dirname + '/../apis/' + file + '.json';
+      path = './apis/oss-2013-10-15';
       try {
         svc.prototype.api = require(path);
       } catch (err) {
@@ -9557,6 +9561,7 @@ ALY.util.update(ALY.Service, {
   }
 });
 
+}).call(this,"/lib")
 },{"./core":10}],19:[function(require,module,exports){
 var ALY = require('../core');
 require('../json/builder');

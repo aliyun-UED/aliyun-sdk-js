@@ -1,15 +1,6 @@
 window.ALY = module.exports = require('./lib/core');
 require('./lib/http/xhr');
 
-// services
-require('./apis/cdn-2014-11-11');
-require('./apis/ecs-2014-05-26');
-require('./apis/opensearch-2015-01-01');
-require('./apis/oss-2013-10-15');
-require('./apis/rds-2014-08-15');
-require('./apis/slb-2014-05-15');
-require('./apis/sts-2015-04-01');
-
 require('./lib/services/oss');
 require('./lib/services/opensearch');
 
