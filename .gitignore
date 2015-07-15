@@ -1,5 +1,6 @@
 configuration
 node_modules
+bower_components
 npm-debug.log
 coverage.html
 vendor
