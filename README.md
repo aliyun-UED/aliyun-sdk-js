@@ -3,34 +3,29 @@
 ## 技术支持
 请加旺旺群：1489391962
 
-## 1.1.0 之前版本升级请注意
-
-1.1.0 之前实例化一个服务代码如下：
-
-```javascript
-ALY.config.update({
-  accessKeyId: "在阿里云OSS申请的 accessKeyId",
-  secretAccessKey: "在阿里云OSS申请的 secretAccessKey"
-});
-
-var oss = new ALY.OSS({
-  endpoint: 'http://oss-cn-hangzhou.aliyuncs.com',
-  apiVersion: '2013-10-15'
-});
-```
-1.1.0 之后实例化一个服务代码如下：
+## 初始化
 
 ```javascript
 var oss = new ALY.OSS({
   accessKeyId: "在阿里云OSS申请的 accessKeyId",
   secretAccessKey: "在阿里云OSS申请的 secretAccessKey",
+  securityToken: "",
   endpoint: 'http://oss-cn-hangzhou.aliyuncs.com',
   apiVersion: '2013-10-15'
 });
 ```
 
-即不需要配置 ALY.config
+可以使用 STS token 初始化 OSS, 后续 sts 会支持其他服务
 
+```javascript
+var oss = new ALY.OSS({
+  accessKeyId: "sts token 中的 accessKeyId",
+  secretAccessKey: "sts token 中的 secretAccessKey",
+  securityToken: "sts token 中的 securityToken",
+  endpoint: 'http://oss-cn-hangzhou.aliyuncs.com',
+  apiVersion: '2013-10-15'
+});
+```
 
 ## 安装
 
