@@ -12,7 +12,6 @@ dist/tests.js
 .DS_Store
 config.json
 
-test*
 t.js
 t.html
 

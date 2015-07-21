@@ -7,7 +7,7 @@ aliyun-sdk test
 npm i mocha should --save-dev
 ```
 
-### 2. how to run?
+### 2. how does it work?
 
 #### (1) config
 
@@ -17,12 +17,12 @@ fill configurations in config.js
 
 ```bash
 cd aliyun-sdk-js/test/sls
-mocha index
+mocha index  #you need to install mocha in global first: npm i -g mocha
 ```
 
 #### (3) run all
 
 ```bash
 cd aliyun-sdk-js
-npm test  #or mocha test
+npm test
 ```
