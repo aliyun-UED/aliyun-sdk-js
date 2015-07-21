@@ -7,7 +7,7 @@ aliyun-sdk test
 npm i mocha should --save-dev
 ```
 
-### 2. how does it work?
+### 2. how does it works?
 
 #### (1) config
 
