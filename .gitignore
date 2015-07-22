@@ -15,6 +15,7 @@ config.json
 
 t.js
 t.html
+test_*
 
 tools
 !tools/open_api_translator.js
