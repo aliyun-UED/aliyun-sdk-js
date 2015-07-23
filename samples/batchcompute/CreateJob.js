@@ -4,7 +4,7 @@ var batchcompute = require('./batchcompute');
 *
 */
 
-var job = {
+var jobDesc = {
     "JobName": "TestScene",
     "JobTag": "JobTag",
     "Priority": 0,
@@ -32,7 +32,7 @@ var job = {
     }
 };
 
-batchcompute.createJob(job,function(err, data) {
+batchcompute.createJob(jobDesc,function(err, data) {
     if(err) {
         console.log(err);
         return;
