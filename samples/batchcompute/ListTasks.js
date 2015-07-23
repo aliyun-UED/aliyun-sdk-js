@@ -5,7 +5,7 @@ var batchcompute = require('./batchcompute');
 */
 var jobId = 'job-00000000559638EC00005F780000069A';
 
-batchcompute.listTaskStatus({jobId:jobId},function(err, data) {
+batchcompute.listTasks({jobId:jobId},function(err, data) {
   if(err) {
     console.log(err);
     return;
