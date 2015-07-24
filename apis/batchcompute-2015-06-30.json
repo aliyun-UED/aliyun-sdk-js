@@ -138,8 +138,8 @@
         }
       }
     },
-    "listJobStatus": {
-      "name": "ListJobStatus",
+    "listJobs": {
+      "name": "ListJobs",
       "http": {
         "method": "GET",
         "uri": "/jobs"
@@ -155,8 +155,8 @@
         }
       }
     },
-    "getJobStatus": {
-      "name": "GetJobStatus",
+    "getJob": {
+      "name": "GetJob",
       "http": {
         "method": "GET",
         "uri": "/jobs/{jobId}"
@@ -182,8 +182,8 @@
         }
       }
     },
-    "getJob": {
-      "name": "GetJob",
+    "getJobDescription": {
+      "name": "GetJobDescription",
       "http": {
         "method": "GET",
         "uri": "/jobs/{jobId}/description"
@@ -205,8 +205,8 @@
         }
       }
     },
-    "listTaskStatus": {
-      "name":"ListTaskStatus",
+    "listTasks": {
+      "name":"ListTasks",
       "http": {
         "method": "GET",
         "uri": "/jobs/{jobId}/tasks"

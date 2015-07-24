@@ -20,7 +20,7 @@ describe('BatchCompute Function Test', function(){
         it('should create success', function (done) {
 
 
-            var job = {
+            var jobDesc = {
                 "JobName": "TestScene",
                 "JobTag": "JobTag",
                 "Priority": 0,
@@ -49,7 +49,7 @@ describe('BatchCompute Function Test', function(){
             };
 
 
-            client.createJob(job, function (err, result) {
+            client.createJob(jobDesc, function (err, result) {
 
                 if (err) {
                     console.log(err);
@@ -69,9 +69,9 @@ describe('BatchCompute Function Test', function(){
         });
 
 
-        it('should list job status success', function (done) {
+        it('should list jobs success', function (done) {
 
-            client.listJobStatus(function (err, result) {
+            client.listJobs(function (err, result) {
 
                 if (err) {
                     console.log(err);
@@ -83,26 +83,6 @@ describe('BatchCompute Function Test', function(){
                 result.data.length.should.above(1)
 
                 result.data[0].should.have.properties(['JobId','OwnerId','State','StartTime','EndTime']);
-
-
-                done();
-            });
-
-        });
-
-        it('should get job status success', function (done) {
-
-
-            client.getJobStatus({jobId:jobId},function (err, result) {
-
-                if (err) {
-                    console.log(err);
-                }
-
-                should(err === null).be.true;
-
-                result.should.have.properties(['requestId']);
-                result.data.should.have.properties(['JobId','OwnerId','State','StartTime','EndTime']);
 
 
                 done();
@@ -122,6 +102,26 @@ describe('BatchCompute Function Test', function(){
                 should(err === null).be.true;
 
                 result.should.have.properties(['requestId']);
+                result.data.should.have.properties(['JobId','OwnerId','State','StartTime','EndTime']);
+
+
+                done();
+            });
+
+        });
+
+        it('should get job description success', function (done) {
+
+
+            client.getJobDescription({jobId:jobId},function (err, result) {
+
+                if (err) {
+                    console.log(err);
+                }
+
+                should(err === null).be.true;
+
+                result.should.have.properties(['requestId']);
                 result.data.should.have.properties(['JobName','JobTag','TaskDag']);
 
                 result.data.TaskDag.TaskDescMap.should.have.property('CountTask')
@@ -130,10 +130,10 @@ describe('BatchCompute Function Test', function(){
 
         });
 
-        it('should list task success', function (done) {
+        it('should list tasks success', function (done) {
 
 
-            client.listTaskStatus({jobId:jobId},function (err, result) {
+            client.listTasks({jobId:jobId},function (err, result) {
 
                 if (err) {
                     console.log(err);
@@ -193,7 +193,7 @@ describe('BatchCompute Function Test', function(){
                 result.should.have.properties(['requestId','code','message']);
 
 
-                client.getJobStatus({jobId:jobId},function (err, result) {
+                client.getJob({jobId:jobId},function (err, result) {
 
                     if (err) {
                         console.log(err);
