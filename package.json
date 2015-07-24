@@ -9,7 +9,7 @@
   "homepage": "https://github.com/aliyun-UED/aliyun-sdk-js.git",
   "contributors": [],
   "devDependencies": {
-    "coffee-script": "1.6.3",
+    "coffee-script": "1.6.5",
     "coffeeify": "",
     "cucumber": "",
     "jasmine-node": "",
