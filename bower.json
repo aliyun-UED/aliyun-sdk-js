@@ -1,7 +1,7 @@
 {
   "name": "aliyun-sdk-js",
   "main": "dist/aliyun-sdk.js",
-  "version": "1.5.2",
+  "version": "1.5.6",
   "homepage": "https://github.com/aliyun-UED/aliyun-sdk-js",
   "authors": [
     "chylvina@gmail.com"
@@ -9,14 +9,21 @@
   "description": "Aliyun SDK for JavaScript",
   "license": "MIT",
   "ignore": [
-    "**/.*",
+    "apis",
     "node_modules",
     "bower_components",
-    "test",
-    "tests"
+    "lib",
+    "samples",
+    "test*",
+    "tools",
+    "browser.js",
+    "index.js"
   ],
-  "dependencies": {
+  "devDependencies": {
     "spark-md5": "~1.0.0",
     "jsSHA": "~2.0.1"
-  }
+  },
+  "moduleType": [
+    "globals"
+  ]
 }
