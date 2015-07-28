@@ -3,6 +3,7 @@ require('./lib/http/xhr');
 
 require('./lib/services/oss');
 require('./lib/services/opensearch');
+require('./lib/services/batchcompute');
 
 ALY.ECS = ALY.Service.defineService('ecs', ['2014-05-26']);
 ALY.RDS = ALY.Service.defineService('rds', ['2014-08-15']);
