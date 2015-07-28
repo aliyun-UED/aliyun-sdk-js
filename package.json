@@ -28,7 +28,6 @@
   "main": "index.js",
   "browser": {
     "./lib/util.js": "./lib/util-browser.js",
-    "./lib/signers/request_signer.js": "./lib/signers/request_signer_browser.js",
     "cdn-2014-11-11.json": "./apis/cdn-2014-11-11.json",
     "ecs-2014-05-26.json": "./apis/ecs-2014-05-26.json",
     "opensearch-2015-01-01.json": "./apis/opensearch-2015-01-01.json",
