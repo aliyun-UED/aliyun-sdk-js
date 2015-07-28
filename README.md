@@ -32,6 +32,8 @@ browserify -r oss-2013-10-15.json -r batchcompute-2015-06-30.json browser.js > d
 
 目前在浏览器端运行的 sdk 还在测试阶段, 如果有问题请随时提出.
 
+使用 aliyun sdk js 将文件上传到 oss, 请点击 [oss-js-upload](https://github.com/aliyun-UED/oss-js-upload)
+
 ## 初始化
 
 ```javascript
