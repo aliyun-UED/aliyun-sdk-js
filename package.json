@@ -31,6 +31,7 @@
     "cdn-2014-11-11.json": "./apis/cdn-2014-11-11.json",
     "ecs-2014-05-26.json": "./apis/ecs-2014-05-26.json",
     "opensearch-2015-01-01.json": "./apis/opensearch-2015-01-01.json",
+    "batchcompute-2015-06-30.json": "./apis/batchcompute-2015-06-30.json",
     "oss-2013-10-15.json": "./apis/oss-2013-10-15.json",
     "rds-2014-08-15.json": "./apis/rds-2014-08-15.json",
     "slb-2014-05-15.json": "./apis/slb-2014-05-15.json",
