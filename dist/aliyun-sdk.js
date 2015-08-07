@@ -1615,7 +1615,7 @@ ALY.Request = inherit({
    *   parameters.
    */
   constructor: function Request(service, operation, params) {
-    var endpoint = service.endpoint;
+    var endpoint = new ALY.Endpoint(service.config.endpoint);
     var region = service.config.region;
 
     this.service = service;
@@ -2290,7 +2290,6 @@ ALY.Service = inherit({
    */
   initialize: function initialize(config) {
     this.config = new ALY.Config(config);
-    this.endpoint = new ALY.Endpoint(this.config.endpoint);
   },
 
   /**
@@ -2520,15 +2519,6 @@ ALY.Service = inherit({
   throttledError: function throttledError(error) {
     // this logic varies between services
     return (error.code == 'ProvisionedThroughputExceededException');
-  },
-
-  /**
-   * @api private
-   */
-  endpointSuffix: function endpointSuffix() {
-    var suffix = '.amazonaws.com';
-    if (this.isRegionCN()) return suffix + '.cn';
-    else return suffix;
   },
 
   /**
@@ -3651,7 +3641,6 @@ ALY.OSS = ALY.Service.defineService('oss', ['2013-10-15'], {
    */
   initialize: function initialize(options) {
     ALY.Service.prototype.initialize.call(this, options);
-    // 在这里 update endpoint ，如果需要的话
   },
 
   setupRequestListeners: function setupRequestListeners(request) {
@@ -3668,10 +3657,7 @@ ALY.OSS = ALY.Service.defineService('oss', ['2013-10-15'], {
 
     if (b) {
       // 确保 host 只被 set 一次，因为 endpoint 只在 service 唯一
-      if(!httpRequest.endpoint.ossHostSet) {
-        httpRequest.endpoint.host = httpRequest.endpoint.hostname = b + '.' + httpRequest.endpoint.hostname;
-        httpRequest.endpoint.ossHostSet = true;
-      }
+      httpRequest.endpoint.host = httpRequest.endpoint.hostname = b + '.' + httpRequest.endpoint.hostname;
 
       httpRequest.virtualHostedBucket = b;
       httpRequest.path = httpRequest.path.replace(new RegExp('^/' + b), '');
