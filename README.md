@@ -9,6 +9,8 @@
 
 目前支持在浏览器端调用除了 sls 以外的所有服务, 不过目前只有 oss 支持 sts , 非 oss 服务只能使用 accessKey 和 accessSecret 进行初始化, 存在泄露风险.
 
+使用 aliyun sdk js 将文件上传到 oss, 请点击 [oss-js-upload](https://github.com/aliyun-UED/oss-js-upload)
+
 ### 如何 build
 
 考虑到文件大小, 目前 dist/aliyun-sdk.js 中仅包含 oss 服务, 如果需要 build 其他服务, 请按照以下步骤操作:
@@ -31,8 +33,6 @@ browserify -r oss-2013-10-15.json -r batchcompute-2015-06-30.json browser.js > d
 ```
 
 目前在浏览器端运行的 sdk 还在测试阶段, 如果有问题请随时提出.
-
-使用 aliyun sdk js 将文件上传到 oss, 请点击 [oss-js-upload](https://github.com/aliyun-UED/oss-js-upload)
 
 ## 初始化
 
