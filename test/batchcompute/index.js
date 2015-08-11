@@ -1,5 +1,5 @@
 var ALY = require('../../index.js');
-var config = require('./config');
+var config = require('./testConfig'); //会先找 testConfig.js , 如果不存在，再找 testConfig.json
 var should = require('should');
 
 var client = new ALY.BatchCompute({
@@ -9,7 +9,7 @@ var client = new ALY.BatchCompute({
     maxRetries: 1,
     apiVersion: '2015-06-30'
 });
-var jobId='job-0000000055ADB2DB00006E1100000041';
+var jobId;
 
 describe('BatchCompute Function Test', function(){
 
@@ -148,10 +148,10 @@ describe('BatchCompute Function Test', function(){
                 arr.length.should.be.exactly(1);
 
                 arr[0].should.have.property('TaskName','CountTask');
-                arr[0].should.have.property('InstanceStatusList')
+                arr[0].should.have.property('InstanceList')
 
 
-                var insArr = arr[0]['InstanceStatusList'];
+                var insArr = arr[0]['InstanceList'];
 
                 insArr.length.should.be.exactly(1);
 
