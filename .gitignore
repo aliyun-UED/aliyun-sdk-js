@@ -19,3 +19,5 @@ test_*
 
 tools
 !tools/open_api_translator.js
+
+test/*/testConfig.js
