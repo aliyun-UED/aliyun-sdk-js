@@ -1,7 +1,7 @@
 {
   "name": "aliyun-sdk-js",
   "main": "dist/aliyun-sdk.js",
-  "version": "1.5.7",
+  "version": "1.5.9",
   "homepage": "https://github.com/aliyun-UED/aliyun-sdk-js",
   "authors": [
     "chylvina@gmail.com"
