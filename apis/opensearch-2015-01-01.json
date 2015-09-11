@@ -3,7 +3,7 @@
   "apiVersion": "v2",
   "checksumFormat": "md5",
   "endpointPrefix": "opensearch",
-  "serviceAbbreviation": "Aliyun OpenSearch",
+  "serviceAbbreviation": "OpenSearch",
   "serviceFullName": "Aliyun OpenSearch",
   "signatureVersion": "opensearch",
   "timestampFormat": "rfc822",

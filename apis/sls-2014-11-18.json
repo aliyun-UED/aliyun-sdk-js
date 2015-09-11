@@ -3,7 +3,7 @@
   "apiVersion": "0.4.0",
   "checksumFormat": "md5",
   "endpointPrefix": "sls",
-  "serviceAbbreviation": "Aliyun SLS",
+  "serviceAbbreviation": "SLS",
   "serviceFullName": "Aliyun Simple Log Service",
   "signatureVersion": "sls",
   "timestampFormat": "rfc822",

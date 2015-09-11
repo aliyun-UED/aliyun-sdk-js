@@ -1,0 +1,770 @@
+{
+  "format": "pop",
+  "apiVersion": "2015-04-16",
+  "checksumFormat": "md5",
+  "endpointPrefix": "yundun",
+  "serviceAbbreviation": "YunDun",
+  "serviceFullName": "Aliyun YUNDUN",
+  "signatureVersion": "pop",
+  "timestampFormat": "top",
+  "xmlnamespace": "",
+  "operations": {
+    "bruteforceLog": {
+      "name": "BruteforceLog",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "BruteforceLog"
+          },
+          "JstOwnerId": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "RecordType": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "ddosLog": {
+      "name": "DdosLog",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DdosLog"
+          },
+          "JstOwnerId": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceType": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteBackDoorFile": {
+      "name": "DeleteBackDoorFile",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteBackDoorFile"
+          },
+          "JstOwnerId": {
+            "type": "integer"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "Path": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "listInstanceInfos": {
+      "name": "ListInstanceInfos",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ListInstanceInfos"
+          },
+          "JstOwnerId": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "Region": {
+            "type": "string"
+          },
+          "EventType": {
+            "type": "string"
+          },
+          "InstanceName": {
+            "type": "string"
+          },
+          "InstanceType": {
+            "type": "string"
+          },
+          "InstanceIds": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "logineventLog": {
+      "name": "LogineventLog",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "LogineventLog"
+          },
+          "JstOwnerId": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "RecordType": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "secureCheck": {
+      "name": "SecureCheck",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SecureCheck"
+          },
+          "JstOwnerId": {
+            "type": "integer"
+          },
+          "InstanceIds": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "wafLog": {
+      "name": "WafLog",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "WafLog"
+          },
+          "JstOwnerId": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceType": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "webshellLog": {
+      "name": "WebshellLog",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "WebshellLog"
+          },
+          "JstOwnerId": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "RecordType": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "addCNameWaf": {
+      "name": "AddCNameWaf",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AddCNameWaf"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceType": {
+            "type": "string"
+          },
+          "Domain": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "closeCCProtect": {
+      "name": "CloseCCProtect",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CloseCCProtect"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceType": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "closePortScan": {
+      "name": "ClosePortScan",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ClosePortScan"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "closeVulScan": {
+      "name": "CloseVulScan",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CloseVulScan"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "configDdos": {
+      "name": "ConfigDdos",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ConfigDdos"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceType": {
+            "type": "string"
+          },
+          "FlowPosition": {
+            "required": true,
+            "type": "integer"
+          },
+          "StrategyPosition": {
+            "required": true,
+            "type": "integer"
+          },
+          "Level": {
+            "required": true,
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "confirmLogin": {
+      "name": "ConfirmLogin",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ConfirmLogin"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "SourceIp": {
+            "required": true,
+            "type": "string"
+          },
+          "Time": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ddosFlowGraph": {
+      "name": "DdosFlowGraph",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DdosFlowGraph"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceType": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteCNameWaf": {
+      "name": "DeleteCNameWaf",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteCNameWaf"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "Domain": {
+            "required": true,
+            "type": "string"
+          },
+          "CnameId": {
+            "required": true,
+            "type": "integer"
+          },
+          "InstanceType": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "detectVulById": {
+      "name": "DetectVulById",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DetectVulById"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "VulId": {
+            "required": true,
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "detectVulByIp": {
+      "name": "DetectVulByIp",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DetectVulByIp"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "VulIp": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "getDdosConfigOptions": {
+      "name": "GetDdosConfigOptions",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "GetDdosConfigOptions"
+          }
+        }
+      }
+    },
+    "openCCProtect": {
+      "name": "OpenCCProtect",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "OpenCCProtect"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceType": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "openPortScan": {
+      "name": "OpenPortScan",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "OpenPortScan"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "openVulScan": {
+      "name": "OpenVulScan",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "OpenVulScan"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "queryDdosConfig": {
+      "name": "QueryDdosConfig",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "QueryDdosConfig"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceType": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "serviceStatus": {
+      "name": "ServiceStatus",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ServiceStatus"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setDdosAuto": {
+      "name": "SetDdosAuto",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetDdosAuto"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceType": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setDdosQps": {
+      "name": "SetDdosQps",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetDdosQps"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceType": {
+            "type": "string"
+          },
+          "QpsPosition": {
+            "required": true,
+            "type": "integer"
+          },
+          "Level": {
+            "required": true,
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "summary": {
+      "name": "Summary",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "Summary"
+          },
+          "JstOwnerId": {
+            "type": "integer"
+          },
+          "InstanceIds": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "wafInfo": {
+      "name": "WafInfo",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "WafInfo"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceType": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "vulScanLog": {
+      "name": "VulScanLog",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "VulScanLog"
+          },
+          "JstOwnerId": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "VulStatus": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}

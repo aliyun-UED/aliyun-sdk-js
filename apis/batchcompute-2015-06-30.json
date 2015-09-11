@@ -3,7 +3,7 @@
   "apiVersion": "2015-06-30",
   "checksumFormat": "md5",
   "endpointPrefix": "batchcompute",
-  "serviceAbbreviation": "Aliyun BatchCompute",
+  "serviceAbbreviation": "BatchCompute",
   "serviceFullName": "Aliyun Batch Computing Service",
   "signatureVersion": "batchcompute",
   "timestampFormat": "rfc822",

@@ -1,0 +1,590 @@
+{
+  "format": "pop",
+  "apiVersion": "2015-04-13",
+  "checksumFormat": "md5",
+  "endpointPrefix": "drds",
+  "serviceAbbreviation": "DRDS",
+  "serviceFullName": "Aliyun DRDS",
+  "signatureVersion": "pop",
+  "timestampFormat": "top",
+  "xmlnamespace": "",
+  "operations": {
+    "alterTable": {
+      "name": "AlterTable",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AlterTable"
+          },
+          "DrdsInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DbName": {
+            "required": true,
+            "type": "string"
+          },
+          "DdlSql": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "cancelDDLTask": {
+      "name": "CancelDDLTask",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CancelDDLTask"
+          },
+          "DrdsInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DbName": {
+            "required": true,
+            "type": "string"
+          },
+          "TaskId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createDrdsDB": {
+      "name": "CreateDrdsDB",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateDrdsDB"
+          },
+          "DrdsInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DbName": {
+            "required": true,
+            "type": "string"
+          },
+          "Encode": {
+            "required": true,
+            "type": "string"
+          },
+          "Password": {
+            "required": true,
+            "type": "string"
+          },
+          "RdsInstances": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createDrdsInstance": {
+      "name": "CreateDrdsInstance",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateDrdsInstance"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "ZoneId": {
+            "required": true,
+            "type": "string"
+          },
+          "Type": {
+            "required": true,
+            "type": "string"
+          },
+          "Quantity": {
+            "required": true,
+            "type": "integer"
+          },
+          "Specification": {
+            "required": true,
+            "type": "string"
+          },
+          "PayType": {
+            "required": true,
+            "type": "string"
+          },
+          "VpcId": {
+            "type": "string"
+          },
+          "VswitchId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createIndex": {
+      "name": "CreateIndex",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateIndex"
+          },
+          "DrdsInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DbName": {
+            "required": true,
+            "type": "string"
+          },
+          "DdlSql": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createTable": {
+      "name": "CreateTable",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateTable"
+          },
+          "DrdsInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DbName": {
+            "required": true,
+            "type": "string"
+          },
+          "DdlSql": {
+            "required": true,
+            "type": "string"
+          },
+          "ShardType": {
+            "required": true,
+            "type": "string"
+          },
+          "ShardKey": {
+            "type": "string"
+          },
+          "AllowFullTableScan": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteDrdsDB": {
+      "name": "DeleteDrdsDB",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteDrdsDB"
+          },
+          "DrdsInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DbName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDDLTask": {
+      "name": "DescribeDDLTask",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDDLTask"
+          },
+          "DrdsInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DbName": {
+            "required": true,
+            "type": "string"
+          },
+          "TaskId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDrdsDB": {
+      "name": "DescribeDrdsDB",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDrdsDB"
+          },
+          "DrdsInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DbName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDrdsDBs": {
+      "name": "DescribeDrdsDBs",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDrdsDBs"
+          },
+          "DrdsInstanceId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDrdsInstance": {
+      "name": "DescribeDrdsInstance",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDrdsInstance"
+          },
+          "DrdsInstanceId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDrdsInstances": {
+      "name": "DescribeDrdsInstances",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDrdsInstances"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "Type": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "dropIndexes": {
+      "name": "DropIndexes",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DropIndexes"
+          },
+          "DrdsInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DbName": {
+            "required": true,
+            "type": "string"
+          },
+          "Table": {
+            "required": true,
+            "type": "string"
+          },
+          "Indexes": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "dropTables": {
+      "name": "DropTables",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DropTables"
+          },
+          "DrdsInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DbName": {
+            "required": true,
+            "type": "string"
+          },
+          "Tables": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "listUnCompleteTasks": {
+      "name": "ListUnCompleteTasks",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ListUnCompleteTasks"
+          },
+          "DrdsInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DbName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyDrdsDBPasswd": {
+      "name": "ModifyDrdsDBPasswd",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyDrdsDBPasswd"
+          },
+          "DrdsInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DbName": {
+            "required": true,
+            "type": "string"
+          },
+          "NewPasswd": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyDrdsInstanceDescription": {
+      "name": "ModifyDrdsInstanceDescription",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyDrdsInstanceDescription"
+          },
+          "DrdsInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "Description": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeCreateDrdsInstanceStatus": {
+      "name": "DescribeCreateDrdsInstanceStatus",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeCreateDrdsInstanceStatus"
+          },
+          "DrdsInstanceId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "removeDrdsInstance": {
+      "name": "RemoveDrdsInstance",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "RemoveDrdsInstance"
+          },
+          "DrdsInstanceId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyDrdsIpWhiteList": {
+      "name": "ModifyDrdsIpWhiteList",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyDrdsIpWhiteList"
+          },
+          "DrdsInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DbName": {
+            "required": true,
+            "type": "string"
+          },
+          "IpWhiteList": {
+            "required": true,
+            "type": "string"
+          },
+          "Mode": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "describeDrdsDBIpWhiteList": {
+      "name": "DescribeDrdsDBIpWhiteList",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDrdsDBIpWhiteList"
+          },
+          "DrdsInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DbName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

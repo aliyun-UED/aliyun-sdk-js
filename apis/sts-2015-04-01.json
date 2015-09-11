@@ -3,8 +3,8 @@
   "apiVersion": "2015-04-01",
   "checksumFormat": "md5",
   "endpointPrefix": "sts",
-  "serviceAbbreviation": "Aliyun STS",
-  "serviceFullName": "Aliyun Secure Token Service",
+  "serviceAbbreviation": "STS",
+  "serviceFullName": "Aliyun STS",
   "signatureVersion": "pop",
   "timestampFormat": "top",
   "xmlnamespace": "",
@@ -16,24 +16,87 @@
         "uri": "/"
       },
       "input": {
-        "payload": ["StsVersion", "Action", "Name", "Policy", "DurationSeconds"],
         "type": "structure",
         "members": {
-          "StsVersion": {
-            "required": true
-          },
           "Action": {
-            "required": true
+            "required": true,
+            "default": "GetFederationToken"
           },
           "Name": {
-            "required": true
+            "required": true,
+            "type": "string"
           },
           "Policy": {
-            "required": true
+            "required": true,
+            "type": "string"
           },
           "DurationSeconds": {
-            "type": "integer",
-            "required": true
+            "required": true,
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "assumeRole": {
+      "name": "AssumeRole",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AssumeRole"
+          },
+          "DurationSeconds": {
+            "type": "integer"
+          },
+          "Policy": {
+            "type": "string"
+          },
+          "RoleArn": {
+            "required": true,
+            "type": "string"
+          },
+          "RoleSessionName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "assumeRoleWithServiceIdentity": {
+      "name": "AssumeRoleWithServiceIdentity",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AssumeRoleWithServiceIdentity"
+          },
+          "DurationSeconds": {
+            "type": "integer"
+          },
+          "Policy": {
+            "type": "string"
+          },
+          "RoleArn": {
+            "required": true,
+            "type": "string"
+          },
+          "RoleSessionName": {
+            "required": true,
+            "type": "string"
+          },
+          "AssumeRoleFor": {
+            "required": true,
+            "type": "string"
           }
         }
       }

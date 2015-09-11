@@ -1,0 +1,1375 @@
+{
+  "format": "pop",
+  "apiVersion": "2015-05-01",
+  "checksumFormat": "md5",
+  "endpointPrefix": "ram",
+  "serviceAbbreviation": "RAM",
+  "serviceFullName": "Aliyun RAM",
+  "signatureVersion": "pop",
+  "timestampFormat": "top",
+  "xmlnamespace": "",
+  "operations": {
+    "createGroup": {
+      "name": "CreateGroup",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateGroup"
+          },
+          "GroupName": {
+            "type": "string"
+          },
+          "Comments": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteGroup": {
+      "name": "DeleteGroup",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteGroup"
+          },
+          "GroupName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "getGroup": {
+      "name": "GetGroup",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "GetGroup"
+          },
+          "GroupName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "listGroups": {
+      "name": "ListGroups",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ListGroups"
+          },
+          "Marker": {
+            "type": "string"
+          },
+          "MaxItems": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "updateGroup": {
+      "name": "UpdateGroup",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "UpdateGroup"
+          },
+          "GroupName": {
+            "type": "string"
+          },
+          "NewGroupName": {
+            "type": "string"
+          },
+          "NewComments": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "addUserToGroup": {
+      "name": "AddUserToGroup",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AddUserToGroup"
+          },
+          "UserName": {
+            "type": "string"
+          },
+          "GroupName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "listGroupsForUser": {
+      "name": "ListGroupsForUser",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ListGroupsForUser"
+          },
+          "UserName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "listUsersForGroup": {
+      "name": "ListUsersForGroup",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ListUsersForGroup"
+          },
+          "GroupName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "removeUserFromGroup": {
+      "name": "RemoveUserFromGroup",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "RemoveUserFromGroup"
+          },
+          "UserName": {
+            "type": "string"
+          },
+          "GroupName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createPolicy": {
+      "name": "CreatePolicy",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreatePolicy"
+          },
+          "PolicyName": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "PolicyDocument": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deletePolicy": {
+      "name": "DeletePolicy",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeletePolicy"
+          },
+          "PolicyName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "getPolicy": {
+      "name": "GetPolicy",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "GetPolicy"
+          },
+          "PolicyType": {
+            "type": "string"
+          },
+          "PolicyName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "listPolicies": {
+      "name": "ListPolicies",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ListPolicies"
+          },
+          "PolicyType": {
+            "type": "string"
+          },
+          "Marker": {
+            "type": "string"
+          },
+          "MaxItems": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "attachPolicyToGroup": {
+      "name": "AttachPolicyToGroup",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AttachPolicyToGroup"
+          },
+          "PolicyType": {
+            "type": "string"
+          },
+          "PolicyName": {
+            "type": "string"
+          },
+          "GroupName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "attachPolicyToUser": {
+      "name": "AttachPolicyToUser",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AttachPolicyToUser"
+          },
+          "PolicyType": {
+            "type": "string"
+          },
+          "PolicyName": {
+            "type": "string"
+          },
+          "UserName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "detachPolicyFromGroup": {
+      "name": "DetachPolicyFromGroup",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DetachPolicyFromGroup"
+          },
+          "PolicyType": {
+            "type": "string"
+          },
+          "PolicyName": {
+            "type": "string"
+          },
+          "GroupName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "detachPolicyFromUser": {
+      "name": "DetachPolicyFromUser",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DetachPolicyFromUser"
+          },
+          "PolicyType": {
+            "type": "string"
+          },
+          "PolicyName": {
+            "type": "string"
+          },
+          "UserName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "listEntitiesForPolicy": {
+      "name": "ListEntitiesForPolicy",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ListEntitiesForPolicy"
+          },
+          "PolicyType": {
+            "type": "string"
+          },
+          "PolicyName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "listPoliciesForGroup": {
+      "name": "ListPoliciesForGroup",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ListPoliciesForGroup"
+          },
+          "GroupName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "listPoliciesForUser": {
+      "name": "ListPoliciesForUser",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ListPoliciesForUser"
+          },
+          "UserName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createPolicyVersion": {
+      "name": "CreatePolicyVersion",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreatePolicyVersion"
+          },
+          "PolicyName": {
+            "type": "string"
+          },
+          "PolicyDocument": {
+            "type": "string"
+          },
+          "SetAsDefault": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "deletePolicyVersion": {
+      "name": "DeletePolicyVersion",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeletePolicyVersion"
+          },
+          "PolicyName": {
+            "type": "string"
+          },
+          "VersionId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "getPolicyVersion": {
+      "name": "GetPolicyVersion",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "GetPolicyVersion"
+          },
+          "PolicyType": {
+            "type": "string"
+          },
+          "PolicyName": {
+            "type": "string"
+          },
+          "VersionId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "listPolicyVersions": {
+      "name": "ListPolicyVersions",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ListPolicyVersions"
+          },
+          "PolicyType": {
+            "type": "string"
+          },
+          "PolicyName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setDefaultPolicyVersion": {
+      "name": "SetDefaultPolicyVersion",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetDefaultPolicyVersion"
+          },
+          "PolicyName": {
+            "type": "string"
+          },
+          "VersionId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "clearAccountAlias": {
+      "name": "ClearAccountAlias",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ClearAccountAlias"
+          }
+        }
+      }
+    },
+    "getAccountAlias": {
+      "name": "GetAccountAlias",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "GetAccountAlias"
+          }
+        }
+      }
+    },
+    "getPasswordPolicy": {
+      "name": "GetPasswordPolicy",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "GetPasswordPolicy"
+          }
+        }
+      }
+    },
+    "setAccountAlias": {
+      "name": "SetAccountAlias",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetAccountAlias"
+          },
+          "AccountAlias": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setPasswordPolicy": {
+      "name": "SetPasswordPolicy",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetPasswordPolicy"
+          },
+          "MinimumPasswordLength": {
+            "type": "integer"
+          },
+          "RequireLowercaseCharacters": {
+            "type": "boolean"
+          },
+          "RequireUppercaseCharacters": {
+            "type": "boolean"
+          },
+          "RequireNumbers": {
+            "type": "boolean"
+          },
+          "RequireSymbols": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "activateService": {
+      "name": "ActivateService",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ActivateService"
+          },
+          "AccountId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deactivateService": {
+      "name": "DeactivateService",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeactivateService"
+          },
+          "AccountId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "getServiceStatus": {
+      "name": "GetServiceStatus",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "GetServiceStatus"
+          },
+          "AccountId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createAccessKey": {
+      "name": "CreateAccessKey",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateAccessKey"
+          },
+          "UserName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteAccessKey": {
+      "name": "DeleteAccessKey",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteAccessKey"
+          },
+          "UserName": {
+            "type": "string"
+          },
+          "UserAccessKeyId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "listAccessKeys": {
+      "name": "ListAccessKeys",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ListAccessKeys"
+          },
+          "UserName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "updateAccessKey": {
+      "name": "UpdateAccessKey",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "UpdateAccessKey"
+          },
+          "UserName": {
+            "type": "string"
+          },
+          "UserAccessKeyId": {
+            "type": "string"
+          },
+          "Status": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createUser": {
+      "name": "CreateUser",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateUser"
+          },
+          "UserName": {
+            "type": "string"
+          },
+          "DisplayName": {
+            "type": "string"
+          },
+          "MobilePhone": {
+            "type": "string"
+          },
+          "Email": {
+            "type": "string"
+          },
+          "Comments": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteUser": {
+      "name": "DeleteUser",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteUser"
+          },
+          "UserName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "getUser": {
+      "name": "GetUser",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "GetUser"
+          },
+          "UserName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "listUsers": {
+      "name": "ListUsers",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ListUsers"
+          },
+          "Marker": {
+            "type": "string"
+          },
+          "MaxItems": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "updateUser": {
+      "name": "UpdateUser",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "UpdateUser"
+          },
+          "UserName": {
+            "type": "string"
+          },
+          "NewUserName": {
+            "type": "string"
+          },
+          "NewDisplayName": {
+            "type": "string"
+          },
+          "NewMobilePhone": {
+            "type": "string"
+          },
+          "NewEmail": {
+            "type": "string"
+          },
+          "NewComments": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createLoginProfile": {
+      "name": "CreateLoginProfile",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateLoginProfile"
+          },
+          "UserName": {
+            "type": "string"
+          },
+          "Password": {
+            "type": "string"
+          },
+          "PasswordResetRequired": {
+            "type": "boolean"
+          },
+          "MFABindRequired": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "deleteLoginProfile": {
+      "name": "DeleteLoginProfile",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteLoginProfile"
+          },
+          "UserName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "getLoginProfile": {
+      "name": "GetLoginProfile",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "GetLoginProfile"
+          },
+          "UserName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "updateLoginProfile": {
+      "name": "UpdateLoginProfile",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "UpdateLoginProfile"
+          },
+          "UserName": {
+            "type": "string"
+          },
+          "Password": {
+            "type": "string"
+          },
+          "PasswordResetRequired": {
+            "type": "boolean"
+          },
+          "MFABindRequired": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "bindMFADevice": {
+      "name": "BindMFADevice",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "BindMFADevice"
+          },
+          "SerialNumber": {
+            "type": "string"
+          },
+          "UserName": {
+            "type": "string"
+          },
+          "AuthenticationCode1": {
+            "type": "string"
+          },
+          "AuthenticationCode2": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createVirtualMFADevice": {
+      "name": "CreateVirtualMFADevice",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateVirtualMFADevice"
+          },
+          "VirtualMFADeviceName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteVirtualMFADevice": {
+      "name": "DeleteVirtualMFADevice",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteVirtualMFADevice"
+          },
+          "SerialNumber": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "getUserMFAInfo": {
+      "name": "GetUserMFAInfo",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "GetUserMFAInfo"
+          },
+          "UserName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "listVirtualMFADevices": {
+      "name": "ListVirtualMFADevices",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ListVirtualMFADevices"
+          }
+        }
+      }
+    },
+    "unbindMFADevice": {
+      "name": "UnbindMFADevice",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "UnbindMFADevice"
+          },
+          "UserName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "attachPolicyToRole": {
+      "name": "AttachPolicyToRole",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AttachPolicyToRole"
+          },
+          "PolicyType": {
+            "type": "string"
+          },
+          "PolicyName": {
+            "type": "string"
+          },
+          "RoleName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createRole": {
+      "name": "CreateRole",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateRole"
+          },
+          "RoleName": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "AssumeRolePolicyDocument": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteRole": {
+      "name": "DeleteRole",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteRole"
+          },
+          "RoleName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "detachPolicyFromRole": {
+      "name": "DetachPolicyFromRole",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DetachPolicyFromRole"
+          },
+          "PolicyType": {
+            "type": "string"
+          },
+          "PolicyName": {
+            "type": "string"
+          },
+          "RoleName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "getAccountSummary": {
+      "name": "GetAccountSummary",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "GetAccountSummary"
+          }
+        }
+      }
+    },
+    "getRole": {
+      "name": "GetRole",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "GetRole"
+          },
+          "RoleName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "getSecurityPreference": {
+      "name": "GetSecurityPreference",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "GetSecurityPreference"
+          }
+        }
+      }
+    },
+    "listPoliciesForRole": {
+      "name": "ListPoliciesForRole",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ListPoliciesForRole"
+          },
+          "RoleName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "listRoles": {
+      "name": "ListRoles",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ListRoles"
+          },
+          "Marker": {
+            "type": "string"
+          },
+          "MaxItems": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "setSecurityPreference": {
+      "name": "SetSecurityPreference",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetSecurityPreference"
+          },
+          "EnableSaveMFATicket": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "updateRole": {
+      "name": "UpdateRole",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "UpdateRole"
+          },
+          "RoleName": {
+            "type": "string"
+          },
+          "NewAssumeRolePolicyDocument": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
