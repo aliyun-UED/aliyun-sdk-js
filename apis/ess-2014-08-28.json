@@ -1,0 +1,1852 @@
+{
+  "format": "pop",
+  "apiVersion": "2014-08-28",
+  "checksumFormat": "md5",
+  "endpointPrefix": "ess",
+  "serviceAbbreviation": "ESS",
+  "serviceFullName": "Aliyun ESS",
+  "signatureVersion": "pop",
+  "timestampFormat": "top",
+  "xmlnamespace": "",
+  "operations": {
+    "attachInstances": {
+      "name": "AttachInstances",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AttachInstances"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ScalingGroupId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceId.1": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceId.2": {
+            "type": "string"
+          },
+          "InstanceId.3": {
+            "type": "string"
+          },
+          "InstanceId.4": {
+            "type": "string"
+          },
+          "InstanceId.5": {
+            "type": "string"
+          },
+          "InstanceId.6": {
+            "type": "string"
+          },
+          "InstanceId.7": {
+            "type": "string"
+          },
+          "InstanceId.8": {
+            "type": "string"
+          },
+          "InstanceId.9": {
+            "type": "string"
+          },
+          "InstanceId.10": {
+            "type": "string"
+          },
+          "InstanceId.11": {
+            "type": "string"
+          },
+          "InstanceId.12": {
+            "type": "string"
+          },
+          "InstanceId.13": {
+            "type": "string"
+          },
+          "InstanceId.14": {
+            "type": "string"
+          },
+          "InstanceId.15": {
+            "type": "string"
+          },
+          "InstanceId.16": {
+            "type": "string"
+          },
+          "InstanceId.17": {
+            "type": "string"
+          },
+          "InstanceId.18": {
+            "type": "string"
+          },
+          "InstanceId.19": {
+            "type": "string"
+          },
+          "InstanceId.20": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createScalingConfiguration": {
+      "name": "CreateScalingConfiguration",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateScalingConfiguration"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ScalingGroupId": {
+            "required": true,
+            "type": "string"
+          },
+          "ImageId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceType": {
+            "required": true,
+            "type": "string"
+          },
+          "SecurityGroupId": {
+            "required": true,
+            "type": "string"
+          },
+          "InternetChargeType": {
+            "type": "string"
+          },
+          "InternetMaxBandwidthIn": {
+            "type": "integer"
+          },
+          "InternetMaxBandwidthOut": {
+            "type": "integer"
+          },
+          "SystemDisk.Category": {
+            "type": "string"
+          },
+          "ScalingConfigurationName": {
+            "type": "string"
+          },
+          "DataDisk.1.Size": {
+            "type": "integer"
+          },
+          "DataDisk.2.Size": {
+            "type": "integer"
+          },
+          "DataDisk.3.Size": {
+            "type": "integer"
+          },
+          "DataDisk.4.Size": {
+            "type": "integer"
+          },
+          "DataDisk.1.Category": {
+            "type": "string"
+          },
+          "DataDisk.2.Category": {
+            "type": "string"
+          },
+          "DataDisk.3.Category": {
+            "type": "string"
+          },
+          "DataDisk.4.Category": {
+            "type": "string"
+          },
+          "DataDisk.1.SnapshotId": {
+            "type": "string"
+          },
+          "DataDisk.2.SnapshotId": {
+            "type": "string"
+          },
+          "DataDisk.3.SnapshotId": {
+            "type": "string"
+          },
+          "DataDisk.4.SnapshotId": {
+            "type": "string"
+          },
+          "DataDisk.1.Device": {
+            "type": "string"
+          },
+          "DataDisk.2.Device": {
+            "type": "string"
+          },
+          "DataDisk.3.Device": {
+            "type": "string"
+          },
+          "DataDisk.4.Device": {
+            "type": "string"
+          },
+          "DataDisk.1.DeleteWithInstance": {
+            "type": "string"
+          },
+          "DataDisk.2.DeleteWithInstance": {
+            "type": "string"
+          },
+          "DataDisk.3.DeleteWithInstance": {
+            "type": "string"
+          },
+          "DataDisk.4.DeleteWithInstance": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createScalingGroup": {
+      "name": "CreateScalingGroup",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateScalingGroup"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ScalingGroupName": {
+            "type": "string"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "MinSize": {
+            "required": true,
+            "type": "integer"
+          },
+          "MaxSize": {
+            "required": true,
+            "type": "integer"
+          },
+          "DefaultCooldown": {
+            "type": "integer"
+          },
+          "LoadBalancerId": {
+            "type": "string"
+          },
+          "DBInstanceId.1": {
+            "type": "string"
+          },
+          "DBInstanceId.2": {
+            "type": "string"
+          },
+          "DBInstanceId.3": {
+            "type": "string"
+          },
+          "RemovalPolicy.1": {
+            "type": "string"
+          },
+          "RemovalPolicy.2": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createScalingRule": {
+      "name": "CreateScalingRule",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateScalingRule"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ScalingGroupId": {
+            "required": true,
+            "type": "string"
+          },
+          "ScalingRuleName": {
+            "type": "string"
+          },
+          "Cooldown": {
+            "type": "integer"
+          },
+          "AdjustmentType": {
+            "required": true,
+            "type": "string"
+          },
+          "AdjustmentValue": {
+            "required": true,
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createScheduledTask": {
+      "name": "CreateScheduledTask",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateScheduledTask"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "ScheduledTaskName": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "ScheduledAction": {
+            "required": true,
+            "type": "string"
+          },
+          "RecurrenceEndTime": {
+            "type": "string"
+          },
+          "LaunchTime": {
+            "type": "string"
+          },
+          "RecurrenceType": {
+            "type": "string"
+          },
+          "RecurrenceValue": {
+            "type": "string"
+          },
+          "TaskEnabled": {
+            "type": "boolean"
+          },
+          "LaunchExpirationTime": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteScalingConfiguration": {
+      "name": "DeleteScalingConfiguration",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteScalingConfiguration"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ScalingConfigurationId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteScalingGroup": {
+      "name": "DeleteScalingGroup",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteScalingGroup"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ScalingGroupId": {
+            "required": true,
+            "type": "string"
+          },
+          "ForceDelete": {
+            "type": "boolean"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteScalingRule": {
+      "name": "DeleteScalingRule",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteScalingRule"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ScalingRuleId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteScheduledTask": {
+      "name": "DeleteScheduledTask",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteScheduledTask"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ScheduledTaskId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeScalingActivities": {
+      "name": "DescribeScalingActivities",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeScalingActivities"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "ScalingGroupId": {
+            "type": "string"
+          },
+          "StatusCode": {
+            "type": "string"
+          },
+          "ScalingActivityId.1": {
+            "type": "string"
+          },
+          "ScalingActivityId.2": {
+            "type": "string"
+          },
+          "ScalingActivityId.3": {
+            "type": "string"
+          },
+          "ScalingActivityId.4": {
+            "type": "string"
+          },
+          "ScalingActivityId.5": {
+            "type": "string"
+          },
+          "ScalingActivityId.6": {
+            "type": "string"
+          },
+          "ScalingActivityId.7": {
+            "type": "string"
+          },
+          "ScalingActivityId.8": {
+            "type": "string"
+          },
+          "ScalingActivityId.9": {
+            "type": "string"
+          },
+          "ScalingActivityId.10": {
+            "type": "string"
+          },
+          "ScalingActivityId.11": {
+            "type": "string"
+          },
+          "ScalingActivityId.12": {
+            "type": "string"
+          },
+          "ScalingActivityId.13": {
+            "type": "string"
+          },
+          "ScalingActivityId.14": {
+            "type": "string"
+          },
+          "ScalingActivityId.15": {
+            "type": "string"
+          },
+          "ScalingActivityId.16": {
+            "type": "string"
+          },
+          "ScalingActivityId.17": {
+            "type": "string"
+          },
+          "ScalingActivityId.18": {
+            "type": "string"
+          },
+          "ScalingActivityId.19": {
+            "type": "string"
+          },
+          "ScalingActivityId.20": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeScalingConfigurations": {
+      "name": "DescribeScalingConfigurations",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeScalingConfigurations"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "ScalingGroupId": {
+            "type": "string"
+          },
+          "ScalingConfigurationId.1": {
+            "type": "string"
+          },
+          "ScalingConfigurationId.2": {
+            "type": "string"
+          },
+          "ScalingConfigurationId.3": {
+            "type": "string"
+          },
+          "ScalingConfigurationId.4": {
+            "type": "string"
+          },
+          "ScalingConfigurationId.5": {
+            "type": "string"
+          },
+          "ScalingConfigurationId.6": {
+            "type": "string"
+          },
+          "ScalingConfigurationId.7": {
+            "type": "string"
+          },
+          "ScalingConfigurationId.8": {
+            "type": "string"
+          },
+          "ScalingConfigurationId.9": {
+            "type": "string"
+          },
+          "ScalingConfigurationId.10": {
+            "type": "string"
+          },
+          "ScalingConfigurationName.1": {
+            "type": "string"
+          },
+          "ScalingConfigurationName.2": {
+            "type": "string"
+          },
+          "ScalingConfigurationName.3": {
+            "type": "string"
+          },
+          "ScalingConfigurationName.4": {
+            "type": "string"
+          },
+          "ScalingConfigurationName.5": {
+            "type": "string"
+          },
+          "ScalingConfigurationName.6": {
+            "type": "string"
+          },
+          "ScalingConfigurationName.7": {
+            "type": "string"
+          },
+          "ScalingConfigurationName.8": {
+            "type": "string"
+          },
+          "ScalingConfigurationName.9": {
+            "type": "string"
+          },
+          "ScalingConfigurationName.10": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeScalingGroups": {
+      "name": "DescribeScalingGroups",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeScalingGroups"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "ScalingGroupId.1": {
+            "type": "string"
+          },
+          "ScalingGroupId.2": {
+            "type": "string"
+          },
+          "ScalingGroupId.3": {
+            "type": "string"
+          },
+          "ScalingGroupId.4": {
+            "type": "string"
+          },
+          "ScalingGroupId.5": {
+            "type": "string"
+          },
+          "ScalingGroupId.6": {
+            "type": "string"
+          },
+          "ScalingGroupId.7": {
+            "type": "string"
+          },
+          "ScalingGroupId.8": {
+            "type": "string"
+          },
+          "ScalingGroupId.9": {
+            "type": "string"
+          },
+          "ScalingGroupId.10": {
+            "type": "string"
+          },
+          "ScalingGroupId.12": {
+            "type": "string"
+          },
+          "ScalingGroupId.13": {
+            "type": "string"
+          },
+          "ScalingGroupId.14": {
+            "type": "string"
+          },
+          "ScalingGroupId.15": {
+            "type": "string"
+          },
+          "ScalingGroupId.16": {
+            "type": "string"
+          },
+          "ScalingGroupId.17": {
+            "type": "string"
+          },
+          "ScalingGroupId.18": {
+            "type": "string"
+          },
+          "ScalingGroupId.19": {
+            "type": "string"
+          },
+          "ScalingGroupId.20": {
+            "type": "string"
+          },
+          "ScalingGroupName.1": {
+            "type": "string"
+          },
+          "ScalingGroupName.2": {
+            "type": "string"
+          },
+          "ScalingGroupName.3": {
+            "type": "string"
+          },
+          "ScalingGroupName.4": {
+            "type": "string"
+          },
+          "ScalingGroupName.5": {
+            "type": "string"
+          },
+          "ScalingGroupName.6": {
+            "type": "string"
+          },
+          "ScalingGroupName.7": {
+            "type": "string"
+          },
+          "ScalingGroupName.8": {
+            "type": "string"
+          },
+          "ScalingGroupName.9": {
+            "type": "string"
+          },
+          "ScalingGroupName.10": {
+            "type": "string"
+          },
+          "ScalingGroupName.11": {
+            "type": "string"
+          },
+          "ScalingGroupName.12": {
+            "type": "string"
+          },
+          "ScalingGroupName.13": {
+            "type": "string"
+          },
+          "ScalingGroupName.14": {
+            "type": "string"
+          },
+          "ScalingGroupName.15": {
+            "type": "string"
+          },
+          "ScalingGroupName.16": {
+            "type": "string"
+          },
+          "ScalingGroupName.17": {
+            "type": "string"
+          },
+          "ScalingGroupName.18": {
+            "type": "string"
+          },
+          "ScalingGroupName.19": {
+            "type": "string"
+          },
+          "ScalingGroupName.20": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeScalingInstances": {
+      "name": "DescribeScalingInstances",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeScalingInstances"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "ScalingGroupId": {
+            "type": "string"
+          },
+          "ScalingConfigurationId": {
+            "type": "string"
+          },
+          "HealthStatus": {
+            "type": "string"
+          },
+          "LifecycleState": {
+            "type": "string"
+          },
+          "CreationType": {
+            "type": "string"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "InstanceId.1": {
+            "type": "string"
+          },
+          "InstanceId.2": {
+            "type": "string"
+          },
+          "InstanceId.3": {
+            "type": "string"
+          },
+          "InstanceId.4": {
+            "type": "string"
+          },
+          "InstanceId.5": {
+            "type": "string"
+          },
+          "InstanceId.6": {
+            "type": "string"
+          },
+          "InstanceId.7": {
+            "type": "string"
+          },
+          "InstanceId.8": {
+            "type": "string"
+          },
+          "InstanceId.9": {
+            "type": "string"
+          },
+          "InstanceId.10": {
+            "type": "string"
+          },
+          "InstanceId.11": {
+            "type": "string"
+          },
+          "InstanceId.12": {
+            "type": "string"
+          },
+          "InstanceId.13": {
+            "type": "string"
+          },
+          "InstanceId.14": {
+            "type": "string"
+          },
+          "InstanceId.15": {
+            "type": "string"
+          },
+          "InstanceId.16": {
+            "type": "string"
+          },
+          "InstanceId.17": {
+            "type": "string"
+          },
+          "InstanceId.18": {
+            "type": "string"
+          },
+          "InstanceId.19": {
+            "type": "string"
+          },
+          "InstanceId.20": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeScalingRules": {
+      "name": "DescribeScalingRules",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeScalingRules"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "ScalingGroupId": {
+            "type": "string"
+          },
+          "ScalingRuleId.1": {
+            "type": "string"
+          },
+          "ScalingRuleId.2": {
+            "type": "string"
+          },
+          "ScalingRuleId.3": {
+            "type": "string"
+          },
+          "ScalingRuleId.4": {
+            "type": "string"
+          },
+          "ScalingRuleId.5": {
+            "type": "string"
+          },
+          "ScalingRuleId.6": {
+            "type": "string"
+          },
+          "ScalingRuleId.7": {
+            "type": "string"
+          },
+          "ScalingRuleId.8": {
+            "type": "string"
+          },
+          "ScalingRuleId.9": {
+            "type": "string"
+          },
+          "ScalingRuleId.10": {
+            "type": "string"
+          },
+          "ScalingRuleName.1": {
+            "type": "string"
+          },
+          "ScalingRuleName.2": {
+            "type": "string"
+          },
+          "ScalingRuleName.3": {
+            "type": "string"
+          },
+          "ScalingRuleName.4": {
+            "type": "string"
+          },
+          "ScalingRuleName.5": {
+            "type": "string"
+          },
+          "ScalingRuleName.6": {
+            "type": "string"
+          },
+          "ScalingRuleName.7": {
+            "type": "string"
+          },
+          "ScalingRuleName.8": {
+            "type": "string"
+          },
+          "ScalingRuleName.9": {
+            "type": "string"
+          },
+          "ScalingRuleName.10": {
+            "type": "string"
+          },
+          "ScalingRuleAri.1": {
+            "type": "string"
+          },
+          "ScalingRuleAri.2": {
+            "type": "string"
+          },
+          "ScalingRuleAri.3": {
+            "type": "string"
+          },
+          "ScalingRuleAri.4": {
+            "type": "string"
+          },
+          "ScalingRuleAri.5": {
+            "type": "string"
+          },
+          "ScalingRuleAri.6": {
+            "type": "string"
+          },
+          "ScalingRuleAri.7": {
+            "type": "string"
+          },
+          "ScalingRuleAri.8": {
+            "type": "string"
+          },
+          "ScalingRuleAri.9": {
+            "type": "string"
+          },
+          "ScalingRuleAri.10": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeScheduledTasks": {
+      "name": "DescribeScheduledTasks",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeScheduledTasks"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "ScheduledAction.1": {
+            "type": "string"
+          },
+          "ScheduledAction.2": {
+            "type": "string"
+          },
+          "ScheduledAction.3": {
+            "type": "string"
+          },
+          "ScheduledAction.4": {
+            "type": "string"
+          },
+          "ScheduledAction.5": {
+            "type": "string"
+          },
+          "ScheduledAction.6": {
+            "type": "string"
+          },
+          "ScheduledAction.7": {
+            "type": "string"
+          },
+          "ScheduledAction.8": {
+            "type": "string"
+          },
+          "ScheduledAction.9": {
+            "type": "string"
+          },
+          "ScheduledAction.10": {
+            "type": "string"
+          },
+          "ScheduledAction.11": {
+            "type": "string"
+          },
+          "ScheduledAction.12": {
+            "type": "string"
+          },
+          "ScheduledAction.13": {
+            "type": "string"
+          },
+          "ScheduledAction.14": {
+            "type": "string"
+          },
+          "ScheduledAction.15": {
+            "type": "string"
+          },
+          "ScheduledAction.16": {
+            "type": "string"
+          },
+          "ScheduledAction.17": {
+            "type": "string"
+          },
+          "ScheduledAction.18": {
+            "type": "string"
+          },
+          "ScheduledAction.19": {
+            "type": "string"
+          },
+          "ScheduledAction.20": {
+            "type": "string"
+          },
+          "ScheduledTaskId.1": {
+            "type": "string"
+          },
+          "ScheduledTaskId.2": {
+            "type": "string"
+          },
+          "ScheduledTaskId.3": {
+            "type": "string"
+          },
+          "ScheduledTaskId.4": {
+            "type": "string"
+          },
+          "ScheduledTaskId.5": {
+            "type": "string"
+          },
+          "ScheduledTaskId.6": {
+            "type": "string"
+          },
+          "ScheduledTaskId.7": {
+            "type": "string"
+          },
+          "ScheduledTaskId.8": {
+            "type": "string"
+          },
+          "ScheduledTaskId.9": {
+            "type": "string"
+          },
+          "ScheduledTaskId.10": {
+            "type": "string"
+          },
+          "ScheduledTaskId.11": {
+            "type": "string"
+          },
+          "ScheduledTaskId.12": {
+            "type": "string"
+          },
+          "ScheduledTaskId.13": {
+            "type": "string"
+          },
+          "ScheduledTaskId.14": {
+            "type": "string"
+          },
+          "ScheduledTaskId.15": {
+            "type": "string"
+          },
+          "ScheduledTaskId.16": {
+            "type": "string"
+          },
+          "ScheduledTaskId.17": {
+            "type": "string"
+          },
+          "ScheduledTaskId.18": {
+            "type": "string"
+          },
+          "ScheduledTaskId.19": {
+            "type": "string"
+          },
+          "ScheduledTaskId.20": {
+            "type": "string"
+          },
+          "ScheduledTaskName.1": {
+            "type": "string"
+          },
+          "ScheduledTaskName.2": {
+            "type": "string"
+          },
+          "ScheduledTaskName.3": {
+            "type": "string"
+          },
+          "ScheduledTaskName.4": {
+            "type": "string"
+          },
+          "ScheduledTaskName.5": {
+            "type": "string"
+          },
+          "ScheduledTaskName.6": {
+            "type": "string"
+          },
+          "ScheduledTaskName.7": {
+            "type": "string"
+          },
+          "ScheduledTaskName.8": {
+            "type": "string"
+          },
+          "ScheduledTaskName.9": {
+            "type": "string"
+          },
+          "ScheduledTaskName.10": {
+            "type": "string"
+          },
+          "ScheduledTaskName.11": {
+            "type": "string"
+          },
+          "ScheduledTaskName.12": {
+            "type": "string"
+          },
+          "ScheduledTaskName.13": {
+            "type": "string"
+          },
+          "ScheduledTaskName.14": {
+            "type": "string"
+          },
+          "ScheduledTaskName.15": {
+            "type": "string"
+          },
+          "ScheduledTaskName.16": {
+            "type": "string"
+          },
+          "ScheduledTaskName.17": {
+            "type": "string"
+          },
+          "ScheduledTaskName.18": {
+            "type": "string"
+          },
+          "ScheduledTaskName.19": {
+            "type": "string"
+          },
+          "ScheduledTaskName.20": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "detachInstances": {
+      "name": "DetachInstances",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DetachInstances"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ScalingGroupId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceId.1": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceId.2": {
+            "type": "string"
+          },
+          "InstanceId.3": {
+            "type": "string"
+          },
+          "InstanceId.4": {
+            "type": "string"
+          },
+          "InstanceId.5": {
+            "type": "string"
+          },
+          "InstanceId.6": {
+            "type": "string"
+          },
+          "InstanceId.7": {
+            "type": "string"
+          },
+          "InstanceId.8": {
+            "type": "string"
+          },
+          "InstanceId.9": {
+            "type": "string"
+          },
+          "InstanceId.10": {
+            "type": "string"
+          },
+          "InstanceId.11": {
+            "type": "string"
+          },
+          "InstanceId.12": {
+            "type": "string"
+          },
+          "InstanceId.13": {
+            "type": "string"
+          },
+          "InstanceId.14": {
+            "type": "string"
+          },
+          "InstanceId.15": {
+            "type": "string"
+          },
+          "InstanceId.16": {
+            "type": "string"
+          },
+          "InstanceId.17": {
+            "type": "string"
+          },
+          "InstanceId.18": {
+            "type": "string"
+          },
+          "InstanceId.19": {
+            "type": "string"
+          },
+          "InstanceId.20": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "disableScalingGroup": {
+      "name": "DisableScalingGroup",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DisableScalingGroup"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ScalingGroupId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "enableScalingGroup": {
+      "name": "EnableScalingGroup",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "EnableScalingGroup"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ScalingGroupId": {
+            "required": true,
+            "type": "string"
+          },
+          "ActiveScalingConfigurationId": {
+            "type": "string"
+          },
+          "InstanceId.1": {
+            "type": "string"
+          },
+          "InstanceId.2": {
+            "type": "string"
+          },
+          "InstanceId.3": {
+            "type": "string"
+          },
+          "InstanceId.4": {
+            "type": "string"
+          },
+          "InstanceId.5": {
+            "type": "string"
+          },
+          "InstanceId.6": {
+            "type": "string"
+          },
+          "InstanceId.7": {
+            "type": "string"
+          },
+          "InstanceId.8": {
+            "type": "string"
+          },
+          "InstanceId.9": {
+            "type": "string"
+          },
+          "InstanceId.10": {
+            "type": "string"
+          },
+          "InstanceId.11": {
+            "type": "string"
+          },
+          "InstanceId.12": {
+            "type": "string"
+          },
+          "InstanceId.13": {
+            "type": "string"
+          },
+          "InstanceId.14": {
+            "type": "string"
+          },
+          "InstanceId.15": {
+            "type": "string"
+          },
+          "InstanceId.16": {
+            "type": "string"
+          },
+          "InstanceId.17": {
+            "type": "string"
+          },
+          "InstanceId.18": {
+            "type": "string"
+          },
+          "InstanceId.19": {
+            "type": "string"
+          },
+          "InstanceId.20": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "executeScalingRule": {
+      "name": "ExecuteScalingRule",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ExecuteScalingRule"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ScalingRuleAri": {
+            "required": true,
+            "type": "string"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyScalingGroup": {
+      "name": "ModifyScalingGroup",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyScalingGroup"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ScalingGroupId": {
+            "required": true,
+            "type": "string"
+          },
+          "ScalingGroupName": {
+            "type": "string"
+          },
+          "MinSize": {
+            "type": "integer"
+          },
+          "MaxSize": {
+            "type": "integer"
+          },
+          "DefaultCooldown": {
+            "type": "integer"
+          },
+          "RemovalPolicy.1": {
+            "type": "string"
+          },
+          "RemovalPolicy.2": {
+            "type": "string"
+          },
+          "ActiveScalingConfigurationId": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyScalingRule": {
+      "name": "ModifyScalingRule",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyScalingRule"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ScalingRuleId": {
+            "required": true,
+            "type": "string"
+          },
+          "ScalingRuleName": {
+            "type": "string"
+          },
+          "Cooldown": {
+            "type": "integer"
+          },
+          "AdjustmentType": {
+            "type": "string"
+          },
+          "AdjustmentValue": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyScheduledTask": {
+      "name": "ModifyScheduledTask",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyScheduledTask"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ScheduledTaskId": {
+            "required": true,
+            "type": "string"
+          },
+          "ScheduledTaskName": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "ScheduledAction": {
+            "type": "string"
+          },
+          "RecurrenceEndTime": {
+            "type": "string"
+          },
+          "LaunchTime": {
+            "type": "string"
+          },
+          "RecurrenceType": {
+            "type": "string"
+          },
+          "RecurrenceValue": {
+            "type": "string"
+          },
+          "TaskEnabled": {
+            "type": "boolean"
+          },
+          "LaunchExpirationTime": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "removeInstances": {
+      "name": "RemoveInstances",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "RemoveInstances"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ScalingGroupId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceId.1": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceId.2": {
+            "type": "string"
+          },
+          "InstanceId.3": {
+            "type": "string"
+          },
+          "InstanceId.4": {
+            "type": "string"
+          },
+          "InstanceId.5": {
+            "type": "string"
+          },
+          "InstanceId.6": {
+            "type": "string"
+          },
+          "InstanceId.7": {
+            "type": "string"
+          },
+          "InstanceId.8": {
+            "type": "string"
+          },
+          "InstanceId.9": {
+            "type": "string"
+          },
+          "InstanceId.10": {
+            "type": "string"
+          },
+          "InstanceId.11": {
+            "type": "string"
+          },
+          "InstanceId.12": {
+            "type": "string"
+          },
+          "InstanceId.13": {
+            "type": "string"
+          },
+          "InstanceId.14": {
+            "type": "string"
+          },
+          "InstanceId.15": {
+            "type": "string"
+          },
+          "InstanceId.16": {
+            "type": "string"
+          },
+          "InstanceId.17": {
+            "type": "string"
+          },
+          "InstanceId.18": {
+            "type": "string"
+          },
+          "InstanceId.19": {
+            "type": "string"
+          },
+          "InstanceId.20": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

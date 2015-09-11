@@ -3,7 +3,7 @@
   "apiVersion": "2013-10-15",
   "checksumFormat": "md5",
   "endpointPrefix": "oss",
-  "serviceAbbreviation": "Aliyun OSS",
+  "serviceAbbreviation": "OSS",
   "serviceFullName": "Aliyun Open Storage Service",
   "signatureVersion": "oss",
   "timestampFormat": "rfc822",

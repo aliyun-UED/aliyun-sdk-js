@@ -1,117 +1,44 @@
 {
-  "format": "query",
+  "format": "pop",
   "apiVersion": "2014-05-15",
   "checksumFormat": "md5",
   "endpointPrefix": "slb",
   "serviceAbbreviation": "SLB",
-  "serviceFullName": "Aliyun Server Load Balancer",
-  "signatureVersion": "top",
+  "serviceFullName": "Aliyun SLB",
+  "signatureVersion": "pop",
   "timestampFormat": "top",
   "xmlnamespace": "",
   "operations": {
-    "createLoadBalancerPro": {
-      "name": "CreateLoadBalancerPro",
+    "addBackendServers": {
+      "name": "AddBackendServers",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "RegionId": {
+          "Action": {
             "required": true,
-            "type": "string"
+            "default": "AddBackendServers"
           },
-          "LoadBalancerMode": {
-            "required": true,
-            "type": "string"
-          },
-          "Address": {
-            "required": true,
-            "type": "string"
-          },
-          "AddressType": {
-            "type": "string"
-          },
-          "InternetChargeType": {
-            "type": "string"
-          },
-          "Bandwidth": {
+          "OwnerId": {
             "type": "integer"
           },
-          "LoadBalancerName": {
+          "ResourceOwnerAccount": {
             "type": "string"
           },
-          "ClientToken": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "setBackendServers": {
-      "name": "SetBackendServers",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "LoadBalancerId": {
             "required": true,
             "type": "string"
           },
           "BackendServers": {
             "type": "string"
-          }
-        }
-      }
-    },
-    "describeHealthStatus": {
-      "name": "DescribeHealthStatus",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "LoadBalancerId": {
-            "required": true,
-            "type": "string"
           },
-          "ListenerPort": {
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "createLoadBalancer": {
-      "name": "CreateLoadBalancer",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "AddressType": {
-            "type": "string"
-          },
-          "InternetChargeType": {
-            "type": "string"
-          },
-          "Bandwidth": {
-            "type": "integer"
-          },
-          "LoadBalancerName": {
-            "type": "string"
-          },
-          "ClientToken": {
+          "OwnerAccount": {
             "type": "string"
           }
         }
@@ -120,12 +47,25 @@
     "addListenerWhiteListItem": {
       "name": "AddListenerWhiteListItem",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "AddListenerWhiteListItem"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "LoadBalancerId": {
             "required": true,
             "type": "string"
@@ -137,47 +77,336 @@
           "SourceItems": {
             "required": true,
             "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
     },
-    "describeLoadBalancers": {
-      "name": "DescribeLoadBalancers",
+    "createLoadBalancer": {
+      "name": "CreateLoadBalancer",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "RegionId": {
+          "Action": {
             "required": true,
+            "default": "CreateLoadBalancer"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
             "type": "string"
           },
-          "LoadBalancerId": {
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
             "type": "string"
           },
           "AddressType": {
             "type": "string"
           },
-          "ServerId": {
+          "InternetChargeType": {
             "type": "string"
           },
-          "InternetChargeType": {
+          "Bandwidth": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "LoadBalancerName": {
+            "type": "string"
+          },
+          "VpcId": {
+            "type": "string"
+          },
+          "VSwitchId": {
+            "type": "string"
+          },
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "removeListenerWhiteListItem": {
-      "name": "RemoveListenerWhiteListItem",
+    "createLoadBalancerHTTPListener": {
+      "name": "CreateLoadBalancerHTTPListener",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateLoadBalancerHTTPListener"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "LoadBalancerId": {
+            "required": true,
+            "type": "string"
+          },
+          "Bandwidth": {
+            "required": true,
+            "type": "integer"
+          },
+          "ListenerPort": {
+            "required": true,
+            "type": "integer"
+          },
+          "BackendServerPort": {
+            "required": true,
+            "type": "integer"
+          },
+          "XForwardedFor": {
+            "type": "string"
+          },
+          "Scheduler": {
+            "type": "string"
+          },
+          "StickySession": {
+            "required": true,
+            "type": "string"
+          },
+          "StickySessionType": {
+            "type": "string"
+          },
+          "CookieTimeout": {
+            "type": "integer"
+          },
+          "Cookie": {
+            "type": "string"
+          },
+          "HealthCheck": {
+            "required": true,
+            "type": "string"
+          },
+          "HealthCheckDomain": {
+            "type": "string"
+          },
+          "HealthCheckURI": {
+            "type": "string"
+          },
+          "HealthyThreshold": {
+            "type": "integer"
+          },
+          "UnhealthyThreshold": {
+            "type": "integer"
+          },
+          "HealthCheckTimeout": {
+            "type": "integer"
+          },
+          "HealthCheckConnectPort": {
+            "type": "integer"
+          },
+          "HealthCheckInterval": {
+            "type": "integer"
+          },
+          "HealthCheckHttpCode": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createLoadBalancerHTTPSListener": {
+      "name": "CreateLoadBalancerHTTPSListener",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateLoadBalancerHTTPSListener"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "LoadBalancerId": {
+            "required": true,
+            "type": "string"
+          },
+          "Bandwidth": {
+            "required": true,
+            "type": "integer"
+          },
+          "ListenerPort": {
+            "required": true,
+            "type": "integer"
+          },
+          "BackendServerPort": {
+            "required": true,
+            "type": "integer"
+          },
+          "XForwardedFor": {
+            "type": "string"
+          },
+          "Scheduler": {
+            "type": "string"
+          },
+          "StickySession": {
+            "required": true,
+            "type": "string"
+          },
+          "StickySessionType": {
+            "type": "string"
+          },
+          "CookieTimeout": {
+            "type": "integer"
+          },
+          "Cookie": {
+            "type": "string"
+          },
+          "HealthCheck": {
+            "required": true,
+            "type": "string"
+          },
+          "HealthCheckDomain": {
+            "type": "string"
+          },
+          "HealthCheckURI": {
+            "type": "string"
+          },
+          "HealthyThreshold": {
+            "type": "integer"
+          },
+          "UnhealthyThreshold": {
+            "type": "integer"
+          },
+          "HealthCheckTimeout": {
+            "type": "integer"
+          },
+          "HealthCheckConnectPort": {
+            "type": "integer"
+          },
+          "HealthCheckInterval": {
+            "type": "integer"
+          },
+          "HealthCheckHttpCode": {
+            "type": "string"
+          },
+          "ServerCertificateId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createLoadBalancerPro": {
+      "name": "CreateLoadBalancerPro",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateLoadBalancerPro"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "AddressType": {
+            "type": "string"
+          },
+          "InternetChargeType": {
+            "type": "string"
+          },
+          "Bandwidth": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "LoadBalancerName": {
+            "type": "string"
+          },
+          "LoadBalancerMode": {
+            "type": "string"
+          },
+          "Address": {
+            "type": "string"
+          },
+          "VpcId": {
+            "type": "string"
+          },
+          "VSwitchId": {
+            "type": "string"
+          },
+          "SuName": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createLoadBalancerTCPListener": {
+      "name": "CreateLoadBalancerTCPListener",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateLoadBalancerTCPListener"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "LoadBalancerId": {
             "required": true,
             "type": "string"
@@ -186,8 +415,186 @@
             "required": true,
             "type": "integer"
           },
-          "SourceItems": {
+          "BackendServerPort": {
             "required": true,
+            "type": "integer"
+          },
+          "Bandwidth": {
+            "required": true,
+            "type": "integer"
+          },
+          "Scheduler": {
+            "type": "string"
+          },
+          "PersistenceTimeout": {
+            "type": "integer"
+          },
+          "HealthyThreshold": {
+            "type": "integer"
+          },
+          "UnhealthyThreshold": {
+            "type": "integer"
+          },
+          "HealthCheckConnectTimeout": {
+            "type": "integer"
+          },
+          "HealthCheckConnectPort": {
+            "type": "integer"
+          },
+          "healthCheckInterval": {
+            "type": "integer"
+          },
+          "HealthCheckDomain": {
+            "type": "string"
+          },
+          "HealthCheckURI": {
+            "type": "string"
+          },
+          "HealthCheckHttpCode": {
+            "type": "string"
+          },
+          "HealthCheckType": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteLoadBalancer": {
+      "name": "DeleteLoadBalancer",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteLoadBalancer"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "LoadBalancerId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteLoadBalancerListener": {
+      "name": "DeleteLoadBalancerListener",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteLoadBalancerListener"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "LoadBalancerId": {
+            "required": true,
+            "type": "string"
+          },
+          "ListenerPort": {
+            "required": true,
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteServerCertificate": {
+      "name": "DeleteServerCertificate",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteServerCertificate"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "type": "string"
+          },
+          "ServerCertificateId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeHealthStatus": {
+      "name": "DescribeHealthStatus",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeHealthStatus"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "LoadBalancerId": {
+            "required": true,
+            "type": "string"
+          },
+          "ListenerPort": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
             "type": "string"
           }
         }
@@ -196,12 +603,25 @@
     "describeListenerAccessControlAttribute": {
       "name": "DescribeListenerAccessControlAttribute",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeListenerAccessControlAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "LoadBalancerId": {
             "required": true,
             "type": "string"
@@ -209,24 +629,204 @@
           "ListenerPort": {
             "required": true,
             "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
     },
-    "addBackendServers": {
-      "name": "AddBackendServers",
+    "describeLoadBalancerAttribute": {
+      "name": "DescribeLoadBalancerAttribute",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLoadBalancerAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "LoadBalancerId": {
             "required": true,
             "type": "string"
           },
-          "BackendServers": {
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLoadBalancerHTTPListenerAttribute": {
+      "name": "DescribeLoadBalancerHTTPListenerAttribute",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLoadBalancerHTTPListenerAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "LoadBalancerId": {
+            "required": true,
+            "type": "string"
+          },
+          "ListenerPort": {
+            "required": true,
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLoadBalancerHTTPSListenerAttribute": {
+      "name": "DescribeLoadBalancerHTTPSListenerAttribute",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLoadBalancerHTTPSListenerAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "LoadBalancerId": {
+            "required": true,
+            "type": "string"
+          },
+          "ListenerPort": {
+            "required": true,
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLoadBalancers": {
+      "name": "DescribeLoadBalancers",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLoadBalancers"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "ServerId": {
+            "type": "string"
+          },
+          "LoadBalancerId": {
+            "type": "string"
+          },
+          "AddressType": {
+            "type": "string"
+          },
+          "InternetChargeType": {
+            "type": "string"
+          },
+          "VpcId": {
+            "type": "string"
+          },
+          "VSwitchId": {
+            "type": "string"
+          },
+          "NetworkType": {
+            "type": "string"
+          },
+          "Address": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLoadBalancerTCPListenerAttribute": {
+      "name": "DescribeLoadBalancerTCPListenerAttribute",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLoadBalancerTCPListenerAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "LoadBalancerId": {
+            "required": true,
+            "type": "string"
+          },
+          "ListenerPort": {
+            "required": true,
+            "type": "integer"
+          },
+          "OwnerAccount": {
             "type": "string"
           }
         }
@@ -235,23 +835,271 @@
     "describeRegions": {
       "name": "DescribeRegions",
       "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {}
-      }
-    },
-    "setListenerAccessControlStatus": {
-      "name": "SetListenerAccessControlStatus",
-      "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeRegions"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeServerCertificate": {
+      "name": "DescribeServerCertificate",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeServerCertificate"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "type": "string"
+          },
+          "ServerCertificateId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeServerCertificates": {
+      "name": "DescribeServerCertificates",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeServerCertificates"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "type": "string"
+          },
+          "ServerCertificateId": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyLoadBalancerInternetSpec": {
+      "name": "ModifyLoadBalancerInternetSpec",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyLoadBalancerInternetSpec"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "LoadBalancerId": {
+            "required": true,
+            "type": "string"
+          },
+          "InternetChargeType": {
+            "type": "string"
+          },
+          "Bandwidth": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "removeBackendServers": {
+      "name": "RemoveBackendServers",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "RemoveBackendServers"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "LoadBalancerId": {
+            "required": true,
+            "type": "string"
+          },
+          "BackendServers": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "removeListenerWhiteListItem": {
+      "name": "RemoveListenerWhiteListItem",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "RemoveListenerWhiteListItem"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "LoadBalancerId": {
+            "required": true,
+            "type": "string"
+          },
+          "ListenerPort": {
+            "required": true,
+            "type": "integer"
+          },
+          "SourceItems": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setBackendServers": {
+      "name": "SetBackendServers",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetBackendServers"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "LoadBalancerId": {
+            "required": true,
+            "type": "string"
+          },
+          "BackendServers": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setListenerAccessControlStatus": {
+      "name": "SetListenerAccessControlStatus",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetListenerAccessControlStatus"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "LoadBalancerId": {
             "required": true,
             "type": "string"
@@ -263,75 +1111,9 @@
           "AccessControlStatus": {
             "required": true,
             "type": "string"
-          }
-        }
-      }
-    },
-    "createLoadBalancerTCPListener": {
-      "name": "CreateLoadBalancerTCPListener",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "LoadBalancerId": {
-            "required": true,
+          },
+          "OwnerAccount": {
             "type": "string"
-          },
-          "Bandwidth": {
-            "required": true,
-            "type": "integer"
-          },
-          "ListenerPort": {
-            "required": true,
-            "type": "integer"
-          },
-          "BackendServerPort": {
-            "required": true,
-            "type": "integer"
-          },
-          "Scheduler": {
-            "type": "string"
-          },
-          "PersistenceTimeout": {
-            "type": "integer"
-          },
-          "HealthCheckConnectTimeout": {
-            "type": "integer"
-          },
-          "HealthCheckConnectPort": {
-            "type": "integer"
-          },
-          "HealthCheckInterval": {
-            "type": "integer"
-          },
-          "HealthyThreshold": {
-            "type": "integer"
-          },
-          "UnhealthyThreshold": {
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "deleteLoadBalancerListener": {
-      "name": "DeleteLoadBalancerListener",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "LoadBalancerId": {
-            "required": true,
-            "type": "string"
-          },
-          "ListenerPort": {
-            "required": true,
-            "type": "integer"
           }
         }
       }
@@ -339,12 +1121,25 @@
     "setLoadBalancerHTTPListenerAttribute": {
       "name": "SetLoadBalancerHTTPListenerAttribute",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "SetLoadBalancerHTTPListenerAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "LoadBalancerId": {
             "required": true,
             "type": "string"
@@ -357,27 +1152,14 @@
             "required": true,
             "type": "integer"
           },
-          "StickySession": {
-            "required": true,
-            "type": "string"
-          },
-          "HealthCheck": {
-            "required": true,
-            "type": "string"
-          },
-          "Cookie": {
-            "type": "string"
-          },
-          "HealthCheckDomain": {
-            "type": "string"
-          },
-          "HealthCheckURI": {
-            "type": "string"
-          },
           "XForwardedFor": {
             "type": "string"
           },
           "Scheduler": {
+            "type": "string"
+          },
+          "StickySession": {
+            "required": true,
             "type": "string"
           },
           "StickySessionType": {
@@ -386,8 +1168,18 @@
           "CookieTimeout": {
             "type": "integer"
           },
-          "HealthCheckConnectPort": {
-            "type": "integer"
+          "Cookie": {
+            "type": "string"
+          },
+          "HealthCheck": {
+            "required": true,
+            "type": "string"
+          },
+          "HealthCheckDomain": {
+            "type": "string"
+          },
+          "HealthCheckURI": {
+            "type": "string"
           },
           "HealthyThreshold": {
             "type": "integer"
@@ -401,360 +1193,13 @@
           "HealthCheckInterval": {
             "type": "integer"
           },
-          "HealthCheckHttpCode": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "setLoadBalancerTCPListenerAttribute": {
-      "name": "SetLoadBalancerTCPListenerAttribute",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "LoadBalancerId": {
-            "required": true,
-            "type": "string"
-          },
-          "ListenerPort": {
-            "required": true,
-            "type": "integer"
-          },
-          "Bandwidth": {
-            "required": true,
-            "type": "integer"
-          },
-          "Scheduler": {
-            "type": "string"
-          },
-          "PersistenceTimeout": {
-            "type": "integer"
-          },
-          "HealthyThreshold": {
-            "type": "integer"
-          },
-          "UnhealthyThreshold": {
-            "type": "integer"
-          },
-          "HealthCheckConnectTimeout": {
-            "type": "integer"
-          },
           "HealthCheckConnectPort": {
-            "type": "integer"
-          },
-          "HealthCheckInterval": {
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "setLoadBalancerName": {
-      "name": "SetLoadBalancerName",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "LoadBalancerId": {
-            "required": true,
-            "type": "string"
-          },
-          "LoadBalancerName": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "setLoadBalancerStatus": {
-      "name": "SetLoadBalancerStatus",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "LoadBalancerId": {
-            "required": true,
-            "type": "string"
-          },
-          "LoadBalancerStatus": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "stopLoadBalancerListener": {
-      "name": "StopLoadBalancerListener",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "LoadBalancerId": {
-            "required": true,
-            "type": "string"
-          },
-          "ListenerPort": {
-            "required": true,
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "startLoadBalancerListener": {
-      "name": "StartLoadBalancerListener",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "LoadBalancerId": {
-            "required": true,
-            "type": "string"
-          },
-          "ListenerPort": {
-            "required": true,
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "deleteLoadBalancer": {
-      "name": "DeleteLoadBalancer",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "LoadBalancerId": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "createLoadBalancerHTTPListener": {
-      "name": "CreateLoadBalancerHTTPListener",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "LoadBalancerId": {
-            "required": true,
-            "type": "string"
-          },
-          "Bandwidth": {
-            "required": true,
-            "type": "integer"
-          },
-          "ListenerPort": {
-            "required": true,
-            "type": "integer"
-          },
-          "BackendServerPort": {
-            "required": true,
-            "type": "integer"
-          },
-          "StickySession": {
-            "required": true,
-            "type": "string"
-          },
-          "HealthCheck": {
-            "required": true,
-            "type": "string"
-          },
-          "XForwardedFor": {
-            "type": "string"
-          },
-          "Scheduler": {
-            "type": "string"
-          },
-          "StickySessionType": {
-            "type": "string"
-          },
-          "Cookie": {
-            "type": "string"
-          },
-          "HealthCheckDomain": {
-            "type": "string"
-          },
-          "HealthCheckURI": {
-            "type": "string"
-          },
-          "HealthCheckConnectPort": {
-            "type": "integer"
-          },
-          "CookieTimeout": {
-            "type": "integer"
-          },
-          "HealthyThreshold": {
-            "type": "integer"
-          },
-          "UnhealthyThreshold": {
-            "type": "integer"
-          },
-          "HealthCheckTimeout": {
-            "type": "integer"
-          },
-          "HealthCheckInterval": {
             "type": "integer"
           },
           "HealthCheckHttpCode": {
             "type": "string"
-          }
-        }
-      }
-    },
-    "describeLoadBalancerAttribute": {
-      "name": "DescribeLoadBalancerAttribute",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "LoadBalancerId": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "removeBackendServers": {
-      "name": "RemoveBackendServers",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "LoadBalancerId": {
-            "required": true,
-            "type": "string"
           },
-          "BackendServers": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifyLoadBalancerInternetSpec": {
-      "name": "ModifyLoadBalancerInternetSpec",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "LoadBalancerId": {
-            "required": true,
-            "type": "string"
-          },
-          "Bandwidth": {
-            "type": "integer"
-          },
-          "InternetChargeType": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "createLoadBalancerHTTPSListener": {
-      "name": "CreateLoadBalancerHTTPSListener",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "LoadBalancerId": {
-            "required": true,
-            "type": "string"
-          },
-          "Bandwidth": {
-            "required": true,
-            "type": "integer"
-          },
-          "ListenerPort": {
-            "required": true,
-            "type": "integer"
-          },
-          "BackendServerPort": {
-            "required": true,
-            "type": "integer"
-          },
-          "StickySession": {
-            "required": true,
-            "type": "string"
-          },
-          "HealthCheck": {
-            "required": true,
-            "type": "string"
-          },
-          "ServerCertificateId": {
-            "required": true,
-            "type": "string"
-          },
-          "XForwardedFor": {
-            "type": "string"
-          },
-          "Scheduler": {
-            "type": "string"
-          },
-          "StickySessionType": {
-            "type": "string"
-          },
-          "Cookie": {
-            "type": "string"
-          },
-          "HealthCheckDomain": {
-            "type": "string"
-          },
-          "HealthCheckURI": {
-            "type": "string"
-          },
-          "HealthCheckConnectPort": {
-            "type": "integer"
-          },
-          "CookieTimeout": {
-            "type": "integer"
-          },
-          "HealthyThreshold": {
-            "type": "integer"
-          },
-          "UnhealthyThreshold": {
-            "type": "integer"
-          },
-          "HealthCheckTimeout": {
-            "type": "integer"
-          },
-          "HealthCheckInterval": {
-            "type": "integer"
-          },
-          "HealthCheckHttpCode": {
+          "OwnerAccount": {
             "type": "string"
           }
         }
@@ -763,12 +1208,25 @@
     "setLoadBalancerHTTPSListenerAttribute": {
       "name": "SetLoadBalancerHTTPSListenerAttribute",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "SetLoadBalancerHTTPSListenerAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "LoadBalancerId": {
             "required": true,
             "type": "string"
@@ -781,27 +1239,14 @@
             "required": true,
             "type": "integer"
           },
-          "StickySession": {
-            "required": true,
-            "type": "string"
-          },
-          "HealthCheck": {
-            "required": true,
-            "type": "string"
-          },
-          "Cookie": {
-            "type": "string"
-          },
-          "HealthCheckDomain": {
-            "type": "string"
-          },
-          "HealthCheckURI": {
-            "type": "string"
-          },
           "XForwardedFor": {
             "type": "string"
           },
           "Scheduler": {
+            "type": "string"
+          },
+          "StickySession": {
+            "required": true,
             "type": "string"
           },
           "StickySessionType": {
@@ -810,8 +1255,18 @@
           "CookieTimeout": {
             "type": "integer"
           },
-          "HealthCheckConnectPort": {
-            "type": "integer"
+          "Cookie": {
+            "type": "string"
+          },
+          "HealthCheck": {
+            "required": true,
+            "type": "string"
+          },
+          "HealthCheckDomain": {
+            "type": "string"
+          },
+          "HealthCheckURI": {
+            "type": "string"
           },
           "HealthyThreshold": {
             "type": "integer"
@@ -825,24 +1280,115 @@
           "HealthCheckInterval": {
             "type": "integer"
           },
+          "HealthCheckConnectPort": {
+            "type": "integer"
+          },
           "HealthCheckHttpCode": {
             "type": "string"
           },
           "ServerCertificateId": {
             "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
     },
-    "describeLoadBalancerHTTPSListenerAttribute": {
-      "name": "DescribeLoadBalancerHTTPSListenerAttribute",
+    "setLoadBalancerName": {
+      "name": "SetLoadBalancerName",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "SetLoadBalancerName"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "LoadBalancerId": {
+            "required": true,
+            "type": "string"
+          },
+          "LoadBalancerName": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setLoadBalancerStatus": {
+      "name": "SetLoadBalancerStatus",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetLoadBalancerStatus"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "LoadBalancerId": {
+            "required": true,
+            "type": "string"
+          },
+          "LoadBalancerStatus": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setLoadBalancerTCPListenerAttribute": {
+      "name": "SetLoadBalancerTCPListenerAttribute",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetLoadBalancerTCPListenerAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "LoadBalancerId": {
             "required": true,
             "type": "string"
@@ -850,58 +1396,160 @@
           "ListenerPort": {
             "required": true,
             "type": "integer"
-          }
-        }
-      }
-    },
-    "describeServerCertificates": {
-      "name": "DescribeServerCertificates",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "RegionId": {
+          },
+          "Bandwidth": {
+            "required": true,
+            "type": "integer"
+          },
+          "Scheduler": {
+            "type": "string"
+          },
+          "PersistenceTimeout": {
+            "type": "integer"
+          },
+          "HealthyThreshold": {
+            "type": "integer"
+          },
+          "UnhealthyThreshold": {
+            "type": "integer"
+          },
+          "HealthCheckConnectTimeout": {
+            "type": "integer"
+          },
+          "HealthCheckConnectPort": {
+            "type": "integer"
+          },
+          "HealthCheckInterval": {
+            "type": "integer"
+          },
+          "HealthCheckDomain": {
+            "type": "string"
+          },
+          "HealthCheckURI": {
+            "type": "string"
+          },
+          "HealthCheckHttpCode": {
+            "type": "string"
+          },
+          "HealthCheckType": {
+            "type": "string"
+          },
+          "SynProxy": {
+            "type": "string"
+          },
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "describeServerCertificate": {
-      "name": "DescribeServerCertificate",
+    "setServerCertificateName": {
+      "name": "SetServerCertificateName",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "SetServerCertificateName"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
           "ServerCertificateId": {
             "required": true,
             "type": "string"
           },
-          "RegionId": {
+          "ServerCertificateName": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "deleteServerCertificate": {
-      "name": "DeleteServerCertificate",
+    "startLoadBalancerListener": {
+      "name": "StartLoadBalancerListener",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "ServerCertificateId": {
+          "Action": {
+            "required": true,
+            "default": "StartLoadBalancerListener"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "LoadBalancerId": {
             "required": true,
             "type": "string"
           },
-          "RegionId": {
+          "ListenerPort": {
+            "required": true,
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "stopLoadBalancerListener": {
+      "name": "StopLoadBalancerListener",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "StopLoadBalancerListener"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "LoadBalancerId": {
+            "required": true,
+            "type": "string"
+          },
+          "ListenerPort": {
+            "required": true,
+            "type": "integer"
+          },
+          "OwnerAccount": {
             "type": "string"
           }
         }
@@ -910,12 +1558,25 @@
     "uploadServerCertificate": {
       "name": "UploadServerCertificate",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "UploadServerCertificate"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "RegionId": {
             "required": true,
             "type": "string"
@@ -927,19 +1588,38 @@
           "PrivateKey": {
             "required": true,
             "type": "string"
+          },
+          "ServerCertificateName": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
     },
-    "describeLoadBalancerHTTPListenerAttribute": {
-      "name": "DescribeLoadBalancerHTTPListenerAttribute",
+    "createLoadBalancerUDPListener": {
+      "name": "CreateLoadBalancerUDPListener",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateLoadBalancerUDPListener"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "LoadBalancerId": {
             "required": true,
             "type": "string"
@@ -947,19 +1627,64 @@
           "ListenerPort": {
             "required": true,
             "type": "integer"
+          },
+          "BackendServerPort": {
+            "required": true,
+            "type": "integer"
+          },
+          "Bandwidth": {
+            "required": true,
+            "type": "integer"
+          },
+          "Scheduler": {
+            "type": "string"
+          },
+          "PersistenceTimeout": {
+            "type": "integer"
+          },
+          "HealthyThreshold": {
+            "type": "integer"
+          },
+          "UnhealthyThreshold": {
+            "type": "integer"
+          },
+          "HealthCheckConnectTimeout": {
+            "type": "integer"
+          },
+          "HealthCheckConnectPort": {
+            "type": "integer"
+          },
+          "healthCheckInterval": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
     },
-    "describeLoadBalancerTCPListenerAttribute": {
-      "name": "DescribeLoadBalancerTCPListenerAttribute",
+    "describeLoadBalancerUDPListenerAttribute": {
+      "name": "DescribeLoadBalancerUDPListenerAttribute",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLoadBalancerUDPListenerAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "LoadBalancerId": {
             "required": true,
             "type": "string"
@@ -967,6 +1692,70 @@
           "ListenerPort": {
             "required": true,
             "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setLoadBalancerUDPListenerAttribute": {
+      "name": "SetLoadBalancerUDPListenerAttribute",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetLoadBalancerUDPListenerAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "LoadBalancerId": {
+            "required": true,
+            "type": "string"
+          },
+          "ListenerPort": {
+            "required": true,
+            "type": "integer"
+          },
+          "Bandwidth": {
+            "required": true,
+            "type": "integer"
+          },
+          "Scheduler": {
+            "type": "string"
+          },
+          "PersistenceTimeout": {
+            "type": "integer"
+          },
+          "HealthyThreshold": {
+            "type": "integer"
+          },
+          "UnhealthyThreshold": {
+            "type": "integer"
+          },
+          "HealthCheckConnectTimeout": {
+            "type": "integer"
+          },
+          "HealthCheckConnectPort": {
+            "type": "integer"
+          },
+          "HealthCheckInterval": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }

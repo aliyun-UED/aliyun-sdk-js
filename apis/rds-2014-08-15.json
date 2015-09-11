@@ -1,185 +1,174 @@
 {
-  "format": "query",
+  "format": "pop",
   "apiVersion": "2014-08-15",
   "checksumFormat": "md5",
   "endpointPrefix": "rds",
   "serviceAbbreviation": "RDS",
-  "serviceFullName": "Aliyun Relational Database Service",
-  "signatureVersion": "top",
+  "serviceFullName": "Aliyun RDS",
+  "signatureVersion": "pop",
   "timestampFormat": "top",
   "xmlnamespace": "",
   "operations": {
-    "createPostpaidDBInstanceForChannel": {
-      "name": "CreatePostpaidDBInstanceForChannel",
+    "startDBInstanceDiagnose": {
+      "name": "StartDBInstanceDiagnose",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "RegionId": {
+          "Action": {
             "required": true,
-            "type": "string"
+            "default": "StartDBInstanceDiagnose"
           },
-          "Engine": {
-            "required": true,
-            "type": "string"
-          },
-          "EngineVersion": {
-            "required": true,
-            "type": "string"
-          },
-          "DBInstanceClass": {
-            "required": true,
-            "type": "string"
-          },
-          "DBInstanceStorage": {
-            "required": true,
+          "OwnerId": {
             "type": "integer"
           },
-          "DBInstanceNetType": {
-            "required": true,
+          "ResourceOwnerAccount": {
             "type": "string"
           },
-          "SecurityIPList": {
-            "required": true,
-            "type": "string"
+          "ResourceOwnerId": {
+            "type": "integer"
           },
           "ClientToken": {
-            "required": true,
             "type": "string"
           },
-          "DBInstanceDescription": {
+          "proxyId": {
             "type": "string"
-          }
-        }
-      }
-    },
-    "modifyPostpaidDBInstanceSpec": {
-      "name": "ModifyPostpaidDBInstanceSpec",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
+          },
           "DBInstanceId": {
             "required": true,
             "type": "string"
           },
-          "DBInstanceClass": {
+          "OwnerAccount": {
             "type": "string"
-          },
-          "DBInstanceStorage": {
-            "type": "integer"
           }
         }
       }
     },
-    "createPostpaidDBInstance": {
-      "name": "CreatePostpaidDBInstance",
+    "describeAbnormalDBInstances": {
+      "name": "DescribeAbnormalDBInstances",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "RegionId": {
+          "Action": {
             "required": true,
-            "type": "string"
+            "default": "DescribeAbnormalDBInstances"
           },
-          "Engine": {
-            "required": true,
-            "type": "string"
-          },
-          "EngineVersion": {
-            "required": true,
-            "type": "string"
-          },
-          "DBInstanceClass": {
-            "required": true,
-            "type": "string"
-          },
-          "DBInstanceStorage": {
-            "required": true,
+          "OwnerId": {
             "type": "integer"
           },
-          "DBInstanceNetType": {
-            "required": true,
+          "ResourceOwnerAccount": {
             "type": "string"
           },
-          "SecurityIPList": {
-            "required": true,
-            "type": "string"
+          "ResourceOwnerId": {
+            "type": "integer"
           },
           "ClientToken": {
-            "required": true,
             "type": "string"
           },
-          "DBInstanceDescription": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "createDBInstanceforFirstPay": {
-      "name": "CreateDBInstanceforFirstPay",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "RegionId": {
-            "required": true,
+          "proxyId": {
             "type": "string"
           },
-          "Engine": {
-            "required": true,
-            "type": "string"
-          },
-          "DBInstanceClass": {
-            "required": true,
-            "type": "string"
-          },
-          "DBInstanceStorage": {
-            "required": true,
-            "type": "integer"
-          },
-          "DBInstanceNetType": {
-            "required": true,
-            "type": "string"
-          },
-          "ClientToken": {
-            "required": true,
-            "type": "string"
-          },
-          "EngineVersion": {
-            "type": "string"
-          },
-          "CharacterSetName": {
-            "type": "string"
-          },
-          "DBInstanceRemarks": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeOptimizeAdviceByDBA": {
-      "name": "DescribeOptimizeAdviceByDBA",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
           "DBInstanceId": {
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDBInstanceAttribute": {
+      "name": "DescribeDBInstanceAttribute",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDBInstanceAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDBInstances": {
+      "name": "DescribeDBInstances",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDBInstances"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "proxyId": {
+            "type": "string"
+          },
+          "Engine": {
+            "type": "string"
+          },
+          "DBInstanceStatus": {
+            "type": "string"
+          },
+          "SearchKey": {
+            "type": "string"
+          },
+          "DBInstanceId": {
+            "type": "string"
+          },
+          "DBInstanceType": {
+            "type": "string"
+          },
+          "RegionId": {
             "required": true,
             "type": "string"
           },
@@ -188,141 +177,134 @@
           },
           "PageNumber": {
             "type": "integer"
+          },
+          "InstanceNetworkType": {
+            "type": "string"
+          },
+          "ConnectionMode": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
     },
-    "modifyDBInstanceSpec": {
-      "name": "ModifyDBInstanceSpec",
+    "describeDBInstancesByExpireTime": {
+      "name": "DescribeDBInstancesByExpireTime",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "DBInstanceId": {
+          "Action": {
             "required": true,
-            "type": "string"
+            "default": "DescribeDBInstancesByExpireTime"
           },
-          "PayType": {
-            "required": true,
-            "type": "string"
-          },
-          "DBInstanceClass": {
-            "type": "string"
-          },
-          "DBInstanceStorage": {
+          "OwnerId": {
             "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "proxyId": {
+            "type": "string"
+          },
+          "ExpirePeriod": {
+            "required": true,
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
     },
-    "modifyAccountDescription": {
-      "name": "ModifyAccountDescription",
+    "describeDBInstancesByPerformance": {
+      "name": "DescribeDBInstancesByPerformance",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDBInstancesByPerformance"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "proxyId": {
+            "type": "string"
+          },
           "DBInstanceId": {
-            "required": true,
             "type": "string"
           },
-          "AccountName": {
-            "required": true,
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "SortMethod": {
             "type": "string"
           },
-          "AccountDescription": {
-            "required": true,
+          "SortKey": {
+            "type": "string"
+          },
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "modifyDBDescription": {
-      "name": "ModifyDBDescription",
+    "allocateInstancePublicConnection": {
+      "name": "AllocateInstancePublicConnection",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "DBInstanceId": {
+          "Action": {
             "required": true,
+            "default": "AllocateInstancePublicConnection"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
             "type": "string"
           },
-          "DBName": {
-            "required": true,
-            "type": "string"
+          "ResourceOwnerId": {
+            "type": "integer"
           },
-          "DBDescription": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "resetAccountPassword": {
-      "name": "ResetAccountPassword",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "DBInstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "AccountName": {
-            "required": true,
-            "type": "string"
-          },
-          "AccountPassword": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "revokeAccountPrivilege": {
-      "name": "RevokeAccountPrivilege",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "DBInstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "AccountName": {
-            "required": true,
-            "type": "string"
-          },
-          "DBName": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "switchDBInstanceNetType": {
-      "name": "SwitchDBInstanceNetType",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
           "DBInstanceId": {
             "required": true,
             "type": "string"
@@ -332,60 +314,547 @@
             "type": "string"
           },
           "Port": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createDBInstance": {
+      "name": "CreateDBInstance",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateDBInstance"
+          },
+          "OwnerId": {
             "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "required": true,
+            "type": "string"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "Engine": {
+            "required": true,
+            "type": "string"
+          },
+          "EngineVersion": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceClass": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceStorage": {
+            "required": true,
+            "type": "integer"
+          },
+          "SystemDBCharset": {
+            "type": "string"
+          },
+          "DBInstanceNetType": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceDescription": {
+            "type": "string"
+          },
+          "SecurityIPList": {
+            "required": true,
+            "type": "string"
+          },
+          "PayType": {
+            "required": true,
+            "type": "string"
+          },
+          "ZoneId": {
+            "type": "string"
+          },
+          "InstanceNetworkType": {
+            "type": "string"
+          },
+          "ConnectionMode": {
+            "type": "string"
+          },
+          "VPCId": {
+            "type": "string"
+          },
+          "VSwitchId": {
+            "type": "string"
+          },
+          "PrivateIpAddress": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
     },
-    "importDatabaseBetweenInstances": {
-      "name": "ImportDatabaseBetweenInstances",
+    "createReadOnlyDBInstance": {
+      "name": "CreateReadOnlyDBInstance",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateReadOnlyDBInstance"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "required": true,
+            "type": "string"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "ZoneId": {
+            "required": true,
+            "type": "string"
+          },
           "DBInstanceId": {
             "required": true,
             "type": "string"
           },
-          "SourceDBInstanceId": {
+          "DBInstanceClass": {
             "required": true,
             "type": "string"
           },
-          "DBInfo": {
+          "DBInstanceStorage": {
             "required": true,
+            "type": "integer"
+          },
+          "EngineVersion": {
+            "required": true,
+            "type": "string"
+          },
+          "PayType": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceDescription": {
+            "type": "string"
+          },
+          "InstanceNetworkType": {
+            "type": "string"
+          },
+          "VPCId": {
+            "type": "string"
+          },
+          "VSwitchId": {
+            "type": "string"
+          },
+          "PrivateIpAddress": {
+            "type": "string"
+          },
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "restartDBInstance": {
-      "name": "RestartDBInstance",
+    "describeDBInstanceNetInfo": {
+      "name": "DescribeDBInstanceNetInfo",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDBInstanceNetInfo"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
           "DBInstanceId": {
             "required": true,
             "type": "string"
+          },
+          "Flag": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
     },
-    "grantAccountPrivilege": {
-      "name": "GrantAccountPrivilege",
+    "describeDBInstanceNetInfoForChannel": {
+      "name": "DescribeDBInstanceNetInfoForChannel",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDBInstanceNetInfoForChannel"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "Flag": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyDBInstanceConnectionMode": {
+      "name": "ModifyDBInstanceConnectionMode",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyDBInstanceConnectionMode"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "ConnectionMode": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyDBInstanceConnectionString": {
+      "name": "ModifyDBInstanceConnectionString",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyDBInstanceConnectionString"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "CurrentConnectionString": {
+            "required": true,
+            "type": "string"
+          },
+          "ConnectionStringPrefix": {
+            "required": true,
+            "type": "string"
+          },
+          "Port": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyDBInstanceNetworkType": {
+      "name": "ModifyDBInstanceNetworkType",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyDBInstanceNetworkType"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceNetworkType": {
+            "required": true,
+            "type": "string"
+          },
+          "VPCId": {
+            "type": "string"
+          },
+          "VSwitchId": {
+            "type": "string"
+          },
+          "PrivateIpAddress": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "releaseInstancePublicConnection": {
+      "name": "ReleaseInstancePublicConnection",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ReleaseInstancePublicConnection"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "CurrentConnectionString": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "switchDBInstanceNetType": {
+      "name": "SwitchDBInstanceNetType",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SwitchDBInstanceNetType"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "ConnectionStringPrefix": {
+            "required": true,
+            "type": "string"
+          },
+          "Port": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "addTagsToResource": {
+      "name": "AddTagsToResource",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AddTagsToResource"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "proxyId": {
+            "type": "string"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "Tag.1.key": {
+            "type": "string"
+          },
+          "Tag.2.key": {
+            "type": "string"
+          },
+          "Tag.3.key": {
+            "type": "string"
+          },
+          "Tag.4.key": {
+            "type": "string"
+          },
+          "Tag.5.key": {
+            "type": "string"
+          },
+          "Tag.1.value": {
+            "type": "string"
+          },
+          "Tag.2.value": {
+            "type": "string"
+          },
+          "Tag.3.value": {
+            "type": "string"
+          },
+          "Tag.4.value": {
+            "type": "string"
+          },
+          "Tag.5.value": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "batchGrantAccountPrivilege": {
+      "name": "BatchGrantAccountPrivilege",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "BatchGrantAccountPrivilege"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "DBInstanceId": {
             "required": true,
             "type": "string"
@@ -401,39 +870,163 @@
           "AccountPrivilege": {
             "required": true,
             "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
     },
-    "describeImportsForSQLServer": {
-      "name": "DescribeImportsForSQLServer",
+    "batchRevokeAccountPrivilege": {
+      "name": "BatchRevokeAccountPrivilege",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "BatchRevokeAccountPrivilege"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "DBInstanceId": {
             "required": true,
             "type": "string"
           },
-          "StartTime": {
+          "AccountName": {
             "required": true,
             "type": "string"
           },
-          "EndTime": {
+          "DBName": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "cancelImport": {
+      "name": "CancelImport",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CancelImport"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
             "required": true,
             "type": "string"
           },
           "ImportId": {
+            "required": true,
             "type": "integer"
           },
-          "PageSize": {
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "checkAccountNameAvailable": {
+      "name": "CheckAccountNameAvailable",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CheckAccountNameAvailable"
+          },
+          "OwnerId": {
             "type": "integer"
           },
-          "PageNumber": {
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
             "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountName": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "checkDBNameAvailable": {
+      "name": "CheckDBNameAvailable",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CheckDBNameAvailable"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DBName": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
@@ -441,12 +1034,25 @@
     "createAccount": {
       "name": "CreateAccount",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateAccount"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "DBInstanceId": {
             "required": true,
             "type": "string"
@@ -461,6 +1067,770 @@
           },
           "AccountDescription": {
             "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createBackup": {
+      "name": "CreateBackup",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateBackup"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DBName": {
+            "type": "string"
+          },
+          "BackupMethod": {
+            "type": "string"
+          },
+          "BackupType": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createDatabase": {
+      "name": "CreateDatabase",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateDatabase"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DBName": {
+            "required": true,
+            "type": "string"
+          },
+          "CharacterSetName": {
+            "required": true,
+            "type": "string"
+          },
+          "DBDescription": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createDBInstanceForChannel": {
+      "name": "CreateDBInstanceForChannel",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateDBInstanceForChannel"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "required": true,
+            "type": "string"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "SystemDBCharset": {
+            "type": "string"
+          },
+          "Engine": {
+            "required": true,
+            "type": "string"
+          },
+          "EngineVersion": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceClass": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceStorage": {
+            "required": true,
+            "type": "integer"
+          },
+          "DBInstanceNetType": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceDescription": {
+            "type": "string"
+          },
+          "SecurityIPList": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountName": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountPassword": {
+            "required": true,
+            "type": "string"
+          },
+          "PayType": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createDBInstanceforFirstPay": {
+      "name": "CreateDBInstanceforFirstPay",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateDBInstanceforFirstPay"
+          },
+          "uid": {
+            "type": "integer"
+          },
+          "bid": {
+            "type": "string"
+          },
+          "uidLoginEmail": {
+            "type": "string"
+          },
+          "bidLoginEmail": {
+            "type": "string"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "Engine": {
+            "required": true,
+            "type": "string"
+          },
+          "EngineVersion": {
+            "type": "string"
+          },
+          "DBInstanceClass": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceStorage": {
+            "required": true,
+            "type": "integer"
+          },
+          "DBInstanceNetType": {
+            "required": true,
+            "type": "string"
+          },
+          "CharacterSetName": {
+            "type": "string"
+          },
+          "DBInstanceRemarks": {
+            "type": "string"
+          },
+          "ClientToken": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createPostpaidDBInstance": {
+      "name": "CreatePostpaidDBInstance",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreatePostpaidDBInstance"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "required": true,
+            "type": "string"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "Engine": {
+            "required": true,
+            "type": "string"
+          },
+          "EngineVersion": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceClass": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceStorage": {
+            "required": true,
+            "type": "integer"
+          },
+          "DBInstanceNetType": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceDescription": {
+            "type": "string"
+          },
+          "SecurityIPList": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createPostpaidDBInstanceForChannel": {
+      "name": "CreatePostpaidDBInstanceForChannel",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreatePostpaidDBInstanceForChannel"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "required": true,
+            "type": "string"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "Engine": {
+            "required": true,
+            "type": "string"
+          },
+          "EngineVersion": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceClass": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceStorage": {
+            "required": true,
+            "type": "integer"
+          },
+          "DBInstanceNetType": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceDescription": {
+            "type": "string"
+          },
+          "SecurityIPList": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createTempDBInstance": {
+      "name": "CreateTempDBInstance",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateTempDBInstance"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "BackupId": {
+            "type": "integer"
+          },
+          "RestoreTime": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createUploadPathForSQLServer": {
+      "name": "CreateUploadPathForSQLServer",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateUploadPathForSQLServer"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DBName": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteAccount": {
+      "name": "DeleteAccount",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteAccount"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountName": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteDatabase": {
+      "name": "DeleteDatabase",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteDatabase"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DBName": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteDBInstance": {
+      "name": "DeleteDBInstance",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteDBInstance"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "descibeImportsFromDatabase": {
+      "name": "DescibeImportsFromDatabase",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescibeImportsFromDatabase"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "Engine": {
+            "required": true,
+            "type": "string"
+          },
+          "ImportId": {
+            "type": "integer"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeAccounts": {
+      "name": "DescribeAccounts",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeAccounts"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountName": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeBackupPolicy": {
+      "name": "DescribeBackupPolicy",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeBackupPolicy"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeBackups": {
+      "name": "DescribeBackups",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeBackups"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "BackupId": {
+            "type": "string"
+          },
+          "BackupLocation": {
+            "type": "string"
+          },
+          "BackupStatus": {
+            "type": "string"
+          },
+          "BackupMode": {
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeBackupTasks": {
+      "name": "DescribeBackupTasks",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeBackupTasks"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "Flag": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "BackupJobId": {
+            "type": "string"
+          },
+          "BackupMode": {
+            "type": "string"
+          },
+          "BackupJobStatus": {
+            "type": "string"
           }
         }
       }
@@ -468,12 +1838,25 @@
     "describeBinlogFiles": {
       "name": "DescribeBinlogFiles",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeBinlogFiles"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "DBInstanceId": {
             "required": true,
             "type": "string"
@@ -491,35 +1874,46 @@
           },
           "PageNumber": {
             "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
     },
-    "createDatabase": {
-      "name": "CreateDatabase",
+    "describeDatabases": {
+      "name": "DescribeDatabases",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDatabases"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "DBInstanceId": {
             "required": true,
             "type": "string"
           },
           "DBName": {
-            "required": true,
             "type": "string"
           },
-          "CharacterSetName": {
-            "required": true,
+          "DBStatus": {
             "type": "string"
           },
-          "CreateDatabase": {
-            "type": "string"
-          },
-          "DBDescription": {
+          "OwnerAccount": {
             "type": "string"
           }
         }
@@ -528,12 +1922,28 @@
     "describeDBInstancePerformance": {
       "name": "DescribeDBInstancePerformance",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDBInstancePerformance"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
           "DBInstanceId": {
             "required": true,
             "type": "string"
@@ -549,182 +1959,54 @@
           "EndTime": {
             "required": true,
             "type": "string"
-          }
-        }
-      }
-    },
-    "createUploadPathForSQLServer": {
-      "name": "CreateUploadPathForSQLServer",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "DBInstanceId": {
-            "required": true,
-            "type": "string"
           },
-          "DBName": {
-            "required": true,
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "describeResourceUsage": {
-      "name": "DescribeResourceUsage",
+    "describeErrorLogs": {
+      "name": "DescribeErrorLogs",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "DBInstanceId": {
+          "Action": {
             "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "deleteAccount": {
-      "name": "DeleteAccount",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "DBInstanceId": {
-            "required": true,
+            "default": "DescribeErrorLogs"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
             "type": "string"
           },
-          "AccountName": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "deleteDatabase": {
-      "name": "DeleteDatabase",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "DBInstanceId": {
             "required": true,
             "type": "string"
           },
-          "DBName": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "upgradeDBInstanceEngineVersion": {
-      "name": "UpgradeDBInstanceEngineVersion",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "DBInstanceId": {
+          "StartTime": {
             "required": true,
             "type": "string"
           },
-          "EngineVersion": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifyDBInstanceMaintainTime": {
-      "name": "ModifyDBInstanceMaintainTime",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "DBInstanceId": {
+          "EndTime": {
             "required": true,
             "type": "string"
           },
-          "MaintainTime": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeAccounts": {
-      "name": "DescribeAccounts",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "DBInstanceId": {
-            "required": true,
-            "type": "string"
+          "PageSize": {
+            "type": "integer"
           },
-          "AccountName": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeDatabases": {
-      "name": "DescribeDatabases",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "DBInstanceId": {
-            "required": true,
-            "type": "string"
+          "PageNumber": {
+            "type": "integer"
           },
-          "DBName": {
-            "type": "string"
-          },
-          "DBStatus": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifySecurityIps": {
-      "name": "ModifySecurityIps",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "DBInstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "SecurityIps": {
-            "required": true,
+          "OwnerAccount": {
             "type": "string"
           }
         }
@@ -733,12 +2015,25 @@
     "describeFilesForSQLServer": {
       "name": "DescribeFilesForSQLServer",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeFilesForSQLServer"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "DBInstanceId": {
             "required": true,
             "type": "string"
@@ -756,85 +2051,813 @@
           },
           "PageNumber": {
             "type": "integer"
-          }
-        }
-      }
-    },
-    "modifyDBInstanceDescription": {
-      "name": "ModifyDBInstanceDescription",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "DBInstanceId": {
-            "required": true,
-            "type": "string"
           },
-          "DBInstanceDescription": {
-            "required": true,
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "describeBackups": {
-      "name": "DescribeBackups",
+    "describeImportsForSQLServer": {
+      "name": "DescribeImportsForSQLServer",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "DBInstanceId": {
+          "Action": {
             "required": true,
-            "type": "string"
+            "default": "DescribeImportsForSQLServer"
           },
-          "StartTime": {
-            "required": true,
-            "type": "string"
-          },
-          "EndTime": {
-            "required": true,
-            "type": "string"
-          },
-          "BackupStatus": {
-            "type": "string"
-          },
-          "BackupMode": {
-            "type": "string"
-          },
-          "BackupId": {
-            "type": "string"
-          },
-          "PageSize": {
+          "OwnerId": {
             "type": "integer"
           },
-          "PageNumber": {
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
             "type": "integer"
-          }
-        }
-      }
-    },
-    "cancelImport": {
-      "name": "CancelImport",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
+          },
           "DBInstanceId": {
             "required": true,
             "type": "string"
           },
           "ImportId": {
-            "required": true,
             "type": "integer"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeModifyParameterLog": {
+      "name": "DescribeModifyParameterLog",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeModifyParameterLog"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeOperationLogs": {
+      "name": "DescribeOperationLogs",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeOperationLogs"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "type": "string"
+          },
+          "SearchKey": {
+            "type": "string"
+          },
+          "DBInstanceUseType": {
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeOptimizeAdviceByDBA": {
+      "name": "DescribeOptimizeAdviceByDBA",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeOptimizeAdviceByDBA"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeOptimizeAdviceOnBigTable": {
+      "name": "DescribeOptimizeAdviceOnBigTable",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeOptimizeAdviceOnBigTable"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeOptimizeAdviceOnExcessIndex": {
+      "name": "DescribeOptimizeAdviceOnExcessIndex",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeOptimizeAdviceOnExcessIndex"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeOptimizeAdviceOnMissIndex": {
+      "name": "DescribeOptimizeAdviceOnMissIndex",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeOptimizeAdviceOnMissIndex"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeOptimizeAdviceOnMissPK": {
+      "name": "DescribeOptimizeAdviceOnMissPK",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeOptimizeAdviceOnMissPK"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeOptimizeAdviceOnStorage": {
+      "name": "DescribeOptimizeAdviceOnStorage",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeOptimizeAdviceOnStorage"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeParameters": {
+      "name": "DescribeParameters",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeParameters"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeParameterTemplates": {
+      "name": "DescribeParameterTemplates",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeParameterTemplates"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "Engine": {
+            "required": true,
+            "type": "string"
+          },
+          "EngineVersion": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describePreCheckResults": {
+      "name": "DescribePreCheckResults",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribePreCheckResults"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "PreCheckId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeRealtimeDiagnoses": {
+      "name": "DescribeRealtimeDiagnoses",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeRealtimeDiagnoses"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeRegions": {
+      "name": "DescribeRegions",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeRegions"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeResourceUsage": {
+      "name": "DescribeResourceUsage",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeResourceUsage"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeSlowLogRecords": {
+      "name": "DescribeSlowLogRecords",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeSlowLogRecords"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "SQLId": {
+            "type": "integer"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "DBName": {
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeSlowLogs": {
+      "name": "DescribeSlowLogs",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeSlowLogs"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "DBName": {
+            "type": "string"
+          },
+          "SortKey": {
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeSQLInjectionInfos": {
+      "name": "DescribeSQLInjectionInfos",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeSQLInjectionInfos"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeSQLLogRecords": {
+      "name": "DescribeSQLLogRecords",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeSQLLogRecords"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "SQLId": {
+            "type": "integer"
+          },
+          "QueryKeywords": {
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
@@ -842,12 +2865,28 @@
     "describeSQLLogReports": {
       "name": "DescribeSQLLogReports",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeSQLLogReports"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
           "DBInstanceId": {
             "required": true,
             "type": "string"
@@ -860,73 +2899,398 @@
             "required": true,
             "type": "string"
           },
+          "ReportType": {
+            "type": "string"
+          },
           "PageSize": {
             "type": "integer"
           },
           "PageNumber": {
             "type": "integer"
           },
-          "ReportType": {
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "createBackup": {
-      "name": "CreateBackup",
+    "describeTasks": {
+      "name": "DescribeTasks",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeTasks"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "DBInstanceId": {
             "required": true,
             "type": "string"
           },
-          "BackupMethod": {
+          "StartTime": {
             "type": "string"
           },
-          "BackupType": {
+          "EndTime": {
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "Status": {
+            "type": "string"
+          },
+          "TaskAction": {
+            "type": "string"
+          },
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "createTempDBInstance": {
-      "name": "CreateTempDBInstance",
+    "describeVpcZoneNos": {
+      "name": "DescribeVpcZoneNos",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeVpcZoneNos"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "Region": {
+            "type": "string"
+          },
+          "ZoneId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "extractBackupFromOAS": {
+      "name": "ExtractBackupFromOAS",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ExtractBackupFromOAS"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
           "DBInstanceId": {
             "required": true,
             "type": "string"
           },
           "BackupId": {
-            "type": "integer"
+            "required": true,
+            "type": "string"
           },
-          "RestoreTime": {
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "describeBackupPolicy": {
-      "name": "DescribeBackupPolicy",
+    "grantAccountPrivilege": {
+      "name": "GrantAccountPrivilege",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "GrantAccountPrivilege"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "DBInstanceId": {
             "required": true,
+            "type": "string"
+          },
+          "AccountName": {
+            "required": true,
+            "type": "string"
+          },
+          "DBName": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountPrivilege": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "importDatabaseBetweenInstances": {
+      "name": "ImportDatabaseBetweenInstances",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ImportDatabaseBetweenInstances"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "SourceDBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInfo": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "importDataForSQLServer": {
+      "name": "ImportDataForSQLServer",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ImportDataForSQLServer"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "FileName": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "importDataFromDatabase": {
+      "name": "ImportDataFromDatabase",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ImportDataFromDatabase"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "SourceDatabaseIp": {
+            "required": true,
+            "type": "string"
+          },
+          "SourceDatabasePort": {
+            "required": true,
+            "type": "string"
+          },
+          "SourceDatabaseUserName": {
+            "required": true,
+            "type": "string"
+          },
+          "SourceDatabasePassword": {
+            "required": true,
+            "type": "string"
+          },
+          "ImportDataType": {
+            "required": true,
+            "type": "string"
+          },
+          "IsLockTable": {
+            "required": true,
+            "type": "string"
+          },
+          "SourceDatabaseDBNames": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "migrateToOtherZone": {
+      "name": "MigrateToOtherZone",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "MigrateToOtherZone"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "ZoneId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyAccountDescription": {
+      "name": "ModifyAccountDescription",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyAccountDescription"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountName": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountDescription": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
             "type": "string"
           }
         }
@@ -935,12 +3299,25 @@
     "modifyBackupPolicy": {
       "name": "ModifyBackupPolicy",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyBackupPolicy"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "DBInstanceId": {
             "required": true,
             "type": "string"
@@ -952,283 +3329,171 @@
           "PreferredBackupPeriod": {
             "required": true,
             "type": "string"
-          }
-        }
-      }
-    },
-    "describeSlowLogs": {
-      "name": "DescribeSlowLogs",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "DBInstanceId": {
-            "required": true,
-            "type": "string"
           },
-          "StartTime": {
-            "required": true,
-            "type": "string"
-          },
-          "EndTime": {
-            "required": true,
-            "type": "string"
-          },
-          "PageNumber": {
-            "type": "integer"
-          },
-          "PageSize": {
-            "type": "integer"
-          },
-          "DBName": {
-            "type": "string"
-          },
-          "SortKey": {
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "describeSQLLogRecords": {
-      "name": "DescribeSQLLogRecords",
+    "modifyDBDescription": {
+      "name": "ModifyDBDescription",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "DBInstanceId": {
+          "Action": {
             "required": true,
-            "type": "string"
+            "default": "ModifyDBDescription"
           },
-          "StartTime": {
-            "required": true,
-            "type": "string"
-          },
-          "EndTime": {
-            "required": true,
-            "type": "string"
-          },
-          "QueryKeywords": {
-            "type": "string"
-          },
-          "PageSize": {
+          "OwnerId": {
             "type": "integer"
           },
-          "PageNumber": {
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
             "type": "integer"
-          }
-        }
-      }
-    },
-    "describeSlowLogRecords": {
-      "name": "DescribeSlowLogRecords",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
+          },
           "DBInstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "StartTime": {
-            "required": true,
-            "type": "string"
-          },
-          "EndTime": {
             "required": true,
             "type": "string"
           },
           "DBName": {
+            "required": true,
             "type": "string"
           },
-          "PageSize": {
-            "type": "integer"
+          "DBDescription": {
+            "required": true,
+            "type": "string"
           },
-          "PageNumber": {
-            "type": "integer"
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
     },
-    "describeOptimizeAdviceOnStorage": {
-      "name": "DescribeOptimizeAdviceOnStorage",
+    "modifyDBInstanceDescription": {
+      "name": "ModifyDBInstanceDescription",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyDBInstanceDescription"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
           "DBInstanceId": {
             "required": true,
             "type": "string"
           },
-          "PageSize": {
-            "type": "integer"
+          "DBInstanceDescription": {
+            "required": true,
+            "type": "string"
           },
-          "PageNumber": {
-            "type": "integer"
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
     },
-    "describeOptimizeAdviceOnBigTable": {
-      "name": "DescribeOptimizeAdviceOnBigTable",
+    "modifyDBInstanceMaintainTime": {
+      "name": "ModifyDBInstanceMaintainTime",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyDBInstanceMaintainTime"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
           "DBInstanceId": {
             "required": true,
             "type": "string"
           },
-          "PageSize": {
-            "type": "integer"
+          "MaintainTime": {
+            "required": true,
+            "type": "string"
           },
-          "PageNumber": {
-            "type": "integer"
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
     },
-    "describeOptimizeAdviceOnMissPK": {
-      "name": "DescribeOptimizeAdviceOnMissPK",
+    "modifyDBInstanceSpec": {
+      "name": "ModifyDBInstanceSpec",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyDBInstanceSpec"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
           "DBInstanceId": {
             "required": true,
             "type": "string"
           },
-          "PageSize": {
+          "DBInstanceClass": {
+            "type": "string"
+          },
+          "DBInstanceStorage": {
             "type": "integer"
           },
-          "PageNumber": {
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "describeErrorLogs": {
-      "name": "DescribeErrorLogs",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "DBInstanceId": {
+          "PayType": {
             "required": true,
             "type": "string"
           },
-          "StartTime": {
-            "required": true,
-            "type": "string"
-          },
-          "EndTime": {
-            "required": true,
-            "type": "string"
-          },
-          "PageSize": {
-            "type": "integer"
-          },
-          "PageNumber": {
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "describeOptimizeAdviceOnExcessIndex": {
-      "name": "DescribeOptimizeAdviceOnExcessIndex",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "DBInstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "PageSize": {
-            "type": "integer"
-          },
-          "PageNumber": {
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "describeOptimizeAdviceOnMissIndex": {
-      "name": "DescribeOptimizeAdviceOnMissIndex",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "DBInstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "PageSize": {
-            "type": "integer"
-          },
-          "PageNumber": {
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "describeParameterTemplates": {
-      "name": "DescribeParameterTemplates",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Engine": {
-            "required": true,
-            "type": "string"
-          },
-          "EngineVersion": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeParameters": {
-      "name": "DescribeParameters",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "DBInstanceId": {
-            "required": true,
+          "OwnerAccount": {
             "type": "string"
           }
         }
@@ -1237,12 +3502,28 @@
     "modifyParameter": {
       "name": "ModifyParameter",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyParameter"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
           "DBInstanceId": {
             "required": true,
             "type": "string"
@@ -1253,6 +3534,148 @@
           },
           "Forcerestart": {
             "type": "boolean"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyPostpaidDBInstanceSpec": {
+      "name": "ModifyPostpaidDBInstanceSpec",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyPostpaidDBInstanceSpec"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DBInstanceClass": {
+            "type": "string"
+          },
+          "DBInstanceStorage": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifySecurityIps": {
+      "name": "ModifySecurityIps",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifySecurityIps"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "SecurityIps": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "preCheckBeforeImportData": {
+      "name": "PreCheckBeforeImportData",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "PreCheckBeforeImportData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "SourceDatabaseIp": {
+            "required": true,
+            "type": "string"
+          },
+          "SourceDatabasePort": {
+            "required": true,
+            "type": "string"
+          },
+          "SourceDatabaseUserName": {
+            "required": true,
+            "type": "string"
+          },
+          "SourceDatabasePassword": {
+            "required": true,
+            "type": "string"
+          },
+          "ImportDataType": {
+            "required": true,
+            "type": "string"
+          },
+          "SourceDatabaseDBNames": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
@@ -1260,77 +3683,129 @@
     "purgeDBInstanceLog": {
       "name": "PurgeDBInstanceLog",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "DBInstanceId": {
+          "Action": {
             "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "deleteDBInstance": {
-      "name": "DeleteDBInstance",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "DBInstanceId": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "createDBInstanceForChannel": {
-      "name": "CreateDBInstanceForChannel",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "RegionId": {
-            "required": true,
-            "type": "string"
+            "default": "PurgeDBInstanceLog"
           },
-          "Engine": {
-            "required": true,
-            "type": "string"
-          },
-          "EngineVersion": {
-            "required": true,
-            "type": "string"
-          },
-          "DBInstanceClass": {
-            "required": true,
-            "type": "string"
-          },
-          "DBInstanceStorage": {
-            "required": true,
+          "OwnerId": {
             "type": "integer"
           },
-          "DBInstanceNetType": {
-            "required": true,
+          "ResourceOwnerAccount": {
             "type": "string"
           },
-          "SecurityIPList": {
-            "required": true,
-            "type": "string"
+          "ResourceOwnerId": {
+            "type": "integer"
           },
           "ClientToken": {
+            "type": "string"
+          },
+          "DBInstanceId": {
             "required": true,
             "type": "string"
           },
-          "PayType": {
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "removeTagsFromResource": {
+      "name": "RemoveTagsFromResource",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "RemoveTagsFromResource"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "proxyId": {
+            "type": "string"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "Tag.1.key": {
+            "type": "string"
+          },
+          "Tag.2.key": {
+            "type": "string"
+          },
+          "Tag.3.key": {
+            "type": "string"
+          },
+          "Tag.4.key": {
+            "type": "string"
+          },
+          "Tag.5.key": {
+            "type": "string"
+          },
+          "Tag.1.value": {
+            "type": "string"
+          },
+          "Tag.2.value": {
+            "type": "string"
+          },
+          "Tag.3.value": {
+            "type": "string"
+          },
+          "Tag.4.value": {
+            "type": "string"
+          },
+          "Tag.5.value": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "resetAccountPassword": {
+      "name": "ResetAccountPassword",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ResetAccountPassword"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
             "required": true,
             "type": "string"
           },
@@ -1342,46 +3817,191 @@
             "required": true,
             "type": "string"
           },
-          "DBInstanceDescription": {
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "importDataForSQLServer": {
-      "name": "ImportDataForSQLServer",
+    "restartDBInstance": {
+      "name": "RestartDBInstance",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "RestartDBInstance"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
           "DBInstanceId": {
             "required": true,
             "type": "string"
           },
-          "FileName": {
-            "required": true,
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "createDBInstance": {
-      "name": "CreateDBInstance",
+    "restoreDBInstance": {
+      "name": "RestoreDBInstance",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "RegionId": {
+          "Action": {
+            "required": true,
+            "default": "RestoreDBInstance"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "DBInstanceId": {
             "required": true,
             "type": "string"
           },
-          "Engine": {
+          "BackupId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "revokeAccountPrivilege": {
+      "name": "RevokeAccountPrivilege",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "RevokeAccountPrivilege"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountName": {
+            "required": true,
+            "type": "string"
+          },
+          "DBName": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "stopSyncing": {
+      "name": "StopSyncing",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "StopSyncing"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "ImportId": {
+            "required": true,
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "upgradeDBInstanceEngineVersion": {
+      "name": "UpgradeDBInstanceEngineVersion",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "UpgradeDBInstanceEngineVersion"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "DBInstanceId": {
             "required": true,
             "type": "string"
           },
@@ -1389,56 +4009,293 @@
             "required": true,
             "type": "string"
           },
-          "DBInstanceClass": {
-            "required": true,
-            "type": "string"
-          },
-          "DBInstanceStorage": {
-            "required": true,
-            "type": "integer"
-          },
-          "DBInstanceNetType": {
-            "required": true,
-            "type": "string"
-          },
-          "SecurityIPList": {
-            "required": true,
-            "type": "string"
-          },
-          "ClientToken": {
-            "required": true,
-            "type": "string"
-          },
-          "PayType": {
-            "required": true,
-            "type": "string"
-          },
-          "DBInstanceDescription": {
-            "type": "string"
-          },
-          "ZoneId": {
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "describeDBInstances": {
-      "name": "DescribeDBInstances",
+    "createAccountForInner": {
+      "name": "CreateAccountForInner",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "RegionId": {
+          "Action": {
+            "required": true,
+            "default": "CreateAccountForInner"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
             "required": true,
             "type": "string"
           },
-          "DBInstanceStatus": {
+          "AccountName": {
+            "required": true,
             "type": "string"
           },
-          "Engine": {
+          "AccountPassword": {
+            "required": true,
+            "type": "string"
+          },
+          "DBName": {
+            "type": "string"
+          },
+          "AccountPrivilege": {
+            "type": "string"
+          },
+          "AccountDescription": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createDatabaseForInner": {
+      "name": "CreateDatabaseForInner",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateDatabaseForInner"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DBName": {
+            "required": true,
+            "type": "string"
+          },
+          "CharacterSetName": {
+            "required": true,
+            "type": "string"
+          },
+          "DBDescription": {
+            "type": "string"
+          },
+          "AccountName": {
+            "type": "string"
+          },
+          "AccountPrivilege": {
+            "type": "string"
+          },
+          "AccountPassword": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "lockDBInstance": {
+      "name": "LockDBInstance",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "LockDBInstance"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "LockReason": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "unlockDBInstance": {
+      "name": "UnlockDBInstance",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "UnlockDBInstance"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "allocateInstancePrivateConnection": {
+      "name": "AllocateInstancePrivateConnection",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AllocateInstancePrivateConnection"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "ConnectionStringPrefix": {
+            "required": true,
+            "type": "string"
+          },
+          "Port": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "resetAccountForPG": {
+      "name": "ResetAccountForPG",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ResetAccountForPG"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountName": {
+            "required": true,
+            "type": "string"
+          },
+          "AccountPassword": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeSQLLogReportList": {
+      "name": "DescribeSQLLogReportList",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeSQLLogReportList"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DBInstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
             "type": "string"
           },
           "PageSize": {
@@ -1447,54 +4304,7 @@
           "PageNumber": {
             "type": "integer"
           },
-          "DBInstanceType": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeDBInstanceAttribute": {
-      "name": "DescribeDBInstanceAttribute",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "DBInstanceId": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeRegions": {
-      "name": "DescribeRegions",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {}
-      }
-    },
-    "migrateToOtherZone": {
-      "name": "MigrateToOtherZone",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "DBInstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "ZoneId": {
-            "required": true,
+          "OwnerAccount": {
             "type": "string"
           }
         }

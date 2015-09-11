@@ -1,59 +1,395 @@
 {
-  "format": "query",
+  "format": "pop",
   "apiVersion": "2014-05-26",
   "checksumFormat": "md5",
   "endpointPrefix": "ecs",
   "serviceAbbreviation": "ECS",
-  "serviceFullName": "Aliyun Elastic Compute Service",
-  "signatureVersion": "top",
+  "serviceFullName": "Aliyun ECS",
+  "signatureVersion": "pop",
   "timestampFormat": "top",
   "xmlnamespace": "",
   "operations": {
-    "resetDisk": {
-      "name": "ResetDisk",
+    "allocateEipAddress": {
+      "name": "AllocateEipAddress",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "AllocateEipAddress"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "Bandwidth": {
+            "type": "string"
+          },
+          "InternetChargeType": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "allocatePublicIpAddress": {
+      "name": "AllocatePublicIpAddress",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AllocatePublicIpAddress"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "IpAddress": {
+            "type": "string"
+          },
+          "VlanId": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "associateEipAddress": {
+      "name": "AssociateEipAddress",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AssociateEipAddress"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "AllocationId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "attachDisk": {
+      "name": "AttachDisk",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AttachDisk"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
           "DiskId": {
             "required": true,
             "type": "string"
           },
-          "SnapshotId": {
-            "required": true,
+          "Device": {
+            "type": "string"
+          },
+          "DeleteWithInstance": {
+            "type": "boolean"
+          },
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "absConfigService": {
-      "name": "AbsConfigService",
+    "authorizeSecurityGroup": {
+      "name": "AuthorizeSecurityGroup",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "configKey": {
+          "Action": {
             "required": true,
+            "default": "AuthorizeSecurityGroup"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "SecurityGroupId": {
+            "required": true,
+            "type": "string"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "IpProtocol": {
+            "required": true,
+            "type": "string"
+          },
+          "PortRange": {
+            "required": true,
+            "type": "string"
+          },
+          "SourceGroupId": {
+            "type": "string"
+          },
+          "SourceGroupOwnerAccount": {
+            "type": "string"
+          },
+          "SourceCidrIp": {
+            "type": "string"
+          },
+          "Policy": {
+            "type": "string"
+          },
+          "Priority": {
+            "type": "string"
+          },
+          "NicType": {
+            "type": "string"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "modifyAutoSnapshotPolicy": {
-      "name": "ModifyAutoSnapshotPolicy",
+    "authorizeSecurityGroupEgress": {
+      "name": "AuthorizeSecurityGroupEgress",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "AuthorizeSecurityGroupEgress"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "SecurityGroupId": {
+            "required": true,
+            "type": "string"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "IpProtocol": {
+            "required": true,
+            "type": "string"
+          },
+          "PortRange": {
+            "required": true,
+            "type": "string"
+          },
+          "DestGroupId": {
+            "type": "string"
+          },
+          "DestGroupOwnerAccount": {
+            "type": "string"
+          },
+          "DestCidrIp": {
+            "type": "string"
+          },
+          "Policy": {
+            "type": "string"
+          },
+          "Priority": {
+            "type": "string"
+          },
+          "NicType": {
+            "type": "string"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "bindIpRange": {
+      "name": "BindIpRange",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "BindIpRange"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "IpAddress": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "cancelCopyImage": {
+      "name": "CancelCopyImage",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CancelCopyImage"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "ImageId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "checkAutoSnapshotPolicy": {
+      "name": "CheckAutoSnapshotPolicy",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CheckAutoSnapshotPolicy"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
           "SystemDiskPolicyEnabled": {
             "type": "boolean"
           },
@@ -81,135 +417,210 @@
         }
       }
     },
-    "modifyDiskAttribute": {
-      "name": "ModifyDiskAttribute",
+    "checkDiskEnableAutoSnapshotValidation": {
+      "name": "CheckDiskEnableAutoSnapshotValidation",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "DiskId": {
+          "Action": {
             "required": true,
+            "default": "CheckDiskEnableAutoSnapshotValidation"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "DiskIds": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "copyImage": {
+      "name": "CopyImage",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CopyImage"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DestinationImageName": {
+            "required": true,
+            "type": "string"
+          },
+          "DestinationDescription": {
+            "required": true,
+            "type": "string"
+          },
+          "ImageId": {
+            "required": true,
+            "type": "string"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "DestinationRegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createDisk": {
+      "name": "CreateDisk",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateDisk"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "ZoneId": {
+            "required": true,
+            "type": "string"
+          },
+          "SnapshotId": {
             "type": "string"
           },
           "DiskName": {
             "type": "string"
           },
+          "Size": {
+            "type": "integer"
+          },
+          "DiskCategory": {
+            "type": "string"
+          },
           "Description": {
-            "type": "string"
-          },
-          "DeleteWithInstance": {
-            "type": "boolean"
-          }
-        }
-      }
-    },
-    "rebootInstance": {
-      "name": "RebootInstance",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "ForceStop": {
-            "type": "boolean"
-          }
-        }
-      }
-    },
-    "stopInstance": {
-      "name": "StopInstance",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "ForceStop": {
-            "type": "boolean"
-          }
-        }
-      }
-    },
-    "startInstance": {
-      "name": "StartInstance",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "deleteSnapshot": {
-      "name": "DeleteSnapshot",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "SnapshotId": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "createSnapshot": {
-      "name": "CreateSnapshot",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "DiskId": {
-            "required": true,
-            "type": "string"
-          },
-          "SnapshotName": {
             "type": "string"
           },
           "ClientToken": {
             "type": "string"
           },
-          "Description": {
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "deleteImage": {
-      "name": "DeleteImage",
+    "createImage": {
+      "name": "CreateImage",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateImage"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "SnapshotId": {
+            "required": true,
+            "type": "string"
+          },
+          "ImageName": {
+            "type": "string"
+          },
+          "ImageVersion": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createInstance": {
+      "name": "CreateInstance",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateInstance"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "RegionId": {
             "required": true,
             "type": "string"
@@ -217,323 +628,163 @@
           "ImageId": {
             "required": true,
             "type": "string"
-          }
-        }
-      }
-    },
-    "describeInstanceTypes": {
-      "name": "DescribeInstanceTypes",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {}
-      }
-    },
-    "describeZones": {
-      "name": "DescribeZones",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "RegionId": {
+          },
+          "InstanceType": {
             "required": true,
             "type": "string"
-          }
-        }
-      }
-    },
-    "describeRegions": {
-      "name": "DescribeRegions",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {}
-      }
-    },
-    "deleteSecurityGroup": {
-      "name": "DeleteSecurityGroup",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
+          },
           "SecurityGroupId": {
             "required": true,
             "type": "string"
           },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeClusters": {
-      "name": "DescribeClusters",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeInstancePhysicalAttribute": {
-      "name": "DescribeInstancePhysicalAttribute",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeIpRanges": {
-      "name": "DescribeIpRanges",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "RegionId": {
-            "required": true,
+          "InstanceName": {
             "type": "string"
           },
-          "ClusterId": {
-            "required": true,
+          "InternetChargeType": {
             "type": "string"
           },
-          "NicType": {
-            "required": true,
-            "type": "string"
-          },
-          "PageNumber": {
+          "InternetMaxBandwidthIn": {
             "type": "integer"
           },
-          "PageSize": {
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "unbindIpRange": {
-      "name": "UnbindIpRange",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "IpAddress": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "bindIpRange": {
-      "name": "BindIpRange",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "IpAddress": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeIntranetAttributeKb": {
-      "name": "DescribeIntranetAttributeKb",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifyIntranetBandwidthKb": {
-      "name": "ModifyIntranetBandwidthKb",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "IntranetMaxBandwidthOut": {
+          "InternetMaxBandwidthOut": {
             "type": "integer"
           },
-          "IntranetMaxBandwidthIn": {
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "describeAutoSnapshotPolicy": {
-      "name": "DescribeAutoSnapshotPolicy",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {}
-      }
-    },
-    "describeInstanceStatus": {
-      "name": "DescribeInstanceStatus",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "RegionId": {
-            "required": true,
+          "HostName": {
             "type": "string"
           },
-          "PageNumber": {
-            "type": "integer"
-          },
-          "PageSize": {
-            "type": "integer"
+          "Password": {
+            "type": "string"
           },
           "ZoneId": {
             "type": "string"
           },
           "ClusterId": {
             "type": "string"
-          }
-        }
-      }
-    },
-    "describeImages": {
-      "name": "DescribeImages",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "RegionId": {
-            "required": true,
+          },
+          "ClientToken": {
             "type": "string"
           },
-          "PageNumber": {
+          "VlanId": {
+            "type": "string"
+          },
+          "InnerIpAddress": {
+            "type": "string"
+          },
+          "SystemDisk.Category": {
+            "type": "string"
+          },
+          "SystemDisk.DiskName": {
+            "type": "string"
+          },
+          "SystemDisk.Description": {
+            "type": "string"
+          },
+          "DataDisk.1.Size": {
             "type": "integer"
           },
-          "PageSize": {
+          "DataDisk.1.Category": {
+            "type": "string"
+          },
+          "DataDisk.1.SnapshotId": {
+            "type": "string"
+          },
+          "DataDisk.1.DiskName": {
+            "type": "string"
+          },
+          "DataDisk.1.Description": {
+            "type": "string"
+          },
+          "DataDisk.1.Device": {
+            "type": "string"
+          },
+          "DataDisk.1.DeleteWithInstance": {
+            "type": "boolean"
+          },
+          "DataDisk.2.Size": {
             "type": "integer"
           },
-          "ImageOwnerAlias": {
+          "DataDisk.2.Category": {
             "type": "string"
           },
-          "ImageId": {
+          "DataDisk.2.SnapshotId": {
             "type": "string"
           },
-          "SnapshotId": {
+          "DataDisk.2.DiskName": {
             "type": "string"
           },
-          "Architecture": {
+          "DataDisk.2.Description": {
             "type": "string"
           },
-          "ImageName": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "leaveSecurityGroup": {
-      "name": "LeaveSecurityGroup",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "InstanceId": {
-            "required": true,
+          "DataDisk.2.Device": {
             "type": "string"
           },
-          "SecurityGroupId": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeEipMonitorData": {
-      "name": "DescribeEipMonitorData",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "StartTime": {
-            "required": true,
+          "DataDisk.2.DeleteWithInstance": {
+            "type": "boolean"
+          },
+          "DataDisk.3.Size": {
+            "type": "integer"
+          },
+          "DataDisk.3.Category": {
             "type": "string"
           },
-          "EndTime": {
-            "required": true,
+          "DataDisk.3.SnapshotId": {
             "type": "string"
           },
-          "AllocationId": {
-            "required": true,
+          "DataDisk.3.DiskName": {
+            "type": "string"
+          },
+          "DataDisk.3.Description": {
+            "type": "string"
+          },
+          "DataDisk.3.Device": {
+            "type": "string"
+          },
+          "DataDisk.3.DeleteWithInstance": {
+            "type": "boolean"
+          },
+          "DataDisk.4.Size": {
+            "type": "integer"
+          },
+          "DataDisk.4.Category": {
+            "type": "string"
+          },
+          "DataDisk.4.SnapshotId": {
+            "type": "string"
+          },
+          "DataDisk.4.DiskName": {
+            "type": "string"
+          },
+          "DataDisk.4.Description": {
+            "type": "string"
+          },
+          "DataDisk.4.Device": {
+            "type": "string"
+          },
+          "DataDisk.4.DeleteWithInstance": {
+            "type": "boolean"
+          },
+          "NodeControllerId": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "VSwitchId": {
+            "type": "string"
+          },
+          "PrivateIpAddress": {
+            "type": "string"
+          },
+          "IoOptimized": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "UseAdditionalService": {
+            "type": "boolean"
+          },
+          "InstanceChargeType": {
             "type": "string"
           },
           "Period": {
@@ -542,88 +793,47 @@
         }
       }
     },
-    "modifySecurityGroupAttribute": {
-      "name": "ModifySecurityGroupAttribute",
+    "createRouteEntry": {
+      "name": "CreateRouteEntry",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "SecurityGroupId": {
+          "Action": {
             "required": true,
-            "type": "string"
+            "default": "CreateRouteEntry"
           },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "SecurityGroupName": {
-            "type": "string"
-          },
-          "Description": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "joinSecurityGroup": {
-      "name": "JoinSecurityGroup",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "SecurityGroupId": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeInstanceAttribute": {
-      "name": "DescribeInstanceAttribute",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeSecurityGroups": {
-      "name": "DescribeSecurityGroups",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "PageNumber": {
+          "OwnerId": {
             "type": "integer"
           },
-          "PageSize": {
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
             "type": "integer"
           },
-          "VpcId": {
+          "RouteTableId": {
+            "required": true,
+            "type": "string"
+          },
+          "DestinationCidrBlock": {
+            "required": true,
+            "type": "string"
+          },
+          "NextHopId": {
+            "required": true,
+            "type": "string"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "NextHopType": {
+            "type": "string"
+          },
+          "OwnerAccount": {
             "type": "string"
           }
         }
@@ -632,12 +842,25 @@
     "createSecurityGroup": {
       "name": "CreateSecurityGroup",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateSecurityGroup"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "RegionId": {
             "required": true,
             "type": "string"
@@ -648,137 +871,54 @@
           "ClientToken": {
             "type": "string"
           },
-          "VpcId": {
-            "type": "string"
-          },
           "SecurityGroupName": {
             "type": "string"
-          }
-        }
-      }
-    },
-    "releasePublicIpAddress": {
-      "name": "ReleasePublicIpAddress",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "PublicIpAddress": {
-            "required": true,
-            "type": "string"
           },
-          "InstanceId": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "allocatePublicIpAddress": {
-      "name": "AllocatePublicIpAddress",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "IpAddress": {
-            "type": "string"
-          },
-          "VlanId": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifyInstanceVpcAttribute": {
-      "name": "ModifyInstanceVpcAttribute",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "VSwitchId": {
-            "required": true,
-            "type": "string"
-          },
-          "PrivateIpAddress": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifyVpcAttribute": {
-      "name": "ModifyVpcAttribute",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
           "VpcId": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createSnapshot": {
+      "name": "CreateSnapshot",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateSnapshot"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DiskId": {
             "required": true,
             "type": "string"
           },
-          "VpcName": {
+          "SnapshotName": {
             "type": "string"
           },
           "Description": {
             "type": "string"
-          }
-        }
-      }
-    },
-    "describeVpcs": {
-      "name": "DescribeVpcs",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "RegionId": {
-            "required": true,
+          },
+          "ClientToken": {
             "type": "string"
           },
-          "VpcId": {
-            "type": "string"
-          },
-          "PageNumber": {
-            "type": "integer"
-          },
-          "PageSize": {
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "deleteVpc": {
-      "name": "DeleteVpc",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "VpcId": {
-            "required": true,
+          "OwnerAccount": {
             "type": "string"
           }
         }
@@ -787,12 +927,25 @@
     "createVpc": {
       "name": "CreateVpc",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateVpc"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "RegionId": {
             "required": true,
             "type": "string"
@@ -808,45 +961,557 @@
           },
           "ClientToken": {
             "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "UserCidr": {
+            "type": "string"
           }
         }
       }
     },
-    "unassociateEipAddress": {
-      "name": "UnassociateEipAddress",
+    "createVSwitch": {
+      "name": "CreateVSwitch",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "AllocationId": {
+          "Action": {
+            "required": true,
+            "default": "CreateVSwitch"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ZoneId": {
             "required": true,
             "type": "string"
+          },
+          "CidrBlock": {
+            "required": true,
+            "type": "string"
+          },
+          "VpcId": {
+            "required": true,
+            "type": "string"
+          },
+          "VSwitchName": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteDisk": {
+      "name": "DeleteDisk",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteDisk"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DiskId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteImage": {
+      "name": "DeleteImage",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteImage"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "ImageId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteInstance": {
+      "name": "DeleteInstance",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteInstance"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
           },
           "InstanceId": {
             "required": true,
             "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
     },
-    "modifyEipAddressAttribute": {
-      "name": "ModifyEipAddressAttribute",
+    "deleteRouteEntry": {
+      "name": "DeleteRouteEntry",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "AllocationId": {
+          "Action": {
+            "required": true,
+            "default": "DeleteRouteEntry"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RouteTableId": {
             "required": true,
             "type": "string"
           },
-          "Bandwidth": {
+          "DestinationCidrBlock": {
             "required": true,
+            "type": "string"
+          },
+          "NextHopId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteSecurityGroup": {
+      "name": "DeleteSecurityGroup",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteSecurityGroup"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "SecurityGroupId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteSnapshot": {
+      "name": "DeleteSnapshot",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteSnapshot"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "SnapshotId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteVpc": {
+      "name": "DeleteVpc",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteVpc"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "VpcId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteVSwitch": {
+      "name": "DeleteVSwitch",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteVSwitch"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "VSwitchId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeAutoSnapshotPolicy": {
+      "name": "DescribeAutoSnapshotPolicy",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeAutoSnapshotPolicy"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeClusters": {
+      "name": "DescribeClusters",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeClusters"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDiskMonitorData": {
+      "name": "DescribeDiskMonitorData",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDiskMonitorData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DiskId": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "Period": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDisks": {
+      "name": "DescribeDisks",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDisks"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "ZoneId": {
+            "type": "string"
+          },
+          "DiskIds": {
+            "type": "string"
+          },
+          "InstanceId": {
+            "type": "string"
+          },
+          "DiskType": {
+            "type": "string"
+          },
+          "Category": {
+            "type": "string"
+          },
+          "Status": {
+            "type": "string"
+          },
+          "SnapshotId": {
+            "type": "string"
+          },
+          "Portable": {
+            "type": "boolean"
+          },
+          "DeleteWithInstance": {
+            "type": "boolean"
+          },
+          "DeleteAutoSnapshot": {
+            "type": "boolean"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "DiskName": {
+            "type": "string"
+          },
+          "EnableAutoSnapshot": {
+            "type": "boolean"
+          },
+          "DiskChargeType": {
+            "type": "string"
+          },
+          "LockReason": {
+            "type": "string"
+          },
+          "Filter.1.Key": {
+            "type": "string"
+          },
+          "Filter.2.Key": {
+            "type": "string"
+          },
+          "Filter.1.Value": {
+            "type": "string"
+          },
+          "Filter.2.Value": {
+            "type": "string"
+          },
+          "Tag.1.Key": {
+            "type": "string"
+          },
+          "Tag.2.Key": {
+            "type": "string"
+          },
+          "Tag.3.Key": {
+            "type": "string"
+          },
+          "Tag.4.Key": {
+            "type": "string"
+          },
+          "Tag.5.Key": {
+            "type": "string"
+          },
+          "Tag.1.Value": {
+            "type": "string"
+          },
+          "Tag.2.Value": {
+            "type": "string"
+          },
+          "Tag.3.Value": {
+            "type": "string"
+          },
+          "Tag.4.Value": {
+            "type": "string"
+          },
+          "Tag.5.Value": {
             "type": "string"
           }
         }
@@ -855,12 +1520,25 @@
     "describeEipAddresses": {
       "name": "DescribeEipAddresses",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeEipAddresses"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "RegionId": {
             "required": true,
             "type": "string"
@@ -879,68 +1557,113 @@
           },
           "PageSize": {
             "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "Filter.1.Key": {
+            "type": "string"
+          },
+          "Filter.2.Key": {
+            "type": "string"
+          },
+          "Filter.1.Value": {
+            "type": "string"
+          },
+          "Filter.2.Value": {
+            "type": "string"
+          },
+          "LockReason": {
+            "type": "string"
           }
         }
       }
     },
-    "associateEipAddress": {
-      "name": "AssociateEipAddress",
+    "describeEipMonitorData": {
+      "name": "DescribeEipMonitorData",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeEipMonitorData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "AllocationId": {
             "required": true,
             "type": "string"
           },
-          "InstanceId": {
+          "StartTime": {
             "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "Period": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "deleteRouteEntry": {
-      "name": "DeleteRouteEntry",
+    "describeImages": {
+      "name": "DescribeImages",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "RouteTableId": {
+          "Action": {
+            "required": true,
+            "default": "DescribeImages"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
             "required": true,
             "type": "string"
           },
-          "DestinationCidrBlock": {
-            "required": true,
+          "Status": {
             "type": "string"
           },
-          "NextHopId": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeRouteTables": {
-      "name": "DescribeRouteTables",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "VRouterId": {
-            "required": true,
+          "ImageId": {
             "type": "string"
           },
-          "RouteTableId": {
+          "ShowExpired": {
+            "type": "boolean"
+          },
+          "SnapshotId": {
+            "type": "string"
+          },
+          "ImageName": {
+            "type": "string"
+          },
+          "ImageOwnerAlias": {
             "type": "string"
           },
           "PageNumber": {
@@ -948,98 +1671,86 @@
           },
           "PageSize": {
             "type": "integer"
-          }
-        }
-      }
-    },
-    "createVSwitch": {
-      "name": "CreateVSwitch",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "ZoneId": {
-            "required": true,
+          },
+          "OwnerAccount": {
             "type": "string"
           },
-          "CidrBlock": {
-            "required": true,
+          "Filter.1.Key": {
             "type": "string"
           },
-          "VpcId": {
-            "required": true,
+          "Filter.2.Key": {
             "type": "string"
           },
-          "VSwitchName": {
+          "Filter.1.Value": {
             "type": "string"
           },
-          "Description": {
+          "Filter.2.Value": {
             "type": "string"
           },
-          "ClientToken": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifyVSwitchAttribute": {
-      "name": "ModifyVSwitchAttribute",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "VSwitchId": {
-            "required": true,
+          "Usage": {
             "type": "string"
           },
-          "VSwitchName": {
+          "Tag.1.Key": {
             "type": "string"
           },
-          "Description": {
+          "Tag.2.Key": {
+            "type": "string"
+          },
+          "Tag.3.Key": {
+            "type": "string"
+          },
+          "Tag.4.Key": {
+            "type": "string"
+          },
+          "Tag.5.Key": {
+            "type": "string"
+          },
+          "Tag.1.Value": {
+            "type": "string"
+          },
+          "Tag.2.Value": {
+            "type": "string"
+          },
+          "Tag.3.Value": {
+            "type": "string"
+          },
+          "Tag.4.Value": {
+            "type": "string"
+          },
+          "Tag.5.Value": {
             "type": "string"
           }
         }
       }
     },
-    "deleteVSwitch": {
-      "name": "DeleteVSwitch",
+    "describeImageSharePermission": {
+      "name": "DescribeImageSharePermission",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "VSwitchId": {
+          "Action": {
             "required": true,
+            "default": "DescribeImageSharePermission"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
             "type": "string"
-          }
-        }
-      }
-    },
-    "describeVSwitches": {
-      "name": "DescribeVSwitches",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "VpcId": {
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
             "required": true,
             "type": "string"
           },
-          "VSwitchId": {
-            "type": "string"
-          },
-          "ZoneId": {
+          "ImageId": {
+            "required": true,
             "type": "string"
           },
           "PageNumber": {
@@ -1047,320 +1758,115 @@
           },
           "PageSize": {
             "type": "integer"
-          }
-        }
-      }
-    },
-    "modifyVRouterAttribute": {
-      "name": "ModifyVRouterAttribute",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "VRouterId": {
-            "required": true,
-            "type": "string"
           },
-          "VRouterName": {
-            "type": "string"
-          },
-          "Description": {
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "describeVRouters": {
-      "name": "DescribeVRouters",
+    "describeInstanceAttribute": {
+      "name": "DescribeInstanceAttribute",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "RegionId": {
+          "Action": {
             "required": true,
-            "type": "string"
+            "default": "DescribeInstanceAttribute"
           },
-          "VRouterId": {
-            "type": "string"
-          },
-          "PageNumber": {
+          "OwnerId": {
             "type": "integer"
           },
-          "PageSize": {
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
             "type": "integer"
-          }
-        }
-      }
-    },
-    "createRouteEntry": {
-      "name": "CreateRouteEntry",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "RouteTableId": {
-            "required": true,
-            "type": "string"
           },
-          "DestinationCidrBlock": {
-            "required": true,
-            "type": "string"
-          },
-          "NextHopId": {
-            "required": true,
-            "type": "string"
-          },
-          "ClientToken": {
-            "type": "string"
-          },
-          "NextHopType": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "reInitDisk": {
-      "name": "ReInitDisk",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "DiskId": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "authorizeSecurityGroup": {
-      "name": "AuthorizeSecurityGroup",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "SecurityGroupId": {
-            "required": true,
-            "type": "string"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "IpProtocol": {
-            "required": true,
-            "type": "string"
-          },
-          "PortRange": {
-            "required": true,
-            "type": "string"
-          },
-          "SourceGroupId": {
-            "type": "string"
-          },
-          "SourceCidrIp": {
-            "type": "string"
-          },
-          "Policy": {
-            "type": "string"
-          },
-          "NicType": {
-            "type": "string"
-          },
-          "SourceGroupOwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeSecurityGroupAttribute": {
-      "name": "DescribeSecurityGroupAttribute",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "SecurityGroupId": {
-            "required": true,
-            "type": "string"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "NicType": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "revokeSecurityGroup": {
-      "name": "RevokeSecurityGroup",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "SecurityGroupId": {
-            "required": true,
-            "type": "string"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "IpProtocol": {
-            "required": true,
-            "type": "string"
-          },
-          "PortRange": {
-            "required": true,
-            "type": "string"
-          },
-          "SourceGroupId": {
-            "type": "string"
-          },
-          "SourceCidrIp": {
-            "type": "string"
-          },
-          "Policy": {
-            "type": "string"
-          },
-          "NicType": {
-            "type": "string"
-          },
-          "SourceGroupOwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifyInstanceAttribute": {
-      "name": "ModifyInstanceAttribute",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
           "InstanceId": {
             "required": true,
             "type": "string"
           },
-          "Password": {
-            "type": "string"
-          },
-          "HostName": {
-            "type": "string"
-          },
-          "InstanceName": {
-            "type": "string"
-          },
-          "Description": {
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "modifyInstanceSpec": {
-      "name": "ModifyInstanceSpec",
+    "describeInstanceMonitorData": {
+      "name": "DescribeInstanceMonitorData",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeInstanceMonitorData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "InstanceId": {
             "required": true,
             "type": "string"
           },
-          "InstanceType": {
+          "StartTime": {
+            "required": true,
             "type": "string"
           },
-          "InternetMaxBandwidthOut": {
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "Period": {
             "type": "integer"
           },
-          "InternetMaxBandwidthIn": {
-            "type": "integer"
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
     },
-    "modifyInstanceNetworkSpec": {
-      "name": "ModifyInstanceNetworkSpec",
+    "describeInstancePhysicalAttribute": {
+      "name": "DescribeInstancePhysicalAttribute",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeInstancePhysicalAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "InstanceId": {
             "required": true,
             "type": "string"
           },
-          "InternetMaxBandwidthOut": {
-            "type": "integer"
-          },
-          "InternetMaxBandwidthIn": {
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "allocateEipAddress": {
-      "name": "AllocateEipAddress",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "Bandwidth": {
-            "type": "string"
-          },
-          "InternetChargeType": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "releaseEipAddress": {
-      "name": "ReleaseEipAddress",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "AllocationId": {
-            "required": true,
+          "OwnerAccount": {
             "type": "string"
           }
         }
@@ -1369,12 +1875,25 @@
     "describeInstances": {
       "name": "DescribeInstances",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeInstances"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "RegionId": {
             "required": true,
             "type": "string"
@@ -1394,111 +1913,512 @@
           "SecurityGroupId": {
             "type": "string"
           },
+          "InstanceIds": {
+            "type": "string"
+          },
           "PageNumber": {
             "type": "integer"
           },
           "PageSize": {
             "type": "integer"
           },
-          "InstanceIds": {
+          "InnerIpAddresses": {
+            "type": "string"
+          },
+          "PrivateIpAddresses": {
+            "type": "string"
+          },
+          "PublicIpAddresses": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "InstanceChargeType": {
+            "type": "string"
+          },
+          "InternetChargeType": {
+            "type": "string"
+          },
+          "InstanceName": {
+            "type": "string"
+          },
+          "ImageId": {
+            "type": "string"
+          },
+          "Status": {
+            "type": "string"
+          },
+          "LockReason": {
+            "type": "string"
+          },
+          "Filter.1.Key": {
+            "type": "string"
+          },
+          "Filter.2.Key": {
+            "type": "string"
+          },
+          "Filter.3.Key": {
+            "type": "string"
+          },
+          "Filter.4.Key": {
+            "type": "string"
+          },
+          "Filter.1.Value": {
+            "type": "string"
+          },
+          "Filter.2.Value": {
+            "type": "string"
+          },
+          "Filter.3.Value": {
+            "type": "string"
+          },
+          "Filter.4.Value": {
+            "type": "string"
+          },
+          "DeviceAvailable": {
+            "type": "boolean"
+          },
+          "IoOptimized": {
+            "type": "boolean"
+          },
+          "Tag.1.Key": {
+            "type": "string"
+          },
+          "Tag.2.Key": {
+            "type": "string"
+          },
+          "Tag.3.Key": {
+            "type": "string"
+          },
+          "Tag.4.Key": {
+            "type": "string"
+          },
+          "Tag.5.Key": {
+            "type": "string"
+          },
+          "Tag.1.Value": {
+            "type": "string"
+          },
+          "Tag.2.Value": {
+            "type": "string"
+          },
+          "Tag.3.Value": {
+            "type": "string"
+          },
+          "Tag.4.Value": {
+            "type": "string"
+          },
+          "Tag.5.Value": {
             "type": "string"
           }
         }
       }
     },
-    "describeInstanceMonitorData": {
-      "name": "DescribeInstanceMonitorData",
+    "describeInstanceStatus": {
+      "name": "DescribeInstanceStatus",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "InstanceId": {
+          "Action": {
             "required": true,
-            "type": "string"
+            "default": "DescribeInstanceStatus"
           },
-          "StartTime": {
-            "required": true,
-            "type": "string"
-          },
-          "EndTime": {
-            "required": true,
-            "type": "string"
-          },
-          "Period": {
+          "OwnerId": {
             "type": "integer"
-          }
-        }
-      }
-    },
-    "createDisk": {
-      "name": "CreateDisk",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "RegionId": {
             "required": true,
             "type": "string"
           },
           "ZoneId": {
-            "required": true,
             "type": "string"
           },
-          "DiskName": {
+          "ClusterId": {
             "type": "string"
           },
-          "Description": {
-            "type": "string"
-          },
-          "Size": {
+          "PageNumber": {
             "type": "integer"
           },
-          "SnapshotId": {
-            "type": "string"
+          "PageSize": {
+            "type": "integer"
           },
-          "ClientToken": {
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "detachDisk": {
-      "name": "DetachDisk",
+    "describeInstanceTypes": {
+      "name": "DescribeInstanceTypes",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeInstanceTypes"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeInstanceVncPasswd": {
+      "name": "DescribeInstanceVncPasswd",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeInstanceVncPasswd"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
           "InstanceId": {
             "required": true,
             "type": "string"
           },
-          "DiskId": {
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeInstanceVncUrl": {
+      "name": "DescribeInstanceVncUrl",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeInstanceVncUrl"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeIntranetAttributeKb": {
+      "name": "DescribeIntranetAttributeKb",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeIntranetAttributeKb"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeIpRanges": {
+      "name": "DescribeIpRanges",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeIpRanges"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "ClusterId": {
+            "required": true,
+            "type": "string"
+          },
+          "NicType": {
+            "required": true,
+            "type": "string"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLimitation": {
+      "name": "DescribeLimitation",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLimitation"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "Limitation": {
             "required": true,
             "type": "string"
           }
         }
       }
     },
-    "deleteDisk": {
-      "name": "DeleteDisk",
+    "describeRegions": {
+      "name": "DescribeRegions",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "DiskId": {
+          "Action": {
             "required": true,
+            "default": "DescribeRegions"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeRouteTables": {
+      "name": "DescribeRouteTables",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeRouteTables"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "VRouterId": {
+            "required": true,
+            "type": "string"
+          },
+          "RouteTableId": {
+            "type": "string"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeSecurityGroupAttribute": {
+      "name": "DescribeSecurityGroupAttribute",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeSecurityGroupAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "SecurityGroupId": {
+            "required": true,
+            "type": "string"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "NicType": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "Direction": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeSecurityGroups": {
+      "name": "DescribeSecurityGroups",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeSecurityGroups"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "VpcId": {
+            "type": "string"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "SecurityGroupIds": {
             "type": "string"
           }
         }
@@ -1507,20 +2427,33 @@
     "describeSnapshots": {
       "name": "DescribeSnapshots",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "RegionId": {
+          "Action": {
             "required": true,
+            "default": "DescribeSnapshots"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "InstanceId": {
             "type": "string"
           },
           "DiskId": {
             "type": "string"
           },
-          "InstanceId": {
+          "RegionId": {
+            "required": true,
             "type": "string"
           },
           "SnapshotIds": {
@@ -1531,19 +2464,95 @@
           },
           "PageSize": {
             "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "SnapshotName": {
+            "type": "string"
+          },
+          "Status": {
+            "type": "string"
+          },
+          "SnapshotType": {
+            "type": "string"
+          },
+          "Filter.1.Key": {
+            "type": "string"
+          },
+          "Filter.2.Key": {
+            "type": "string"
+          },
+          "Filter.1.Value": {
+            "type": "string"
+          },
+          "Filter.2.Value": {
+            "type": "string"
+          },
+          "Usage": {
+            "type": "string"
+          },
+          "SourceDiskType": {
+            "type": "string"
+          },
+          "Tag.1.Key": {
+            "type": "string"
+          },
+          "Tag.2.Key": {
+            "type": "string"
+          },
+          "Tag.3.Key": {
+            "type": "string"
+          },
+          "Tag.4.Key": {
+            "type": "string"
+          },
+          "Tag.5.Key": {
+            "type": "string"
+          },
+          "Tag.1.Value": {
+            "type": "string"
+          },
+          "Tag.2.Value": {
+            "type": "string"
+          },
+          "Tag.3.Value": {
+            "type": "string"
+          },
+          "Tag.4.Value": {
+            "type": "string"
+          },
+          "Tag.5.Value": {
+            "type": "string"
           }
         }
       }
     },
-    "describeDisks": {
-      "name": "DescribeDisks",
+    "describeVpcs": {
+      "name": "DescribeVpcs",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeVpcs"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "VpcId": {
+            "type": "string"
+          },
           "RegionId": {
             "required": true,
             "type": "string"
@@ -1554,123 +2563,394 @@
           "PageSize": {
             "type": "integer"
           },
-          "ZoneId": {
+          "OwnerAccount": {
             "type": "string"
-          },
-          "SnapshotId": {
-            "type": "string"
-          },
-          "InstanceId": {
-            "type": "string"
-          },
-          "DiskIds": {
-            "type": "string"
-          },
-          "Category": {
-            "type": "string"
-          },
-          "Status": {
-            "type": "string"
-          },
-          "Portable": {
-            "type": "boolean"
-          },
-          "DeleteWithInstance": {
-            "type": "boolean"
-          },
-          "DiskType": {
-            "type": "string"
-          },
-          "DeleteAutoSnapshot": {
-            "type": "boolean"
           }
         }
       }
     },
-    "createImage": {
-      "name": "CreateImage",
+    "describeVRouters": {
+      "name": "DescribeVRouters",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeVRouters"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "VRouterId": {
+            "type": "string"
+          },
           "RegionId": {
             "required": true,
             "type": "string"
           },
-          "SnapshotId": {
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeVSwitches": {
+      "name": "DescribeVSwitches",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeVSwitches"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "VpcId": {
             "required": true,
             "type": "string"
           },
-          "ImageVersion": {
+          "VSwitchId": {
+            "type": "string"
+          },
+          "ZoneId": {
+            "type": "string"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeZones": {
+      "name": "DescribeZones",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeZones"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "detachDisk": {
+      "name": "DetachDisk",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DetachDisk"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "DiskId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "joinSecurityGroup": {
+      "name": "JoinSecurityGroup",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "JoinSecurityGroup"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "SecurityGroupId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "leaveSecurityGroup": {
+      "name": "LeaveSecurityGroup",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "LeaveSecurityGroup"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "SecurityGroupId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyAutoSnapshotPolicy": {
+      "name": "ModifyAutoSnapshotPolicy",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyAutoSnapshotPolicy"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "SystemDiskPolicyEnabled": {
+            "type": "boolean"
+          },
+          "SystemDiskPolicyTimePeriod": {
+            "type": "integer"
+          },
+          "SystemDiskPolicyRetentionDays": {
+            "type": "integer"
+          },
+          "SystemDiskPolicyRetentionLastWeek": {
+            "type": "boolean"
+          },
+          "DataDiskPolicyEnabled": {
+            "type": "boolean"
+          },
+          "DataDiskPolicyTimePeriod": {
+            "type": "integer"
+          },
+          "DataDiskPolicyRetentionDays": {
+            "type": "integer"
+          },
+          "DataDiskPolicyRetentionLastWeek": {
+            "type": "boolean"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyDiskAttribute": {
+      "name": "ModifyDiskAttribute",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyDiskAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DiskId": {
+            "required": true,
+            "type": "string"
+          },
+          "DiskName": {
             "type": "string"
           },
           "Description": {
             "type": "string"
           },
-          "ClientToken": {
-            "type": "string"
+          "DeleteWithInstance": {
+            "type": "boolean"
           },
-          "ImageName": {
+          "DeleteAutoSnapshot": {
+            "type": "boolean"
+          },
+          "EnableAutoSnapshot": {
+            "type": "boolean"
+          },
+          "OwnerAccount": {
             "type": "string"
           }
         }
       }
     },
-    "deleteInstance": {
-      "name": "DeleteInstance",
+    "modifyEipAddressAttribute": {
+      "name": "ModifyEipAddressAttribute",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
-          "InstanceId": {
+          "Action": {
             "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeDiskMonitorData": {
-      "name": "DescribeDiskMonitorData",
-      "http": {
-        "method": "GET",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "DiskId": {
-            "required": true,
-            "type": "string"
+            "default": "ModifyEipAddressAttribute"
           },
-          "StartTime": {
-            "required": true,
-            "type": "string"
-          },
-          "EndTime": {
-            "required": true,
-            "type": "string"
-          },
-          "Period": {
+          "OwnerId": {
             "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "AllocationId": {
+            "required": true,
+            "type": "string"
+          },
+          "Bandwidth": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
     },
-    "createInstance": {
-      "name": "CreateInstance",
+    "modifyImageAttribute": {
+      "name": "ModifyImageAttribute",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyImageAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "RegionId": {
             "required": true,
             "type": "string"
@@ -1679,165 +2959,732 @@
             "required": true,
             "type": "string"
           },
-          "InstanceType": {
+          "ImageName": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyImageShareGroupPermission": {
+      "name": "ModifyImageShareGroupPermission",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyImageShareGroupPermission"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
             "required": true,
             "type": "string"
           },
-          "SecurityGroupId": {
+          "ImageId": {
+            "required": true,
+            "type": "string"
+          },
+          "AddGroup.1": {
+            "type": "string"
+          },
+          "RemoveGroup.1": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyImageSharePermission": {
+      "name": "ModifyImageSharePermission",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyImageSharePermission"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "ImageId": {
+            "required": true,
+            "type": "string"
+          },
+          "AddAccount.1": {
+            "type": "string"
+          },
+          "AddAccount.2": {
+            "type": "string"
+          },
+          "AddAccount.3": {
+            "type": "string"
+          },
+          "AddAccount.4": {
+            "type": "string"
+          },
+          "AddAccount.5": {
+            "type": "string"
+          },
+          "AddAccount.6": {
+            "type": "string"
+          },
+          "AddAccount.7": {
+            "type": "string"
+          },
+          "AddAccount.8": {
+            "type": "string"
+          },
+          "AddAccount.9": {
+            "type": "string"
+          },
+          "AddAccount.10": {
+            "type": "string"
+          },
+          "RemoveAccount.1": {
+            "type": "string"
+          },
+          "RemoveAccount.2": {
+            "type": "string"
+          },
+          "RemoveAccount.3": {
+            "type": "string"
+          },
+          "RemoveAccount.4": {
+            "type": "string"
+          },
+          "RemoveAccount.5": {
+            "type": "string"
+          },
+          "RemoveAccount.6": {
+            "type": "string"
+          },
+          "RemoveAccount.7": {
+            "type": "string"
+          },
+          "RemoveAccount.8": {
+            "type": "string"
+          },
+          "RemoveAccount.9": {
+            "type": "string"
+          },
+          "RemoveAccount.10": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyInstanceAttribute": {
+      "name": "ModifyInstanceAttribute",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyInstanceAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "Password": {
+            "type": "string"
+          },
+          "HostName": {
+            "type": "string"
+          },
+          "InstanceName": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyInstanceNetworkSpec": {
+      "name": "ModifyInstanceNetworkSpec",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyInstanceNetworkSpec"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "InstanceId": {
             "required": true,
             "type": "string"
           },
           "InternetMaxBandwidthOut": {
             "type": "integer"
           },
-          "HostName": {
-            "type": "string"
-          },
-          "Password": {
-            "type": "string"
-          },
-          "ZoneId": {
-            "type": "string"
-          },
-          "ClientToken": {
-            "type": "string"
-          },
-          "InnerIpAddress": {
-            "type": "string"
-          },
-          "InstanceName": {
-            "type": "string"
-          },
-          "VlanId": {
-            "type": "string"
-          },
-          "InternetChargeType": {
-            "type": "string"
-          },
-          "SystemDisk.Category": {
-            "type": "string"
-          },
-          "DataDisk.1.Category": {
-            "type": "string"
-          },
-          "DataDisk.1.Size": {
-            "type": "integer"
-          },
-          "DataDisk.1.SnapshotId": {
-            "type": "string"
-          },
-          "DataDisk.2.Category": {
-            "type": "string"
-          },
-          "DataDisk.2.Size": {
-            "type": "integer"
-          },
-          "DataDisk.2.SnapshotId": {
-            "type": "string"
-          },
-          "DataDisk.3.Category": {
-            "type": "string"
-          },
-          "DataDisk.3.Size": {
-            "type": "integer"
-          },
-          "DataDisk.3.SnapshotId": {
-            "type": "string"
-          },
-          "DataDisk.4.Category": {
-            "type": "string"
-          },
-          "DataDisk.4.Size": {
-            "type": "integer"
-          },
-          "DataDisk.4.SnapshotId": {
-            "type": "string"
-          },
-          "NodeControllerId": {
-            "type": "string"
-          },
-          "SystemDisk.DiskName": {
-            "type": "string"
-          },
-          "SystemDisk.Description": {
-            "type": "string"
-          },
-          "DataDisk.1.DiskName": {
-            "type": "string"
-          },
-          "DataDisk.1.Description": {
-            "type": "string"
-          },
-          "DataDisk.1.Device": {
-            "type": "string"
-          },
-          "DataDisk.2.DiskName": {
-            "type": "string"
-          },
-          "DataDisk.2.Description": {
-            "type": "string"
-          },
-          "DataDisk.2.Device": {
-            "type": "string"
-          },
-          "DataDisk.3.DiskName": {
-            "type": "string"
-          },
-          "DataDisk.3.Description": {
-            "type": "string"
-          },
-          "DataDisk.3.Device": {
-            "type": "string"
-          },
-          "DataDisk.4.DiskName": {
-            "type": "string"
-          },
-          "DataDisk.4.Description": {
-            "type": "string"
-          },
-          "DataDisk.4.Device": {
-            "type": "string"
-          },
-          "Description": {
-            "type": "string"
-          },
-          "ClusterId": {
-            "type": "string"
-          },
-          "VSwitchId": {
-            "type": "string"
-          },
-          "PrivateIpAddress": {
-            "type": "string"
-          },
           "InternetMaxBandwidthIn": {
             "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
     },
-    "attachDisk": {
-      "name": "AttachDisk",
+    "modifyInstanceSpec": {
+      "name": "ModifyInstanceSpec",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyInstanceSpec"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "InstanceId": {
             "required": true,
             "type": "string"
+          },
+          "InstanceType": {
+            "type": "string"
+          },
+          "InternetMaxBandwidthOut": {
+            "type": "integer"
+          },
+          "InternetMaxBandwidthIn": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "Temporary.StartTime": {
+            "type": "string"
+          },
+          "Temporary.EndTime": {
+            "type": "string"
+          },
+          "Temporary.InternetMaxBandwidthOut": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "modifyInstanceVncPasswd": {
+      "name": "ModifyInstanceVncPasswd",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyInstanceVncPasswd"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "VncPassword": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyInstanceVpcAttribute": {
+      "name": "ModifyInstanceVpcAttribute",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyInstanceVpcAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "VSwitchId": {
+            "required": true,
+            "type": "string"
+          },
+          "PrivateIpAddress": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyIntranetBandwidthKb": {
+      "name": "ModifyIntranetBandwidthKb",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyIntranetBandwidthKb"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "IntranetMaxBandwidthIn": {
+            "type": "integer"
+          },
+          "IntranetMaxBandwidthOut": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifySecurityGroupAttribute": {
+      "name": "ModifySecurityGroupAttribute",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifySecurityGroupAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "SecurityGroupId": {
+            "required": true,
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "SecurityGroupName": {
+            "type": "string"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifySnapshotAttribute": {
+      "name": "ModifySnapshotAttribute",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifySnapshotAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "SnapshotId": {
+            "required": true,
+            "type": "string"
+          },
+          "SnapshotName": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyVpcAttribute": {
+      "name": "ModifyVpcAttribute",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyVpcAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "VpcId": {
+            "required": true,
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "VpcName": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "UserCidr": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyVRouterAttribute": {
+      "name": "ModifyVRouterAttribute",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyVRouterAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "VRouterId": {
+            "required": true,
+            "type": "string"
+          },
+          "VRouterName": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyVSwitchAttribute": {
+      "name": "ModifyVSwitchAttribute",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyVSwitchAttribute"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "VSwitchId": {
+            "required": true,
+            "type": "string"
+          },
+          "VSwitchName": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "rebootInstance": {
+      "name": "RebootInstance",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "RebootInstance"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "ForceStop": {
+            "type": "boolean"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "reInitDisk": {
+      "name": "ReInitDisk",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ReInitDisk"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
           },
           "DiskId": {
             "required": true,
             "type": "string"
           },
-          "Device": {
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "releaseEipAddress": {
+      "name": "ReleaseEipAddress",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ReleaseEipAddress"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
             "type": "string"
           },
-          "DeleteWithInstance": {
-            "type": "boolean"
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "AllocationId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "releasePublicIpAddress": {
+      "name": "ReleasePublicIpAddress",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ReleasePublicIpAddress"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "InstanceId": {
+            "type": "string"
+          },
+          "PublicIpAddress": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
           }
         }
       }
@@ -1845,12 +3692,25 @@
     "replaceSystemDisk": {
       "name": "ReplaceSystemDisk",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri": "/"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Action": {
+            "required": true,
+            "default": "ReplaceSystemDisk"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
           "InstanceId": {
             "required": true,
             "type": "string"
@@ -1860,6 +3720,718 @@
             "type": "string"
           },
           "ClientToken": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "UseAdditionalService": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "resetDisk": {
+      "name": "ResetDisk",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ResetDisk"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DiskId": {
+            "required": true,
+            "type": "string"
+          },
+          "SnapshotId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "resizeDisk": {
+      "name": "ResizeDisk",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ResizeDisk"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "DiskId": {
+            "required": true,
+            "type": "string"
+          },
+          "NewSize": {
+            "required": true,
+            "type": "integer"
+          },
+          "ClientToken": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "revokeSecurityGroup": {
+      "name": "RevokeSecurityGroup",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "RevokeSecurityGroup"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "SecurityGroupId": {
+            "required": true,
+            "type": "string"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "IpProtocol": {
+            "required": true,
+            "type": "string"
+          },
+          "PortRange": {
+            "required": true,
+            "type": "string"
+          },
+          "SourceGroupId": {
+            "type": "string"
+          },
+          "SourceGroupOwnerAccount": {
+            "type": "string"
+          },
+          "SourceCidrIp": {
+            "type": "string"
+          },
+          "Policy": {
+            "type": "string"
+          },
+          "NicType": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "revokeSecurityGroupEgress": {
+      "name": "RevokeSecurityGroupEgress",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "RevokeSecurityGroupEgress"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "SecurityGroupId": {
+            "required": true,
+            "type": "string"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "IpProtocol": {
+            "required": true,
+            "type": "string"
+          },
+          "PortRange": {
+            "required": true,
+            "type": "string"
+          },
+          "DestGroupId": {
+            "type": "string"
+          },
+          "DestGroupOwnerAccount": {
+            "type": "string"
+          },
+          "DestCidrIp": {
+            "type": "string"
+          },
+          "Policy": {
+            "type": "string"
+          },
+          "NicType": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "startInstance": {
+      "name": "StartInstance",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "StartInstance"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "stopInstance": {
+      "name": "StopInstance",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "StopInstance"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "ForceStop": {
+            "type": "boolean"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "unassociateEipAddress": {
+      "name": "UnassociateEipAddress",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "UnassociateEipAddress"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "AllocationId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "unbindIpRange": {
+      "name": "UnbindIpRange",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "UnbindIpRange"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "IpAddress": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "addTags": {
+      "name": "AddTags",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AddTags"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "ResourceType": {
+            "required": true,
+            "type": "string"
+          },
+          "ResourceId": {
+            "required": true,
+            "type": "string"
+          },
+          "Tag.1.Key": {
+            "required": true,
+            "type": "string"
+          },
+          "Tag.2.Key": {
+            "type": "string"
+          },
+          "Tag.3.Key": {
+            "type": "string"
+          },
+          "Tag.4.Key": {
+            "type": "string"
+          },
+          "Tag.5.Key": {
+            "type": "string"
+          },
+          "Tag.1.Value": {
+            "required": true,
+            "type": "string"
+          },
+          "Tag.2.Value": {
+            "type": "string"
+          },
+          "Tag.3.Value": {
+            "type": "string"
+          },
+          "Tag.4.Value": {
+            "type": "string"
+          },
+          "Tag.5.Value": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeResourceByTags": {
+      "name": "DescribeResourceByTags",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeResourceByTags"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "ResourceType": {
+            "type": "string"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "Tag.1.Key": {
+            "type": "string"
+          },
+          "Tag.2.Key": {
+            "type": "string"
+          },
+          "Tag.3.Key": {
+            "type": "string"
+          },
+          "Tag.4.Key": {
+            "type": "string"
+          },
+          "Tag.5.Key": {
+            "type": "string"
+          },
+          "Tag.1.Value": {
+            "type": "string"
+          },
+          "Tag.2.Value": {
+            "type": "string"
+          },
+          "Tag.3.Value": {
+            "type": "string"
+          },
+          "Tag.4.Value": {
+            "type": "string"
+          },
+          "Tag.5.Value": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeTags": {
+      "name": "DescribeTags",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeTags"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "ResourceType": {
+            "type": "string"
+          },
+          "ResourceId": {
+            "type": "string"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "Tag.1.Key": {
+            "type": "string"
+          },
+          "Tag.2.Key": {
+            "type": "string"
+          },
+          "Tag.3.Key": {
+            "type": "string"
+          },
+          "Tag.4.Key": {
+            "type": "string"
+          },
+          "Tag.5.Key": {
+            "type": "string"
+          },
+          "Tag.1.Value": {
+            "type": "string"
+          },
+          "Tag.2.Value": {
+            "type": "string"
+          },
+          "Tag.3.Value": {
+            "type": "string"
+          },
+          "Tag.4.Value": {
+            "type": "string"
+          },
+          "Tag.5.Value": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "removeTags": {
+      "name": "RemoveTags",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "RemoveTags"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "ResourceType": {
+            "type": "string"
+          },
+          "ResourceId": {
+            "type": "string"
+          },
+          "Tag.1.Key": {
+            "type": "string"
+          },
+          "Tag.2.Key": {
+            "type": "string"
+          },
+          "Tag.3.Key": {
+            "type": "string"
+          },
+          "Tag.4.Key": {
+            "type": "string"
+          },
+          "Tag.5.Key": {
+            "type": "string"
+          },
+          "Tag.1.Value": {
+            "type": "string"
+          },
+          "Tag.2.Value": {
+            "type": "string"
+          },
+          "Tag.3.Value": {
+            "type": "string"
+          },
+          "Tag.4.Value": {
+            "type": "string"
+          },
+          "Tag.5.Value": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeTagKeys": {
+      "name": "DescribeTagKeys",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeTagKeys"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "ResourceType": {
+            "type": "string"
+          },
+          "ResourceId": {
+            "type": "string"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "renewInstance": {
+      "name": "RenewInstance",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "RenewInstance"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "InstanceType": {
+            "type": "string"
+          },
+          "InternetMaxBandwidthOut": {
+            "type": "integer"
+          },
+          "InternetChargeType": {
+            "type": "string"
+          },
+          "Period": {
+            "required": true,
+            "type": "integer"
+          },
+          "RebootTime": {
+            "type": "string"
+          },
+          "CovertDiskPortable.1.DiskId": {
+            "type": "string"
+          },
+          "CovertDiskPortable.2.DiskId": {
+            "type": "string"
+          },
+          "CovertDiskPortable.3.DiskId": {
+            "type": "string"
+          },
+          "CovertDiskPortable.4.DiskId": {
             "type": "string"
           }
         }
