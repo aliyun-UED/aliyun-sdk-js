@@ -1340,8 +1340,13 @@ ALY.ParamValidator = ALY.util.inherit({
       var value = params[paramName];
       var notSet = value === undefined || value === null;
       if (rules[paramName].required && notSet) {
-        this.fail('MissingRequiredParameter',
-          'Missing required key \'' + paramName + '\' in ' + context);
+        if (rules[paramName].default) {
+          params[paramName] = rules[paramName].default;
+        }
+        else {
+          this.fail('MissingRequiredParameter',
+              'Missing required key \'' + paramName + '\' in ' + context);
+        }
       }
       //if (rules[paramName].location == 'uri' && value) {
       //  if (typeof value == 'string' && value.indexOf('/') == 0) {
@@ -1363,7 +1368,7 @@ ALY.ParamValidator = ALY.util.inherit({
         this.validateMember(paramRules, paramValue, memberContext);
       } else {
         this.fail('UnexpectedParameter',
-          'Unexpected key \'' + paramName + '\' found in ' + context);
+            'Unexpected key \'' + paramName + '\' found in ' + context);
       }
     }
 
@@ -1400,7 +1405,7 @@ ALY.ParamValidator = ALY.util.inherit({
     for (var param in params) {
       if (!params.hasOwnProperty(param)) continue;
       this.validateMember(rules, params[param],
-                          context + '[\'' +  param + '\']');
+          context + '[\'' +  param + '\']');
     }
   },
 
@@ -1421,11 +1426,11 @@ ALY.ParamValidator = ALY.util.inherit({
         return this.validateType(context, value, ['boolean']);
       case 'timestamp':
         return this.validateType(context, value, [Date,
-          /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/, 'number'],
-          'Date object, ISO-8601 string, or a UNIX timestamp');
+              /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/, 'number'],
+            'Date object, ISO-8601 string, or a UNIX timestamp');
       default:
         return this.fail('UnkownType', 'Unhandled type ' +
-                         rules.type + ' for ' + context);
+            rules.type + ' for ' + context);
     }
   },
 
@@ -1460,7 +1465,7 @@ ALY.ParamValidator = ALY.util.inherit({
 
     var vowel = acceptedType.match(/^[aeiou]/i) ? 'n' : '';
     this.fail('InvalidParameterType', 'Expected ' + context + ' to be a' +
-              vowel + ' ' + acceptedType);
+        vowel + ' ' + acceptedType);
   },
 
   validateNumber: function validateNumber(context, value) {
@@ -1491,7 +1496,7 @@ ALY.ParamValidator = ALY.util.inherit({
     }
 
     this.fail('InvalidParameterType', 'Expected ' + context + ' to be a ' +
-      'string, Buffer, Stream, Blob, or typed array object');
+        'string, Buffer, Stream, Blob, or typed array object');
   }
 });
 
@@ -2715,9 +2720,6 @@ ALY.ServiceInterface.Pop = {
 
     var body = req.params;
 
-    console.log('++++++++++++++');
-    console.log(req.service.api.apiVersion);
-    console.log('++++++++++++++');
     body.Format = "JSON";
     body.Version = req.service.api.apiVersion;
     body.AccessKeyId = req.service.config.accessKeyId;
@@ -16669,7 +16671,7 @@ module.exports={
   "apiVersion": "2013-10-15",
   "checksumFormat": "md5",
   "endpointPrefix": "oss",
-  "serviceAbbreviation": "Aliyun OSS",
+  "serviceAbbreviation": "OSS",
   "serviceFullName": "Aliyun Open Storage Service",
   "signatureVersion": "oss",
   "timestampFormat": "rfc822",
