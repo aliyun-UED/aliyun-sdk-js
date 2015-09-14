@@ -17,8 +17,9 @@ cdn.refreshObjectCaches({
 
 cdn.describeCdnMonitorData({
   DomainName: "cdn.test.com",
-  StartTime: new Date("2014-12-10T00:00:00Z"),
-  EndTime: new Date("2014-12-10T00:10:00Z")
+  // 注意, 之前是传入 Date 对象, 现在改为一个 ISO 时间字符串, 而且时间精确到秒而不是毫秒
+  StartTime: "2014-12-10T00:00:00Z",
+  EndTime: "2014-13-10T00:10:00Z"
 }, function(err, res) {
   console.log(err, res);
 });
