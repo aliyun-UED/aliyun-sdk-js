@@ -1,5 +1,7 @@
 # 阿里云 SDK for JavaScript
 
+**原来阿里云 SDK 还可以这样用 https://git.oschina.net/chylvina/open5**
+
 ## 技术支持
 请加旺旺群：1489391962
 
