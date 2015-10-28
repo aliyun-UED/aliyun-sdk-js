@@ -1076,7 +1076,7 @@ ALY.HttpRequest = inherit({
   setUserAgent: function setUserAgent() {
     //var prefix = ALY.util.isBrowser() ? 'X-Aly-' : '';
     //this.headers[prefix + 'User-Agent'] = ALY.util.userAgent();
-    this.headers['User-Agent'] = ALY.util.userAgent();
+    this.headers['x-sdk-client'] = this.headers['User-Agent'] = ALY.util.userAgent();
   },
 
   pathname: function pathname() {
@@ -1088,7 +1088,7 @@ ALY.HttpRequest = inherit({
   },
 
   debug: function () {
-    if(process.env.DEBUG) {
+    if(process.env.DEBUG == 'aliyun') {
       console.log('-------- HttpRequest Start: --------');
       console.log('method:', this.method);
       console.log('path:', this.path);
@@ -2080,7 +2080,7 @@ ALY.SequentialExecutor = ALY.util.inherit({
     if (domain && this.domain instanceof domain.Domain)
       this.domain.enter();
 
-    if(process.env.DEBUG) {
+    if(process.env.DEBUG == 'aliyun') {
       console.log('emit', eventName);
     }
     var listeners = this.listeners(eventName);
@@ -2727,6 +2727,8 @@ ALY.ServiceInterface.Pop = {
     body.SignatureMethod = "HMAC-SHA1";
     body.SignatureNonce = Math.round(Math.random() * 1000000);
     body.Timestamp = ALY.util.date.iso8601(ALY.util.date.getDate());
+
+    req.httpRequest.headers['x-acs-date'] = body.Timestamp;
 
     // sign
     var headers = [];
@@ -3421,7 +3423,7 @@ ALY.BatchCompute = ALY.Service.defineService('batchcompute', ['2015-06-30'], {
         }
 
         resp.error = ALY.util.error(new Error(error.Message), {
-            code: error.ErrorCode,
+            code: error.Code || error.ErrorCode,
             headers: headers,
             requestId: headers['request-id']
         });
@@ -4010,7 +4012,7 @@ ALY.Signers.BatchCompute = inherit(ALY.Signers.RequestSigner, {
   },
 
   sign: function sign(secret, string) {
-    if(process.env.DEBUG) {
+    if(process.env.DEBUG == 'aliyun') {
       console.log('----------- sign string start -----------');
       console.log(string);
       console.log('----------- sign string end -----------');
@@ -4128,7 +4130,7 @@ ALY.Signers.OpenSearch = inherit(ALY.Signers.RequestSigner, {
   },
 
   sign: function sign(secret, string) {
-    if(process.env.DEBUG) {
+    if(process.env.DEBUG == 'aliyun') {
       console.log('----------- sign string start -----------');
       console.log(string);
       console.log('----------- sign string end -----------');
@@ -4304,7 +4306,7 @@ ALY.Signers.OSS = inherit(ALY.Signers.RequestSigner, {
   },
 
   sign: function sign(secret, string) {
-    if(process.env.DEBUG) {
+    if(process.env.DEBUG == 'aliyun') {
       console.log('----------- sign string start -----------');
       console.log(string);
       console.log('----------- sign string end -----------');
@@ -4497,7 +4499,7 @@ ALY.Signers.SLS = inherit(ALY.Signers.RequestSigner, {
   },
 
   sign: function sign(secret, string) {
-    if(process.env.DEBUG) {
+    if(process.env.DEBUG == 'aliyun') {
       console.log('----------- sign string start -----------');
       console.log(string);
       console.log('----------- sign string end -----------');
@@ -4531,7 +4533,7 @@ ALY.Signers.TOP = inherit(ALY.Signers.RequestSigner, {
   },
 
   sign: function sign(secret, string) {
-    if(process.env.DEBUG) {
+    if(process.env.DEBUG == 'aliyun') {
       console.log('----------- sign string start -----------');
       console.log(string);
       console.log('----------- sign string end -----------');
@@ -16923,12 +16925,6 @@ module.exports={
           "Bucket": {
             "required": true,
             "location": "uri"
-          },
-          "CreateBucketConfiguration": {
-            "type": "structure",
-            "members": {
-              "LocationConstraint": {}
-            }
           },
           "GrantFullControl": {
             "location": "header",
