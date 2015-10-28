@@ -5,10 +5,7 @@ var oss = require('./oss');
 // -------------------------------
 
 oss.createBucket({
-  Bucket: 'chylvina1',
-  CreateBucketConfiguration: {
-    LocationConstraint: 'oss-cn-hangzhou-a'   // oss-cn-hangzhou-a 或者 oss-cn-qingdao-a
-  }
+  Bucket: 'chylvina1'
 }, function (err, data) {
   if (err) {
     console.log('error:', err);
