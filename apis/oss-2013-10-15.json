@@ -256,12 +256,6 @@
             "required": true,
             "location": "uri"
           },
-          "CreateBucketConfiguration": {
-            "type": "structure",
-            "members": {
-              "LocationConstraint": {}
-            }
-          },
           "GrantFullControl": {
             "location": "header",
             "name": "x-oss-grant-full-control"
