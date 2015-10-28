@@ -9,7 +9,7 @@
 
 现在 aliyun sdk 支持在浏览器端调用, 只需要引入 dist/aliyun-sdk.js 即可, 使用参考 sample/browser/browser.html
 
-目前支持在浏览器端调用除了 sls 以外的所有服务, 不过目前只有 oss 支持 sts , 非 oss 服务只能使用 accessKey 和 accessSecret 进行初始化, 存在泄露风险.
+目前支持在浏览器端调用除了 sls, ocs 以外的所有服务, 不过目前只有 oss 支持 sts 和 cors , 非 oss 服务只能使用根 accessKey 和 accessSecret 进行初始化, 存在泄露风险.
 
 使用 aliyun sdk js 将文件上传到 oss, 请点击 [oss-js-upload](https://github.com/aliyun-UED/oss-js-upload)
 
