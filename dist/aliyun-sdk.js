@@ -2728,8 +2728,6 @@ ALY.ServiceInterface.Pop = {
     body.SignatureNonce = Math.round(Math.random() * 1000000);
     body.Timestamp = ALY.util.date.iso8601(ALY.util.date.getDate());
 
-    req.httpRequest.headers['x-acs-date'] = body.Timestamp;
-
     // sign
     var headers = [];
 
