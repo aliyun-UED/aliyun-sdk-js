@@ -663,63 +663,6 @@
         }
       }
     },
-    "activateService": {
-      "name": "ActivateService",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "ActivateService"
-          },
-          "AccountId": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "deactivateService": {
-      "name": "DeactivateService",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DeactivateService"
-          },
-          "AccountId": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "getServiceStatus": {
-      "name": "GetServiceStatus",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "GetServiceStatus"
-          },
-          "AccountId": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "createAccessKey": {
       "name": "CreateAccessKey",
       "http": {
@@ -1234,22 +1177,6 @@
           },
           "RoleName": {
             "type": "string"
-          }
-        }
-      }
-    },
-    "getAccountSummary": {
-      "name": "GetAccountSummary",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "GetAccountSummary"
           }
         }
       }
