@@ -9,34 +9,6 @@
   "timestampFormat": "top",
   "xmlnamespace": "",
   "operations": {
-    "getFederationToken": {
-      "name": "GetFederationToken",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "GetFederationToken"
-          },
-          "Name": {
-            "required": true,
-            "type": "string"
-          },
-          "Policy": {
-            "required": true,
-            "type": "string"
-          },
-          "DurationSeconds": {
-            "required": true,
-            "type": "integer"
-          }
-        }
-      }
-    },
     "assumeRole": {
       "name": "AssumeRole",
       "http": {
@@ -61,40 +33,6 @@
             "type": "string"
           },
           "RoleSessionName": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "assumeRoleWithServiceIdentity": {
-      "name": "AssumeRoleWithServiceIdentity",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "AssumeRoleWithServiceIdentity"
-          },
-          "DurationSeconds": {
-            "type": "integer"
-          },
-          "Policy": {
-            "type": "string"
-          },
-          "RoleArn": {
-            "required": true,
-            "type": "string"
-          },
-          "RoleSessionName": {
-            "required": true,
-            "type": "string"
-          },
-          "AssumeRoleFor": {
             "required": true,
             "type": "string"
           }
