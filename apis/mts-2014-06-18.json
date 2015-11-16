@@ -1,0 +1,1088 @@
+{
+  "format": "pop",
+  "apiVersion": "2014-06-18",
+  "checksumFormat": "md5",
+  "endpointPrefix": "mts",
+  "serviceAbbreviation": "MTS",
+  "serviceFullName": "Aliyun MTS",
+  "signatureVersion": "pop",
+  "timestampFormat": "top",
+  "xmlnamespace": "",
+  "operations": {
+    "startMediaWorkflowExecution": {
+      "name": "StartMediaWorkflowExecution",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "StartMediaWorkflowExecution"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "Input": {
+            "required": true,
+            "type": "string"
+          },
+          "WorkflowType": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "registerMediaWorkflowType": {
+      "name": "RegisterMediaWorkflowType",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "RegisterMediaWorkflowType"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "Name": {
+            "required": true,
+            "type": "string"
+          },
+          "Definition": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "submitJobs": {
+      "name": "SubmitJobs",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SubmitJobs"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "Input": {
+            "required": true,
+            "type": "string"
+          },
+          "Outputs": {
+            "required": true,
+            "type": "string"
+          },
+          "OutputBucket": {
+            "required": true,
+            "type": "string"
+          },
+          "OutputLocation": {
+            "type": "string"
+          },
+          "PipelineId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "submitMediaInfoJob": {
+      "name": "SubmitMediaInfoJob",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SubmitMediaInfoJob"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "Input": {
+            "required": true,
+            "type": "string"
+          },
+          "UserData": {
+            "type": "string"
+          },
+          "PipelineId": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "submitSnapshotJob": {
+      "name": "SubmitSnapshotJob",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SubmitSnapshotJob"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "Input": {
+            "required": true,
+            "type": "string"
+          },
+          "SnapshotConfig": {
+            "required": true,
+            "type": "string"
+          },
+          "UserData": {
+            "type": "string"
+          },
+          "PipelineId": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "updatePipeline": {
+      "name": "UpdatePipeline",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "UpdatePipeline"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "PipelineId": {
+            "required": true,
+            "type": "string"
+          },
+          "Name": {
+            "required": true,
+            "type": "string"
+          },
+          "State": {
+            "required": true,
+            "type": "string"
+          },
+          "NotifyConfig": {
+            "type": "string"
+          },
+          "Role": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "updateTemplate": {
+      "name": "UpdateTemplate",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "UpdateTemplate"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "TemplateId": {
+            "required": true,
+            "type": "string"
+          },
+          "Name": {
+            "required": true,
+            "type": "string"
+          },
+          "Container": {
+            "type": "string"
+          },
+          "Video": {
+            "type": "string"
+          },
+          "Audio": {
+            "type": "string"
+          },
+          "MuxConfig": {
+            "type": "string"
+          },
+          "TransConfig": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "updateWaterMarkTemplate": {
+      "name": "UpdateWaterMarkTemplate",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "UpdateWaterMarkTemplate"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "WaterMarkTemplateId": {
+            "required": true,
+            "type": "string"
+          },
+          "Name": {
+            "required": true,
+            "type": "string"
+          },
+          "Config": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "searchTemplate": {
+      "name": "SearchTemplate",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SearchTemplate"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "State": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "searchWaterMarkTemplate": {
+      "name": "SearchWaterMarkTemplate",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SearchWaterMarkTemplate"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "State": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "submitAnalysisJob": {
+      "name": "SubmitAnalysisJob",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SubmitAnalysisJob"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "Input": {
+            "required": true,
+            "type": "string"
+          },
+          "AnalysisConfig": {
+            "type": "string"
+          },
+          "UserData": {
+            "type": "string"
+          },
+          "PipelineId": {
+            "required": true,
+            "type": "string"
+          },
+          "Priority": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "queryWaterMarkTemplateList": {
+      "name": "QueryWaterMarkTemplateList",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "QueryWaterMarkTemplateList"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "WaterMarkTemplateIds": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "searchJob": {
+      "name": "SearchJob",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SearchJob"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "State": {
+            "type": "string"
+          },
+          "StartOfJobCreatedTimeRange": {
+            "type": "string"
+          },
+          "EndOfJobCreatedTimeRange": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "searchPipeline": {
+      "name": "SearchPipeline",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SearchPipeline"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "State": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "queryJobListByPid": {
+      "name": "QueryJobListByPid",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "QueryJobListByPid"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "PipelineId": {
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "queryMediaInfoJobList": {
+      "name": "QueryMediaInfoJobList",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "QueryMediaInfoJobList"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "MediaInfoJobIds": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "queryPipelineList": {
+      "name": "QueryPipelineList",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "QueryPipelineList"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "PipelineIds": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "querySnapshotJobList": {
+      "name": "QuerySnapshotJobList",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "QuerySnapshotJobList"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "SnapshotJobIds": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "queryTemplateList": {
+      "name": "QueryTemplateList",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "QueryTemplateList"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "TemplateIds": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "queryJobList": {
+      "name": "QueryJobList",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "QueryJobList"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "JobIds": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "addWaterMarkTemplate": {
+      "name": "AddWaterMarkTemplate",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AddWaterMarkTemplate"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "Name": {
+            "required": true,
+            "type": "string"
+          },
+          "Config": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "cancelJob": {
+      "name": "CancelJob",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CancelJob"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "JobId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deletePipeline": {
+      "name": "DeletePipeline",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeletePipeline"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "PipelineId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteTemplate": {
+      "name": "DeleteTemplate",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteTemplate"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "TemplateId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteWaterMarkTemplate": {
+      "name": "DeleteWaterMarkTemplate",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteWaterMarkTemplate"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "WaterMarkTemplateId": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "playerAuth": {
+      "name": "PlayerAuth",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "PlayerAuth"
+          },
+          "OwnerId": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "string"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "queryAnalysisJobList": {
+      "name": "QueryAnalysisJobList",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "QueryAnalysisJobList"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "AnalysisJobIds": {
+            "required": true,
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "addPipeline": {
+      "name": "AddPipeline",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AddPipeline"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "Name": {
+            "required": true,
+            "type": "string"
+          },
+          "Speed": {
+            "type": "string"
+          },
+          "NotifyConfig": {
+            "type": "string"
+          },
+          "Role": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "addTemplate": {
+      "name": "AddTemplate",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AddTemplate"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "Name": {
+            "required": true,
+            "type": "string"
+          },
+          "Container": {
+            "type": "string"
+          },
+          "Video": {
+            "type": "string"
+          },
+          "Audio": {
+            "type": "string"
+          },
+          "TransConfig": {
+            "type": "string"
+          },
+          "MuxConfig": {
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
