@@ -128,6 +128,7 @@ SDK 目前支持下列服务:
 | Aliyun SLS      | ALY.SLS | 2014-11-18 | [SLS API手册](http://docs.aliyun.com/#/sls/api/overview) |
 | Aliyun RAM      | ALY.RAM | 2015-05-15 | [RAM API手册](https://docs.aliyun.com/#/pub/ram) |
 | Aliyun STS      | ALY.STS | 2015-04-01 | [STS API手册](http://docs.aliyun.com/#/pub/ram/sts-user-guide/intro) |
+| Aliyun MTS      | ALY.MTS | 2014-06-18 | [MTS API手册](https://docs.aliyun.com/#/pub/mts/API-Reference/summary) |
 | Aliyun OpenSearch      | ALY.OpenSearch | 2015-01-01 | [OpenSearch API手册](http://docs.aliyun.com/#/opensearch/api-reference/terminology) |
 | Aliyun BatchCompute      | ALY.BatchCompute | 2015-06-30 | [BatchCompute API手册](http://docs.aliyun.com/#/pub/batchcompute) |
 | Aliyun OCS memcached      | ALY.MEMCACHED        | | [BinaryProtocolRevamped](https://code.google.com/p/memcached/wiki/BinaryProtocolRevamped) |
