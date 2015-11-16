@@ -1,0 +1,33 @@
+{
+  "format": "ots",
+  "apiVersion": "2014-08-08",
+  "checksumFormat": "md5",
+  "endpointPrefix": "ots",
+  "serviceAbbreviation": "OTS",
+  "serviceFullName": "Aliyun Open Table Service",
+  "signatureVersion": "ots",
+  "timestampFormat": "rfc822",
+  "xmlnamespace": "",
+  "operations": {
+    "listTable": {
+      "name": "ListTable",
+      "http": {
+        "method": "POST",
+        "uri": "/ListTable"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "InstanceName": {
+            "location": "header",
+            "name": "x-ots-instancename"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    }
+  }
+}
