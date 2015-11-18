@@ -1,5 +1,5 @@
 {
-  "format": "ots",
+  "format": "rest-json",
   "apiVersion": "2014-08-08",
   "checksumFormat": "md5",
   "endpointPrefix": "ots",
