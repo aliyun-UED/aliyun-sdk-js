@@ -1,4 +1,4 @@
-var ALY = require('../../');
+var ALY = require('../../../');
 
 var batchCompute = new ALY.BatchCompute({
     "accessKeyId": "在阿里云官网申请的 accessKeyId",
@@ -7,7 +7,7 @@ var batchCompute = new ALY.BatchCompute({
 
     endpoint: 'http://batchcompute.cn-qingdao.aliyuncs.com',
 
-    // 这是batchcompute sdk 目前支持最新的 api 版本, 不需要修改
+    // 这是 batchcompute sdk 的 api 版本
     apiVersion: '2015-06-30'
 
     //以下是可选配置
