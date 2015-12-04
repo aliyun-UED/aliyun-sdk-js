@@ -1,0 +1,594 @@
+{
+  "format": "rest-json",
+  "apiVersion": "2015-11-11",
+  "checksumFormat": "md5",
+  "endpointPrefix": "batchcompute",
+  "serviceAbbreviation": "BatchCompute",
+  "serviceFullName": "Aliyun Batch Computing Service",
+  "signatureVersion": "batchcompute",
+  "timestampFormat": "rfc822",
+  "xmlnamespace": "",
+  "operations": {
+    "createCluster": {
+      "name": "CreateCluster",
+      "http": {
+        "method": "POST",
+        "uri": "/clusters"
+      },
+      "input": {
+        "payload": ["Name", "Description", "ImageId", "Groups"],
+        "members": {
+          "Name":{
+            "type": "string",
+            "required": true
+          },
+          "ImageId": {
+            "required": true,
+            "type": "string"
+          },
+          "Description": {
+            "required": false,
+            "type": "string"
+          },
+          "Groups": {
+            "required":true,
+            "type": "map",
+            "members": {
+              "type": "structure",
+              "members": {
+                "DesiredVMCount": {
+                  "required": true,
+                  "type": "integer"
+                },
+                "InstanceType": {
+                  "required": false,
+                  "type": "string"
+                },
+                "ResourceType": {
+                  "required": false,
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "JobId": {
+            "type": "string",
+            "name": "ResourceId"
+          },
+          "RequestId": {
+            "location": "header",
+            "name": "Request-Id"
+          }
+        }
+      }
+    },
+    "listClusters": {
+      "name": "ListClusters",
+      "http": {
+        "method": "GET",
+        "uri": "/clusters?Marker={Marker}&MaxItemCount={MaxItemCount}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Marker": {
+            "required": false,
+            "type":"string",
+            "location":"uri"
+          },
+          "MaxItemCount": {
+            "required": false,
+            "type":"integer",
+            "location":"uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
+    "getCluster": {
+      "name": "GetCluster",
+      "http": {
+        "method": "GET",
+        "uri": "/clusters/{ClusterId}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "ClusterId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
+    "deleteCluster": {
+      "name": "DeleteCluster",
+      "http": {
+        "method": "DELETE",
+        "uri": "/clusters/{ClusterId}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "ClusterId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
+
+    "listJobs": {
+      "name": "ListJobs",
+      "http": {
+        "method": "GET",
+        "uri": "/jobs?Marker={Marker}&MaxItemCount={MaxItemCount}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Marker": {
+            "required": false,
+            "type": "string",
+            "location": "uri"
+          },
+          "MaxItemCount": {
+            "required": false,
+            "type": "integer",
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
+    "getJob": {
+      "name": "GetJob",
+      "http": {
+        "method": "GET",
+        "uri": "/jobs/{JobId}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "JobId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
+    "getJobDescription": {
+      "name": "GetJobDescription",
+      "http": {
+        "method": "GET",
+        "uri": "/jobs/{JobId}?description"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "JobId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
+    "deleteJob": {
+      "name": "DeleteJob",
+      "http": {
+        "method": "DELETE",
+        "uri": "/jobs/{JobId}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "JobId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
+    "startJob": {
+      "name": "StartJob",
+      "http": {
+        "method": "POST",
+        "uri": "/jobs/{JobId}/start"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "JobId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
+    "stopJob": {
+      "name": "StopJob",
+      "http": {
+        "method": "POST",
+        "uri": "/jobs/{JobId}/stop"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "JobId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
+    "changeJobPriority": {
+      "name": "ChangeJobPriority",
+      "http": {
+        "method": "PUT",
+        "uri": "/jobs/{JobId}"
+      },
+      "input": {
+        "payload": ["Priority"],
+        "members": {
+          "JobId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          },
+          "Priority": {
+            "required": true,
+            "type":"integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
+
+    "createJob": {
+      "name": "CreateJob",
+      "http": {
+        "method": "POST",
+        "uri": "/jobs"
+      },
+      "input": {
+        "payload": ["Name", "Description", "Priority", "JobFailOnInstanceFail","Type","DAG"],
+        "members": {
+          "Name":{
+            "type": "string",
+            "required": true
+          },
+          "Description": {
+            "required": false,
+            "type": "string"
+          },
+          "Priority": {
+            "required": true,
+            "type": "integer"
+          },
+          "Type": {
+            "required": true,
+            "type": "string"
+          },
+          "JobFailOnInstanceFail": {
+            "required": true,
+            "type": "boolean"
+          },
+          "DAG": {
+            "required":true,
+            "type": "structure",
+            "members": {
+              "Tasks": {
+                "required":true,
+                "type": "map",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "InstanceCount": {
+                      "required": true,
+                      "type": "integer"
+                    },
+                    "Timeout": {
+                      "required": true,
+                      "type": "integer"
+                    },
+                    "MaxRetryCount": {
+                      "required": false,
+                      "type": "integer"
+                    },
+                    "ClusterId": {
+                      "required": true,
+                      "type": "string"
+                    },
+
+
+                    "InputMapping": {
+                      "required": false,
+                      "type": "map",
+                      "members":{
+                        "type":"string"
+                      }
+                    },
+                    "OutputMapping": {
+                      "required": false,
+                      "type": "map",
+                      "members":{
+                        "type":"string"
+                      }
+                    },
+                    "LogMapping": {
+                      "required": false,
+                      "type": "map",
+                      "members":{
+                        "type":"string"
+                      }
+                    },
+
+                    "Parameters": {
+                      "type": "structure",
+                      "required": true,
+                      "members": {
+                        "StderrRedirectPath": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "StdoutRedirectPath": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "InputMappingConfig": {
+                          "type": "structure",
+                          "required": false,
+                          "members": {
+                            "Locale": {
+                              "type": "string",
+                              "required": false
+                            },
+                            "Lock": {
+                              "type": "boolean",
+                              "required": false
+                            }
+                          }
+                        },
+                        "Command": {
+                          "type": "structure",
+                          "required": true,
+                          "members": {
+                            "CommandLine": {
+                              "type": "string",
+                              "required": true
+                            },
+                            "PackagePath": {
+                              "type": "string",
+                              "required": true
+                            },
+                            "EnvVars": {
+                              "required": false,
+                              "type": "map",
+                              "members":{
+                                "type":"string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Dependencies": {
+                "type": "map",
+                "required": false,
+                "members": {
+                  "type": "list"
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "JobId": {
+            "type": "string",
+            "name": "ResourceId"
+          },
+          "RequestId": {
+            "location": "header",
+            "name": "Request-Id"
+          }
+        }
+      }
+    },
+    "listTasks": {
+      "name": "ListTasks",
+      "http": {
+        "method": "GET",
+        "uri": "/jobs/{JobId}/tasks?Marker={Marker}&MaxItemCount={MaxItemCount}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "JobId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          },
+          "Marker": {
+            "required": false,
+            "type": "string",
+            "location": "uri"
+          },
+          "MaxItemCount": {
+            "required": false,
+            "type": "integer",
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
+    "getTask": {
+      "name": "GetTask",
+      "http": {
+        "method": "GET",
+        "uri": "/jobs/{JobId}/tasks/{TaskName}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "JobId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          },
+          "TaskName": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
+    "listInstances": {
+      "name": "ListInstances",
+      "http": {
+        "method": "GET",
+        "uri": "/jobs/{JobId}/tasks/{TaskName}/instances?Marker={Marker}&MaxItemCount={MaxItemCount}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "JobId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          },
+          "TaskName": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          },
+          "Marker": {
+            "required": false,
+            "type": "string",
+            "location": "uri"
+          },
+          "MaxItemCount": {
+            "required": false,
+            "type": "integer",
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
+    "getInstance": {
+      "name": "GetInstance",
+      "http": {
+        "method": "GET",
+        "uri": "/jobs/{JobId}/tasks/{TaskName}/instances/{InstanceId}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "JobId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          },
+          "TaskName": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          },
+          "InstanceId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    }
+  },
+  "pagination": {
+
+  }
+}
