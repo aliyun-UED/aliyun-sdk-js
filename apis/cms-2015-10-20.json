@@ -1,0 +1,217 @@
+{
+  "format": "rest",
+  "apiVersion": "2015-10-20",
+  "checksumFormat": "md5",
+  "endpointPrefix": "cms",
+  "serviceAbbreviation": "CMS",
+  "serviceFullName": "Aliyun CMS",
+  "signatureVersion": "cms",
+  "timestampFormat": "rfc822",
+  "xmlnamespace": "",
+  "operations": {
+
+    "batchQueryMetric": {
+      "name": "BatchQueryMetric",
+      "http": {
+        "method": "GET",
+        "uri": "/?Action=BatchQueryMetric&ResourceOwnerId={ResourceOwnerId}&Project={Project}&Metric={Metric}&Period={Period}&StartTime={StartTime}&EndTime={EndTime}&Dimensions={Dimensions}&Extend={Extend}&Filter={Filter}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "ResourceOwnerId": {
+            "type": "integer",
+            "location": "uri"
+          },
+          "Project": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Metric": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Period": {
+            "type": "string",
+            "location": "uri"
+          },
+          "StartTime": {
+            "type": "string",
+            "location": "uri"
+          },
+          "EndTime": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Dimensions": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Extend": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Filter": {
+            "type": "string",
+            "location": "uri"
+          }
+        }
+      }
+    },
+
+
+    "queryMetric": {
+      "name": "QueryMetric",
+      "http": {
+        "method": "GET",
+        "uri": "/?Action=QueryMetric&Project={Project}&ResourceOwnerId={ResourceOwnerId}&Metric={Metric}&Period={Period}&StartTime={StartTime}&EndTime={EndTime}&Dimensions={Dimensions}&Page={Page}&Length={Length}&Extend={Extend}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "ResourceOwnerId": {
+            "type": "integer",
+            "location": "uri"
+          },
+          "Project": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Metric": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Period": {
+            "type": "string",
+            "location": "uri"
+          },
+          "StartTime": {
+            "type": "string",
+            "location": "uri"
+          },
+          "EndTime": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Dimensions": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Page": {
+            "type": "string",
+            "location":"uri"
+          },
+          "Length": {
+            "type": "string",
+            "location":"uri"
+          },
+          "Extend": {
+            "type": "string",
+            "location":"uri"
+          }
+        }
+      }
+    },
+    "describeMetricDatum": {
+      "name": "DescribeMetricDatum",
+      "http": {
+        "method": "GET",
+        "uri": "/?Action=DescribeMetricDatum&ResourceOwnerId={ResourceOwnerId}&Project={Project}&Metric={Metric}&Period={Period}&StartTime={StartTime}&EndTime={EndTime}&Dimensions={Dimensions}&Page={Page}&Length={Length}&Extend={Extend}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "ResourceOwnerId": {
+            "type": "integer",
+            "location": "uri"
+          },
+          "Project": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Metric": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Period": {
+            "type": "string",
+            "location": "uri"
+          },
+          "StartTime": {
+            "type": "string",
+            "location": "uri"
+          },
+          "EndTime": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Dimensions": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Page": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Length": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Extend": {
+            "type": "string",
+            "location": "uri"
+          }
+        }
+      }
+    },
+    "getMetricStatistics": {
+      "name": "GetMetricStatistics",
+      "http": {
+        "method": "GET",
+        "uri": "/?Action=GetMetricStatistics&ResourceOwnerId={ResourceOwnerId}&Namespace={Namespace}&StartTime={StartTime}&EndTime={EndTime}&Interval={Interval}&Dimensions={Dimensions}&NextToken={NextToken}&Length={Length}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "ResourceOwnerId": {
+            "type": "integer",
+            "location": "uri"
+          },
+          "Namespace": {
+            "type": "string",
+            "location": "uri"
+          },
+          "MetricName": {
+            "type": "string",
+            "location": "uri"
+          },
+          "StartTime": {
+            "type": "string",
+            "location": "uri"
+          },
+          "EndTime": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Interval": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Dimensions": {
+            "type": "string",
+            "location": "uri"
+          },
+          "NextToken": {
+            "type": "integer",
+            "location": "uri"
+          },
+          "Length": {
+            "type": "integer",
+            "location": "uri"
+          }
+        }
+      }
+    }
+
+  }
+}
