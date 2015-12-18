@@ -14,7 +14,7 @@
       "name": "BatchQueryMetric",
       "http": {
         "method": "GET",
-        "uri": "/?Action=BatchQueryMetric&Project={Project}&Metric={Metric}&Period={Period}&StartTime={StartTime}&EndTime={EndTime}&Dimensions={Dimensions}&Extend={Extend}&Filter={Filter}"
+        "uri": "/?Action=BatchQueryMetric&Project={Project}&Metric={Metric}&Period={Period}&StartTime={StartTime}&EndTime={EndTime}&Dimensions={Dimensions}"
       },
       "input": {
         "type": "structure",
@@ -40,14 +40,6 @@
             "location": "uri"
           },
           "Dimensions": {
-            "type": "string",
-            "location": "uri"
-          },
-          "Extend": {
-            "type": "string",
-            "location": "uri"
-          },
-          "Filter": {
             "type": "string",
             "location": "uri"
           }
@@ -60,7 +52,7 @@
       "name": "QueryMetric",
       "http": {
         "method": "GET",
-        "uri": "/?Action=QueryMetric&Project={Project}&Metric={Metric}&Period={Period}&StartTime={StartTime}&EndTime={EndTime}&Dimensions={Dimensions}&Page={Page}&Length={Length}&Extend={Extend}"
+        "uri": "/?Action=QueryMetric&Project={Project}&Metric={Metric}&Period={Period}&StartTime={StartTime}&EndTime={EndTime}&Dimensions={Dimensions}&Page={Page}&Length={Length}"
       },
       "input": {
         "type": "structure",
@@ -94,10 +86,6 @@
             "location":"uri"
           },
           "Length": {
-            "type": "string",
-            "location":"uri"
-          },
-          "Extend": {
             "type": "string",
             "location":"uri"
           }
@@ -108,7 +96,7 @@
       "name": "DescribeMetricDatum",
       "http": {
         "method": "GET",
-        "uri": "/?Action=DescribeMetricDatum&Project={Project}&Metric={Metric}&Period={Period}&StartTime={StartTime}&EndTime={EndTime}&Dimensions={Dimensions}&Page={Page}&Length={Length}&Extend={Extend}"
+        "uri": "/?Action=DescribeMetricDatum&Project={Project}&Metric={Metric}&Period={Period}&StartTime={StartTime}&EndTime={EndTime}&Dimensions={Dimensions}&Page={Page}&Length={Length}"
       },
       "input": {
         "type": "structure",
@@ -142,10 +130,6 @@
             "location": "uri"
           },
           "Length": {
-            "type": "string",
-            "location": "uri"
-          },
-          "Extend": {
             "type": "string",
             "location": "uri"
           }
