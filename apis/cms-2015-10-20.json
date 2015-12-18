@@ -14,15 +14,11 @@
       "name": "BatchQueryMetric",
       "http": {
         "method": "GET",
-        "uri": "/?Action=BatchQueryMetric&ResourceOwnerId={ResourceOwnerId}&Project={Project}&Metric={Metric}&Period={Period}&StartTime={StartTime}&EndTime={EndTime}&Dimensions={Dimensions}&Extend={Extend}&Filter={Filter}"
+        "uri": "/?Action=BatchQueryMetric&Project={Project}&Metric={Metric}&Period={Period}&StartTime={StartTime}&EndTime={EndTime}&Dimensions={Dimensions}&Extend={Extend}&Filter={Filter}"
       },
       "input": {
         "type": "structure",
         "members": {
-          "ResourceOwnerId": {
-            "type": "integer",
-            "location": "uri"
-          },
           "Project": {
             "type": "string",
             "location": "uri"
@@ -64,15 +60,11 @@
       "name": "QueryMetric",
       "http": {
         "method": "GET",
-        "uri": "/?Action=QueryMetric&Project={Project}&ResourceOwnerId={ResourceOwnerId}&Metric={Metric}&Period={Period}&StartTime={StartTime}&EndTime={EndTime}&Dimensions={Dimensions}&Page={Page}&Length={Length}&Extend={Extend}"
+        "uri": "/?Action=QueryMetric&Project={Project}&Metric={Metric}&Period={Period}&StartTime={StartTime}&EndTime={EndTime}&Dimensions={Dimensions}&Page={Page}&Length={Length}&Extend={Extend}"
       },
       "input": {
         "type": "structure",
         "members": {
-          "ResourceOwnerId": {
-            "type": "integer",
-            "location": "uri"
-          },
           "Project": {
             "type": "string",
             "location": "uri"
@@ -116,15 +108,11 @@
       "name": "DescribeMetricDatum",
       "http": {
         "method": "GET",
-        "uri": "/?Action=DescribeMetricDatum&ResourceOwnerId={ResourceOwnerId}&Project={Project}&Metric={Metric}&Period={Period}&StartTime={StartTime}&EndTime={EndTime}&Dimensions={Dimensions}&Page={Page}&Length={Length}&Extend={Extend}"
+        "uri": "/?Action=DescribeMetricDatum&Project={Project}&Metric={Metric}&Period={Period}&StartTime={StartTime}&EndTime={EndTime}&Dimensions={Dimensions}&Page={Page}&Length={Length}&Extend={Extend}"
       },
       "input": {
         "type": "structure",
         "members": {
-          "ResourceOwnerId": {
-            "type": "integer",
-            "location": "uri"
-          },
           "Project": {
             "type": "string",
             "location": "uri"
@@ -168,15 +156,11 @@
       "name": "GetMetricStatistics",
       "http": {
         "method": "GET",
-        "uri": "/?Action=GetMetricStatistics&ResourceOwnerId={ResourceOwnerId}&Namespace={Namespace}&StartTime={StartTime}&EndTime={EndTime}&Interval={Interval}&Dimensions={Dimensions}&NextToken={NextToken}&Length={Length}"
+        "uri": "/?Action=GetMetricStatistics&Namespace={Namespace}&MetricName={MetricName}&StartTime={StartTime}&EndTime={EndTime}&Interval={Interval}&Dimensions={Dimensions}&NextToken={NextToken}&Length={Length}"
       },
       "input": {
         "type": "structure",
         "members": {
-          "ResourceOwnerId": {
-            "type": "integer",
-            "location": "uri"
-          },
           "Namespace": {
             "type": "string",
             "location": "uri"
