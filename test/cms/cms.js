@@ -41,15 +41,11 @@ describe('test cms', function(){
                 StartTime:startTime
 
                 //EndTime: endtime,
-                //ResourceOwnerId: "",
                 //Page: "",
                 //Length: '',
                 //Extend: ''
             };
 
-            //Project={Project}&ResourceOwnerId={ResourceOwnerId}&Metric={Metric}
-            // &Period={Period}&StartTime={StartTime}&EndTime={EndTime}
-            // &Dimensions={Dimensions}&Page={Page}&Length={Length}&Extend={Extend}
 
             client.queryMetric(opt,function(err,result){
                 result.code.should.be.exactly(200);
@@ -80,16 +76,12 @@ describe('test cms', function(){
                 StartTime:startTime
 
                 //EndTime: "",
-                //ResourceOwnerId: "",
+                //MetricName: "",
                 //Namespace: "",
                 //Interval: "",
                 //NextToken: "",
                 //Length: ""
             };
-
-            //ResourceOwnerId={ResourceOwnerId}&Namespace={Namespace}
-            // &StartTime={StartTime}&EndTime={EndTime}&Interval={Interval}
-            // &Dimensions={Dimensions}&NextToken={NextToken}&Length={Length}
 
             client.getMetricStatistics(opt,function(err,result){
                 result.code.should.be.exactly(200);
@@ -114,14 +106,9 @@ describe('test cms', function(){
                 StartTime: startTime,
 
                 //EndTime: "",
-                //ResourceOwnerId: "",
                 //Extend: "",
                 //Filter; "",
             };
-
-            //ResourceOwnerId={ResourceOwnerId}&Project={Project}
-            // &Metric={Metric}&Period={Period}&StartTime={StartTime}&EndTime={EndTime}
-            // &Dimensions={Dimensions}&Extend={Extend}&Filter={Filter}
 
             client.batchQueryMetric(opt,function(err,result){
                 result.code.should.be.exactly(200);
@@ -152,17 +139,14 @@ describe('test cms', function(){
                 Project: "aliyun_sls",
                 Metric: "LogInflow",
                 Period:"60",
-                StartTime: startTime,
+                StartTime: startTime
 
                 //EndTime: "",
-                //ResourceOwnerId: "",
                 //Extend: "",
-                //Filter; "",
+                //Length: "",
+                //Page: ""
             };
 
-            //ResourceOwnerId={ResourceOwnerId}&Project={Project}
-            // &Metric={Metric}&Period={Period}&StartTime={StartTime}&EndTime={EndTime}
-            // &Dimensions={Dimensions}&Extend={Extend}&Filter={Filter}
 
             client.describeMetricDatum(opt,function(err,result){
                 result.code.should.be.exactly(200);
