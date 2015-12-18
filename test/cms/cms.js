@@ -43,7 +43,6 @@ describe('test cms', function(){
                 //EndTime: endtime,
                 //Page: "",
                 //Length: '',
-                //Extend: ''
             };
 
 
@@ -106,8 +105,6 @@ describe('test cms', function(){
                 StartTime: startTime,
 
                 //EndTime: "",
-                //Extend: "",
-                //Filter; "",
             };
 
             client.batchQueryMetric(opt,function(err,result){
@@ -142,7 +139,6 @@ describe('test cms', function(){
                 StartTime: startTime
 
                 //EndTime: "",
-                //Extend: "",
                 //Length: "",
                 //Page: ""
             };

@@ -6,9 +6,7 @@ var opt= {
     Metric: "",
     Period:"",
     StartTime: "",
-    EndTime: "",
-    Extend: "",
-    Filter: ""
+    EndTime: ""
 };
 
 client.batchQueryMetric(opt,function(err,result){

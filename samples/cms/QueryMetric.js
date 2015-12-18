@@ -8,8 +8,7 @@ var opt= {
     StartTime:"",
     EndTime: "",
     Page: "",
-    Length: '',
-    Extend: ''
+    Length: ''
 };
 
 
