@@ -1,0 +1,185 @@
+{
+  "format": "rest",
+  "apiVersion": "2015-10-20",
+  "checksumFormat": "md5",
+  "endpointPrefix": "cms",
+  "serviceAbbreviation": "CMS",
+  "serviceFullName": "Aliyun CMS",
+  "signatureVersion": "cms",
+  "timestampFormat": "rfc822",
+  "xmlnamespace": "",
+  "operations": {
+
+    "batchQueryMetric": {
+      "name": "BatchQueryMetric",
+      "http": {
+        "method": "GET",
+        "uri": "/?Action=BatchQueryMetric&Project={Project}&Metric={Metric}&Period={Period}&StartTime={StartTime}&EndTime={EndTime}&Dimensions={Dimensions}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Project": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Metric": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Period": {
+            "type": "string",
+            "location": "uri"
+          },
+          "StartTime": {
+            "type": "string",
+            "location": "uri"
+          },
+          "EndTime": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Dimensions": {
+            "type": "string",
+            "location": "uri"
+          }
+        }
+      }
+    },
+
+
+    "queryMetric": {
+      "name": "QueryMetric",
+      "http": {
+        "method": "GET",
+        "uri": "/?Action=QueryMetric&Project={Project}&Metric={Metric}&Period={Period}&StartTime={StartTime}&EndTime={EndTime}&Dimensions={Dimensions}&Page={Page}&Length={Length}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Project": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Metric": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Period": {
+            "type": "string",
+            "location": "uri"
+          },
+          "StartTime": {
+            "type": "string",
+            "location": "uri"
+          },
+          "EndTime": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Dimensions": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Page": {
+            "type": "string",
+            "location":"uri"
+          },
+          "Length": {
+            "type": "string",
+            "location":"uri"
+          }
+        }
+      }
+    },
+    "describeMetricDatum": {
+      "name": "DescribeMetricDatum",
+      "http": {
+        "method": "GET",
+        "uri": "/?Action=DescribeMetricDatum&Project={Project}&Metric={Metric}&Period={Period}&StartTime={StartTime}&EndTime={EndTime}&Dimensions={Dimensions}&Page={Page}&Length={Length}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Project": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Metric": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Period": {
+            "type": "string",
+            "location": "uri"
+          },
+          "StartTime": {
+            "type": "string",
+            "location": "uri"
+          },
+          "EndTime": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Dimensions": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Page": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Length": {
+            "type": "string",
+            "location": "uri"
+          }
+        }
+      }
+    },
+    "getMetricStatistics": {
+      "name": "GetMetricStatistics",
+      "http": {
+        "method": "GET",
+        "uri": "/?Action=GetMetricStatistics&Namespace={Namespace}&MetricName={MetricName}&StartTime={StartTime}&EndTime={EndTime}&Interval={Interval}&Dimensions={Dimensions}&NextToken={NextToken}&Length={Length}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Namespace": {
+            "type": "string",
+            "location": "uri"
+          },
+          "MetricName": {
+            "type": "string",
+            "location": "uri"
+          },
+          "StartTime": {
+            "type": "string",
+            "location": "uri"
+          },
+          "EndTime": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Interval": {
+            "type": "string",
+            "location": "uri"
+          },
+          "Dimensions": {
+            "type": "string",
+            "location": "uri"
+          },
+          "NextToken": {
+            "type": "integer",
+            "location": "uri"
+          },
+          "Length": {
+            "type": "integer",
+            "location": "uri"
+          }
+        }
+      }
+    }
+
+  }
+}
