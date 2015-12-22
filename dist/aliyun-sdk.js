@@ -788,7 +788,7 @@ require('./param_validator');
 
 ALY.events = new ALY.SequentialExecutor();
 
-},{"./config":4,"./event_listeners":6,"./http":7,"./param_validator":10,"./request":11,"./sequential_executor":12,"./service":13,"./signers/request_signer":27,"./util":30}],6:[function(require,module,exports){
+},{"./config":4,"./event_listeners":6,"./http":7,"./param_validator":10,"./request":11,"./sequential_executor":12,"./service":13,"./signers/request_signer":28,"./util":31}],6:[function(require,module,exports){
 var ALY = require('./core');
 require('./sequential_executor');
 require('./service_interface/json');
@@ -1031,7 +1031,7 @@ ALY.EventListeners = {
   })
 };
 
-},{"./core":5,"./sequential_executor":12,"./service_interface/json":14,"./service_interface/pop":15,"./service_interface/query":16,"./service_interface/rest":17,"./service_interface/rest_json":18,"./service_interface/rest_xml":19,"util":107}],7:[function(require,module,exports){
+},{"./core":5,"./sequential_executor":12,"./service_interface/json":14,"./service_interface/pop":15,"./service_interface/query":16,"./service_interface/rest":17,"./service_interface/rest_json":18,"./service_interface/rest_xml":19,"util":108}],7:[function(require,module,exports){
 (function (process){
 var ALY = require('./core');
 var inherit = ALY.util.inherit;
@@ -1076,9 +1076,7 @@ ALY.HttpRequest = inherit({
   setUserAgent: function setUserAgent() {
     //var prefix = ALY.util.isBrowser() ? 'X-Aly-' : '';
     //this.headers[prefix + 'User-Agent'] = ALY.util.userAgent();
-
-    //this.headers['x-sdk-client'] = this.headers['User-Agent'] = ALY.util.userAgent();
-    this.headers['User-Agent'] = ALY.util.userAgent();
+    this.headers['x-sdk-client'] = this.headers['User-Agent'] = ALY.util.userAgent();
   },
 
   pathname: function pathname() {
@@ -1125,7 +1123,7 @@ ALY.HttpClient.getInstance = function getInstance() {
 };
 
 }).call(this,require('_process'))
-},{"./core":5,"_process":85}],8:[function(require,module,exports){
+},{"./core":5,"_process":86}],8:[function(require,module,exports){
 var ALY = require('../core');
 var EventEmitter = require('events').EventEmitter;
 require('../http');
@@ -1236,7 +1234,7 @@ ALY.HttpClient.prototype = ALY.XHRClient.prototype;
  */
 ALY.HttpClient.streamsApiVersion = 1;
 
-},{"../core":5,"../http":7,"events":82}],9:[function(require,module,exports){
+},{"../core":5,"../http":7,"events":83}],9:[function(require,module,exports){
 var ALY = require('../core');
 var inherit = ALY.util.inherit;
 
@@ -1502,7 +1500,7 @@ ALY.ParamValidator = ALY.util.inherit({
   }
 });
 
-},{"./core":5,"stream":103}],11:[function(require,module,exports){
+},{"./core":5,"stream":104}],11:[function(require,module,exports){
 (function (process){
 var ALY = require('./core');
 var inherit = ALY.util.inherit;
@@ -2005,7 +2003,7 @@ ALY.Response = inherit({
 });
 
 }).call(this,require('_process'))
-},{"./core":5,"_process":85,"stream":103}],12:[function(require,module,exports){
+},{"./core":5,"_process":86,"stream":104}],12:[function(require,module,exports){
 (function (process){
 var ALY = require('./core');
 var domain = ALY.util.nodeRequire('domain');
@@ -2262,7 +2260,7 @@ ALY.SequentialExecutor.prototype.addListener = ALY.SequentialExecutor.prototype.
 ALY.SequentialExecutor.prototype.addAsyncListener = ALY.SequentialExecutor.prototype.onAsync;
 
 }).call(this,require('_process'))
-},{"./core":5,"_process":85}],13:[function(require,module,exports){
+},{"./core":5,"_process":86}],13:[function(require,module,exports){
 (function (__dirname){
 var ALY = require('./core');
 var inherit = ALY.util.inherit;
@@ -2642,7 +2640,7 @@ ALY.util.update(ALY.Service, {
 });
 
 }).call(this,"/lib")
-},{"./core":5,"fs":76}],14:[function(require,module,exports){
+},{"./core":5,"fs":77}],14:[function(require,module,exports){
 var ALY = require('../core');
 require('../json/builder');
 
@@ -3209,11 +3207,11 @@ ALY.ServiceInterface.RestXml = {
   }
 };
 
-},{"../core":5,"../xml/builder":31,"../xml/parser":32,"./rest":17}],20:[function(require,module,exports){
+},{"../core":5,"../xml/builder":32,"../xml/parser":33,"./rest":17}],20:[function(require,module,exports){
 var ALY = require('../core');
 var parseURL = require('url').parse;
 
-ALY.BatchCompute = ALY.Service.defineService('batchcompute', ['2015-06-30'], {
+ALY.BatchCompute = ALY.Service.defineService('batchcompute', ['2015-06-30','2015-11-11'], {
     /**
      * @api private
      */
@@ -3223,16 +3221,24 @@ ALY.BatchCompute = ALY.Service.defineService('batchcompute', ['2015-06-30'], {
     setupRequestListeners: function setupRequestListeners(request) {
 
         var that = this;
+        var svc = ALY.ServiceInterface.RestJson;
+
         request.addListener('build', this.addContentType);
+
+        request.removeListener('extractData', svc.extractData);
+
         request.addListener('extractError', this.extractError);
         request.addListener('extractData', function (response) {
             that.extractData(response, request['operation']);
         });
     },
 
+
     addContentType: function(req){
         var httpRequest = req.httpRequest;
         var headers = httpRequest.headers;
+
+        headers['x-acs-version'] = req.service.config.apiVersion;
 
         if(req.operation==='updateJobPriority'){
             httpRequest.body = JSON.parse(httpRequest.body).priority+'';
@@ -3241,10 +3247,14 @@ ALY.BatchCompute = ALY.Service.defineService('batchcompute', ['2015-06-30'], {
         }
     },
 
+
     extractData: function extractData(resp, operation) {
+
+        resp.data = JSON.parse(resp.httpResponse.body.toString().trim() || '{}');
 
         var result = resp.data;
         delete result['RequestId'];
+
 
         var reqId = resp.httpResponse.headers['request-id'];
 
@@ -3256,25 +3266,31 @@ ALY.BatchCompute = ALY.Service.defineService('batchcompute', ['2015-06-30'], {
             requestId: reqId || ''
         };
 
-        switch (operation) {
-            case 'listJobs':
-                resp.data.data = this.getFormatters().formatJobList(result);
-                break;
-            case 'getJob':
-                resp.data.data = this.getFormatters().formatJob(result);
-                break;
-            case 'getJobDescription':
-                resp.data.data = this.getFormatters().formatJobDescription(result);
-                break;
-            case 'listTasks':
-                resp.data.data = this.getFormatters().formatTaskList(result);
-                break;
-            case 'listImages':
-                resp.data.data = this.getFormatters().formatImageList(result);
-                break;
-            case 'createJob':
-                resp.data.data = this.getFormatters().formatJob(result);
-                break;
+        if(resp.request.httpRequest.headers['x-acs-version']=='2015-06-30') {
+
+            switch (operation) {
+                case 'listJobs':
+                    resp.data.data = this.getFormatters().formatJobList(result);
+                    break;
+                case 'getJob':
+                    resp.data.data = this.getFormatters().formatJob(result);
+                    break;
+                case 'getJobDescription':
+                    resp.data.data = this.getFormatters().formatJobDescription(result);
+                    break;
+                case 'listTasks':
+                    resp.data.data = this.getFormatters().formatTaskList(result);
+                    break;
+                case 'listImages':
+                    resp.data.data = this.getFormatters().formatImageList(result);
+                    break;
+                case 'createJob':
+                    resp.data.data = this.getFormatters().formatJob(result);
+                    break;
+            }
+        }
+        else{
+            resp.data.data = result;
         }
 
     },
@@ -3432,7 +3448,7 @@ ALY.BatchCompute = ALY.Service.defineService('batchcompute', ['2015-06-30'], {
 
 module.exports = ALY.BatchCompute;
 
-},{"../core":5,"url":105}],21:[function(require,module,exports){
+},{"../core":5,"url":106}],21:[function(require,module,exports){
 var ALY = require('../core');
 var parseURL = require('url').parse;
 
@@ -3636,7 +3652,7 @@ ALY.OpenSearch = ALY.Service.defineService('opensearch', ['2015-01-01'], {
 
 module.exports = ALY.OpenSearch;
 
-},{"../core":5,"url":105}],22:[function(require,module,exports){
+},{"../core":5,"url":106}],22:[function(require,module,exports){
 var ALY = require('../core');
 
 ALY.OSS = ALY.Service.defineService('oss', ['2013-10-15'], {
@@ -3879,7 +3895,8 @@ module.exports = ALY.OSS;
 (function (process){
 var ALY = require('../core');
 var inherit = ALY.util.inherit;
-var API_VERSION = '2015-06-30';
+//var API_VERSION = '2015-11-11';
+//var API_VERSION = '2015-06-30';
 
 /**
  * @api private
@@ -3890,7 +3907,8 @@ ALY.Signers.BatchCompute = inherit(ALY.Signers.RequestSigner, {
   addAuthorization: function addAuthorization(credentials, date) {
     var headers = this.request.headers;
 
-    headers['Date'] = ALY.util.date.rfc822(date);
+    //headers['Date'] = ALY.util.date.rfc822(date);
+    headers['x-acs-date'] = ALY.util.date.rfc822(date);
     //headers['Date'] = new Date().toGMTString();
 
 
@@ -3903,7 +3921,7 @@ ALY.Signers.BatchCompute = inherit(ALY.Signers.RequestSigner, {
 
     headers['x-acs-signature-method'] = 'HMAC-SHA1';
     headers['x-acs-signature-version'] = '1.0';
-    headers['x-acs-version'] = API_VERSION;
+    //headers['x-acs-version'] = API_VERSION;
     headers['x-sdk-client'] = 'node.js/1.0.0';
     headers['Accept'] = 'application/json';
 
@@ -3916,12 +3934,17 @@ ALY.Signers.BatchCompute = inherit(ALY.Signers.RequestSigner, {
   stringToSign: function stringToSign() {
     var r = this.request;
 
+    //fix signature not match in browser
+    if(r.method!='GET' && r.method!='HEAD'){
+       r.headers['Content-Type'] = r.headers['Content-Type'] || 'text/plain;charset=UTF-8';
+    }
+
     var parts = [];
     parts.push(r.method);
     parts.push(r.headers['Accept'] || '');
     parts.push(r.headers['Content-MD5'] || '');
     parts.push(r.headers['Content-Type'] || '');
-    parts.push(r.headers['Date'] || '');
+    parts.push(r.headers['x-acs-date'] || r.headers['Date'] ||'');
 
     var headers = this.canonicalizedAmzHeaders();
     if (headers) parts.push(headers);
@@ -3998,8 +4021,14 @@ ALY.Signers.BatchCompute = inherit(ALY.Signers.RequestSigner, {
         ALY.util.arrayEach(resources, function (resource) {
           if (resource.value === undefined)
             querystring.push(resource.name);
-          else
-            querystring.push(resource.name + '=' + resource.value);
+          else {
+
+            if(resource.value!=null && resource.value!=''){
+              querystring.push(resource.name + '=' + resource.value);
+            }else{
+              querystring.push(resource.name);
+            }
+          }
         });
 
         resource += '?' + querystring.join('&');
@@ -4024,7 +4053,135 @@ ALY.Signers.BatchCompute = inherit(ALY.Signers.RequestSigner, {
 module.exports = ALY.Signers.BatchCompute;
 
 }).call(this,require('_process'))
-},{"../core":5,"_process":85}],24:[function(require,module,exports){
+},{"../core":5,"_process":86}],24:[function(require,module,exports){
+(function (process){
+var ALY = require('../core');
+var inherit = ALY.util.inherit;
+
+function randomNumbers(count) {
+  var num = '';
+  for (var i = 0; i < count; i++) {
+    num += Math.floor(Math.random() * 10);
+  }
+  return num;
+}
+
+/**
+ * @api private
+ */
+ALY.Signers.CMS = inherit(ALY.Signers.RequestSigner, {
+
+  addAuthorization: function addAuthorization(credentials, date) {
+    // if (!this.request.headers['presigned-expires']) {
+    //   this.request.headers['Date'] = ALY.util.date.rfc822(date);
+    // }
+
+    // if (credentials.sessionToken) {
+    //   // presigned URLs require this header to be lowercased
+    //   this.request.headers['x-amz-security-token'] = credentials.sessionToken;
+    // }
+    var date = new Date();
+
+    var globalQuery = {
+      'Format': 'JSON',
+      'Version': '2015-10-20',
+      'AccessKeyId': credentials.accessKeyId,
+      'SignatureMethod': 'HMAC-SHA1',
+      'SignatureVersion': '1.0',
+      'SignatureNonce': String(date.getTime()) + randomNumbers(4),
+      'Timestamp': date.toISOString().replace(/\.\d{3}/, '')
+    };
+
+    var parts = [];
+    Object.keys(globalQuery).forEach(function(key) {
+      parts.push(key + '=' + encodeURIComponent(globalQuery[key]));
+    });
+    this.request.path += (this.request.path.indexOf('?') == -1? '?' : '&') + parts.join('&');
+
+    var signature = this.sign(credentials.secretAccessKey, this.stringToSign());
+    this.request.path += '&Signature=' + encodeURIComponent(signature);
+    // var auth = 'OSS ' + credentials.accessKeyId + ':' + signature;
+
+    // this.request.headers['Authorization'] = auth;
+  },
+
+  stringToSign: function stringToSign() {
+    var r = this.request;
+
+    var s = r.method + '&%2F&' + encodeURIComponent(this.canonicalizedQueryString());
+
+    return s;
+  },
+
+  canonicalizedQueryString: function canonicalizedQueryString() {
+    var that = this;
+    var r = this.request;
+    var querystring = r.path.split('?')[1];
+    var resource = '';
+    if (r.body) {
+      querystring += '&' + r.body;
+    }
+
+    if (querystring) {
+
+      // collect a list of sub resources and query params that need to be signed
+      var resources = [];
+
+      ALY.util.arrayEach.call(this, querystring.split('&'), function (param) {
+        var pos = param.indexOf('=');
+        var name = param.slice(0, pos);
+        var value = param.slice(pos + 1);
+
+        var resource = { name: name };
+        if (value !== undefined) {
+          resource.value = decodeURIComponent(value);
+        }
+
+        resources.push(resource);
+      });
+
+      resources.sort(function (a, b) { return a.name < b.name ? -1 : 1; });
+
+      if (resources.length) {
+
+        querystring = [];
+        ALY.util.arrayEach(resources, function (resource) {
+          if (resource.value === undefined)
+            querystring.push(that.cmsEscape(resource.name));
+          else
+            querystring.push(that.cmsEscape(resource.name) + '=' + that.cmsEscape(resource.value));
+        });
+
+        resource += querystring.join('&');
+      }
+    }
+
+    return resource;
+  },
+
+  cmsEscape: function(clearString) {
+    // http://v8.googlecode.com/svn/trunk/src/uri.js
+    return encodeURIComponent(clearString)
+        .replace(/\!/gi, '%21')
+        .replace(/\'/gi, '%27')
+        .replace(/\(/gi, '%28')
+        .replace(/\)/gi, '%29')
+        .replace(/\*/gi, '%2A')
+  },
+
+  sign: function sign(secret, string) {
+    if(process.env.DEBUG == 'aliyun') {
+      console.log('----------- sign string start -----------');
+      console.log(string);
+      console.log('----------- sign string end -----------');
+    }
+    return ALY.util.crypto.hmac(secret + '&', string, 'base64', 'sha1');
+  }
+});
+
+module.exports = ALY.Signers.CMS;
+}).call(this,require('_process'))
+},{"../core":5,"_process":86}],25:[function(require,module,exports){
 (function (process){
 var ALY = require('../core');
 var inherit = ALY.util.inherit;
@@ -4141,7 +4298,7 @@ ALY.Signers.OpenSearch = inherit(ALY.Signers.RequestSigner, {
 
 module.exports = ALY.Signers.OpenSearch;
 }).call(this,require('_process'))
-},{"../core":5,"_process":85}],25:[function(require,module,exports){
+},{"../core":5,"_process":86}],26:[function(require,module,exports){
 (function (process){
 var ALY = require('../core');
 var inherit = ALY.util.inherit;
@@ -4318,7 +4475,7 @@ ALY.Signers.OSS = inherit(ALY.Signers.RequestSigner, {
 module.exports = ALY.Signers.OSS;
 
 }).call(this,require('_process'))
-},{"../core":5,"_process":85}],26:[function(require,module,exports){
+},{"../core":5,"_process":86}],27:[function(require,module,exports){
 var ALY = require('../core');
 var inherit = ALY.util.inherit;
 
@@ -4331,7 +4488,7 @@ ALY.Signers.POP = inherit(ALY.Signers.RequestSigner, {
 
 module.exports = ALY.Signers.POP;
 
-},{"../core":5}],27:[function(require,module,exports){
+},{"../core":5}],28:[function(require,module,exports){
 var ALY = require('../core');
 var inherit = ALY.util.inherit;
 
@@ -4352,6 +4509,7 @@ ALY.Signers.RequestSigner.getVersion = function getVersion(version) {
     case 'pop': return ALY.Signers.POP;
     case 'opensearch': return ALY.Signers.OpenSearch;
     case 'batchcompute': return ALY.Signers.BatchCompute;
+    case 'cms': return ALY.Signers.CMS;
   }
   throw new Error('Unknown signing version ' + version);
 };
@@ -4362,8 +4520,8 @@ require('./opensearch');
 require('./top');
 require('./pop');
 require('./batchcompute');
-
-},{"../core":5,"./batchcompute":23,"./opensearch":24,"./oss":25,"./pop":26,"./sls":28,"./top":29}],28:[function(require,module,exports){
+require('./cms');
+},{"../core":5,"./batchcompute":23,"./cms":24,"./opensearch":25,"./oss":26,"./pop":27,"./sls":29,"./top":30}],29:[function(require,module,exports){
 (function (process){
 var ALY = require('../core');
 var inherit = ALY.util.inherit;
@@ -4511,7 +4669,7 @@ ALY.Signers.SLS = inherit(ALY.Signers.RequestSigner, {
 module.exports = ALY.Signers.SLS;
 
 }).call(this,require('_process'))
-},{"../core":5,"_process":85}],29:[function(require,module,exports){
+},{"../core":5,"_process":86}],30:[function(require,module,exports){
 (function (process){
 var ALY = require('../core');
 var inherit = ALY.util.inherit;
@@ -4546,7 +4704,7 @@ ALY.Signers.TOP = inherit(ALY.Signers.RequestSigner, {
 module.exports = ALY.Signers.TOP;
 
 }).call(this,require('_process'))
-},{"../core":5,"_process":85}],30:[function(require,module,exports){
+},{"../core":5,"_process":86}],31:[function(require,module,exports){
 (function (process){
 /*global escape:true */
 
@@ -4622,17 +4780,6 @@ ALY.util = {
       }
     }
     return output;
-  },
-
-  popEscape: function(clearString) {
-    clearString = clearString.toString();
-    clearString = encodeURIComponent(clearString)
-        .replace(/\!/gi, '%21')
-        .replace(/\'/gi, '%27')
-        .replace(/\(/gi, '%28')
-        .replace(/\)/gi, '%29')
-        .replace(/\*/gi, '%2A')
-    return clearString;
   },
 
   opensearchEscape: function(clearString) {
@@ -5259,7 +5406,7 @@ ALY.util = {
 module.exports = ALY.util;
 
 }).call(this,require('_process'))
-},{"../bower_components/jsSHA/src/sha.js":1,"../bower_components/spark-md5/spark-md5.js":2,"./core":5,"_process":85,"buffer":78,"fs":76,"url":105}],31:[function(require,module,exports){
+},{"../bower_components/jsSHA/src/sha.js":1,"../bower_components/spark-md5/spark-md5.js":2,"./core":5,"_process":86,"buffer":79,"fs":77,"url":106}],32:[function(require,module,exports){
 var ALY = require('../core');
 var builder = require('xmlbuilder');
 var inherit = ALY.util.inherit;
@@ -5340,7 +5487,7 @@ ALY.XML.Builder = inherit({
 
 });
 
-},{"../core":5,"xmlbuilder":53}],32:[function(require,module,exports){
+},{"../core":5,"xmlbuilder":54}],33:[function(require,module,exports){
 var ALY = require('../core');
 var inherit = ALY.util.inherit;
 var xml2js = require('xml2js');
@@ -5541,7 +5688,7 @@ ALY.XML.Parser = inherit({
 
 });
 
-},{"../core":5,"xml2js":35}],33:[function(require,module,exports){
+},{"../core":5,"xml2js":36}],34:[function(require,module,exports){
 // Generated by CoffeeScript 1.7.1
 (function() {
   var xml2js;
@@ -5558,7 +5705,7 @@ ALY.XML.Parser = inherit({
 
 }).call(this);
 
-},{"../lib/xml2js":35}],34:[function(require,module,exports){
+},{"../lib/xml2js":36}],35:[function(require,module,exports){
 // Generated by CoffeeScript 1.7.1
 (function() {
   var prefixMatch;
@@ -5579,7 +5726,7 @@ ALY.XML.Parser = inherit({
 
 }).call(this);
 
-},{}],35:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 (function (process){
 // Generated by CoffeeScript 1.7.1
 (function() {
@@ -6019,7 +6166,7 @@ ALY.XML.Parser = inherit({
 }).call(this);
 
 }).call(this,require('_process'))
-},{"./bom":33,"./processors":34,"_process":85,"events":82,"sax":36,"xmlbuilder":53}],36:[function(require,module,exports){
+},{"./bom":34,"./processors":35,"_process":86,"events":83,"sax":37,"xmlbuilder":54}],37:[function(require,module,exports){
 (function (Buffer){
 // wrapper for non-node envs
 ;(function (sax) {
@@ -7433,7 +7580,7 @@ if (!String.fromCodePoint) {
 })(typeof exports === "undefined" ? sax = {} : exports);
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":78,"stream":103,"string_decoder":104}],37:[function(require,module,exports){
+},{"buffer":79,"stream":104,"string_decoder":105}],38:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLAttribute, create;
@@ -7467,7 +7614,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"lodash-node/modern/objects/create":66}],38:[function(require,module,exports){
+},{"lodash-node/modern/objects/create":67}],39:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLBuilder, XMLDeclaration, XMLDocType, XMLElement, XMLStringifier;
@@ -7538,7 +7685,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"./XMLDeclaration":45,"./XMLDocType":46,"./XMLElement":47,"./XMLStringifier":51}],39:[function(require,module,exports){
+},{"./XMLDeclaration":46,"./XMLDocType":47,"./XMLElement":48,"./XMLStringifier":52}],40:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLCData, XMLNode, create,
@@ -7589,7 +7736,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"./XMLNode":48,"lodash-node/modern/objects/create":66}],40:[function(require,module,exports){
+},{"./XMLNode":49,"lodash-node/modern/objects/create":67}],41:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLComment, XMLNode, create,
@@ -7640,7 +7787,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"./XMLNode":48,"lodash-node/modern/objects/create":66}],41:[function(require,module,exports){
+},{"./XMLNode":49,"lodash-node/modern/objects/create":67}],42:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLDTDAttList, create;
@@ -7714,7 +7861,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"lodash-node/modern/objects/create":66}],42:[function(require,module,exports){
+},{"lodash-node/modern/objects/create":67}],43:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLDTDElement, create, isArray;
@@ -7768,7 +7915,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"lodash-node/modern/objects/create":66,"lodash-node/modern/objects/isArray":68}],43:[function(require,module,exports){
+},{"lodash-node/modern/objects/create":67,"lodash-node/modern/objects/isArray":69}],44:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLDTDEntity, create, isObject;
@@ -7858,7 +8005,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"lodash-node/modern/objects/create":66,"lodash-node/modern/objects/isObject":71}],44:[function(require,module,exports){
+},{"lodash-node/modern/objects/create":67,"lodash-node/modern/objects/isObject":72}],45:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLDTDNotation, create;
@@ -7920,7 +8067,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"lodash-node/modern/objects/create":66}],45:[function(require,module,exports){
+},{"lodash-node/modern/objects/create":67}],46:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLDeclaration, XMLNode, create, isObject,
@@ -7995,7 +8142,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"./XMLNode":48,"lodash-node/modern/objects/create":66,"lodash-node/modern/objects/isObject":71}],46:[function(require,module,exports){
+},{"./XMLNode":49,"lodash-node/modern/objects/create":67,"lodash-node/modern/objects/isObject":72}],47:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLCData, XMLComment, XMLDTDAttList, XMLDTDElement, XMLDTDEntity, XMLDTDNotation, XMLDocType, XMLProcessingInstruction, create, isObject;
@@ -8189,7 +8336,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"./XMLCData":39,"./XMLComment":40,"./XMLDTDAttList":41,"./XMLDTDElement":42,"./XMLDTDEntity":43,"./XMLDTDNotation":44,"./XMLProcessingInstruction":49,"lodash-node/modern/objects/create":66,"lodash-node/modern/objects/isObject":71}],47:[function(require,module,exports){
+},{"./XMLCData":40,"./XMLComment":41,"./XMLDTDAttList":42,"./XMLDTDElement":43,"./XMLDTDEntity":44,"./XMLDTDNotation":45,"./XMLProcessingInstruction":50,"lodash-node/modern/objects/create":67,"lodash-node/modern/objects/isObject":72}],48:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLAttribute, XMLElement, XMLNode, XMLProcessingInstruction, create, isArray, isFunction, isObject,
@@ -8398,7 +8545,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"./XMLAttribute":37,"./XMLNode":48,"./XMLProcessingInstruction":49,"lodash-node/modern/objects/create":66,"lodash-node/modern/objects/isArray":68,"lodash-node/modern/objects/isFunction":70,"lodash-node/modern/objects/isObject":71}],48:[function(require,module,exports){
+},{"./XMLAttribute":38,"./XMLNode":49,"./XMLProcessingInstruction":50,"lodash-node/modern/objects/create":67,"lodash-node/modern/objects/isArray":69,"lodash-node/modern/objects/isFunction":71,"lodash-node/modern/objects/isObject":72}],49:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLCData, XMLComment, XMLDeclaration, XMLDocType, XMLElement, XMLNode, XMLRaw, XMLText, isArray, isEmpty, isFunction, isObject,
@@ -8734,7 +8881,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"./XMLCData":39,"./XMLComment":40,"./XMLDeclaration":45,"./XMLDocType":46,"./XMLElement":47,"./XMLRaw":50,"./XMLText":52,"lodash-node/modern/objects/isArray":68,"lodash-node/modern/objects/isEmpty":69,"lodash-node/modern/objects/isFunction":70,"lodash-node/modern/objects/isObject":71}],49:[function(require,module,exports){
+},{"./XMLCData":40,"./XMLComment":41,"./XMLDeclaration":46,"./XMLDocType":47,"./XMLElement":48,"./XMLRaw":51,"./XMLText":53,"lodash-node/modern/objects/isArray":69,"lodash-node/modern/objects/isEmpty":70,"lodash-node/modern/objects/isFunction":71,"lodash-node/modern/objects/isObject":72}],50:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLProcessingInstruction, create;
@@ -8787,7 +8934,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"lodash-node/modern/objects/create":66}],50:[function(require,module,exports){
+},{"lodash-node/modern/objects/create":67}],51:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLNode, XMLRaw, create,
@@ -8838,7 +8985,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"./XMLNode":48,"lodash-node/modern/objects/create":66}],51:[function(require,module,exports){
+},{"./XMLNode":49,"lodash-node/modern/objects/create":67}],52:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLStringifier,
@@ -9007,7 +9154,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{}],52:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLNode, XMLText, create,
@@ -9059,7 +9206,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"./XMLNode":48,"lodash-node/modern/objects/create":66}],53:[function(require,module,exports){
+},{"./XMLNode":49,"lodash-node/modern/objects/create":67}],54:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLBuilder, assign;
@@ -9075,7 +9222,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"./XMLBuilder":38,"lodash-node/modern/objects/assign":65}],54:[function(require,module,exports){
+},{"./XMLBuilder":39,"lodash-node/modern/objects/assign":66}],55:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9117,7 +9264,7 @@ function bind(func, thisArg) {
 
 module.exports = bind;
 
-},{"../internals/createWrapper":59,"../internals/slice":64}],55:[function(require,module,exports){
+},{"../internals/createWrapper":60,"../internals/slice":65}],56:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9181,7 +9328,7 @@ function baseBind(bindData) {
 
 module.exports = baseBind;
 
-},{"../objects/isObject":71,"./baseCreate":56,"./setBindData":62,"./slice":64}],56:[function(require,module,exports){
+},{"../objects/isObject":72,"./baseCreate":57,"./setBindData":63,"./slice":65}],57:[function(require,module,exports){
 (function (global){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
@@ -9227,7 +9374,7 @@ if (!nativeCreate) {
 module.exports = baseCreate;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../objects/isObject":71,"../utilities/noop":75,"./isNative":60}],57:[function(require,module,exports){
+},{"../objects/isObject":72,"../utilities/noop":76,"./isNative":61}],58:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9309,7 +9456,7 @@ function baseCreateCallback(func, thisArg, argCount) {
 
 module.exports = baseCreateCallback;
 
-},{"../functions/bind":54,"../support":73,"../utilities/identity":74,"./setBindData":62}],58:[function(require,module,exports){
+},{"../functions/bind":55,"../support":74,"../utilities/identity":75,"./setBindData":63}],59:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9389,7 +9536,7 @@ function baseCreateWrapper(bindData) {
 
 module.exports = baseCreateWrapper;
 
-},{"../objects/isObject":71,"./baseCreate":56,"./setBindData":62,"./slice":64}],59:[function(require,module,exports){
+},{"../objects/isObject":72,"./baseCreate":57,"./setBindData":63,"./slice":65}],60:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9497,7 +9644,7 @@ function createWrapper(func, bitmask, partialArgs, partialRightArgs, thisArg, ar
 
 module.exports = createWrapper;
 
-},{"../objects/isFunction":70,"./baseBind":55,"./baseCreateWrapper":58,"./slice":64}],60:[function(require,module,exports){
+},{"../objects/isFunction":71,"./baseBind":56,"./baseCreateWrapper":59,"./slice":65}],61:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9533,7 +9680,7 @@ function isNative(value) {
 
 module.exports = isNative;
 
-},{}],61:[function(require,module,exports){
+},{}],62:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9555,7 +9702,7 @@ var objectTypes = {
 
 module.exports = objectTypes;
 
-},{}],62:[function(require,module,exports){
+},{}],63:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9600,7 +9747,7 @@ var setBindData = !defineProperty ? noop : function(func, value) {
 
 module.exports = setBindData;
 
-},{"../utilities/noop":75,"./isNative":60}],63:[function(require,module,exports){
+},{"../utilities/noop":76,"./isNative":61}],64:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9640,7 +9787,7 @@ var shimKeys = function(object) {
 
 module.exports = shimKeys;
 
-},{"./objectTypes":61}],64:[function(require,module,exports){
+},{"./objectTypes":62}],65:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9680,7 +9827,7 @@ function slice(array, start, end) {
 
 module.exports = slice;
 
-},{}],65:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9752,7 +9899,7 @@ var assign = function(object, source, guard) {
 
 module.exports = assign;
 
-},{"../internals/baseCreateCallback":57,"../internals/objectTypes":61,"./keys":72}],66:[function(require,module,exports){
+},{"../internals/baseCreateCallback":58,"../internals/objectTypes":62,"./keys":73}],67:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9802,7 +9949,7 @@ function create(prototype, properties) {
 
 module.exports = create;
 
-},{"../internals/baseCreate":56,"./assign":65}],67:[function(require,module,exports){
+},{"../internals/baseCreate":57,"./assign":66}],68:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9854,7 +10001,7 @@ var forOwn = function(collection, callback, thisArg) {
 
 module.exports = forOwn;
 
-},{"../internals/baseCreateCallback":57,"../internals/objectTypes":61,"./keys":72}],68:[function(require,module,exports){
+},{"../internals/baseCreateCallback":58,"../internals/objectTypes":62,"./keys":73}],69:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9901,7 +10048,7 @@ var isArray = nativeIsArray || function(value) {
 
 module.exports = isArray;
 
-},{"../internals/isNative":60}],69:[function(require,module,exports){
+},{"../internals/isNative":61}],70:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9966,7 +10113,7 @@ function isEmpty(value) {
 
 module.exports = isEmpty;
 
-},{"./forOwn":67,"./isFunction":70}],70:[function(require,module,exports){
+},{"./forOwn":68,"./isFunction":71}],71:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9995,7 +10142,7 @@ function isFunction(value) {
 
 module.exports = isFunction;
 
-},{}],71:[function(require,module,exports){
+},{}],72:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -10036,7 +10183,7 @@ function isObject(value) {
 
 module.exports = isObject;
 
-},{"../internals/objectTypes":61}],72:[function(require,module,exports){
+},{"../internals/objectTypes":62}],73:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -10074,7 +10221,7 @@ var keys = !nativeKeys ? shimKeys : function(object) {
 
 module.exports = keys;
 
-},{"../internals/isNative":60,"../internals/shimKeys":63,"./isObject":71}],73:[function(require,module,exports){
+},{"../internals/isNative":61,"../internals/shimKeys":64,"./isObject":72}],74:[function(require,module,exports){
 (function (global){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
@@ -10118,7 +10265,7 @@ support.funcNames = typeof Function.name == 'string';
 module.exports = support;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./internals/isNative":60}],74:[function(require,module,exports){
+},{"./internals/isNative":61}],75:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -10148,7 +10295,7 @@ function identity(value) {
 
 module.exports = identity;
 
-},{}],75:[function(require,module,exports){
+},{}],76:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -10176,11 +10323,11 @@ function noop() {
 
 module.exports = noop;
 
-},{}],76:[function(require,module,exports){
-
 },{}],77:[function(require,module,exports){
-arguments[4][76][0].apply(exports,arguments)
-},{"dup":76}],78:[function(require,module,exports){
+
+},{}],78:[function(require,module,exports){
+arguments[4][77][0].apply(exports,arguments)
+},{"dup":77}],79:[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -11619,7 +11766,7 @@ function decodeUtf8Char (str) {
   }
 }
 
-},{"base64-js":79,"ieee754":80,"is-array":81}],79:[function(require,module,exports){
+},{"base64-js":80,"ieee754":81,"is-array":82}],80:[function(require,module,exports){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 ;(function (exports) {
@@ -11745,7 +11892,7 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 	exports.fromByteArray = uint8ToBase64
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
-},{}],80:[function(require,module,exports){
+},{}],81:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -11831,7 +11978,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],81:[function(require,module,exports){
+},{}],82:[function(require,module,exports){
 
 /**
  * isArray
@@ -11866,7 +12013,7 @@ module.exports = isArray || function (val) {
   return !! val && '[object Array]' == str.call(val);
 };
 
-},{}],82:[function(require,module,exports){
+},{}],83:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -12169,7 +12316,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],83:[function(require,module,exports){
+},{}],84:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -12194,12 +12341,12 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],84:[function(require,module,exports){
+},{}],85:[function(require,module,exports){
 module.exports = Array.isArray || function (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]';
 };
 
-},{}],85:[function(require,module,exports){
+},{}],86:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -12291,7 +12438,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],86:[function(require,module,exports){
+},{}],87:[function(require,module,exports){
 (function (global){
 /*! https://mths.be/punycode v1.3.2 by @mathias */
 ;(function(root) {
@@ -12825,7 +12972,7 @@ process.umask = function() { return 0; };
 }(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],87:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -12911,7 +13058,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],88:[function(require,module,exports){
+},{}],89:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -12998,16 +13145,16 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],89:[function(require,module,exports){
+},{}],90:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":87,"./encode":88}],90:[function(require,module,exports){
+},{"./decode":88,"./encode":89}],91:[function(require,module,exports){
 module.exports = require("./lib/_stream_duplex.js")
 
-},{"./lib/_stream_duplex.js":91}],91:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":92}],92:[function(require,module,exports){
 // a duplex stream is just a stream that is both readable and writable.
 // Since JS doesn't have multiple prototypal inheritance, this class
 // prototypally inherits from Readable, and then parasitically from
@@ -13091,7 +13238,7 @@ function forEach (xs, f) {
   }
 }
 
-},{"./_stream_readable":93,"./_stream_writable":95,"core-util-is":96,"inherits":83,"process-nextick-args":97}],92:[function(require,module,exports){
+},{"./_stream_readable":94,"./_stream_writable":96,"core-util-is":97,"inherits":84,"process-nextick-args":98}],93:[function(require,module,exports){
 // a passthrough stream.
 // basically just the most minimal sort of Transform stream.
 // Every written chunk gets output as-is.
@@ -13120,7 +13267,7 @@ PassThrough.prototype._transform = function(chunk, encoding, cb) {
   cb(null, chunk);
 };
 
-},{"./_stream_transform":94,"core-util-is":96,"inherits":83}],93:[function(require,module,exports){
+},{"./_stream_transform":95,"core-util-is":97,"inherits":84}],94:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -14083,7 +14230,7 @@ function indexOf (xs, x) {
 }
 
 }).call(this,require('_process'))
-},{"./_stream_duplex":91,"_process":85,"buffer":78,"core-util-is":96,"events":82,"inherits":83,"isarray":84,"process-nextick-args":97,"string_decoder/":104,"util":77}],94:[function(require,module,exports){
+},{"./_stream_duplex":92,"_process":86,"buffer":79,"core-util-is":97,"events":83,"inherits":84,"isarray":85,"process-nextick-args":98,"string_decoder/":105,"util":78}],95:[function(require,module,exports){
 // a transform stream is a readable/writable stream where you do
 // something with the data.  Sometimes it's called a "filter",
 // but that's not a great name for it, since that implies a thing where
@@ -14282,7 +14429,7 @@ function done(stream, er) {
   return stream.push(null);
 }
 
-},{"./_stream_duplex":91,"core-util-is":96,"inherits":83}],95:[function(require,module,exports){
+},{"./_stream_duplex":92,"core-util-is":97,"inherits":84}],96:[function(require,module,exports){
 // A bit simpler than readable streams.
 // Implement an async ._write(chunk, cb), and it'll handle all
 // the drain event emission and buffering.
@@ -14804,7 +14951,7 @@ function endWritable(stream, state, cb) {
   state.ended = true;
 }
 
-},{"./_stream_duplex":91,"buffer":78,"core-util-is":96,"events":82,"inherits":83,"process-nextick-args":97,"util-deprecate":98}],96:[function(require,module,exports){
+},{"./_stream_duplex":92,"buffer":79,"core-util-is":97,"events":83,"inherits":84,"process-nextick-args":98,"util-deprecate":99}],97:[function(require,module,exports){
 (function (Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -14914,7 +15061,7 @@ function objectToString(o) {
   return Object.prototype.toString.call(o);
 }
 }).call(this,require("buffer").Buffer)
-},{"buffer":78}],97:[function(require,module,exports){
+},{"buffer":79}],98:[function(require,module,exports){
 (function (process){
 'use strict';
 module.exports = nextTick;
@@ -14931,7 +15078,7 @@ function nextTick(fn) {
 }
 
 }).call(this,require('_process'))
-},{"_process":85}],98:[function(require,module,exports){
+},{"_process":86}],99:[function(require,module,exports){
 (function (global){
 
 /**
@@ -14997,10 +15144,10 @@ function config (name) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],99:[function(require,module,exports){
+},{}],100:[function(require,module,exports){
 module.exports = require("./lib/_stream_passthrough.js")
 
-},{"./lib/_stream_passthrough.js":92}],100:[function(require,module,exports){
+},{"./lib/_stream_passthrough.js":93}],101:[function(require,module,exports){
 var Stream = (function (){
   try {
     return require('st' + 'ream'); // hack to fix a circular dependency issue when used with browserify
@@ -15014,13 +15161,13 @@ exports.Duplex = require('./lib/_stream_duplex.js');
 exports.Transform = require('./lib/_stream_transform.js');
 exports.PassThrough = require('./lib/_stream_passthrough.js');
 
-},{"./lib/_stream_duplex.js":91,"./lib/_stream_passthrough.js":92,"./lib/_stream_readable.js":93,"./lib/_stream_transform.js":94,"./lib/_stream_writable.js":95}],101:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":92,"./lib/_stream_passthrough.js":93,"./lib/_stream_readable.js":94,"./lib/_stream_transform.js":95,"./lib/_stream_writable.js":96}],102:[function(require,module,exports){
 module.exports = require("./lib/_stream_transform.js")
 
-},{"./lib/_stream_transform.js":94}],102:[function(require,module,exports){
+},{"./lib/_stream_transform.js":95}],103:[function(require,module,exports){
 module.exports = require("./lib/_stream_writable.js")
 
-},{"./lib/_stream_writable.js":95}],103:[function(require,module,exports){
+},{"./lib/_stream_writable.js":96}],104:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -15149,7 +15296,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"events":82,"inherits":83,"readable-stream/duplex.js":90,"readable-stream/passthrough.js":99,"readable-stream/readable.js":100,"readable-stream/transform.js":101,"readable-stream/writable.js":102}],104:[function(require,module,exports){
+},{"events":83,"inherits":84,"readable-stream/duplex.js":91,"readable-stream/passthrough.js":100,"readable-stream/readable.js":101,"readable-stream/transform.js":102,"readable-stream/writable.js":103}],105:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -15372,7 +15519,7 @@ function base64DetectIncompleteChar(buffer) {
   this.charLength = this.charReceived ? 3 : 0;
 }
 
-},{"buffer":78}],105:[function(require,module,exports){
+},{"buffer":79}],106:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -16081,14 +16228,14 @@ function isNullOrUndefined(arg) {
   return  arg == null;
 }
 
-},{"punycode":86,"querystring":89}],106:[function(require,module,exports){
+},{"punycode":87,"querystring":90}],107:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],107:[function(require,module,exports){
+},{}],108:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -16678,4445 +16825,2921 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":106,"_process":85,"inherits":83}],"ecs-2014-05-26.json":[function(require,module,exports){
+},{"./support/isBuffer":107,"_process":86,"inherits":84}],"oss-2013-10-15.json":[function(require,module,exports){
 module.exports={
-  "format": "pop",
-  "apiVersion": "2014-05-26",
+  "format": "rest-xml",
+  "apiVersion": "2013-10-15",
   "checksumFormat": "md5",
-  "endpointPrefix": "ecs",
-  "serviceAbbreviation": "ECS",
-  "serviceFullName": "Aliyun ECS",
-  "signatureVersion": "pop",
-  "timestampFormat": "top",
+  "endpointPrefix": "oss",
+  "serviceAbbreviation": "OSS",
+  "serviceFullName": "Aliyun Open Storage Service",
+  "signatureVersion": "oss",
+  "timestampFormat": "rfc822",
   "xmlnamespace": "",
   "operations": {
-    "allocateEipAddress": {
-      "name": "AllocateEipAddress",
+    "abortMultipartUpload": {
+      "name": "AbortMultipartUpload",
       "http": {
-        "method": "POST",
-        "uri": "/"
+        "method": "DELETE",
+        "uri": "/{Bucket}/{Key}?uploadId={UploadId}"
       },
       "input": {
         "type": "structure",
         "members": {
-          "Action": {
+          "Bucket": {
             "required": true,
-            "default": "AllocateEipAddress"
+            "location": "uri"
           },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
+          "Key": {
             "required": true,
-            "type": "string"
+            "location": "uri"
           },
-          "Bandwidth": {
-            "type": "string"
+          "UploadId": {
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "completeMultipartUpload": {
+      "name": "CompleteMultipartUpload",
+      "http": {
+        "method": "POST",
+        "uri": "/{Bucket}/{Key}?uploadId={UploadId}"
+      },
+      "input": {
+        "payload": "CompleteMultipartUpload",
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
           },
-          "InternetChargeType": {
-            "type": "string"
+          "Key": {
+            "required": true,
+            "location": "uri"
           },
-          "OwnerAccount": {
-            "type": "string"
+          "CompleteMultipartUpload": {
+            "type": "structure",
+            "name": "CompleteMultipartUpload",
+            "members": {
+              "Parts": {
+                "type": "list",
+                "name": "Part",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "PartNumber": {
+                      "type": "integer"
+                    },
+                    "ETag": {}
+                  }
+                },
+                "flattened": true
+              }
+            }
+          },
+          "UploadId": {
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Bucket": {},
+          "ETag": {},
+          "Expiration": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "x-oss-expiration"
+          },
+          "Key": {},
+          "Location": {},
+          "ServerSideEncryption": {
+            "location": "header",
+            "name": "x-oss-server-side-encryption"
+          },
+          "VersionId": {
+            "location": "header",
+            "name": "x-oss-version-id"
           }
         }
       }
     },
-    "allocatePublicIpAddress": {
-      "name": "AllocatePublicIpAddress",
+    "copyObject": {
+      "name": "CopyObject",
+      "alias": "PutObjectCopy",
       "http": {
-        "method": "POST",
-        "uri": "/"
+        "method": "PUT",
+        "uri": "/{Bucket}/{Key}"
       },
       "input": {
         "type": "structure",
         "members": {
-          "Action": {
+          "ACL": {
+            "location": "header",
+            "name": "x-oss-acl"
+          },
+          "Bucket": {
             "required": true,
-            "default": "AllocatePublicIpAddress"
+            "location": "uri"
           },
-          "OwnerId": {
-            "type": "integer"
+          "CacheControl": {
+            "location": "header",
+            "name": "Cache-Control"
           },
-          "ResourceOwnerAccount": {
-            "type": "string"
+          "ContentDisposition": {
+            "location": "header",
+            "name": "Content-Disposition"
           },
-          "ResourceOwnerId": {
-            "type": "integer"
+          "ContentEncoding": {
+            "location": "header",
+            "name": "Content-Encoding"
           },
-          "InstanceId": {
+          "ContentLanguage": {
+            "location": "header",
+            "name": "Content-Language"
+          },
+          "ContentType": {
+            "location": "header",
+            "name": "Content-Type"
+          },
+          "CopySource": {
             "required": true,
-            "type": "string"
+            "location": "header",
+            "name": "x-oss-copy-source"
           },
-          "IpAddress": {
-            "type": "string"
+          "CopySourceIfMatch": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "x-oss-copy-source-if-match"
           },
-          "VlanId": {
-            "type": "string"
+          "CopySourceIfModifiedSince": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "x-oss-copy-source-if-modified-since"
           },
-          "OwnerAccount": {
-            "type": "string"
+          "CopySourceIfNoneMatch": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "x-oss-copy-source-if-none-match"
+          },
+          "CopySourceIfUnmodifiedSince": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "x-oss-copy-source-if-unmodified-since"
+          },
+          "Expires": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "Expires"
+          },
+          "GrantFullControl": {
+            "location": "header",
+            "name": "x-oss-grant-full-control"
+          },
+          "GrantRead": {
+            "location": "header",
+            "name": "x-oss-grant-read"
+          },
+          "GrantReadACP": {
+            "location": "header",
+            "name": "x-oss-grant-read-acp"
+          },
+          "GrantWriteACP": {
+            "location": "header",
+            "name": "x-oss-grant-write-acp"
+          },
+          "Key": {
+            "required": true,
+            "location": "uri"
+          },
+          "Metadata": {
+            "type": "map",
+            "location": "header",
+            "name": "x-oss-meta-",
+            "members": {},
+            "keys": {}
+          },
+          "MetadataDirective": {
+            "location": "header",
+            "name": "x-oss-metadata-directive"
+          },
+          "ServerSideEncryption": {
+            "location": "header",
+            "name": "x-oss-server-side-encryption"
+          },
+          "StorageClass": {
+            "location": "header",
+            "name": "x-oss-storage-class"
+          },
+          "WebsiteRedirectLocation": {
+            "location": "header",
+            "name": "x-oss-website-redirect-location"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CopySourceVersionId": {
+            "location": "header",
+            "name": "x-oss-copy-source-version-id"
+          },
+          "Expiration": {
+            "location": "header",
+            "name": "x-oss-expiration"
+          },
+          "ServerSideEncryption": {
+            "location": "header",
+            "name": "x-oss-server-side-encryption"
+          },
+          "ETag": {},
+          "LastModified": {}
+        }
+      }
+    },
+    "createBucket": {
+      "name": "CreateBucket",
+      "alias": "PutBucket",
+      "http": {
+        "method": "PUT",
+        "uri": "/{Bucket}"
+      },
+      "input": {
+        "payload": "CreateBucketConfiguration",
+        "type": "structure",
+        "members": {
+          "ACL": {
+            "location": "header",
+            "name": "x-oss-acl"
+          },
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          },
+          "GrantFullControl": {
+            "location": "header",
+            "name": "x-oss-grant-full-control"
+          },
+          "GrantRead": {
+            "location": "header",
+            "name": "x-oss-grant-read"
+          },
+          "GrantReadACP": {
+            "location": "header",
+            "name": "x-oss-grant-read-acp"
+          },
+          "GrantWrite": {
+            "location": "header",
+            "name": "x-oss-grant-write"
+          },
+          "GrantWriteACP": {
+            "location": "header",
+            "name": "x-oss-grant-write-acp"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Location": {
+            "location": "header",
+            "name": "Location"
           }
         }
       }
     },
-    "associateEipAddress": {
-      "name": "AssociateEipAddress",
+    "createMultipartUpload": {
+      "name": "CreateMultipartUpload",
+      "alias": "InitiateMultipartUpload",
       "http": {
         "method": "POST",
-        "uri": "/"
+        "uri": "/{Bucket}/{Key}?uploads"
       },
       "input": {
         "type": "structure",
         "members": {
-          "Action": {
+          "ACL": {
+            "location": "header",
+            "name": "x-oss-acl"
+          },
+          "Bucket": {
             "required": true,
-            "default": "AssociateEipAddress"
+            "location": "uri"
           },
-          "OwnerId": {
-            "type": "integer"
+          "CacheControl": {
+            "location": "header",
+            "name": "Cache-Control"
           },
-          "ResourceOwnerAccount": {
-            "type": "string"
+          "ContentDisposition": {
+            "location": "header",
+            "name": "Content-Disposition"
           },
-          "ResourceOwnerId": {
-            "type": "integer"
+          "ContentEncoding": {
+            "location": "header",
+            "name": "Content-Encoding"
           },
-          "AllocationId": {
+          "ContentLanguage": {
+            "location": "header",
+            "name": "Content-Language"
+          },
+          "ContentType": {
+            "location": "header",
+            "name": "Content-Type"
+          },
+          "Expires": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "Expires"
+          },
+          "GrantFullControl": {
+            "location": "header",
+            "name": "x-oss-grant-full-control"
+          },
+          "GrantRead": {
+            "location": "header",
+            "name": "x-oss-grant-read"
+          },
+          "GrantReadACP": {
+            "location": "header",
+            "name": "x-oss-grant-read-acp"
+          },
+          "GrantWriteACP": {
+            "location": "header",
+            "name": "x-oss-grant-write-acp"
+          },
+          "Key": {
             "required": true,
-            "type": "string"
+            "location": "uri"
           },
-          "InstanceId": {
+          "Metadata": {
+            "type": "map",
+            "location": "header",
+            "name": "x-oss-meta-",
+            "members": {},
+            "keys": {}
+          },
+          "ServerSideEncryption": {
+            "location": "header",
+            "name": "x-oss-server-side-encryption"
+          },
+          "StorageClass": {
+            "location": "header",
+            "name": "x-oss-storage-class"
+          },
+          "WebsiteRedirectLocation": {
+            "location": "header",
+            "name": "x-oss-website-redirect-location"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "name": "Bucket"
+          },
+          "Key": {},
+          "ServerSideEncryption": {
+            "location": "header",
+            "name": "x-oss-server-side-encryption"
+          },
+          "UploadId": {}
+        }
+      }
+    },
+    "deleteBucket": {
+      "name": "DeleteBucket",
+      "http": {
+        "method": "DELETE",
+        "uri": "/{Bucket}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
             "required": true,
-            "type": "string"
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "deleteBucketLogging": {
+      "name": "DeleteBucketLogging",
+      "http": {
+        "method": "DELETE",
+        "uri": "/{Bucket}?logging"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "deleteBucketCors": {
+      "name": "DeleteBucketCors",
+      "http": {
+        "method": "DELETE",
+        "uri": "/{Bucket}?cors"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "deleteBucketLifecycle": {
+      "name": "DeleteBucketLifecycle",
+      "http": {
+        "method": "DELETE",
+        "uri": "/{Bucket}?lifecycle"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "deleteBucketPolicy": {
+      "name": "DeleteBucketPolicy",
+      "http": {
+        "method": "DELETE",
+        "uri": "/{Bucket}?policy"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "deleteBucketTagging": {
+      "name": "DeleteBucketTagging",
+      "http": {
+        "method": "DELETE",
+        "uri": "/{Bucket}?tagging"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "deleteBucketWebsite": {
+      "name": "DeleteBucketWebsite",
+      "http": {
+        "method": "DELETE",
+        "uri": "/{Bucket}?website"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "deleteObject": {
+      "name": "DeleteObject",
+      "http": {
+        "method": "DELETE",
+        "uri": "/{Bucket}/{Key}?versionId={VersionId}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
           },
-          "OwnerAccount": {
-            "type": "string"
+          "Key": {
+            "required": true,
+            "location": "uri"
+          },
+          "MFA": {
+            "location": "header",
+            "name": "x-oss-mfa"
+          },
+          "VersionId": {
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "DeleteMarker": {
+            "type": "boolean",
+            "location": "header",
+            "name": "x-oss-delete-marker"
+          },
+          "VersionId": {
+            "location": "header",
+            "name": "x-oss-version-id"
           }
         }
       }
     },
-    "attachDisk": {
-      "name": "AttachDisk",
+    "deleteObjects": {
+      "name": "DeleteObjects",
+      "alias": "DeleteMultipleObjects",
       "http": {
         "method": "POST",
-        "uri": "/"
+        "uri": "/{Bucket}?delete"
+      },
+      "input": {
+        "payload": "Delete",
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          },
+          "ContentMD5": {
+            "location": "header",
+            "name": "Content-MD5"
+          },
+          "Delete": {
+            "type": "structure",
+            "required": true,
+            "members": {
+              "Objects": {
+                "type": "list",
+                "required": true,
+                "name": "Object",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "Key": {
+                      "required": true
+                    },
+                    "VersionId": {}
+                  }
+                },
+                "flattened": true
+              },
+              "Quiet": {
+                "type": "boolean"
+              }
+            }
+          },
+          "MFA": {
+            "location": "header",
+            "name": "x-oss-mfa"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Deleted": {
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "members": {
+                "DeleteMarker": {
+                  "type": "boolean"
+                },
+                "DeleteMarkerVersionId": {},
+                "Key": {},
+                "VersionId": {}
+              }
+            },
+            "flattened": true
+          },
+          "Error": {
+            "type": "list",
+            "name": "Errors",
+            "members": {
+              "type": "structure",
+              "members": {
+                "Code": {},
+                "Key": {},
+                "Message": {},
+                "VersionId": {}
+              }
+            },
+            "flattened": true
+          }
+        }
+      }
+    },
+    "getBucketAcl": {
+      "name": "GetBucketAcl",
+      "http": {
+        "method": "GET",
+        "uri": "/{Bucket}?acl"
       },
       "input": {
         "type": "structure",
         "members": {
-          "Action": {
+          "Bucket": {
             "required": true,
-            "default": "AttachDisk"
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "AccessControlList": {
+            "type": "list",
+            "name": "Grants",
+            "members": {
+              "type": "structure",
+              "name": "Grant",
+              "members": {
+                "Grantee": {
+                  "type": "structure",
+                  "xmlns": {
+                    "uri": "http://www.w3.org/2001/XMLSchema-instance",
+                    "prefix": "xsi"
+                  },
+                  "members": {
+                    "DisplayName": {},
+                    "EmailAddress": {},
+                    "ID": {},
+                    "xsi:type": {
+                      "name": "Type",
+                      "attribute": true
+                    },
+                    "URI": {}
+                  }
+                },
+                "Permission": {}
+              }
+            }
           },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "InstanceId": {
+          "Owner": {
+            "type": "structure",
+            "members": {
+              "DisplayName": {},
+              "ID": {}
+            }
+          }
+        }
+      }
+    },
+    "getBucketCors": {
+      "name": "GetBucketCors",
+      "http": {
+        "method": "GET",
+        "uri": "/{Bucket}?cors"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
             "required": true,
-            "type": "string"
-          },
-          "DiskId": {
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CORSRule": {
+            "type": "list",
+            "name": "CORSRules",
+            "members": {
+              "type": "structure",
+              "members": {
+                "AllowedHeader": {
+                  "type": "list",
+                  "name": "AllowedHeaders",
+                  "members": {},
+                  "flattened": true
+                },
+                "AllowedMethod": {
+                  "type": "list",
+                  "name": "AllowedMethods",
+                  "members": {},
+                  "flattened": true
+                },
+                "AllowedOrigin": {
+                  "type": "list",
+                  "name": "AllowedOrigins",
+                  "members": {},
+                  "flattened": true
+                },
+                "ExposeHeader": {
+                  "type": "list",
+                  "name": "ExposeHeaders",
+                  "members": {},
+                  "flattened": true
+                },
+                "MaxAgeSeconds": {
+                  "type": "integer"
+                }
+              }
+            },
+            "flattened": true
+          }
+        }
+      }
+    },
+    "getBucketLifecycle": {
+      "name": "GetBucketLifecycle",
+      "http": {
+        "method": "GET",
+        "uri": "/{Bucket}?lifecycle"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
             "required": true,
-            "type": "string"
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Rule": {
+            "type": "list",
+            "name": "Rules",
+            "members": {
+              "type": "structure",
+              "members": {
+                "Expiration": {
+                  "type": "structure",
+                  "members": {
+                    "Date": {
+                      "type": "timestamp",
+                      "format": "iso8601"
+                    },
+                    "Days": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "ID": {},
+                "Prefix": {},
+                "Status": {},
+                "Transition": {
+                  "type": "structure",
+                  "members": {
+                    "Date": {
+                      "type": "timestamp",
+                      "format": "iso8601"
+                    },
+                    "Days": {
+                      "type": "integer"
+                    },
+                    "StorageClass": {}
+                  }
+                }
+              }
+            },
+            "flattened": true
+          }
+        }
+      }
+    },
+    "getBucketLocation": {
+      "name": "GetBucketLocation",
+      "http": {
+        "method": "GET",
+        "uri": "/{Bucket}?location"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "LocationConstraint": {}
+        }
+      }
+    },
+    "getBucketLogging": {
+      "name": "GetBucketLogging",
+      "http": {
+        "method": "GET",
+        "uri": "/{Bucket}?logging"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "LoggingEnabled": {
+            "type": "structure",
+            "members": {
+              "TargetBucket": {},
+              "TargetGrants": {
+                "type": "list",
+                "members": {
+                  "type": "structure",
+                  "name": "Grant",
+                  "members": {
+                    "Grantee": {
+                      "type": "structure",
+                      "xmlns": {
+                        "uri": "http://www.w3.org/2001/XMLSchema-instance",
+                        "prefix": "xsi"
+                      },
+                      "members": {
+                        "DisplayName": {},
+                        "EmailAddress": {},
+                        "ID": {},
+                        "xsi:type": {
+                          "name": "Type",
+                          "attribute": true
+                        },
+                        "URI": {}
+                      }
+                    },
+                    "Permission": {}
+                  }
+                }
+              },
+              "TargetPrefix": {}
+            }
+          }
+        }
+      }
+    },
+    "getBucketNotification": {
+      "name": "GetBucketNotification",
+      "http": {
+        "method": "GET",
+        "uri": "/{Bucket}?notification"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TopicConfiguration": {
+            "type": "structure",
+            "members": {
+              "Event": {},
+              "Topic": {}
+            }
+          }
+        }
+      }
+    },
+    "getBucketPolicy": {
+      "name": "GetBucketPolicy",
+      "http": {
+        "method": "GET",
+        "uri": "/{Bucket}?policy"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Policy": {}
+        },
+        "payload": "Policy"
+      }
+    },
+    "getBucketRequestPayment": {
+      "name": "GetBucketRequestPayment",
+      "http": {
+        "method": "GET",
+        "uri": "/{Bucket}?requestPayment"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Payer": {}
+        }
+      }
+    },
+    "getBucketTagging": {
+      "name": "GetBucketTagging",
+      "http": {
+        "method": "GET",
+        "uri": "/{Bucket}?tagging"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TagSet": {
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "name": "Tag",
+              "members": {
+                "Key": {},
+                "Value": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "getBucketVersioning": {
+      "name": "GetBucketVersioning",
+      "http": {
+        "method": "GET",
+        "uri": "/{Bucket}?versioning"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "MFADelete": {},
+          "Status": {}
+        }
+      }
+    },
+    "getBucketWebsite": {
+      "name": "GetBucketWebsite",
+      "http": {
+        "method": "GET",
+        "uri": "/{Bucket}?website"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ErrorDocument": {
+            "type": "structure",
+            "members": {
+              "Key": {}
+            }
           },
-          "Device": {
-            "type": "string"
+          "IndexDocument": {
+            "type": "structure",
+            "members": {
+              "Suffix": {}
+            }
           },
-          "DeleteWithInstance": {
+          "RedirectAllRequestsTo": {
+            "type": "structure",
+            "members": {
+              "HostName": {},
+              "Protocol": {}
+            }
+          },
+          "RoutingRules": {
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "name": "RoutingRule",
+              "members": {
+                "Condition": {
+                  "type": "structure",
+                  "members": {
+                    "HttpErrorCodeReturnedEquals": {},
+                    "KeyPrefixEquals": {}
+                  }
+                },
+                "Redirect": {
+                  "type": "structure",
+                  "members": {
+                    "HostName": {},
+                    "HttpRedirectCode": {},
+                    "Protocol": {},
+                    "ReplaceKeyPrefixWith": {},
+                    "ReplaceKeyWith": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "getObject": {
+      "name": "GetObject",
+      "http": {
+        "method": "GET",
+        "uri": "/{Bucket}/{Key}?versionId={VersionId}&response-content-type={ResponseContentType}&response-content-language={ResponseContentLanguage}&response-expires={ResponseExpires}&response-cache-control={ResponseCacheControl}&response-content-disposition={ResponseContentDisposition}&response-content-encoding={ResponseContentEncoding}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          },
+          "IfMatch": {
+            "location": "header",
+            "name": "If-Match"
+          },
+          "IfModifiedSince": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "If-Modified-Since"
+          },
+          "IfNoneMatch": {
+            "location": "header",
+            "name": "If-None-Match"
+          },
+          "IfUnmodifiedSince": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "If-Unmodified-Since"
+          },
+          "Key": {
+            "required": true,
+            "location": "uri"
+          },
+          "Range": {
+            "location": "header",
+            "name": "Range"
+          },
+          "ResponseCacheControl": {
+            "location": "uri"
+          },
+          "ResponseContentDisposition": {
+            "location": "uri"
+          },
+          "ResponseContentEncoding": {
+            "location": "uri"
+          },
+          "ResponseContentLanguage": {
+            "location": "uri"
+          },
+          "ResponseContentType": {
+            "location": "uri"
+          },
+          "ResponseExpires": {
+            "type": "timestamp",
+            "location": "uri"
+          },
+          "VersionId": {
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "AcceptRanges": {
+            "location": "header",
+            "name": "accept-ranges"
+          },
+          "Body": {
+            "type": "binary",
+            "streaming": true
+          },
+          "CacheControl": {
+            "location": "header",
+            "name": "Cache-Control"
+          },
+          "ContentDisposition": {
+            "location": "header",
+            "name": "Content-Disposition"
+          },
+          "ContentEncoding": {
+            "location": "header",
+            "name": "Content-Encoding"
+          },
+          "ContentLanguage": {
+            "location": "header",
+            "name": "Content-Language"
+          },
+          "ContentLength": {
+            "type": "integer",
+            "location": "header",
+            "name": "Content-Length"
+          },
+          "ContentType": {
+            "location": "header",
+            "name": "Content-Type"
+          },
+          "DeleteMarker": {
+            "type": "boolean",
+            "location": "header",
+            "name": "x-oss-delete-marker"
+          },
+          "ETag": {
+            "location": "header",
+            "name": "ETag"
+          },
+          "Expiration": {
+            "location": "header",
+            "name": "x-oss-expiration"
+          },
+          "Expires": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "Expires"
+          },
+          "LastModified": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "Last-Modified"
+          },
+          "Metadata": {
+            "type": "map",
+            "location": "header",
+            "name": "x-oss-meta-",
+            "members": {},
+            "keys": {}
+          },
+          "MissingMeta": {
+            "type": "integer",
+            "location": "header",
+            "name": "x-oss-missing-meta"
+          },
+          "Restore": {
+            "location": "header",
+            "name": "x-oss-restore"
+          },
+          "ServerSideEncryption": {
+            "location": "header",
+            "name": "x-oss-server-side-encryption"
+          },
+          "VersionId": {
+            "location": "header",
+            "name": "x-oss-version-id"
+          },
+          "WebsiteRedirectLocation": {
+            "location": "header",
+            "name": "x-oss-website-redirect-location"
+          }
+        },
+        "payload": "Body"
+      }
+    },
+    "getObjectAcl": {
+      "name": "GetObjectAcl",
+      "http": {
+        "method": "GET",
+        "uri": "/{Bucket}/{Key}?acl&versionId={VersionId}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          },
+          "Key": {
+            "required": true,
+            "location": "uri"
+          },
+          "VersionId": {
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "AccessControlList": {
+            "type": "list",
+            "name": "Grants",
+            "members": {
+              "type": "structure",
+              "name": "Grant",
+              "members": {
+                "Grantee": {
+                  "type": "structure",
+                  "xmlns": {
+                    "uri": "http://www.w3.org/2001/XMLSchema-instance",
+                    "prefix": "xsi"
+                  },
+                  "members": {
+                    "DisplayName": {},
+                    "EmailAddress": {},
+                    "ID": {},
+                    "xsi:type": {
+                      "name": "Type",
+                      "attribute": true
+                    },
+                    "URI": {}
+                  }
+                },
+                "Permission": {}
+              }
+            }
+          },
+          "Owner": {
+            "type": "structure",
+            "members": {
+              "DisplayName": {},
+              "ID": {}
+            }
+          }
+        }
+      }
+    },
+    "getObjectTorrent": {
+      "name": "GetObjectTorrent",
+      "http": {
+        "method": "GET",
+        "uri": "/{Bucket}/{Key}?torrent"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          },
+          "Key": {
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Body": {
+            "type": "binary",
+            "streaming": true
+          }
+        },
+        "payload": "Body"
+      }
+    },
+    "headBucket": {
+      "name": "HeadBucket",
+      "http": {
+        "method": "HEAD",
+        "uri": "/{Bucket}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "headObject": {
+      "name": "HeadObject",
+      "http": {
+        "method": "HEAD",
+        "uri": "/{Bucket}/{Key}?versionId={VersionId}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          },
+          "IfMatch": {
+            "location": "header",
+            "name": "If-Match"
+          },
+          "IfModifiedSince": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "If-Modified-Since"
+          },
+          "IfNoneMatch": {
+            "location": "header",
+            "name": "If-None-Match"
+          },
+          "IfUnmodifiedSince": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "If-Unmodified-Since"
+          },
+          "Key": {
+            "required": true,
+            "location": "uri"
+          },
+          "Range": {
+            "location": "header",
+            "name": "Range"
+          },
+          "VersionId": {
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "AcceptRanges": {
+            "location": "header",
+            "name": "accept-ranges"
+          },
+          "CacheControl": {
+            "location": "header",
+            "name": "Cache-Control"
+          },
+          "ContentDisposition": {
+            "location": "header",
+            "name": "Content-Disposition"
+          },
+          "ContentEncoding": {
+            "location": "header",
+            "name": "Content-Encoding"
+          },
+          "ContentLanguage": {
+            "location": "header",
+            "name": "Content-Language"
+          },
+          "ContentLength": {
+            "type": "integer",
+            "location": "header",
+            "name": "Content-Length"
+          },
+          "ContentType": {
+            "location": "header",
+            "name": "Content-Type"
+          },
+          "DeleteMarker": {
+            "type": "boolean",
+            "location": "header",
+            "name": "x-oss-delete-marker"
+          },
+          "ETag": {
+            "location": "header",
+            "name": "ETag"
+          },
+          "Expiration": {
+            "location": "header",
+            "name": "x-oss-expiration"
+          },
+          "Expires": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "Expires"
+          },
+          "LastModified": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "Last-Modified"
+          },
+          "Metadata": {
+            "type": "map",
+            "location": "header",
+            "name": "x-oss-meta-",
+            "members": {},
+            "keys": {}
+          },
+          "MissingMeta": {
+            "type": "integer",
+            "location": "header",
+            "name": "x-oss-missing-meta"
+          },
+          "Restore": {
+            "location": "header",
+            "name": "x-oss-restore"
+          },
+          "ServerSideEncryption": {
+            "location": "header",
+            "name": "x-oss-server-side-encryption"
+          },
+          "VersionId": {
+            "location": "header",
+            "name": "x-oss-version-id"
+          },
+          "WebsiteRedirectLocation": {
+            "location": "header",
+            "name": "x-oss-website-redirect-location"
+          }
+        }
+      }
+    },
+    "listBuckets": {
+      "name": "ListBuckets",
+      "alias": "GetService",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {}
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Buckets": {
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "name": "Bucket",
+              "members": {
+                "CreationDate": {
+                  "type": "timestamp"
+                },
+                "Name": {}
+              }
+            }
+          },
+          "Owner": {
+            "type": "structure",
+            "members": {
+              "DisplayName": {},
+              "ID": {}
+            }
+          }
+        }
+      }
+    },
+    "listMultipartUploads": {
+      "name": "ListMultipartUploads",
+      "http": {
+        "method": "GET",
+        "uri": "/{Bucket}?uploads&prefix={Prefix}&delimiter={Delimiter}&max-uploads={MaxUploads}&key-marker={KeyMarker}&upload-id-marker={UploadIdMarker}&encoding-type={EncodingType}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          },
+          "Delimiter": {
+            "location": "uri"
+          },
+          "EncodingType": {
+            "location": "uri"
+          },
+          "KeyMarker": {
+            "location": "uri"
+          },
+          "MaxUploads": {
+            "type": "integer",
+            "location": "uri"
+          },
+          "Prefix": {
+            "location": "uri"
+          },
+          "UploadIdMarker": {
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Bucket": {},
+          "CommonPrefixes": {
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "members": {
+                "Prefix": {}
+              }
+            },
+            "flattened": true
+          },
+          "EncodingType": {
+            "location": "header",
+            "name": "Encoding-Type"
+          },
+          "IsTruncated": {
             "type": "boolean"
           },
-          "OwnerAccount": {
-            "type": "string"
+          "KeyMarker": {},
+          "MaxUploads": {
+            "type": "integer"
+          },
+          "NextKeyMarker": {},
+          "NextUploadIdMarker": {},
+          "Prefix": {},
+          "UploadIdMarker": {},
+          "Upload": {
+            "type": "list",
+            "name": "Uploads",
+            "members": {
+              "type": "structure",
+              "members": {
+                "Initiated": {
+                  "type": "timestamp"
+                },
+                "Initiator": {
+                  "type": "structure",
+                  "members": {
+                    "DisplayName": {},
+                    "ID": {}
+                  }
+                },
+                "Key": {},
+                "Owner": {
+                  "type": "structure",
+                  "members": {
+                    "DisplayName": {},
+                    "ID": {}
+                  }
+                },
+                "StorageClass": {},
+                "UploadId": {}
+              }
+            },
+            "flattened": true
           }
         }
       }
     },
-    "authorizeSecurityGroup": {
-      "name": "AuthorizeSecurityGroup",
+    "listObjectVersions": {
+      "name": "ListObjectVersions",
+      "alias": "GetBucketObjectVersions",
       "http": {
-        "method": "POST",
-        "uri": "/"
+        "method": "GET",
+        "uri": "/{Bucket}?versions&delimiter={Delimiter}&key-marker={KeyMarker}&max-keys={MaxKeys}&prefix={Prefix}&version-id-marker={VersionIdMarker}&encoding-type={EncodingType}"
       },
       "input": {
         "type": "structure",
         "members": {
-          "Action": {
+          "Bucket": {
             "required": true,
-            "default": "AuthorizeSecurityGroup"
+            "location": "uri"
           },
-          "OwnerId": {
+          "Delimiter": {
+            "location": "uri"
+          },
+          "EncodingType": {
+            "location": "uri"
+          },
+          "KeyMarker": {
+            "location": "uri"
+          },
+          "MaxKeys": {
+            "type": "integer",
+            "location": "uri"
+          },
+          "Prefix": {
+            "location": "uri"
+          },
+          "VersionIdMarker": {
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CommonPrefixes": {
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "members": {
+                "Prefix": {}
+              }
+            },
+            "flattened": true
+          },
+          "DeleteMarker": {
+            "type": "list",
+            "name": "DeleteMarkers",
+            "members": {
+              "type": "structure",
+              "members": {
+                "IsLatest": {
+                  "type": "boolean"
+                },
+                "Key": {},
+                "LastModified": {
+                  "type": "timestamp"
+                },
+                "Owner": {
+                  "type": "structure",
+                  "members": {
+                    "DisplayName": {},
+                    "ID": {}
+                  }
+                },
+                "VersionId": {}
+              }
+            },
+            "flattened": true
+          },
+          "EncodingType": {
+            "location": "header",
+            "name": "Encoding-Type"
+          },
+          "IsTruncated": {
+            "type": "boolean"
+          },
+          "KeyMarker": {},
+          "MaxKeys": {
             "type": "integer"
           },
-          "ResourceOwnerAccount": {
-            "type": "string"
+          "Name": {},
+          "NextKeyMarker": {},
+          "NextVersionIdMarker": {},
+          "Prefix": {},
+          "VersionIdMarker": {},
+          "Version": {
+            "type": "list",
+            "name": "Versions",
+            "members": {
+              "type": "structure",
+              "members": {
+                "ETag": {},
+                "IsLatest": {
+                  "type": "boolean"
+                },
+                "Key": {},
+                "LastModified": {
+                  "type": "timestamp"
+                },
+                "Owner": {
+                  "type": "structure",
+                  "members": {
+                    "DisplayName": {},
+                    "ID": {}
+                  }
+                },
+                "Size": {},
+                "StorageClass": {},
+                "VersionId": {}
+              }
+            },
+            "flattened": true
+          }
+        }
+      }
+    },
+    "listObjects": {
+      "name": "ListObjects",
+      "alias": "GetBucket",
+      "http": {
+        "method": "GET",
+        "uri": "/{Bucket}?delimiter={Delimiter}&marker={Marker}&max-keys={MaxKeys}&prefix={Prefix}&encoding-type={EncodingType}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
           },
-          "ResourceOwnerId": {
+          "Delimiter": {
+            "location": "uri"
+          },
+          "EncodingType": {
+            "location": "uri"
+          },
+          "Marker": {
+            "location": "uri"
+          },
+          "MaxKeys": {
+            "type": "integer",
+            "location": "uri"
+          },
+          "Prefix": {
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CommonPrefixes": {
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "members": {
+                "Prefix": {}
+              }
+            },
+            "flattened": true
+          },
+          "Contents": {
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "members": {
+                "ETag": {},
+                "Key": {},
+                "LastModified": {
+                  "type": "timestamp"
+                },
+                "Owner": {
+                  "type": "structure",
+                  "members": {
+                    "DisplayName": {},
+                    "ID": {}
+                  }
+                },
+                "Size": {
+                  "type": "integer"
+                },
+                "StorageClass": {}
+              }
+            },
+            "flattened": true
+          },
+          "EncodingType": {
+            "location": "header",
+            "name": "Encoding-Type"
+          },
+          "IsTruncated": {
+            "type": "boolean"
+          },
+          "Marker": {},
+          "MaxKeys": {
             "type": "integer"
           },
-          "SecurityGroupId": {
+          "Name": {},
+          "NextMarker": {},
+          "Prefix": {}
+        }
+      }
+    },
+    "listParts": {
+      "name": "ListParts",
+      "http": {
+        "method": "GET",
+        "uri": "/{Bucket}/{Key}?uploadId={UploadId}&max-parts={MaxParts}&part-number-marker={PartNumberMarker}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
             "required": true,
-            "type": "string"
+            "location": "uri"
           },
-          "RegionId": {
+          "Key": {
             "required": true,
-            "type": "string"
+            "location": "uri"
           },
-          "IpProtocol": {
+          "MaxParts": {
+            "type": "integer",
+            "location": "uri"
+          },
+          "PartNumberMarker": {
+            "type": "integer",
+            "location": "uri"
+          },
+          "UploadId": {
             "required": true,
-            "type": "string"
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Bucket": {},
+          "Initiator": {
+            "type": "structure",
+            "members": {
+              "DisplayName": {},
+              "ID": {}
+            }
           },
-          "PortRange": {
+          "IsTruncated": {
+            "type": "boolean"
+          },
+          "Key": {},
+          "MaxParts": {
+            "type": "integer"
+          },
+          "NextPartNumberMarker": {
+            "type": "integer"
+          },
+          "Owner": {
+            "type": "structure",
+            "members": {
+              "DisplayName": {},
+              "ID": {}
+            }
+          },
+          "PartNumberMarker": {
+            "type": "integer"
+          },
+          "Part": {
+            "type": "list",
+            "name": "Parts",
+            "members": {
+              "type": "structure",
+              "members": {
+                "ETag": {},
+                "LastModified": {
+                  "type": "timestamp"
+                },
+                "PartNumber": {
+                  "type": "integer"
+                },
+                "Size": {
+                  "type": "integer"
+                }
+              }
+            },
+            "flattened": true
+          },
+          "StorageClass": {},
+          "UploadId": {}
+        }
+      }
+    },
+    "putBucketAcl": {
+      "name": "PutBucketAcl",
+      "http": {
+        "method": "PUT",
+        "uri": "/{Bucket}?acl"
+      },
+      "input": {
+        "payload": "AccessControlPolicy",
+        "type": "structure",
+        "members": {
+          "ACL": {
+            "location": "header",
+            "name": "x-oss-acl"
+          },
+          "AccessControlPolicy": {
+            "type": "structure",
+            "members": {
+              "Grants": {
+                "type": "list",
+                "name": "AccessControlList",
+                "members": {
+                  "type": "structure",
+                  "name": "Grant",
+                  "members": {
+                    "Grantee": {
+                      "type": "structure",
+                      "xmlns": {
+                        "uri": "http://www.w3.org/2001/XMLSchema-instance",
+                        "prefix": "xsi"
+                      },
+                      "members": {
+                        "DisplayName": {},
+                        "EmailAddress": {},
+                        "ID": {},
+                        "Type": {
+                          "required": true,
+                          "name": "xsi:type",
+                          "attribute": true
+                        },
+                        "URI": {}
+                      }
+                    },
+                    "Permission": {}
+                  }
+                }
+              },
+              "Owner": {
+                "type": "structure",
+                "members": {
+                  "DisplayName": {},
+                  "ID": {}
+                }
+              }
+            }
+          },
+          "Bucket": {
             "required": true,
-            "type": "string"
+            "location": "uri"
           },
-          "SourceGroupId": {
-            "type": "string"
+          "ContentMD5": {
+            "location": "header",
+            "name": "Content-MD5"
           },
-          "SourceGroupOwnerAccount": {
-            "type": "string"
+          "GrantFullControl": {
+            "location": "header",
+            "name": "x-oss-grant-full-control"
           },
-          "SourceCidrIp": {
-            "type": "string"
+          "GrantRead": {
+            "location": "header",
+            "name": "x-oss-grant-read"
+          },
+          "GrantReadACP": {
+            "location": "header",
+            "name": "x-oss-grant-read-acp"
+          },
+          "GrantWrite": {
+            "location": "header",
+            "name": "x-oss-grant-write"
+          },
+          "GrantWriteACP": {
+            "location": "header",
+            "name": "x-oss-grant-write-acp"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "putBucketCors": {
+      "name": "PutBucketCors",
+      "http": {
+        "method": "PUT",
+        "uri": "/{Bucket}?cors"
+      },
+      "input": {
+        "payload": "CORSConfiguration",
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          },
+          "CORSConfiguration": {
+            "type": "structure",
+            "members": {
+              "CORSRules": {
+                "type": "list",
+                "name": "CORSRule",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "AllowedHeaders": {
+                      "type": "list",
+                      "name": "AllowedHeader",
+                      "members": {},
+                      "flattened": true
+                    },
+                    "AllowedMethods": {
+                      "type": "list",
+                      "name": "AllowedMethod",
+                      "members": {},
+                      "flattened": true
+                    },
+                    "AllowedOrigins": {
+                      "type": "list",
+                      "name": "AllowedOrigin",
+                      "members": {},
+                      "flattened": true
+                    },
+                    "ExposeHeaders": {
+                      "type": "list",
+                      "name": "ExposeHeader",
+                      "members": {},
+                      "flattened": true
+                    },
+                    "MaxAgeSeconds": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "flattened": true
+              }
+            }
+          },
+          "ContentMD5": {
+            "location": "header",
+            "name": "Content-MD5"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "putBucketLifecycle": {
+      "name": "PutBucketLifecycle",
+      "http": {
+        "method": "PUT",
+        "uri": "/{Bucket}?lifecycle"
+      },
+      "input": {
+        "payload": "LifecycleConfiguration",
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          },
+          "ContentMD5": {
+            "location": "header",
+            "name": "Content-MD5"
+          },
+          "LifecycleConfiguration": {
+            "type": "structure",
+            "members": {
+              "Rules": {
+                "type": "list",
+                "required": true,
+                "name": "Rule",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "Expiration": {
+                      "type": "structure",
+                      "members": {
+                        "Date": {
+                          "type": "timestamp",
+                          "format": "iso8601"
+                        },
+                        "Days": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "ID": {},
+                    "Prefix": {
+                      "required": true
+                    },
+                    "Status": {
+                      "required": true
+                    },
+                    "Transition": {
+                      "type": "structure",
+                      "members": {
+                        "Date": {
+                          "type": "timestamp",
+                          "format": "iso8601"
+                        },
+                        "Days": {
+                          "type": "integer"
+                        },
+                        "StorageClass": {}
+                      }
+                    }
+                  }
+                },
+                "flattened": true
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "putBucketLogging": {
+      "name": "PutBucketLogging",
+      "http": {
+        "method": "PUT",
+        "uri": "/{Bucket}?logging"
+      },
+      "input": {
+        "payload": "BucketLoggingStatus",
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          },
+          "BucketLoggingStatus": {
+            "type": "structure",
+            "required": true,
+            "members": {
+              "LoggingEnabled": {
+                "type": "structure",
+                "members": {
+                  "TargetBucket": {},
+                  "TargetGrants": {
+                    "type": "list",
+                    "members": {
+                      "type": "structure",
+                      "name": "Grant",
+                      "members": {
+                        "Grantee": {
+                          "type": "structure",
+                          "xmlns": {
+                            "uri": "http://www.w3.org/2001/XMLSchema-instance",
+                            "prefix": "xsi"
+                          },
+                          "members": {
+                            "DisplayName": {},
+                            "EmailAddress": {},
+                            "ID": {},
+                            "Type": {
+                              "required": true,
+                              "name": "xsi:type",
+                              "attribute": true
+                            },
+                            "URI": {}
+                          }
+                        },
+                        "Permission": {}
+                      }
+                    }
+                  },
+                  "TargetPrefix": {}
+                }
+              }
+            }
+          },
+          "ContentMD5": {
+            "location": "header",
+            "name": "Content-MD5"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "putBucketNotification": {
+      "name": "PutBucketNotification",
+      "http": {
+        "method": "PUT",
+        "uri": "/{Bucket}?notification"
+      },
+      "input": {
+        "payload": "NotificationConfiguration",
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          },
+          "ContentMD5": {
+            "location": "header",
+            "name": "Content-MD5"
+          },
+          "NotificationConfiguration": {
+            "type": "structure",
+            "required": true,
+            "members": {
+              "TopicConfiguration": {
+                "type": "structure",
+                "required": true,
+                "members": {
+                  "Event": {},
+                  "Topic": {}
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "putBucketPolicy": {
+      "name": "PutBucketPolicy",
+      "http": {
+        "method": "PUT",
+        "uri": "/{Bucket}?policy"
+      },
+      "input": {
+        "payload": "Policy",
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          },
+          "ContentMD5": {
+            "location": "header",
+            "name": "Content-MD5"
           },
           "Policy": {
-            "type": "string"
-          },
-          "Priority": {
-            "type": "string"
-          },
-          "NicType": {
-            "type": "string"
-          },
-          "ClientToken": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "authorizeSecurityGroupEgress": {
-      "name": "AuthorizeSecurityGroupEgress",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "AuthorizeSecurityGroupEgress"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "SecurityGroupId": {
-            "required": true,
-            "type": "string"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "IpProtocol": {
-            "required": true,
-            "type": "string"
-          },
-          "PortRange": {
-            "required": true,
-            "type": "string"
-          },
-          "DestGroupId": {
-            "type": "string"
-          },
-          "DestGroupOwnerAccount": {
-            "type": "string"
-          },
-          "DestCidrIp": {
-            "type": "string"
-          },
-          "Policy": {
-            "type": "string"
-          },
-          "Priority": {
-            "type": "string"
-          },
-          "NicType": {
-            "type": "string"
-          },
-          "ClientToken": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "bindIpRange": {
-      "name": "BindIpRange",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "BindIpRange"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "IpAddress": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "cancelCopyImage": {
-      "name": "CancelCopyImage",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "CancelCopyImage"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "ImageId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "checkAutoSnapshotPolicy": {
-      "name": "CheckAutoSnapshotPolicy",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "CheckAutoSnapshotPolicy"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          },
-          "SystemDiskPolicyEnabled": {
-            "type": "boolean"
-          },
-          "SystemDiskPolicyTimePeriod": {
-            "type": "integer"
-          },
-          "SystemDiskPolicyRetentionDays": {
-            "type": "integer"
-          },
-          "SystemDiskPolicyRetentionLastWeek": {
-            "type": "boolean"
-          },
-          "DataDiskPolicyEnabled": {
-            "type": "boolean"
-          },
-          "DataDiskPolicyTimePeriod": {
-            "type": "integer"
-          },
-          "DataDiskPolicyRetentionDays": {
-            "type": "integer"
-          },
-          "DataDiskPolicyRetentionLastWeek": {
-            "type": "boolean"
-          }
-        }
-      }
-    },
-    "checkDiskEnableAutoSnapshotValidation": {
-      "name": "CheckDiskEnableAutoSnapshotValidation",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "CheckDiskEnableAutoSnapshotValidation"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          },
-          "DiskIds": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "copyImage": {
-      "name": "CopyImage",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "CopyImage"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "DestinationImageName": {
-            "required": true,
-            "type": "string"
-          },
-          "DestinationDescription": {
-            "required": true,
-            "type": "string"
-          },
-          "ImageId": {
-            "required": true,
-            "type": "string"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "DestinationRegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "createDisk": {
-      "name": "CreateDisk",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "CreateDisk"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "ZoneId": {
-            "required": true,
-            "type": "string"
-          },
-          "SnapshotId": {
-            "type": "string"
-          },
-          "DiskName": {
-            "type": "string"
-          },
-          "Size": {
-            "type": "integer"
-          },
-          "DiskCategory": {
-            "type": "string"
-          },
-          "Description": {
-            "type": "string"
-          },
-          "ClientToken": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "createImage": {
-      "name": "CreateImage",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "CreateImage"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "SnapshotId": {
-            "required": true,
-            "type": "string"
-          },
-          "ImageName": {
-            "type": "string"
-          },
-          "ImageVersion": {
-            "type": "string"
-          },
-          "Description": {
-            "type": "string"
-          },
-          "ClientToken": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "createInstance": {
-      "name": "CreateInstance",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "CreateInstance"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "ImageId": {
-            "required": true,
-            "type": "string"
-          },
-          "InstanceType": {
-            "required": true,
-            "type": "string"
-          },
-          "SecurityGroupId": {
-            "required": true,
-            "type": "string"
-          },
-          "InstanceName": {
-            "type": "string"
-          },
-          "InternetChargeType": {
-            "type": "string"
-          },
-          "InternetMaxBandwidthIn": {
-            "type": "integer"
-          },
-          "InternetMaxBandwidthOut": {
-            "type": "integer"
-          },
-          "HostName": {
-            "type": "string"
-          },
-          "Password": {
-            "type": "string"
-          },
-          "ZoneId": {
-            "type": "string"
-          },
-          "ClusterId": {
-            "type": "string"
-          },
-          "ClientToken": {
-            "type": "string"
-          },
-          "VlanId": {
-            "type": "string"
-          },
-          "InnerIpAddress": {
-            "type": "string"
-          },
-          "SystemDisk.Category": {
-            "type": "string"
-          },
-          "SystemDisk.DiskName": {
-            "type": "string"
-          },
-          "SystemDisk.Description": {
-            "type": "string"
-          },
-          "DataDisk.1.Size": {
-            "type": "integer"
-          },
-          "DataDisk.1.Category": {
-            "type": "string"
-          },
-          "DataDisk.1.SnapshotId": {
-            "type": "string"
-          },
-          "DataDisk.1.DiskName": {
-            "type": "string"
-          },
-          "DataDisk.1.Description": {
-            "type": "string"
-          },
-          "DataDisk.1.Device": {
-            "type": "string"
-          },
-          "DataDisk.1.DeleteWithInstance": {
-            "type": "boolean"
-          },
-          "DataDisk.2.Size": {
-            "type": "integer"
-          },
-          "DataDisk.2.Category": {
-            "type": "string"
-          },
-          "DataDisk.2.SnapshotId": {
-            "type": "string"
-          },
-          "DataDisk.2.DiskName": {
-            "type": "string"
-          },
-          "DataDisk.2.Description": {
-            "type": "string"
-          },
-          "DataDisk.2.Device": {
-            "type": "string"
-          },
-          "DataDisk.2.DeleteWithInstance": {
-            "type": "boolean"
-          },
-          "DataDisk.3.Size": {
-            "type": "integer"
-          },
-          "DataDisk.3.Category": {
-            "type": "string"
-          },
-          "DataDisk.3.SnapshotId": {
-            "type": "string"
-          },
-          "DataDisk.3.DiskName": {
-            "type": "string"
-          },
-          "DataDisk.3.Description": {
-            "type": "string"
-          },
-          "DataDisk.3.Device": {
-            "type": "string"
-          },
-          "DataDisk.3.DeleteWithInstance": {
-            "type": "boolean"
-          },
-          "DataDisk.4.Size": {
-            "type": "integer"
-          },
-          "DataDisk.4.Category": {
-            "type": "string"
-          },
-          "DataDisk.4.SnapshotId": {
-            "type": "string"
-          },
-          "DataDisk.4.DiskName": {
-            "type": "string"
-          },
-          "DataDisk.4.Description": {
-            "type": "string"
-          },
-          "DataDisk.4.Device": {
-            "type": "string"
-          },
-          "DataDisk.4.DeleteWithInstance": {
-            "type": "boolean"
-          },
-          "NodeControllerId": {
-            "type": "string"
-          },
-          "Description": {
-            "type": "string"
-          },
-          "VSwitchId": {
-            "type": "string"
-          },
-          "PrivateIpAddress": {
-            "type": "string"
-          },
-          "IoOptimized": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          },
-          "UseAdditionalService": {
-            "type": "boolean"
-          },
-          "InstanceChargeType": {
-            "type": "string"
-          },
-          "Period": {
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "createRouteEntry": {
-      "name": "CreateRouteEntry",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "CreateRouteEntry"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RouteTableId": {
-            "required": true,
-            "type": "string"
-          },
-          "DestinationCidrBlock": {
-            "required": true,
-            "type": "string"
-          },
-          "NextHopId": {
-            "required": true,
-            "type": "string"
-          },
-          "ClientToken": {
-            "type": "string"
-          },
-          "NextHopType": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "createSecurityGroup": {
-      "name": "CreateSecurityGroup",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "CreateSecurityGroup"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "Description": {
-            "type": "string"
-          },
-          "ClientToken": {
-            "type": "string"
-          },
-          "SecurityGroupName": {
-            "type": "string"
-          },
-          "VpcId": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "createSnapshot": {
-      "name": "CreateSnapshot",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "CreateSnapshot"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "DiskId": {
-            "required": true,
-            "type": "string"
-          },
-          "SnapshotName": {
-            "type": "string"
-          },
-          "Description": {
-            "type": "string"
-          },
-          "ClientToken": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "createVpc": {
-      "name": "CreateVpc",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "CreateVpc"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "CidrBlock": {
-            "type": "string"
-          },
-          "VpcName": {
-            "type": "string"
-          },
-          "Description": {
-            "type": "string"
-          },
-          "ClientToken": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          },
-          "UserCidr": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "createVSwitch": {
-      "name": "CreateVSwitch",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "CreateVSwitch"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "ZoneId": {
-            "required": true,
-            "type": "string"
-          },
-          "CidrBlock": {
-            "required": true,
-            "type": "string"
-          },
-          "VpcId": {
-            "required": true,
-            "type": "string"
-          },
-          "VSwitchName": {
-            "type": "string"
-          },
-          "Description": {
-            "type": "string"
-          },
-          "ClientToken": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "deleteDisk": {
-      "name": "DeleteDisk",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DeleteDisk"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "DiskId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "deleteImage": {
-      "name": "DeleteImage",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DeleteImage"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "ImageId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "deleteInstance": {
-      "name": "DeleteInstance",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DeleteInstance"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "deleteRouteEntry": {
-      "name": "DeleteRouteEntry",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DeleteRouteEntry"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RouteTableId": {
-            "required": true,
-            "type": "string"
-          },
-          "DestinationCidrBlock": {
-            "required": true,
-            "type": "string"
-          },
-          "NextHopId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "deleteSecurityGroup": {
-      "name": "DeleteSecurityGroup",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DeleteSecurityGroup"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "SecurityGroupId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "deleteSnapshot": {
-      "name": "DeleteSnapshot",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DeleteSnapshot"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "SnapshotId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "deleteVpc": {
-      "name": "DeleteVpc",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DeleteVpc"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "VpcId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "deleteVSwitch": {
-      "name": "DeleteVSwitch",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DeleteVSwitch"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "VSwitchId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeAutoSnapshotPolicy": {
-      "name": "DescribeAutoSnapshotPolicy",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeAutoSnapshotPolicy"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeClusters": {
-      "name": "DescribeClusters",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeClusters"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeDiskMonitorData": {
-      "name": "DescribeDiskMonitorData",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeDiskMonitorData"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "DiskId": {
-            "required": true,
-            "type": "string"
-          },
-          "StartTime": {
-            "required": true,
-            "type": "string"
-          },
-          "EndTime": {
-            "required": true,
-            "type": "string"
-          },
-          "Period": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeDisks": {
-      "name": "DescribeDisks",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeDisks"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "ZoneId": {
-            "type": "string"
-          },
-          "DiskIds": {
-            "type": "string"
-          },
-          "InstanceId": {
-            "type": "string"
-          },
-          "DiskType": {
-            "type": "string"
-          },
-          "Category": {
-            "type": "string"
-          },
-          "Status": {
-            "type": "string"
-          },
-          "SnapshotId": {
-            "type": "string"
-          },
-          "Portable": {
-            "type": "boolean"
-          },
-          "DeleteWithInstance": {
-            "type": "boolean"
-          },
-          "DeleteAutoSnapshot": {
-            "type": "boolean"
-          },
-          "PageNumber": {
-            "type": "integer"
-          },
-          "PageSize": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          },
-          "DiskName": {
-            "type": "string"
-          },
-          "EnableAutoSnapshot": {
-            "type": "boolean"
-          },
-          "DiskChargeType": {
-            "type": "string"
-          },
-          "LockReason": {
-            "type": "string"
-          },
-          "Filter.1.Key": {
-            "type": "string"
-          },
-          "Filter.2.Key": {
-            "type": "string"
-          },
-          "Filter.1.Value": {
-            "type": "string"
-          },
-          "Filter.2.Value": {
-            "type": "string"
-          },
-          "Tag.1.Key": {
-            "type": "string"
-          },
-          "Tag.2.Key": {
-            "type": "string"
-          },
-          "Tag.3.Key": {
-            "type": "string"
-          },
-          "Tag.4.Key": {
-            "type": "string"
-          },
-          "Tag.5.Key": {
-            "type": "string"
-          },
-          "Tag.1.Value": {
-            "type": "string"
-          },
-          "Tag.2.Value": {
-            "type": "string"
-          },
-          "Tag.3.Value": {
-            "type": "string"
-          },
-          "Tag.4.Value": {
-            "type": "string"
-          },
-          "Tag.5.Value": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeEipAddresses": {
-      "name": "DescribeEipAddresses",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeEipAddresses"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "Status": {
-            "type": "string"
-          },
-          "EipAddress": {
-            "type": "string"
-          },
-          "AllocationId": {
-            "type": "string"
-          },
-          "PageNumber": {
-            "type": "integer"
-          },
-          "PageSize": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          },
-          "Filter.1.Key": {
-            "type": "string"
-          },
-          "Filter.2.Key": {
-            "type": "string"
-          },
-          "Filter.1.Value": {
-            "type": "string"
-          },
-          "Filter.2.Value": {
-            "type": "string"
-          },
-          "LockReason": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeEipMonitorData": {
-      "name": "DescribeEipMonitorData",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeEipMonitorData"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "AllocationId": {
-            "required": true,
-            "type": "string"
-          },
-          "StartTime": {
-            "required": true,
-            "type": "string"
-          },
-          "EndTime": {
-            "required": true,
-            "type": "string"
-          },
-          "Period": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeImages": {
-      "name": "DescribeImages",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeImages"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "Status": {
-            "type": "string"
-          },
-          "ImageId": {
-            "type": "string"
-          },
-          "ShowExpired": {
-            "type": "boolean"
-          },
-          "SnapshotId": {
-            "type": "string"
-          },
-          "ImageName": {
-            "type": "string"
-          },
-          "ImageOwnerAlias": {
-            "type": "string"
-          },
-          "PageNumber": {
-            "type": "integer"
-          },
-          "PageSize": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          },
-          "Filter.1.Key": {
-            "type": "string"
-          },
-          "Filter.2.Key": {
-            "type": "string"
-          },
-          "Filter.1.Value": {
-            "type": "string"
-          },
-          "Filter.2.Value": {
-            "type": "string"
-          },
-          "Usage": {
-            "type": "string"
-          },
-          "Tag.1.Key": {
-            "type": "string"
-          },
-          "Tag.2.Key": {
-            "type": "string"
-          },
-          "Tag.3.Key": {
-            "type": "string"
-          },
-          "Tag.4.Key": {
-            "type": "string"
-          },
-          "Tag.5.Key": {
-            "type": "string"
-          },
-          "Tag.1.Value": {
-            "type": "string"
-          },
-          "Tag.2.Value": {
-            "type": "string"
-          },
-          "Tag.3.Value": {
-            "type": "string"
-          },
-          "Tag.4.Value": {
-            "type": "string"
-          },
-          "Tag.5.Value": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeImageSharePermission": {
-      "name": "DescribeImageSharePermission",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeImageSharePermission"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "ImageId": {
-            "required": true,
-            "type": "string"
-          },
-          "PageNumber": {
-            "type": "integer"
-          },
-          "PageSize": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeInstanceAttribute": {
-      "name": "DescribeInstanceAttribute",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeInstanceAttribute"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeInstanceMonitorData": {
-      "name": "DescribeInstanceMonitorData",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeInstanceMonitorData"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "StartTime": {
-            "required": true,
-            "type": "string"
-          },
-          "EndTime": {
-            "required": true,
-            "type": "string"
-          },
-          "Period": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeInstancePhysicalAttribute": {
-      "name": "DescribeInstancePhysicalAttribute",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeInstancePhysicalAttribute"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeInstances": {
-      "name": "DescribeInstances",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeInstances"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "VpcId": {
-            "type": "string"
-          },
-          "VSwitchId": {
-            "type": "string"
-          },
-          "ZoneId": {
-            "type": "string"
-          },
-          "InstanceNetworkType": {
-            "type": "string"
-          },
-          "SecurityGroupId": {
-            "type": "string"
-          },
-          "InstanceIds": {
-            "type": "string"
-          },
-          "PageNumber": {
-            "type": "integer"
-          },
-          "PageSize": {
-            "type": "integer"
-          },
-          "InnerIpAddresses": {
-            "type": "string"
-          },
-          "PrivateIpAddresses": {
-            "type": "string"
-          },
-          "PublicIpAddresses": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          },
-          "InstanceChargeType": {
-            "type": "string"
-          },
-          "InternetChargeType": {
-            "type": "string"
-          },
-          "InstanceName": {
-            "type": "string"
-          },
-          "ImageId": {
-            "type": "string"
-          },
-          "Status": {
-            "type": "string"
-          },
-          "LockReason": {
-            "type": "string"
-          },
-          "Filter.1.Key": {
-            "type": "string"
-          },
-          "Filter.2.Key": {
-            "type": "string"
-          },
-          "Filter.3.Key": {
-            "type": "string"
-          },
-          "Filter.4.Key": {
-            "type": "string"
-          },
-          "Filter.1.Value": {
-            "type": "string"
-          },
-          "Filter.2.Value": {
-            "type": "string"
-          },
-          "Filter.3.Value": {
-            "type": "string"
-          },
-          "Filter.4.Value": {
-            "type": "string"
-          },
-          "DeviceAvailable": {
-            "type": "boolean"
-          },
-          "IoOptimized": {
-            "type": "boolean"
-          },
-          "Tag.1.Key": {
-            "type": "string"
-          },
-          "Tag.2.Key": {
-            "type": "string"
-          },
-          "Tag.3.Key": {
-            "type": "string"
-          },
-          "Tag.4.Key": {
-            "type": "string"
-          },
-          "Tag.5.Key": {
-            "type": "string"
-          },
-          "Tag.1.Value": {
-            "type": "string"
-          },
-          "Tag.2.Value": {
-            "type": "string"
-          },
-          "Tag.3.Value": {
-            "type": "string"
-          },
-          "Tag.4.Value": {
-            "type": "string"
-          },
-          "Tag.5.Value": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeInstanceStatus": {
-      "name": "DescribeInstanceStatus",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeInstanceStatus"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "ZoneId": {
-            "type": "string"
-          },
-          "ClusterId": {
-            "type": "string"
-          },
-          "PageNumber": {
-            "type": "integer"
-          },
-          "PageSize": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeInstanceTypes": {
-      "name": "DescribeInstanceTypes",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeInstanceTypes"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeInstanceVncPasswd": {
-      "name": "DescribeInstanceVncPasswd",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeInstanceVncPasswd"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeInstanceVncUrl": {
-      "name": "DescribeInstanceVncUrl",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeInstanceVncUrl"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeIntranetAttributeKb": {
-      "name": "DescribeIntranetAttributeKb",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeIntranetAttributeKb"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeIpRanges": {
-      "name": "DescribeIpRanges",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeIpRanges"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "ClusterId": {
-            "required": true,
-            "type": "string"
-          },
-          "NicType": {
-            "required": true,
-            "type": "string"
-          },
-          "PageNumber": {
-            "type": "integer"
-          },
-          "PageSize": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeLimitation": {
-      "name": "DescribeLimitation",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeLimitation"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          },
-          "Limitation": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeRegions": {
-      "name": "DescribeRegions",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeRegions"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeRouteTables": {
-      "name": "DescribeRouteTables",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeRouteTables"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "VRouterId": {
-            "required": true,
-            "type": "string"
-          },
-          "RouteTableId": {
-            "type": "string"
-          },
-          "PageNumber": {
-            "type": "integer"
-          },
-          "PageSize": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeSecurityGroupAttribute": {
-      "name": "DescribeSecurityGroupAttribute",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeSecurityGroupAttribute"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "SecurityGroupId": {
-            "required": true,
-            "type": "string"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "NicType": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          },
-          "Direction": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeSecurityGroups": {
-      "name": "DescribeSecurityGroups",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeSecurityGroups"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "VpcId": {
-            "type": "string"
-          },
-          "PageNumber": {
-            "type": "integer"
-          },
-          "PageSize": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          },
-          "SecurityGroupIds": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeSnapshots": {
-      "name": "DescribeSnapshots",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeSnapshots"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "InstanceId": {
-            "type": "string"
-          },
-          "DiskId": {
-            "type": "string"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "SnapshotIds": {
-            "type": "string"
-          },
-          "PageNumber": {
-            "type": "integer"
-          },
-          "PageSize": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          },
-          "SnapshotName": {
-            "type": "string"
-          },
-          "Status": {
-            "type": "string"
-          },
-          "SnapshotType": {
-            "type": "string"
-          },
-          "Filter.1.Key": {
-            "type": "string"
-          },
-          "Filter.2.Key": {
-            "type": "string"
-          },
-          "Filter.1.Value": {
-            "type": "string"
-          },
-          "Filter.2.Value": {
-            "type": "string"
-          },
-          "Usage": {
-            "type": "string"
-          },
-          "SourceDiskType": {
-            "type": "string"
-          },
-          "Tag.1.Key": {
-            "type": "string"
-          },
-          "Tag.2.Key": {
-            "type": "string"
-          },
-          "Tag.3.Key": {
-            "type": "string"
-          },
-          "Tag.4.Key": {
-            "type": "string"
-          },
-          "Tag.5.Key": {
-            "type": "string"
-          },
-          "Tag.1.Value": {
-            "type": "string"
-          },
-          "Tag.2.Value": {
-            "type": "string"
-          },
-          "Tag.3.Value": {
-            "type": "string"
-          },
-          "Tag.4.Value": {
-            "type": "string"
-          },
-          "Tag.5.Value": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeVpcs": {
-      "name": "DescribeVpcs",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeVpcs"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "VpcId": {
-            "type": "string"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "PageNumber": {
-            "type": "integer"
-          },
-          "PageSize": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeVRouters": {
-      "name": "DescribeVRouters",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeVRouters"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "VRouterId": {
-            "type": "string"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "PageNumber": {
-            "type": "integer"
-          },
-          "PageSize": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeVSwitches": {
-      "name": "DescribeVSwitches",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeVSwitches"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "VpcId": {
-            "required": true,
-            "type": "string"
-          },
-          "VSwitchId": {
-            "type": "string"
-          },
-          "ZoneId": {
-            "type": "string"
-          },
-          "PageNumber": {
-            "type": "integer"
-          },
-          "PageSize": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeZones": {
-      "name": "DescribeZones",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeZones"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "detachDisk": {
-      "name": "DetachDisk",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "DetachDisk"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "DiskId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "joinSecurityGroup": {
-      "name": "JoinSecurityGroup",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "JoinSecurityGroup"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "SecurityGroupId": {
-            "required": true,
-            "type": "string"
-          },
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "leaveSecurityGroup": {
-      "name": "LeaveSecurityGroup",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "LeaveSecurityGroup"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "SecurityGroupId": {
-            "required": true,
-            "type": "string"
-          },
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifyAutoSnapshotPolicy": {
-      "name": "ModifyAutoSnapshotPolicy",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "ModifyAutoSnapshotPolicy"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "SystemDiskPolicyEnabled": {
-            "type": "boolean"
-          },
-          "SystemDiskPolicyTimePeriod": {
-            "type": "integer"
-          },
-          "SystemDiskPolicyRetentionDays": {
-            "type": "integer"
-          },
-          "SystemDiskPolicyRetentionLastWeek": {
-            "type": "boolean"
-          },
-          "DataDiskPolicyEnabled": {
-            "type": "boolean"
-          },
-          "DataDiskPolicyTimePeriod": {
-            "type": "integer"
-          },
-          "DataDiskPolicyRetentionDays": {
-            "type": "integer"
-          },
-          "DataDiskPolicyRetentionLastWeek": {
-            "type": "boolean"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifyDiskAttribute": {
-      "name": "ModifyDiskAttribute",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "ModifyDiskAttribute"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "DiskId": {
-            "required": true,
-            "type": "string"
-          },
-          "DiskName": {
-            "type": "string"
-          },
-          "Description": {
-            "type": "string"
-          },
-          "DeleteWithInstance": {
-            "type": "boolean"
-          },
-          "DeleteAutoSnapshot": {
-            "type": "boolean"
-          },
-          "EnableAutoSnapshot": {
-            "type": "boolean"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifyEipAddressAttribute": {
-      "name": "ModifyEipAddressAttribute",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "ModifyEipAddressAttribute"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "AllocationId": {
-            "required": true,
-            "type": "string"
-          },
-          "Bandwidth": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifyImageAttribute": {
-      "name": "ModifyImageAttribute",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "ModifyImageAttribute"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "ImageId": {
-            "required": true,
-            "type": "string"
-          },
-          "ImageName": {
-            "type": "string"
-          },
-          "Description": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifyImageShareGroupPermission": {
-      "name": "ModifyImageShareGroupPermission",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "ModifyImageShareGroupPermission"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "ImageId": {
-            "required": true,
-            "type": "string"
-          },
-          "AddGroup.1": {
-            "type": "string"
-          },
-          "RemoveGroup.1": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifyImageSharePermission": {
-      "name": "ModifyImageSharePermission",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "ModifyImageSharePermission"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "ImageId": {
-            "required": true,
-            "type": "string"
-          },
-          "AddAccount.1": {
-            "type": "string"
-          },
-          "AddAccount.2": {
-            "type": "string"
-          },
-          "AddAccount.3": {
-            "type": "string"
-          },
-          "AddAccount.4": {
-            "type": "string"
-          },
-          "AddAccount.5": {
-            "type": "string"
-          },
-          "AddAccount.6": {
-            "type": "string"
-          },
-          "AddAccount.7": {
-            "type": "string"
-          },
-          "AddAccount.8": {
-            "type": "string"
-          },
-          "AddAccount.9": {
-            "type": "string"
-          },
-          "AddAccount.10": {
-            "type": "string"
-          },
-          "RemoveAccount.1": {
-            "type": "string"
-          },
-          "RemoveAccount.2": {
-            "type": "string"
-          },
-          "RemoveAccount.3": {
-            "type": "string"
-          },
-          "RemoveAccount.4": {
-            "type": "string"
-          },
-          "RemoveAccount.5": {
-            "type": "string"
-          },
-          "RemoveAccount.6": {
-            "type": "string"
-          },
-          "RemoveAccount.7": {
-            "type": "string"
-          },
-          "RemoveAccount.8": {
-            "type": "string"
-          },
-          "RemoveAccount.9": {
-            "type": "string"
-          },
-          "RemoveAccount.10": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifyInstanceAttribute": {
-      "name": "ModifyInstanceAttribute",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "ModifyInstanceAttribute"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "Password": {
-            "type": "string"
-          },
-          "HostName": {
-            "type": "string"
-          },
-          "InstanceName": {
-            "type": "string"
-          },
-          "Description": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifyInstanceNetworkSpec": {
-      "name": "ModifyInstanceNetworkSpec",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "ModifyInstanceNetworkSpec"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "InternetMaxBandwidthOut": {
-            "type": "integer"
-          },
-          "InternetMaxBandwidthIn": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifyInstanceSpec": {
-      "name": "ModifyInstanceSpec",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "ModifyInstanceSpec"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "InstanceType": {
-            "type": "string"
-          },
-          "InternetMaxBandwidthOut": {
-            "type": "integer"
-          },
-          "InternetMaxBandwidthIn": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          },
-          "Temporary.StartTime": {
-            "type": "string"
-          },
-          "Temporary.EndTime": {
-            "type": "string"
-          },
-          "Temporary.InternetMaxBandwidthOut": {
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "modifyInstanceVncPasswd": {
-      "name": "ModifyInstanceVncPasswd",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "ModifyInstanceVncPasswd"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "VncPassword": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifyInstanceVpcAttribute": {
-      "name": "ModifyInstanceVpcAttribute",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "ModifyInstanceVpcAttribute"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "VSwitchId": {
-            "required": true,
-            "type": "string"
-          },
-          "PrivateIpAddress": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifyIntranetBandwidthKb": {
-      "name": "ModifyIntranetBandwidthKb",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "ModifyIntranetBandwidthKb"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "IntranetMaxBandwidthIn": {
-            "type": "integer"
-          },
-          "IntranetMaxBandwidthOut": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifySecurityGroupAttribute": {
-      "name": "ModifySecurityGroupAttribute",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "ModifySecurityGroupAttribute"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "SecurityGroupId": {
-            "required": true,
-            "type": "string"
-          },
-          "Description": {
-            "type": "string"
-          },
-          "SecurityGroupName": {
-            "type": "string"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifySnapshotAttribute": {
-      "name": "ModifySnapshotAttribute",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "ModifySnapshotAttribute"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          },
-          "SnapshotId": {
-            "required": true,
-            "type": "string"
-          },
-          "SnapshotName": {
-            "type": "string"
-          },
-          "Description": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifyVpcAttribute": {
-      "name": "ModifyVpcAttribute",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "ModifyVpcAttribute"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "VpcId": {
-            "required": true,
-            "type": "string"
-          },
-          "Description": {
-            "type": "string"
-          },
-          "VpcName": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          },
-          "UserCidr": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifyVRouterAttribute": {
-      "name": "ModifyVRouterAttribute",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "ModifyVRouterAttribute"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "VRouterId": {
-            "required": true,
-            "type": "string"
-          },
-          "VRouterName": {
-            "type": "string"
-          },
-          "Description": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "modifyVSwitchAttribute": {
-      "name": "ModifyVSwitchAttribute",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "ModifyVSwitchAttribute"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "VSwitchId": {
-            "required": true,
-            "type": "string"
-          },
-          "VSwitchName": {
-            "type": "string"
-          },
-          "Description": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
+            "required": true
           }
         }
-      }
-    },
-    "rebootInstance": {
-      "name": "RebootInstance",
-      "http": {
-        "method": "POST",
-        "uri": "/"
       },
-      "input": {
+      "output": {
         "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "RebootInstance"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "ForceStop": {
-            "type": "boolean"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
+        "members": {}
       }
     },
-    "reInitDisk": {
-      "name": "ReInitDisk",
+    "putBucketRequestPayment": {
+      "name": "PutBucketRequestPayment",
       "http": {
-        "method": "POST",
-        "uri": "/"
+        "method": "PUT",
+        "uri": "/{Bucket}?requestPayment"
       },
       "input": {
+        "payload": "RequestPaymentConfiguration",
         "type": "structure",
         "members": {
-          "Action": {
+          "Bucket": {
             "required": true,
-            "default": "ReInitDisk"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
+            "location": "uri"
           },
-          "ResourceOwnerId": {
-            "type": "integer"
+          "ContentMD5": {
+            "location": "header",
+            "name": "Content-MD5"
           },
-          "DiskId": {
+          "RequestPaymentConfiguration": {
+            "type": "structure",
             "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
+            "members": {
+              "Payer": {
+                "required": true
+              }
+            }
           }
         }
-      }
-    },
-    "releaseEipAddress": {
-      "name": "ReleaseEipAddress",
-      "http": {
-        "method": "POST",
-        "uri": "/"
       },
-      "input": {
+      "output": {
         "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "ReleaseEipAddress"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "AllocationId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
+        "members": {}
       }
     },
-    "releasePublicIpAddress": {
-      "name": "ReleasePublicIpAddress",
+    "putBucketTagging": {
+      "name": "PutBucketTagging",
       "http": {
-        "method": "POST",
-        "uri": "/"
+        "method": "PUT",
+        "uri": "/{Bucket}?tagging"
       },
       "input": {
+        "payload": "Tagging",
         "type": "structure",
         "members": {
-          "Action": {
+          "Bucket": {
             "required": true,
-            "default": "ReleasePublicIpAddress"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
+            "location": "uri"
           },
-          "InstanceId": {
-            "type": "string"
+          "ContentMD5": {
+            "location": "header",
+            "name": "Content-MD5"
           },
-          "PublicIpAddress": {
+          "Tagging": {
+            "type": "structure",
             "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
+            "members": {
+              "TagSet": {
+                "type": "list",
+                "required": true,
+                "members": {
+                  "type": "structure",
+                  "required": true,
+                  "name": "Tag",
+                  "members": {
+                    "Key": {
+                      "required": true
+                    },
+                    "Value": {
+                      "required": true
+                    }
+                  }
+                }
+              }
+            }
           }
         }
-      }
-    },
-    "replaceSystemDisk": {
-      "name": "ReplaceSystemDisk",
-      "http": {
-        "method": "POST",
-        "uri": "/"
       },
-      "input": {
+      "output": {
         "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "ReplaceSystemDisk"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "ImageId": {
-            "required": true,
-            "type": "string"
-          },
-          "ClientToken": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          },
-          "UseAdditionalService": {
-            "type": "boolean"
-          }
-        }
+        "members": {}
       }
     },
-    "resetDisk": {
-      "name": "ResetDisk",
+    "putBucketVersioning": {
+      "name": "PutBucketVersioning",
       "http": {
-        "method": "POST",
-        "uri": "/"
+        "method": "PUT",
+        "uri": "/{Bucket}?versioning"
       },
       "input": {
+        "payload": "VersioningConfiguration",
         "type": "structure",
         "members": {
-          "Action": {
-            "required": true,
-            "default": "ResetDisk"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "DiskId": {
-            "required": true,
-            "type": "string"
-          },
-          "SnapshotId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          },
+          "ContentMD5": {
+            "location": "header",
+            "name": "Content-MD5"
+          },
+          "MFA": {
+            "location": "header",
+            "name": "x-oss-mfa"
+          },
+          "VersioningConfiguration": {
+            "type": "structure",
+            "required": true,
+            "members": {
+              "MFADelete": {},
+              "Status": {}
+            }
           }
         }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
       }
     },
-    "resizeDisk": {
-      "name": "ResizeDisk",
+    "putBucketWebsite": {
+      "name": "PutBucketWebsite",
       "http": {
-        "method": "POST",
-        "uri": "/"
+        "method": "PUT",
+        "uri": "/{Bucket}?website"
       },
       "input": {
+        "payload": "WebsiteConfiguration",
         "type": "structure",
         "members": {
-          "Action": {
+          "Bucket": {
             "required": true,
-            "default": "ResizeDisk"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
+            "location": "uri"
           },
-          "DiskId": {
-            "required": true,
-            "type": "string"
+          "ContentMD5": {
+            "location": "header",
+            "name": "Content-MD5"
           },
-          "NewSize": {
+          "WebsiteConfiguration": {
+            "type": "structure",
             "required": true,
-            "type": "integer"
-          },
-          "ClientToken": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
+            "members": {
+              "ErrorDocument": {
+                "type": "structure",
+                "members": {
+                  "Key": {
+                    "required": true
+                  }
+                }
+              },
+              "IndexDocument": {
+                "type": "structure",
+                "members": {
+                  "Suffix": {
+                    "required": true
+                  }
+                }
+              },
+              "RedirectAllRequestsTo": {
+                "type": "structure",
+                "members": {
+                  "HostName": {
+                    "required": true
+                  },
+                  "Protocol": {}
+                }
+              },
+              "RoutingRules": {
+                "type": "list",
+                "members": {
+                  "type": "structure",
+                  "name": "RoutingRule",
+                  "members": {
+                    "Condition": {
+                      "type": "structure",
+                      "members": {
+                        "HttpErrorCodeReturnedEquals": {},
+                        "KeyPrefixEquals": {}
+                      }
+                    },
+                    "Redirect": {
+                      "type": "structure",
+                      "required": true,
+                      "members": {
+                        "HostName": {},
+                        "HttpRedirectCode": {},
+                        "Protocol": {},
+                        "ReplaceKeyPrefixWith": {},
+                        "ReplaceKeyWith": {}
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
       }
     },
-    "revokeSecurityGroup": {
-      "name": "RevokeSecurityGroup",
+    "putObject": {
+      "name": "PutObject",
       "http": {
-        "method": "POST",
-        "uri": "/"
+        "method": "PUT",
+        "uri": "/{Bucket}/{Key}"
       },
       "input": {
+        "payload": "Body",
         "type": "structure",
         "members": {
-          "Action": {
-            "required": true,
-            "default": "RevokeSecurityGroup"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "SecurityGroupId": {
-            "required": true,
-            "type": "string"
+          "ACL": {
+            "location": "header",
+            "name": "x-oss-acl"
           },
-          "RegionId": {
-            "required": true,
-            "type": "string"
+          "AccessControlAllowOrigin": {
+            "location": "header",
+            "name": "Access-Control-Allow-Origin"
           },
-          "IpProtocol": {
-            "required": true,
-            "type": "string"
+          "Body": {
+            "type": "binary",
+            "streaming": true
           },
-          "PortRange": {
+          "Bucket": {
             "required": true,
-            "type": "string"
+            "location": "uri"
           },
-          "SourceGroupId": {
-            "type": "string"
+          "CacheControl": {
+            "location": "header",
+            "name": "Cache-Control"
           },
-          "SourceGroupOwnerAccount": {
-            "type": "string"
+          "ContentDisposition": {
+            "location": "header",
+            "name": "Content-Disposition"
           },
-          "SourceCidrIp": {
-            "type": "string"
+          "ContentEncoding": {
+            "location": "header",
+            "name": "Content-Encoding"
           },
-          "Policy": {
-            "type": "string"
+          "ContentLanguage": {
+            "location": "header",
+            "name": "Content-Language"
           },
-          "NicType": {
-            "type": "string"
+          "ContentLength": {
+            "type": "integer",
+            "location": "header",
+            "name": "Content-Length"
           },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "revokeSecurityGroupEgress": {
-      "name": "RevokeSecurityGroupEgress",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "RevokeSecurityGroupEgress"
+          "ContentMD5": {
+            "location": "header",
+            "name": "Content-MD5"
           },
-          "OwnerId": {
-            "type": "integer"
+          "ContentType": {
+            "location": "header",
+            "name": "Content-Type"
           },
-          "ResourceOwnerAccount": {
-            "type": "string"
+          "Expires": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "Expires"
           },
-          "ResourceOwnerId": {
-            "type": "integer"
+          "GrantFullControl": {
+            "location": "header",
+            "name": "x-oss-grant-full-control"
           },
-          "SecurityGroupId": {
-            "required": true,
-            "type": "string"
+          "GrantRead": {
+            "location": "header",
+            "name": "x-oss-grant-read"
           },
-          "RegionId": {
-            "required": true,
-            "type": "string"
+          "GrantReadACP": {
+            "location": "header",
+            "name": "x-oss-grant-read-acp"
           },
-          "IpProtocol": {
-            "required": true,
-            "type": "string"
+          "GrantWriteACP": {
+            "location": "header",
+            "name": "x-oss-grant-write-acp"
           },
-          "PortRange": {
+          "Key": {
             "required": true,
-            "type": "string"
+            "location": "uri"
           },
-          "DestGroupId": {
-            "type": "string"
+          "Metadata": {
+            "type": "map",
+            "location": "header",
+            "name": "x-oss-meta-",
+            "members": {},
+            "keys": {}
           },
-          "DestGroupOwnerAccount": {
-            "type": "string"
+          "ServerSideEncryption": {
+            "location": "header",
+            "name": "x-oss-server-side-encryption"
           },
-          "DestCidrIp": {
-            "type": "string"
+          "StorageClass": {
+            "location": "header",
+            "name": "x-oss-storage-class"
           },
-          "Policy": {
-            "type": "string"
-          },
-          "NicType": {
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
+          "WebsiteRedirectLocation": {
+            "location": "header",
+            "name": "x-oss-website-redirect-location"
           }
         }
-      }
-    },
-    "startInstance": {
-      "name": "StartInstance",
-      "http": {
-        "method": "POST",
-        "uri": "/"
       },
-      "input": {
+      "output": {
         "type": "structure",
         "members": {
-          "Action": {
-            "required": true,
-            "default": "StartInstance"
+          "ETag": {
+            "location": "header",
+            "name": "ETag"
           },
-          "OwnerId": {
-            "type": "integer"
+          "Expiration": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "x-oss-expiration"
           },
-          "ResourceOwnerAccount": {
-            "type": "string"
+          "ServerSideEncryption": {
+            "location": "header",
+            "name": "x-oss-server-side-encryption"
           },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
+          "VersionId": {
+            "location": "header",
+            "name": "x-oss-version-id"
           }
         }
       }
     },
-    "stopInstance": {
-      "name": "StopInstance",
+    "putObjectAcl": {
+      "name": "PutObjectAcl",
       "http": {
-        "method": "POST",
-        "uri": "/"
+        "method": "PUT",
+        "uri": "/{Bucket}/{Key}?acl"
       },
       "input": {
+        "payload": "AccessControlPolicy",
         "type": "structure",
         "members": {
-          "Action": {
-            "required": true,
-            "default": "StopInstance"
-          },
-          "OwnerId": {
-            "type": "integer"
+          "ACL": {
+            "location": "header",
+            "name": "x-oss-acl"
           },
-          "ResourceOwnerAccount": {
-            "type": "string"
+          "AccessControlPolicy": {
+            "type": "structure",
+            "members": {
+              "Grants": {
+                "type": "list",
+                "name": "AccessControlList",
+                "members": {
+                  "type": "structure",
+                  "name": "Grant",
+                  "members": {
+                    "Grantee": {
+                      "type": "structure",
+                      "xmlns": {
+                        "uri": "http://www.w3.org/2001/XMLSchema-instance",
+                        "prefix": "xsi"
+                      },
+                      "members": {
+                        "DisplayName": {},
+                        "EmailAddress": {},
+                        "ID": {},
+                        "Type": {
+                          "required": true,
+                          "name": "xsi:type",
+                          "attribute": true
+                        },
+                        "URI": {}
+                      }
+                    },
+                    "Permission": {}
+                  }
+                }
+              },
+              "Owner": {
+                "type": "structure",
+                "members": {
+                  "DisplayName": {},
+                  "ID": {}
+                }
+              }
+            }
           },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "InstanceId": {
+          "Bucket": {
             "required": true,
-            "type": "string"
+            "location": "uri"
           },
-          "ForceStop": {
-            "type": "boolean"
+          "ContentMD5": {
+            "location": "header",
+            "name": "Content-MD5"
           },
-          "OwnerAccount": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "unassociateEipAddress": {
-      "name": "UnassociateEipAddress",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "UnassociateEipAddress"
+          "GrantFullControl": {
+            "location": "header",
+            "name": "x-oss-grant-full-control"
           },
-          "OwnerId": {
-            "type": "integer"
+          "GrantRead": {
+            "location": "header",
+            "name": "x-oss-grant-read"
           },
-          "ResourceOwnerAccount": {
-            "type": "string"
+          "GrantReadACP": {
+            "location": "header",
+            "name": "x-oss-grant-read-acp"
           },
-          "ResourceOwnerId": {
-            "type": "integer"
+          "GrantWrite": {
+            "location": "header",
+            "name": "x-oss-grant-write"
           },
-          "AllocationId": {
-            "required": true,
-            "type": "string"
+          "GrantWriteACP": {
+            "location": "header",
+            "name": "x-oss-grant-write-acp"
           },
-          "InstanceId": {
+          "Key": {
             "required": true,
-            "type": "string"
-          },
-          "OwnerAccount": {
-            "type": "string"
+            "location": "uri"
           }
         }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
       }
     },
-    "unbindIpRange": {
-      "name": "UnbindIpRange",
+    "restoreObject": {
+      "name": "RestoreObject",
+      "alias": "PostObjectRestore",
       "http": {
         "method": "POST",
-        "uri": "/"
+        "uri": "/{Bucket}/{Key}?restore"
       },
       "input": {
+        "payload": "RestoreRequest",
         "type": "structure",
         "members": {
-          "Action": {
-            "required": true,
-            "default": "UnbindIpRange"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "InstanceId": {
+          "Bucket": {
             "required": true,
-            "type": "string"
+            "location": "uri"
           },
-          "IpAddress": {
+          "Key": {
             "required": true,
-            "type": "string"
+            "location": "uri"
           },
-          "OwnerAccount": {
-            "type": "string"
+          "RestoreRequest": {
+            "type": "structure",
+            "members": {
+              "Days": {
+                "type": "integer",
+                "required": true
+              }
+            }
           }
         }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
       }
     },
-    "addTags": {
-      "name": "AddTags",
+    "uploadPart": {
+      "name": "UploadPart",
       "http": {
-        "method": "POST",
-        "uri": "/"
+        "method": "PUT",
+        "uri": "/{Bucket}/{Key}?partNumber={PartNumber}&uploadId={UploadId}"
       },
       "input": {
+        "payload": "Body",
         "type": "structure",
         "members": {
-          "Action": {
-            "required": true,
-            "default": "AddTags"
-          },
-          "OwnerId": {
-            "type": "integer"
+          "Body": {
+            "type": "binary",
+            "streaming": true
           },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "ResourceType": {
-            "required": true,
-            "type": "string"
-          },
-          "ResourceId": {
-            "required": true,
-            "type": "string"
-          },
-          "Tag.1.Key": {
+          "Bucket": {
             "required": true,
-            "type": "string"
+            "location": "uri"
           },
-          "Tag.2.Key": {
-            "type": "string"
+          "ContentLength": {
+            "type": "integer",
+            "location": "header",
+            "name": "Content-Length"
           },
-          "Tag.3.Key": {
-            "type": "string"
+          "ContentMD5": {
+            "location": "header",
+            "name": "Content-MD5"
           },
-          "Tag.4.Key": {
-            "type": "string"
-          },
-          "Tag.5.Key": {
-            "type": "string"
-          },
-          "Tag.1.Value": {
+          "Key": {
             "required": true,
-            "type": "string"
-          },
-          "Tag.2.Value": {
-            "type": "string"
-          },
-          "Tag.3.Value": {
-            "type": "string"
+            "location": "uri"
           },
-          "Tag.4.Value": {
-            "type": "string"
-          },
-          "Tag.5.Value": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeResourceByTags": {
-      "name": "DescribeResourceByTags",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
+          "PartNumber": {
+            "type": "integer",
             "required": true,
-            "default": "DescribeResourceByTags"
-          },
-          "OwnerId": {
-            "type": "integer"
+            "location": "uri"
           },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "PageSize": {
-            "type": "integer"
-          },
-          "PageNumber": {
-            "type": "integer"
-          },
-          "ResourceType": {
-            "type": "string"
-          },
-          "RegionId": {
+          "UploadId": {
             "required": true,
-            "type": "string"
-          },
-          "Tag.1.Key": {
-            "type": "string"
-          },
-          "Tag.2.Key": {
-            "type": "string"
-          },
-          "Tag.3.Key": {
-            "type": "string"
-          },
-          "Tag.4.Key": {
-            "type": "string"
-          },
-          "Tag.5.Key": {
-            "type": "string"
-          },
-          "Tag.1.Value": {
-            "type": "string"
-          },
-          "Tag.2.Value": {
-            "type": "string"
-          },
-          "Tag.3.Value": {
-            "type": "string"
-          },
-          "Tag.4.Value": {
-            "type": "string"
-          },
-          "Tag.5.Value": {
-            "type": "string"
+            "location": "uri"
           }
         }
-      }
-    },
-    "describeTags": {
-      "name": "DescribeTags",
-      "http": {
-        "method": "POST",
-        "uri": "/"
       },
-      "input": {
+      "output": {
         "type": "structure",
         "members": {
-          "Action": {
-            "required": true,
-            "default": "DescribeTags"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
+          "ETag": {
+            "location": "header",
+            "name": "ETag"
           },
-          "PageSize": {
-            "type": "integer"
-          },
-          "PageNumber": {
-            "type": "integer"
-          },
-          "ResourceType": {
-            "type": "string"
-          },
-          "ResourceId": {
-            "type": "string"
-          },
-          "RegionId": {
-            "required": true,
-            "type": "string"
-          },
-          "Tag.1.Key": {
-            "type": "string"
-          },
-          "Tag.2.Key": {
-            "type": "string"
-          },
-          "Tag.3.Key": {
-            "type": "string"
-          },
-          "Tag.4.Key": {
-            "type": "string"
-          },
-          "Tag.5.Key": {
-            "type": "string"
-          },
-          "Tag.1.Value": {
-            "type": "string"
-          },
-          "Tag.2.Value": {
-            "type": "string"
-          },
-          "Tag.3.Value": {
-            "type": "string"
-          },
-          "Tag.4.Value": {
-            "type": "string"
-          },
-          "Tag.5.Value": {
-            "type": "string"
+          "ServerSideEncryption": {
+            "location": "header",
+            "name": "x-oss-server-side-encryption"
           }
         }
       }
     },
-    "removeTags": {
-      "name": "RemoveTags",
+    "uploadPartCopy": {
+      "name": "UploadPartCopy",
       "http": {
-        "method": "POST",
-        "uri": "/"
+        "method": "PUT",
+        "uri": "/{Bucket}/{Key}?partNumber={PartNumber}&uploadId={UploadId}"
       },
       "input": {
         "type": "structure",
         "members": {
-          "Action": {
+          "Bucket": {
             "required": true,
-            "default": "RemoveTags"
+            "location": "uri"
           },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "RegionId": {
+          "CopySource": {
             "required": true,
-            "type": "string"
-          },
-          "ResourceType": {
-            "type": "string"
-          },
-          "ResourceId": {
-            "type": "string"
-          },
-          "Tag.1.Key": {
-            "type": "string"
-          },
-          "Tag.2.Key": {
-            "type": "string"
-          },
-          "Tag.3.Key": {
-            "type": "string"
+            "location": "header",
+            "name": "x-oss-copy-source"
           },
-          "Tag.4.Key": {
-            "type": "string"
+          "CopySourceIfMatch": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "x-oss-copy-source-if-match"
           },
-          "Tag.5.Key": {
-            "type": "string"
+          "CopySourceIfModifiedSince": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "x-oss-copy-source-if-modified-since"
           },
-          "Tag.1.Value": {
-            "type": "string"
+          "CopySourceIfNoneMatch": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "x-oss-copy-source-if-none-match"
           },
-          "Tag.2.Value": {
-            "type": "string"
+          "CopySourceIfUnmodifiedSince": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "x-oss-copy-source-if-unmodified-since"
           },
-          "Tag.3.Value": {
-            "type": "string"
+          "CopySourceRange": {
+            "location": "header",
+            "name": "x-oss-copy-source-range"
           },
-          "Tag.4.Value": {
-            "type": "string"
-          },
-          "Tag.5.Value": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "describeTagKeys": {
-      "name": "DescribeTagKeys",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
+          "Key": {
             "required": true,
-            "default": "DescribeTagKeys"
-          },
-          "OwnerId": {
-            "type": "integer"
-          },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "PageSize": {
-            "type": "integer"
-          },
-          "PageNumber": {
-            "type": "integer"
+            "location": "uri"
           },
-          "ResourceType": {
-            "type": "string"
-          },
-          "ResourceId": {
-            "type": "string"
+          "PartNumber": {
+            "type": "integer",
+            "required": true,
+            "location": "uri"
           },
-          "RegionId": {
+          "UploadId": {
             "required": true,
-            "type": "string"
+            "location": "uri"
           }
         }
-      }
-    },
-    "renewInstance": {
-      "name": "RenewInstance",
-      "http": {
-        "method": "POST",
-        "uri": "/"
       },
-      "input": {
+      "output": {
         "type": "structure",
         "members": {
-          "Action": {
-            "required": true,
-            "default": "RenewInstance"
+          "CopySourceVersionId": {
+            "location": "header",
+            "name": "x-oss-copy-source-version-id"
           },
-          "OwnerId": {
-            "type": "integer"
+          "ServerSideEncryption": {
+            "location": "header",
+            "name": "x-oss-server-side-encryption"
           },
-          "ResourceOwnerAccount": {
-            "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
-          },
-          "OwnerAccount": {
-            "type": "string"
-          },
-          "InstanceId": {
-            "required": true,
-            "type": "string"
-          },
-          "InstanceType": {
-            "type": "string"
-          },
-          "InternetMaxBandwidthOut": {
-            "type": "integer"
-          },
-          "InternetChargeType": {
-            "type": "string"
-          },
-          "Period": {
-            "required": true,
-            "type": "integer"
-          },
-          "RebootTime": {
-            "type": "string"
-          },
-          "CovertDiskPortable.1.DiskId": {
-            "type": "string"
-          },
-          "CovertDiskPortable.2.DiskId": {
-            "type": "string"
-          },
-          "CovertDiskPortable.3.DiskId": {
-            "type": "string"
-          },
-          "CovertDiskPortable.4.DiskId": {
-            "type": "string"
+          "ETag": {},
+          "LastModified": {
+            "type": "timestamp"
           }
         }
       }
+    }
+  },
+  "pagination": {
+    "listMultipartUploads": {
+      "limitKey": "MaxUploads",
+      "moreResults": "IsTruncated",
+      "outputToken": [
+        "NextKeyMarker",
+        "NextUploadIdMarker"
+      ],
+      "inputToken": [
+        "KeyMarker",
+        "UploadIdMarker"
+      ],
+      "resultKey": "Uploads"
+    },
+    "listObjectVersions": {
+      "moreResults": "IsTruncated",
+      "limitKey": "MaxKeys",
+      "outputToken": [
+        "NextKeyMarker",
+        "NextVersionIdMarker"
+      ],
+      "inputToken": [
+        "KeyMarker",
+        "VersionIdMarker"
+      ],
+      "resultKey": "Versions"
+    },
+    "listObjects": {
+      "moreResults": "IsTruncated",
+      "limitKey": "MaxKeys",
+      "outputToken": "NextMarker or Contents[-1].Key",
+      "inputToken": "Marker",
+      "resultKey": [
+        "Contents",
+        "CommonPrefixes"
+      ]
+    },
+    "listParts": {
+      "limitKey": "IsTruncated",
+      "outputToken": "NextPartNumberMarker",
+      "inputToken": "PartNumberMarker",
+      "resultKey": "Parts"
     }
   }
 }
