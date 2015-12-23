@@ -1,0 +1,60 @@
+{
+  "format": "top",
+  "apiVersion": "2015-12-16",
+  "checksumFormat": "md5",
+  "endpointPrefix": "dayu",
+  "serviceAbbreviation": "DAYU",
+  "serviceFullName": "Alidayu",
+  "signatureVersion": "top",
+  "timestampFormat": "rfc822",
+  "xmlnamespace": "",
+  "operations": {
+    "sendSMS": {
+      "name": "alibaba.aliqin.fc.sms.num.send",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "method": {
+            "required": true,
+            "default": "alibaba.aliqin.fc.sms.num.send"
+          },
+          "extend": {
+          },
+          "sms_type": {
+            "required": true,
+            "default": "normal"
+          },
+          "sms_free_sign_name": {
+            "required": true
+          },
+          "sms_param": {
+            "type": "map"
+          },
+          "rec_num": {
+            "required": true
+          },
+          "sms_template_code": {
+            "required": true
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "count": {
+            "type": "integer"
+          },
+          "logstores": {
+            "type": "list",
+            "members": {
+            }
+          }
+        }
+      }
+    }
+  }
+}
