@@ -43,18 +43,135 @@
         }
       },
       "output": {
+      }
+    },
+    "doublecall": {
+      "name": "alibaba.aliqin.fc.voice.num.doublecall",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
         "type": "structure",
         "members": {
-          "count": {
-            "type": "integer"
+          "method": {
+            "required": true,
+            "default": "alibaba.aliqin.fc.voice.num.doublecall"
           },
-          "logstores": {
-            "type": "list",
-            "members": {
-            }
+          "session_time_out": {
+          },
+          "extend": {
+          },
+          "caller_num": {
+            "required": true
+          },
+          "caller_show_num": {
+            "required": true
+          },
+          "called_num": {
+            "required": true
+          },
+          "called_show_num": {
+            "required": true
           }
         }
+      },
+      "output": {
+      }
+    },
+    "singlecall": {
+      "name": "alibaba.aliqin.fc.tts.num.singlecall",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "method": {
+            "required": true,
+            "default": "alibaba.aliqin.fc.tts.num.singlecall"
+          },
+          "extend": {
+          },
+          "tts_param": {
+            "type": "map"
+          },
+          "called_num": {
+            "required": true
+          },
+          "called_show_num": {
+            "required": true
+          },
+          "tts_code": {
+            "required": true
+          }
+        }
+      },
+      "output": {
+      }
+    },
+    "voiceNotification": {
+      "name": "alibaba.aliqin.fc.voice.num.singlecall",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "method": {
+            "required": true,
+            "default": "alibaba.aliqin.fc.voice.num.singlecall"
+          },
+          "extend": {
+          },
+          "called_num": {
+            "required": true
+          },
+          "called_show_num": {
+            "required": true
+          },
+          "voice_code": {
+            "required": true
+          }
+        }
+      },
+      "output": {
+      }
+    },
+    "querySMS": {
+      "name": "alibaba.aliqin.fc.sms.num.query",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "method": {
+            "required": true,
+            "default": "alibaba.aliqin.fc.sms.num.query"
+          },
+          "biz_id": {
+          },
+          "rec_num": {
+            "required": true
+          },
+          "query_date": {
+            "required": true
+          },
+          "current_page": {
+            "required": true
+          },
+          "page_size": {
+            "required": true
+          }
+        }
+      },
+      "output": {
       }
     }
+
   }
 }
