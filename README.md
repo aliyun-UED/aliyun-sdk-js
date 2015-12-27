@@ -80,6 +80,8 @@ npm install aliyun-sdk
  cd samples/oss
  node GetBucket.js
  ```
+ 
+ ***oss 支持 stream 请使用 https://github.com/berwin/aliyun-oss-upload-stream***
 
 ### SLS
 在 samples/sls 目录下的代码示例，使用方法：
