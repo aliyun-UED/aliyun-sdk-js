@@ -33,7 +33,8 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
                         "InstanceType": "ecs.t1.small",
                         "ResourceType": "OnDemand"
                     }
-                }
+                },
+                "UserData": {"a":"b"}
             };
 
             client.createCluster(clusterDesc, function (err, result) {
@@ -111,6 +112,7 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
                 result.code.should.be.exactly(200);
 
                 result.data.Id.should.equal(clusterId);
+                result.data.UserData['a'].should.equal('b');
 
                 done();
             });
