@@ -33,7 +33,8 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
                         "InstanceType": "ecs.t1.small",
                         "ResourceType": "OnDemand"
                     }
-                }
+                },
+                "UserData": {"a":"b"}
             };
 
             client.createCluster(clusterDesc, function (err, result) {
@@ -58,6 +59,44 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
             });
 
         });
+
+        it('should update cluster success', function (done) {
+
+
+            client.changeClusterDesiredVMCount({ClusterId: clusterId,Groups:{"group1":{DesiredVMCount:4}}}, function (err, result) {
+
+                if (err) {
+                    console.log(err);
+                }
+
+                should(err === null).be.true;
+
+                result.should.have.properties(['requestId', 'code', 'message']);
+                result.code.should.be.exactly(200);
+
+                client.getCluster({ClusterId: clusterId}, function (err, result) {
+
+                    if (err) {
+                        console.log(err);
+                    }
+
+                    should(err === null).be.true;
+
+                    result.should.have.properties(['requestId', 'code', 'message']);
+                    result.code.should.be.exactly(200);
+
+                    result.data.Id.should.equal(clusterId);
+
+                    result.data.Groups['group1']['DesiredVMCount'].should.be.exactly(4);
+
+                    done();
+                });
+
+ 
+            });
+
+        });
+
         it('should get cluster success', function (done) {
 
 
@@ -73,6 +112,7 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
                 result.code.should.be.exactly(200);
 
                 result.data.Id.should.equal(clusterId);
+                result.data.UserData['a'].should.equal('b');
 
                 done();
             });

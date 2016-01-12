@@ -16,7 +16,7 @@
         "uri": "/clusters"
       },
       "input": {
-        "payload": ["Name", "Description", "ImageId", "Groups"],
+        "payload": ["Name", "Description", "ImageId","UserData", "Groups"],
         "members": {
           "Name":{
             "type": "string",
@@ -29,6 +29,13 @@
           "Description": {
             "required": false,
             "type": "string"
+          },
+          "UserData": {
+            "required": false,
+            "type": "map",
+            "members": {
+               "type": "string"
+            }
           },
           "Groups": {
             "required":true,
@@ -129,6 +136,41 @@
             "required": true,
             "type":"string",
             "location":"uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
+    "changeClusterDesiredVMCount": {
+      "name": "ChangeClusterDesiredVMCount",
+      "http": {
+        "method": "PUT",
+        "uri": "/clusters/{ClusterId}"
+      },
+      "input": {
+        "payload": ["Groups"],
+        "members": {
+          "ClusterId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          },
+          "Groups": {
+            "required":true,
+            "type": "map",
+            "members": {
+              "type": "structure",
+              "members": {
+                "DesiredVMCount": {
+                  "required": true,
+                  "type": "integer"
+                }
+              }
+            }
           }
         }
       },
