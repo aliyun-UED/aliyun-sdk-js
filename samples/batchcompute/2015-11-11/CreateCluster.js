@@ -7,7 +7,7 @@ var clusterDesc = {
     "Groups": {
         "group1": {
             "DesiredVMCount": 3,
-            //"InstanceType": "ecs.t1.small",
+            "InstanceType": 'ecs.s3.large',
             "ResourceType": "OnDemand"
         }
     }
