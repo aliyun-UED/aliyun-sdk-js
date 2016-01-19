@@ -48,7 +48,7 @@
                   "type": "integer"
                 },
                 "InstanceType": {
-                  "required": false,
+                  "required": true,
                   "type": "string"
                 },
                 "ResourceType": {
@@ -397,8 +397,30 @@
                       "type": "integer"
                     },
                     "ClusterId": {
-                      "required": true,
+                      "required": false,
                       "type": "string"
+                    },
+                    "AutoCluster": {
+                      "required": false,
+                      "type": "structure",
+                      "members": {
+                        "ImageId": {
+                          "required": false,
+                          "type": "string"
+                        },
+                        "ECSImageId": {
+                          "required": false,
+                          "type": "string"
+                        },
+                        "InstanceType": {
+                          "required": true,
+                          "type": "string"
+                        },
+                        "ResourceType": {
+                          "required": false,
+                          "type": "string"
+                        }
+                      }
                     },
 
 

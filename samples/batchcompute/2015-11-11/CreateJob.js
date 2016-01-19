@@ -34,7 +34,12 @@ var jobDesc = {
                 "Timeout": 21600,
                 "InstanceCount": 1,
                 "MaxRetryCount": 0,
-                "ClusterId": "cls-6kilcg94rdtk004d" //没有请先创建 Cluster
+                "ClusterId": "cls-6kilcg94rdtk004d" //没有请先创建 Cluster, 或者可以直接用autoCluster
+                //"AutoCluster": {
+                //   "InstanceType": 'ecs.s3.large',
+                //   "ResourceType": "OnDemand",
+                //   "ECSImageId": "m-xxxx"    //ecs image id
+                //}
             }
         },
         "Dependencies": {

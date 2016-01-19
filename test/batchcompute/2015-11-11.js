@@ -11,9 +11,11 @@ var client = new ALY.BatchCompute({
 });
 
 var IMAGE_ID =  config.ecsImageId;
+var INSTANCE_TYPE = 'ecs.s3.large';
 
 var jobId;
 var clusterId;
+var jobId_autoCluster;
 
 describe('BatchCompute-2015-11-11 Function Test', function () {
 
@@ -30,7 +32,7 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
                 "Groups": {
                     "group1": {
                         "DesiredVMCount": 3,
-                        "InstanceType": "ecs.t1.small",
+                        "InstanceType": INSTANCE_TYPE,
                         "ResourceType": "OnDemand"
                     }
                 },
@@ -59,6 +61,8 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
             });
 
         });
+
+
 
         it('should update cluster success', function (done) {
 
@@ -176,7 +180,7 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
                 "Groups": {
                     "group1": {
                         "DesiredVMCount": 3,
-                        "InstanceType": "ecs.t1.small",
+                        "InstanceType": INSTANCE_TYPE,
                         "ResourceType": "OnDemand"
                     }
                 }
@@ -264,6 +268,74 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
 
                 jobId = result.data.Id;
                 console.log('======> Created:', jobId)
+
+                done();
+            });
+
+        });
+
+        it('should create auto-cluster job success', function (done) {
+
+            var jobDesc = {
+                "Name": "node-sdk-test-job-auto-cluster",
+                "Description": "test job",
+                "Priority": 0,
+                "JobFailOnInstanceFail": true,
+                "Type": "DAG",
+                "DAG": {
+                    "Tasks": {
+                        "CountTask": {
+                            "Parameters": {
+                                "Command": {
+                                    "CommandLine": "python count_all_num.py",
+                                    "PackagePath": "oss://my-bucket/diku_simple_test/program_package.tar.gz",
+                                    "EnvVars":{}
+                                },
+                                //"InputMappingConfig": {
+                                //    "Locale": "GBK",
+                                //    "Lock": false
+                                //},
+                                "StdoutRedirectPath": "oss://my-bucket/diku_simple_test/log/",
+                                "StderrRedirectPath": "oss://my-bucket/diku_simple_test/log/"
+                            },
+                            //"InputMapping": {
+                            //    "oss path": "guest os path"
+                            //},
+                            //"OutputMapping": {
+                            //    "guest os path": "oss://my-bucket/diku_simple_test/log"
+                            //},
+                            //"LogMapping": {
+                            //    "guest os path": "oss://my-bucket/diku_simple_test/log"
+                            //},
+                            "Timeout": 21600,
+                            "InstanceCount": 1,
+                            "MaxRetryCount": 0,
+                            "AutoCluster": {
+                                "ECSImageId": IMAGE_ID,
+                                "InstanceType": INSTANCE_TYPE
+                            }
+                        }
+                    },
+                    "Dependencies": {
+                        "CountTask": []
+                    }
+                }
+            };
+
+
+            client.createJob(jobDesc, function (err, result) {
+
+                if (err) {
+                    console.log(err);
+                }
+
+                should(err === null).be.true;
+
+                result.should.have.properties(['requestId']);
+                result.data.should.have.properties(['Id']);
+
+                jobId_autoCluster = result.data.Id;
+                console.log('======> Created:', jobId_autoCluster)
 
                 done();
             });
@@ -470,7 +542,7 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
         /********************* tasks end ***********************/
         /*******************************************************/
 
-        it('should stop success', function (done) {
+        it('should stop job success', function (done) {
 
             client.stopJob({JobId: jobId}, function (err, result) {
 
@@ -487,7 +559,7 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
 
         });
 
-        it('should update success', function (done) {
+        it('should update job success', function (done) {
 
             client.changeJobPriority({JobId: jobId, Priority: 10}, function (err, result) {
 
@@ -517,7 +589,7 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
         });
 
 
-        it('should start success', function (done) {
+        it('should start job success', function (done) {
 
             client.startJob({JobId: jobId}, function (err, result) {
 
@@ -535,7 +607,7 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
         });
 
 
-        it('should stop and delete success', function (done) {
+        it('should stop and delete job success', function (done) {
 
             client.stopJob({JobId: jobId}, function (err, result) {
 
@@ -562,6 +634,42 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
 
 
                     client.getJob({JobId: jobId}, function (err, result) {
+                        err.code.should.eql('InvalidResource.NotFound');
+                        done();
+                    });
+
+                });
+            });
+
+        });
+
+        it('should stop and delete autoClusterJob success', function (done) {
+
+            client.stopJob({JobId: jobId_autoCluster}, function (err, result) {
+
+                if (err) {
+                    console.log(err);
+                }
+
+                should(err === null).be.true;
+
+                result.should.have.properties(['requestId', 'code', 'message']);
+                result.code.should.be.exactly(201);
+
+
+                client.deleteJob({JobId: jobId_autoCluster}, function (err, result) {
+
+                    if (err) {
+                        console.log(err);
+                    }
+
+                    should(err === null).be.true;
+
+                    result.should.have.properties(['requestId', 'code', 'message']);
+                    //result.code.should.be.exactly(200);
+
+
+                    client.getJob({JobId: jobId_autoCluster}, function (err, result) {
                         err.code.should.eql('InvalidResource.NotFound');
                         done();
                     });
