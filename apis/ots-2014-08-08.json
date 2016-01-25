@@ -1,5 +1,5 @@
 {
-  "format": "rest-json",
+  "format": "rest",
   "apiVersion": "2014-08-08",
   "checksumFormat": "md5",
   "endpointPrefix": "ots",
@@ -18,9 +18,84 @@
       "input": {
         "type": "structure",
         "members": {
-          "InstanceName": {
+          "instance_name": {
+            "required": true,
             "location": "header",
             "name": "x-ots-instancename"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "createTable": {
+      "name": "CreateTable",
+      "http": {
+        "method": "POST",
+        "uri": "/CreateTable"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "instance_name": {
+            "required": true,
+            "location": "header",
+            "name": "x-ots-instancename"
+          },
+          "table_meta": {
+            "required": true,
+            "type": "structure",
+            "name": "table_meta",
+            "members": {
+              "table_name": {
+                "required": true,
+                "name": "table_name",
+                "type": "string"
+              },
+              "primary_key": {
+                "name": "primary_key",
+                "type": "list",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "name": {
+                      "required": true,
+                      "name": "name",
+                      "type": "string"
+                    },
+                    "type": {
+                      "required": true,
+                      "name": "type",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "reserved_throughput": {
+            "required": true,
+            "name": "reserved_throughput",
+            "type": "structure",
+            "members": {
+              "capacity_unit": {
+                "required": true,
+                "name": "capacity_unit",
+                "type": "structure",
+                "members": {
+                  "read": {
+                    "name": "read",
+                    "type": "integer"
+                  },
+                  "write": {
+                    "name": "write",
+                    "type": "integer"
+                  }
+                }
+              }
+            }
           }
         }
       },
