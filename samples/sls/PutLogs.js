@@ -3,8 +3,8 @@ var sls = require('./sls');
 // -------------------------------
 // put logs
 // -------------------------------
-var projectName = "project_name1";
-var logStoreName = "logstore_name1";
+var projectName = "your_project_name";
+var logStoreName = "your_logstore";
 
 var logGroup = {
     logs : [{
