@@ -5,10 +5,12 @@ var sls = require('./sls');
 // -------------------------------
 var projectName = "your_project_name";
 
-sls.listLogStores({
+sls.deleteLogstore({
   //必选字段
-    projectName: projectName 
-}, function (err, data) {
+    projectName: projectName ,
+    LogStoreName : "your_logstore"
+        },function(err,data)
+{
 
     if (err) {
         console.log('error:', err);

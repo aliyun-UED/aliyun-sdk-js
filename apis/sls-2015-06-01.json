@@ -1,0 +1,845 @@
+{
+  "format": "rest-json",
+  "apiVersion": "0.6.0",
+  "checksumFormat": "md5",
+  "endpointPrefix": "sls",
+  "serviceAbbreviation": "SLS",
+  "serviceFullName": "Aliyun Simple Log Service",
+  "signatureVersion": "sls",
+  "timestampFormat": "rfc822",
+  "xmlnamespace": "",
+  "operations": {
+    "putLogs": {
+      "name": "putLogs",
+      "http": {
+        "method": "POST",
+        "uri": "/logstores/{logStoreName}/shards/lb"
+      },
+      "input": {
+        "payload": "logGroup",
+        "type": "structure",
+        "ContentMD5": true,
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logStoreName": {
+            "required": true,
+            "location": "uri"
+          },
+          "logGroup": {
+            "required":true,
+            "type": "structure",
+            "members": {
+              "logs": {
+                "required":true,
+                "type": "list",
+                "members": {
+
+                  "type":"structure",
+                  "members": {
+                    "time": {
+                      "type": "integer",
+                      "required": true
+                    },
+                    "contents": {
+                      "type": "list",
+                      "required": true,
+                      "members": {
+                        "type":"structure",
+                        "members": {
+                          "key": {
+                            "type": "string",
+                            "required": true
+                          },
+                          "value": {
+                            "type": "string",
+                            "required": true
+                          }
+                        }
+                      }
+                    }
+                  }
+
+                }
+              },
+              "topic": {
+                "type": "string",
+                "required": false
+              },
+              "source": {
+                "type": "string",
+                "required": false
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "createLogstore": {
+      "name": "createLogstore",
+      "http": {
+        "method": "POST",
+        "uri": "/logstores"
+      },
+      "input": {
+        "payload": "logstoreDetail",
+        "type": "structure",
+        "ContentMD5": true,
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logstoreDetail":{
+            "required":true,
+            "type": "structure",
+            "members": {
+                "logstoreName":{
+                    "type":"string",
+                    "required":true
+                },
+                "ttl":{
+                    "type": "integer",
+                    "required": true
+                },
+                "shardCount":{
+                    "type": "integer",
+                    "required": true
+                }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "updateLogstore": {
+      "name": "updateLogstore",
+      "http": {
+        "method": "PUT",
+        "uri": "/logstores/{logstoreName}"
+      },
+      "input": {
+        "payload": "logstoreDetail",
+        "type": "structure",
+        "ContentMD5": true,
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logstoreName":{
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "logstoreDetail":{
+            "required":true,
+            "type": "structure",
+            "members": {
+                "logstoreName":{
+                    "type":"string",
+                    "required":true
+                },
+                "ttl":{
+                    "type": "integer",
+                    "required": true
+                },
+                "shardCount":{
+                    "type": "integer",
+                    "required": true
+                }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "deleteLogstore": {
+      "name": "deleteLogstore",
+      "http": {
+        "method": "DELETE",
+        "uri": "/logstores/{LogStoreName}"
+      },
+      "input": {
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "LogStoreName":{
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "getLogstore": {
+      "name": "getLogstore",
+      "http": {
+        "method": "GET",
+        "uri": "/logstores/{LogStoreName}"
+      },
+      "input": {
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "LogStoreName":{
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "listLogStores": {
+      "name": "ListLogStores",
+      "http": {
+        "method": "GET",
+        "uri": "/logstores"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "count": {
+            "type": "integer"
+          },
+          "logstores": {
+            "type": "list",
+            "members": {
+            }
+          },
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "listTopics": {
+      "name": "ListTopics",
+      "http": {
+        "method": "GET",
+        "uri": "/logstores/{logStoreName}?type=topic&line={line}&token={token}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logStoreName": {
+            "required": true,
+            "location": "uri"
+          },
+
+          "token": {
+            "required": false,
+            "location": "uri",
+            "type": "string"
+          },
+          "line": {
+            "required": false,
+            "location": "uri",
+            "type": "integer"
+          }
+        }
+      },
+      "output":{
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "listShards": {
+      "name": "listShards",
+      "http": {
+        "method": "GET",
+        "uri": "/logstores/{logStoreName}/shards"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logStoreName": {
+            "required": true,
+            "location": "uri"
+          }
+        }
+      }
+    },
+    "splitShard": {
+      "name": "splitShard",
+      "http": {
+        "method": "POST",
+        "uri": "/logstores/{logStoreName}/shards/{ShardId}?action=split&key={HashKey}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logStoreName": {
+            "required": true,
+            "location": "uri"
+          },
+          "ShardId": {
+            "required": true,
+            "type":"integer",
+            "location": "uri"
+          },
+          "HashKey": {
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output":{
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "mergeShards": {
+      "name": "mergeShard",
+      "http": {
+        "method": "POST",
+        "uri": "/logstores/{logStoreName}/shards/{ShardId}?action=merge"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logStoreName": {
+            "required": true,
+            "location": "uri"
+          },
+          "ShardId": {
+            "required": true,
+            "type":"integer",
+            "location": "uri"
+          }
+        }
+      },
+      "output":{
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "deleteShard": {
+      "name": "deleteShard",
+      "http": {
+        "method": "DELETE",
+        "uri": "/logstores/{logStoreName}/shards/{ShardId}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logStoreName": {
+            "required": true,
+            "location": "uri"
+          },
+          "ShardId": {
+            "required": true,
+            "type":"integer",
+            "location": "uri"
+          }
+        }
+      },
+      "output":{
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "getCursor": {
+      "name": "getCursor",
+      "http": {
+        "method": "GET",
+        "uri": "/logstores/{logStoreName}/shards/{ShardId}?type=cursor&from={FromTime}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logStoreName": {
+            "required": true,
+            "location": "uri"
+          },
+          "ShardId": {
+            "required": true,
+            "type":"integer",
+            "location": "uri"
+          },
+          "FromTime": {
+            "required": true,
+            "type":"integer",
+            "location": "uri"
+          }
+        }
+      },
+      "output":{
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "batchGetLogs": {
+      "name": "batchGetLogs",
+      "http": {
+        "method": "GET",
+        "uri": "/logstores/{logStoreName}/shards/{ShardId}?type=log&cursor={cursor}&count={count}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logStoreName": {
+            "required": true,
+            "location": "uri"
+          },
+          "ShardId": {
+            "required": true,
+            "type":"integer",
+            "location": "uri"
+          },
+          "cursor": {
+            "required": true,
+            "location": "uri"
+          },
+          "count": {
+            "required": true,
+            "type":"integer",
+            "location": "uri"
+          }
+        }
+      },
+      "output":{
+        "type": "binary",
+        "payload": "logGroupListBuf",
+        "members": {
+            "logGroupListBuf":{
+                "streaming":true
+            }
+        }
+      }
+    },
+    "createIndex": {
+      "name": "createIndex",
+      "http": {
+        "method": "POST",
+        "uri": "/logstores/{logstoreName}/index"
+      },
+      "input": {
+        "payload": "indexDetail",
+        "type": "structure",
+        "ContentMD5": true,
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logstoreName":{
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "indexDetail":{
+            "required":true,
+            "type": "structure",
+            "members": {
+                "ttl":{
+                    "type":"integer",
+                    "required":true
+                },
+                "line":{
+                    "type":"structure",
+                    "members":{
+                        "token":{
+                            "type":"list"
+                        },
+                        "include_keys":{
+                            "type":"list"
+                        },
+                        "exclude_keys":{
+                            "type":"list"
+                        },
+                        "caseSensitive":{
+                            "type":"boolean"
+                        }
+                    }
+                },
+                "key":{
+                    "type": "structure"
+                }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "updateIndex": {
+      "name": "updateIndex",
+      "http": {
+        "method": "PUT",
+        "uri": "/logstores/{logstoreName}/index"
+      },
+      "input": {
+        "payload": "indexDetail",
+        "type": "structure",
+        "ContentMD5": true,
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logstoreName":{
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "indexDetail":{
+            "required":true,
+            "type": "structure",
+            "members": {
+                "ttl":{
+                    "type":"integer",
+                    "required":true
+                },
+                "line":{
+                    "type":"structure",
+                    "members":{
+                        "token":{
+                            "type":"list"
+                        },
+                        "include_keys":{
+                            "type":"list"
+                        },
+                        "exclude_keys":{
+                            "type":"list"
+                        },
+                        "caseSensitive":{
+                            "type":"boolean"
+                        }
+                    }
+                },
+                "key":{
+                    "type": "structure"
+                }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "deleteIndex": {
+      "name": "deleteIndex",
+      "http": {
+        "method": "DELETE",
+        "uri": "/logstores/{logstoreName}/index"
+      },
+      "input": {
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logstoreName":{
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "getIndex": {
+      "name": "getIndex",
+      "http": {
+        "method": "GET",
+        "uri": "/logstores/{logstoreName}/index"
+      },
+      "input": {
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logstoreName":{
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "getHistograms": {
+      "name": "GetHistograms",
+      "http": {
+        "method": "GET",
+        "uri": "/logstores/{logStoreName}?type=histogram&from={from}&to={to}&topic={topic}&query={query}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logStoreName": {
+            "required": true,
+            "location": "uri"
+          },
+
+          "topic": {
+            "required": false,
+            "location": "uri",
+            "type": "string"
+          },
+          "from": {
+            "required": false,
+            "location": "uri",
+            "type": "integer"
+          },
+          "to": {
+            "required": false,
+            "location": "uri",
+            "type": "integer"
+          },
+          "query": {
+            "required": false,
+            "location": "uri",
+            "type": "string"
+          }
+        }
+      },
+      "output":{
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "getLogs": {
+      "name": "GetLogs",
+      "http": {
+        "method": "GET",
+        "uri": "/logstores/{logStoreName}?type=log&from={from}&to={to}&topic={topic}&query={query}&line={line}&offset={offset}&reverse={reverse}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logStoreName": {
+            "required": true,
+            "location": "uri"
+          },
+
+          "topic": {
+            "required": false,
+            "location": "uri",
+            "type": "string"
+          },
+          "from": {
+            "required": false,
+            "location": "uri",
+            "type": "integer"
+          },
+          "to": {
+            "required": false,
+            "location": "uri",
+            "type": "integer"
+          },
+          "query": {
+            "required": false,
+            "location": "uri",
+            "type": "string"
+          },
+
+          "line": {
+            "required": false,
+            "location": "uri",
+            "type": "integer"
+          },
+
+          "offset": {
+            "required": false,
+            "location": "uri",
+            "type": "integer"
+          },
+          "reverse":{
+            "required": false,
+            "location": "uri",
+            "type": "boolean"
+          }
+        }
+      },
+      "output":{
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    }
+  },
+  "pagination": {
+
+  }
+}
