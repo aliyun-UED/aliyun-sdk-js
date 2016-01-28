@@ -3,8 +3,8 @@ var sls = require('./sls');
 // -------------------------------
 // get Histogram
 // -------------------------------
-var projectName = "project_name1";
-var logStoreName = "logstore_name1";
+var projectName = "your_project_name";
+var logStoreName = "your_logstore";
 var to = Math.floor(new Date().getTime() / 1000);
 var from = to - 900; //15min
 
