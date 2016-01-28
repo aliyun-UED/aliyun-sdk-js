@@ -280,6 +280,136 @@
         "members": {}
       }
     },
+    "PutRow": {
+      "name": "PutRow",
+      "http": {
+        "method": "POST",
+        "uri": "/PutRow"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "instance_name": {
+            "required": true,
+            "location": "header",
+            "name": "x-ots-instancename"
+          },
+          "table_name": {
+            "name": "table_name",
+            "required": true,
+            "type": "string"
+          },
+          "condition": {
+            "name": "condition",
+            "required": true,
+            "type": "structure",
+            "members": {
+              "row_existence": {
+                "name": "row_existence",
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "primary_key": {
+            "name": "primary_key",
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "members": {
+                "name": {
+                  "name": "name",
+                  "required": true,
+                  "type": "string"
+                },
+                "value": {
+                  "name": "value",
+                  "required": true,
+                  "type": "structure",
+                  "members": {
+                    "type": {
+                      "name": "type",
+                      "required": true,
+                      "type": "string"
+                    },
+                    "v_int": {
+                      "name": "v_int",
+                      "type": "integer"
+                    },
+                    "v_string": {
+                      "name": "v_string",
+                      "type": "string"
+                    },
+                    "v_bool": {
+                      "name": "v_bool",
+                      "type": "boolean"
+                    },
+                    "v_double": {
+                      "name": "v_double",
+                      "type": "float"
+                    },
+                    "v_binary": {
+                      "name": "v_binary",
+                      "type": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "attribute_columns": {
+            "name": "attribute_columns",
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "members": {
+                "name": {
+                  "name": "name",
+                  "required": true,
+                  "type": "string"
+                },
+                "value": {
+                  "name": "value",
+                  "required": true,
+                  "type": "structure",
+                  "members": {
+                    "type": {
+                      "name": "type",
+                      "required": true,
+                      "type": "string"
+                    },
+                    "v_int": {
+                      "name": "v_int",
+                      "type": "integer"
+                    },
+                    "v_string": {
+                      "name": "v_string",
+                      "type": "string"
+                    },
+                    "v_bool": {
+                      "name": "v_bool",
+                      "type": "boolean"
+                    },
+                    "v_double": {
+                      "name": "v_double",
+                      "type": "float"
+                    },
+                    "v_binary": {
+                      "name": "v_binary",
+                      "type": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
     "UpdateRow": {
       "name": "UpdateRow",
       "http": {
