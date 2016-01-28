@@ -1,8 +1,11 @@
 var ots = require('./ots');
 
-ots.getRow({
+ots.deleteRow({
       instance_name: 'chylvina',
       table_name: "table1",
+      condition: {
+        row_existence: "IGNORE"
+      },
       primary_key: [
         {
           name: "key1",

@@ -9,7 +9,7 @@
   "timestampFormat": "rfc822",
   "xmlnamespace": "",
   "operations": {
-    "CreateTable": {
+    "createTable": {
       "name": "CreateTable",
       "http": {
         "method": "POST",
@@ -83,7 +83,7 @@
         "members": {}
       }
     },
-    "ListTable": {
+    "listTable": {
       "name": "ListTable",
       "http": {
         "method": "POST",
@@ -104,7 +104,7 @@
         "members": {}
       }
     },
-    "DeleteTable": {
+    "deleteTable": {
       "name": "DeleteTable",
       "http": {
         "method": "POST",
@@ -130,7 +130,7 @@
         "members": {}
       }
     },
-    "UpdateTable": {
+    "updateTable": {
       "name": "UpdateTable",
       "http": {
         "method": "POST",
@@ -178,7 +178,7 @@
         "members": {}
       }
     },
-    "DescribeTable": {
+    "describeTable": {
       "name": "DescribeTable",
       "http": {
         "method": "POST",
@@ -204,7 +204,7 @@
         "members": {}
       }
     },
-    "GetRow": {
+    "getRow": {
       "name": "GetRow",
       "http": {
         "method": "POST",
@@ -280,7 +280,7 @@
         "members": {}
       }
     },
-    "PutRow": {
+    "putRow": {
       "name": "PutRow",
       "http": {
         "method": "POST",
@@ -410,7 +410,7 @@
         "members": {}
       }
     },
-    "UpdateRow": {
+    "updateRow": {
       "name": "UpdateRow",
       "http": {
         "method": "POST",
@@ -544,7 +544,7 @@
         "members": {}
       }
     },
-    "DeleteRow": {
+    "deleteRow": {
       "name": "DeleteRow",
       "http": {
         "method": "POST",
@@ -628,7 +628,7 @@
         "members": {}
       }
     },
-    "GetRange": {
+    "getRange": {
       "name": "GetRange",
       "http": {
         "method": "POST",
@@ -759,7 +759,7 @@
         "members": {}
       }
     },
-    "BatchGetRow": {
+    "batchGetRow": {
       "name": "BatchGetRow",
       "http": {
         "method": "POST",
@@ -853,7 +853,7 @@
         "members": {}
       }
     },
-    "BatchWriteRow": {
+    "batchWriteRow": {
       "name": "BatchWriteRow",
       "http": {
         "method": "POST",
