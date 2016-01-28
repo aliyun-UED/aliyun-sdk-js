@@ -126,6 +126,7 @@ SDK 目前支持下列服务:
 | Aliyun RDS      | ALY.RDS | 2014-08-15 | [RDS API手册](http://imgs-storage.cdn.aliyuncs.com/help/rds/RDS-API-Reference.pdf) |
 | Aliyun SLB      | ALY.SLB | 2014-05-15 | [SLB API手册](http://imgs-storage.cdn.aliyuncs.com/help/slb/SLB-API-Reference_2014-05-15.pdf) |
 | Aliyun OSS      | ALY.OSS | 2013-10-15 | [OSS API手册](http://imgs-storage.cdn.aliyuncs.com/help/oss/oss%20api%2020140828.pdf) |
+| Aliyun OTS      | ALY.OTS | 2014-08-08 | [OTS API手册](https://help.aliyun.com/document_detail/ots/APIReference) |
 | Aliyun CDN      | ALY.CDN | 2014-11-11 | [CDN API手册](http://imgs-storage.cdn.aliyuncs.com/help/cdn/cdn%20open%20api%20v1.6.pdf) |
 | Aliyun CMS      | ALY.CMS | 2015-10-20 | [CMS API手册](https://help.aliyun.com/document_detail/cms/API_References/New_Metric_OpenAPI_Reference.html?spm=5176.product8314972_cms.6.89.O1ENDP) |
 | Aliyun SLS      | ALY.SLS | 2014-11-18 | [SLS API手册](http://docs.aliyun.com/#/sls/api/overview) |

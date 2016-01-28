@@ -1,0 +1,1189 @@
+{
+  "format": "rest",
+  "apiVersion": "2014-08-08",
+  "checksumFormat": "md5",
+  "endpointPrefix": "ots",
+  "serviceAbbreviation": "OTS",
+  "serviceFullName": "Aliyun Open Table Service",
+  "signatureVersion": "ots",
+  "timestampFormat": "rfc822",
+  "xmlnamespace": "",
+  "operations": {
+    "createTable": {
+      "name": "CreateTable",
+      "http": {
+        "method": "POST",
+        "uri": "/CreateTable"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "instance_name": {
+            "required": true,
+            "location": "header",
+            "name": "x-ots-instancename"
+          },
+          "table_meta": {
+            "name": "table_meta",
+            "required": true,
+            "type": "structure",
+            "members": {
+              "table_name": {
+                "name": "table_name",
+                "required": true,
+                "type": "string"
+              },
+              "primary_key": {
+                "name": "primary_key",
+                "type": "list",
+                "members": {
+                  "type": "structure",
+                  "members": {
+                    "name": {
+                      "name": "name",
+                      "required": true,
+                      "type": "string"
+                    },
+                    "type": {
+                      "name": "type",
+                      "required": true,
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "reserved_throughput": {
+            "name": "reserved_throughput",
+            "required": true,
+            "type": "structure",
+            "members": {
+              "capacity_unit": {
+                "name": "capacity_unit",
+                "required": true,
+                "type": "structure",
+                "members": {
+                  "read": {
+                    "name": "read",
+                    "type": "integer"
+                  },
+                  "write": {
+                    "name": "write",
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "listTable": {
+      "name": "ListTable",
+      "http": {
+        "method": "POST",
+        "uri": "/ListTable"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "instance_name": {
+            "required": true,
+            "location": "header",
+            "name": "x-ots-instancename"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "deleteTable": {
+      "name": "DeleteTable",
+      "http": {
+        "method": "POST",
+        "uri": "/DeleteTable"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "instance_name": {
+            "required": true,
+            "location": "header",
+            "name": "x-ots-instancename"
+          },
+          "table_name": {
+            "name": "table_name",
+            "required": true,
+            "type": "string"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "updateTable": {
+      "name": "UpdateTable",
+      "http": {
+        "method": "POST",
+        "uri": "/UpdateTable"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "instance_name": {
+            "required": true,
+            "location": "header",
+            "name": "x-ots-instancename"
+          },
+          "table_name": {
+            "name": "table_name",
+            "required": true,
+            "type": "string"
+          },
+          "reserved_throughput": {
+            "name": "reserved_throughput",
+            "required": true,
+            "type": "structure",
+            "members": {
+              "capacity_unit": {
+                "name": "capacity_unit",
+                "required": true,
+                "type": "structure",
+                "members": {
+                  "read": {
+                    "name": "read",
+                    "type": "integer"
+                  },
+                  "write": {
+                    "name": "write",
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "describeTable": {
+      "name": "DescribeTable",
+      "http": {
+        "method": "POST",
+        "uri": "/DescribeTable"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "instance_name": {
+            "required": true,
+            "location": "header",
+            "name": "x-ots-instancename"
+          },
+          "table_name": {
+            "name": "table_name",
+            "required": true,
+            "type": "string"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "getRow": {
+      "name": "GetRow",
+      "http": {
+        "method": "POST",
+        "uri": "/GetRow"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "instance_name": {
+            "required": true,
+            "location": "header",
+            "name": "x-ots-instancename"
+          },
+          "table_name": {
+            "name": "table_name",
+            "required": true,
+            "type": "string"
+          },
+          "primary_key": {
+            "name": "primary_key",
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "members": {
+                "name": {
+                  "name": "name",
+                  "required": true,
+                  "type": "string"
+                },
+                "value": {
+                  "name": "value",
+                  "required": true,
+                  "type": "structure",
+                  "members": {
+                    "type": {
+                      "name": "type",
+                      "required": true,
+                      "type": "string"
+                    },
+                    "v_int": {
+                      "name": "v_int",
+                      "type": "integer"
+                    },
+                    "v_string": {
+                      "name": "v_string",
+                      "type": "string"
+                    },
+                    "v_bool": {
+                      "name": "v_bool",
+                      "type": "boolean"
+                    },
+                    "v_double": {
+                      "name": "v_double",
+                      "type": "float"
+                    },
+                    "v_binary": {
+                      "name": "v_binary",
+                      "type": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "columns_to_get": {
+            "name": "columns_to_get",
+            "type": "list"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "putRow": {
+      "name": "PutRow",
+      "http": {
+        "method": "POST",
+        "uri": "/PutRow"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "instance_name": {
+            "required": true,
+            "location": "header",
+            "name": "x-ots-instancename"
+          },
+          "table_name": {
+            "name": "table_name",
+            "required": true,
+            "type": "string"
+          },
+          "condition": {
+            "name": "condition",
+            "required": true,
+            "type": "structure",
+            "members": {
+              "row_existence": {
+                "name": "row_existence",
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "primary_key": {
+            "name": "primary_key",
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "members": {
+                "name": {
+                  "name": "name",
+                  "required": true,
+                  "type": "string"
+                },
+                "value": {
+                  "name": "value",
+                  "required": true,
+                  "type": "structure",
+                  "members": {
+                    "type": {
+                      "name": "type",
+                      "required": true,
+                      "type": "string"
+                    },
+                    "v_int": {
+                      "name": "v_int",
+                      "type": "integer"
+                    },
+                    "v_string": {
+                      "name": "v_string",
+                      "type": "string"
+                    },
+                    "v_bool": {
+                      "name": "v_bool",
+                      "type": "boolean"
+                    },
+                    "v_double": {
+                      "name": "v_double",
+                      "type": "float"
+                    },
+                    "v_binary": {
+                      "name": "v_binary",
+                      "type": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "attribute_columns": {
+            "name": "attribute_columns",
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "members": {
+                "name": {
+                  "name": "name",
+                  "required": true,
+                  "type": "string"
+                },
+                "value": {
+                  "name": "value",
+                  "required": true,
+                  "type": "structure",
+                  "members": {
+                    "type": {
+                      "name": "type",
+                      "required": true,
+                      "type": "string"
+                    },
+                    "v_int": {
+                      "name": "v_int",
+                      "type": "integer"
+                    },
+                    "v_string": {
+                      "name": "v_string",
+                      "type": "string"
+                    },
+                    "v_bool": {
+                      "name": "v_bool",
+                      "type": "boolean"
+                    },
+                    "v_double": {
+                      "name": "v_double",
+                      "type": "float"
+                    },
+                    "v_binary": {
+                      "name": "v_binary",
+                      "type": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "updateRow": {
+      "name": "UpdateRow",
+      "http": {
+        "method": "POST",
+        "uri": "/UpdateRow"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "instance_name": {
+            "required": true,
+            "location": "header",
+            "name": "x-ots-instancename"
+          },
+          "table_name": {
+            "name": "table_name",
+            "required": true,
+            "type": "string"
+          },
+          "condition": {
+            "name": "condition",
+            "required": true,
+            "type": "structure",
+            "members": {
+              "row_existence": {
+                "name": "row_existence",
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "primary_key": {
+            "name": "primary_key",
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "members": {
+                "name": {
+                  "name": "name",
+                  "required": true,
+                  "type": "string"
+                },
+                "value": {
+                  "name": "value",
+                  "required": true,
+                  "type": "structure",
+                  "members": {
+                    "type": {
+                      "name": "type",
+                      "required": true,
+                      "type": "string"
+                    },
+                    "v_int": {
+                      "name": "v_int",
+                      "type": "integer"
+                    },
+                    "v_string": {
+                      "name": "v_string",
+                      "type": "string"
+                    },
+                    "v_bool": {
+                      "name": "v_bool",
+                      "type": "boolean"
+                    },
+                    "v_double": {
+                      "name": "v_double",
+                      "type": "float"
+                    },
+                    "v_binary": {
+                      "name": "v_binary",
+                      "type": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "attribute_columns": {
+            "name": "attribute_columns",
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "members": {
+                "type": {
+                  "name": "type",
+                  "required": true,
+                  "type": "string"
+                },
+                "name": {
+                  "name": "name",
+                  "required": true,
+                  "type": "string"
+                },
+                "value": {
+                  "name": "value",
+                  "type": "structure",
+                  "members": {
+                    "type": {
+                      "name": "type",
+                      "required": true,
+                      "type": "string"
+                    },
+                    "v_int": {
+                      "name": "v_int",
+                      "type": "integer"
+                    },
+                    "v_string": {
+                      "name": "v_string",
+                      "type": "string"
+                    },
+                    "v_bool": {
+                      "name": "v_bool",
+                      "type": "boolean"
+                    },
+                    "v_double": {
+                      "name": "v_double",
+                      "type": "float"
+                    },
+                    "v_binary": {
+                      "name": "v_binary",
+                      "type": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "deleteRow": {
+      "name": "DeleteRow",
+      "http": {
+        "method": "POST",
+        "uri": "/DeleteRow"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "instance_name": {
+            "required": true,
+            "location": "header",
+            "name": "x-ots-instancename"
+          },
+          "table_name": {
+            "name": "table_name",
+            "required": true,
+            "type": "string"
+          },
+          "condition": {
+            "name": "condition",
+            "required": true,
+            "type": "structure",
+            "members": {
+              "row_existence": {
+                "name": "row_existence",
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "primary_key": {
+            "name": "primary_key",
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "members": {
+                "name": {
+                  "name": "name",
+                  "required": true,
+                  "type": "string"
+                },
+                "value": {
+                  "name": "value",
+                  "required": true,
+                  "type": "structure",
+                  "members": {
+                    "type": {
+                      "name": "type",
+                      "required": true,
+                      "type": "string"
+                    },
+                    "v_int": {
+                      "name": "v_int",
+                      "type": "integer"
+                    },
+                    "v_string": {
+                      "name": "v_string",
+                      "type": "string"
+                    },
+                    "v_bool": {
+                      "name": "v_bool",
+                      "type": "boolean"
+                    },
+                    "v_double": {
+                      "name": "v_double",
+                      "type": "float"
+                    },
+                    "v_binary": {
+                      "name": "v_binary",
+                      "type": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "getRange": {
+      "name": "GetRange",
+      "http": {
+        "method": "POST",
+        "uri": "/GetRange"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "instance_name": {
+            "required": true,
+            "location": "header",
+            "name": "x-ots-instancename"
+          },
+          "table_name": {
+            "name": "table_name",
+            "required": true,
+            "type": "string"
+          },
+          "direction": {
+            "name": "direction",
+            "required": true,
+            "type": "string"
+          },
+          "columns_to_get": {
+            "name": "columns_to_get",
+            "type": "list"
+          },
+          "limit": {
+            "name": "limit",
+            "type": "integer"
+          },
+          "inclusive_start_primary_key": {
+            "name": "inclusive_start_primary_key",
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "members": {
+                "name": {
+                  "name": "name",
+                  "required": true,
+                  "type": "string"
+                },
+                "value": {
+                  "name": "value",
+                  "required": true,
+                  "type": "structure",
+                  "members": {
+                    "type": {
+                      "name": "type",
+                      "required": true,
+                      "type": "string"
+                    },
+                    "v_int": {
+                      "name": "v_int",
+                      "type": "integer"
+                    },
+                    "v_string": {
+                      "name": "v_string",
+                      "type": "string"
+                    },
+                    "v_bool": {
+                      "name": "v_bool",
+                      "type": "boolean"
+                    },
+                    "v_double": {
+                      "name": "v_double",
+                      "type": "float"
+                    },
+                    "v_binary": {
+                      "name": "v_binary",
+                      "type": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "exclusive_end_primary_key": {
+            "name": "exclusive_end_primary_key",
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "members": {
+                "name": {
+                  "name": "name",
+                  "required": true,
+                  "type": "string"
+                },
+                "value": {
+                  "name": "value",
+                  "required": true,
+                  "type": "structure",
+                  "members": {
+                    "type": {
+                      "name": "type",
+                      "required": true,
+                      "type": "string"
+                    },
+                    "v_int": {
+                      "name": "v_int",
+                      "type": "integer"
+                    },
+                    "v_string": {
+                      "name": "v_string",
+                      "type": "string"
+                    },
+                    "v_bool": {
+                      "name": "v_bool",
+                      "type": "boolean"
+                    },
+                    "v_double": {
+                      "name": "v_double",
+                      "type": "float"
+                    },
+                    "v_binary": {
+                      "name": "v_binary",
+                      "type": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "batchGetRow": {
+      "name": "BatchGetRow",
+      "http": {
+        "method": "POST",
+        "uri": "/BatchGetRow"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "instance_name": {
+            "required": true,
+            "location": "header",
+            "name": "x-ots-instancename"
+          },
+          "tables": {
+            "name": "tables",
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "members": {
+                "table_name": {
+                  "name": "table_name",
+                  "required": true,
+                  "type": "string"
+                },
+                "rows": {
+                  "name": "rows",
+                  "type": "list",
+                  "members": {
+                    "type": "structure",
+                    "members": {
+                      "primary_key": {
+                        "name": "primary_key",
+                        "type": "list",
+                        "members": {
+                          "type": "structure",
+                          "members": {
+                            "name": {
+                              "name": "name",
+                              "required": true,
+                              "type": "string"
+                            },
+                            "value": {
+                              "name": "value",
+                              "required": true,
+                              "type": "structure",
+                              "members": {
+                                "type": {
+                                  "name": "type",
+                                  "required": true,
+                                  "type": "string"
+                                },
+                                "v_int": {
+                                  "name": "v_int",
+                                  "type": "integer"
+                                },
+                                "v_string": {
+                                  "name": "v_string",
+                                  "type": "string"
+                                },
+                                "v_bool": {
+                                  "name": "v_bool",
+                                  "type": "boolean"
+                                },
+                                "v_double": {
+                                  "name": "v_double",
+                                  "type": "float"
+                                },
+                                "v_binary": {
+                                  "name": "v_binary",
+                                  "type": "binary"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "columns_to_get": {
+                  "name": "columns_to_get",
+                  "type": "list"
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "batchWriteRow": {
+      "name": "BatchWriteRow",
+      "http": {
+        "method": "POST",
+        "uri": "/BatchWriteRow"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "instance_name": {
+            "required": true,
+            "location": "header",
+            "name": "x-ots-instancename"
+          },
+          "tables": {
+            "name": "tables",
+            "type": "list",
+            "members": {
+              "type": "structure",
+              "members": {
+                "table_name": {
+                  "name": "table_name",
+                  "required": true,
+                  "type": "string"
+                },
+                "put_rows": {
+                  "name": "put_rows",
+                  "type": "list",
+                  "members": {
+                    "type": "structure",
+                    "members": {
+                      "condition": {
+                        "name": "condition",
+                        "required": true,
+                        "type": "structure",
+                        "members": {
+                          "row_existence": {
+                            "name": "row_existence",
+                            "required": true,
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "primary_key": {
+                        "name": "primary_key",
+                        "type": "list",
+                        "members": {
+                          "type": "structure",
+                          "members": {
+                            "name": {
+                              "name": "name",
+                              "required": true,
+                              "type": "string"
+                            },
+                            "value": {
+                              "name": "value",
+                              "required": true,
+                              "type": "structure",
+                              "members": {
+                                "type": {
+                                  "name": "type",
+                                  "required": true,
+                                  "type": "string"
+                                },
+                                "v_int": {
+                                  "name": "v_int",
+                                  "type": "integer"
+                                },
+                                "v_string": {
+                                  "name": "v_string",
+                                  "type": "string"
+                                },
+                                "v_bool": {
+                                  "name": "v_bool",
+                                  "type": "boolean"
+                                },
+                                "v_double": {
+                                  "name": "v_double",
+                                  "type": "float"
+                                },
+                                "v_binary": {
+                                  "name": "v_binary",
+                                  "type": "binary"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "attribute_columns": {
+                        "name": "attribute_columns",
+                        "type": "list",
+                        "members": {
+                          "type": "structure",
+                          "members": {
+                            "name": {
+                              "name": "name",
+                              "required": true,
+                              "type": "string"
+                            },
+                            "value": {
+                              "name": "value",
+                              "required": true,
+                              "type": "structure",
+                              "members": {
+                                "type": {
+                                  "name": "type",
+                                  "required": true,
+                                  "type": "string"
+                                },
+                                "v_int": {
+                                  "name": "v_int",
+                                  "type": "integer"
+                                },
+                                "v_string": {
+                                  "name": "v_string",
+                                  "type": "string"
+                                },
+                                "v_bool": {
+                                  "name": "v_bool",
+                                  "type": "boolean"
+                                },
+                                "v_double": {
+                                  "name": "v_double",
+                                  "type": "float"
+                                },
+                                "v_binary": {
+                                  "name": "v_binary",
+                                  "type": "binary"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "update_rows": {
+                  "name": "update_rows",
+                  "type": "list",
+                  "members": {
+                    "type": "structure",
+                    "members": {
+                      "condition": {
+                        "name": "condition",
+                        "required": true,
+                        "type": "structure",
+                        "members": {
+                          "row_existence": {
+                            "name": "row_existence",
+                            "required": true,
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "primary_key": {
+                        "name": "primary_key",
+                        "type": "list",
+                        "members": {
+                          "type": "structure",
+                          "members": {
+                            "name": {
+                              "name": "name",
+                              "required": true,
+                              "type": "string"
+                            },
+                            "value": {
+                              "name": "value",
+                              "required": true,
+                              "type": "structure",
+                              "members": {
+                                "type": {
+                                  "name": "type",
+                                  "required": true,
+                                  "type": "string"
+                                },
+                                "v_int": {
+                                  "name": "v_int",
+                                  "type": "integer"
+                                },
+                                "v_string": {
+                                  "name": "v_string",
+                                  "type": "string"
+                                },
+                                "v_bool": {
+                                  "name": "v_bool",
+                                  "type": "boolean"
+                                },
+                                "v_double": {
+                                  "name": "v_double",
+                                  "type": "float"
+                                },
+                                "v_binary": {
+                                  "name": "v_binary",
+                                  "type": "binary"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "attribute_columns": {
+                        "name": "attribute_columns",
+                        "type": "list",
+                        "members": {
+                          "type": "structure",
+                          "members": {
+                            "type": {
+                              "name": "type",
+                              "required": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "name": "name",
+                              "required": true,
+                              "type": "string"
+                            },
+                            "value": {
+                              "name": "value",
+                              "type": "structure",
+                              "members": {
+                                "type": {
+                                  "name": "type",
+                                  "required": true,
+                                  "type": "string"
+                                },
+                                "v_int": {
+                                  "name": "v_int",
+                                  "type": "integer"
+                                },
+                                "v_string": {
+                                  "name": "v_string",
+                                  "type": "string"
+                                },
+                                "v_bool": {
+                                  "name": "v_bool",
+                                  "type": "boolean"
+                                },
+                                "v_double": {
+                                  "name": "v_double",
+                                  "type": "float"
+                                },
+                                "v_binary": {
+                                  "name": "v_binary",
+                                  "type": "binary"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "delete_rows": {
+                  "name": "delete_rows",
+                  "type": "list",
+                  "members": {
+                    "type": "structure",
+                    "members": {
+                      "condition": {
+                        "name": "condition",
+                        "required": true,
+                        "type": "structure",
+                        "members": {
+                          "row_existence": {
+                            "name": "row_existence",
+                            "required": true,
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "primary_key": {
+                        "name": "primary_key",
+                        "type": "list",
+                        "members": {
+                          "type": "structure",
+                          "members": {
+                            "name": {
+                              "name": "name",
+                              "required": true,
+                              "type": "string"
+                            },
+                            "value": {
+                              "name": "value",
+                              "required": true,
+                              "type": "structure",
+                              "members": {
+                                "type": {
+                                  "name": "type",
+                                  "required": true,
+                                  "type": "string"
+                                },
+                                "v_int": {
+                                  "name": "v_int",
+                                  "type": "integer"
+                                },
+                                "v_string": {
+                                  "name": "v_string",
+                                  "type": "string"
+                                },
+                                "v_bool": {
+                                  "name": "v_bool",
+                                  "type": "boolean"
+                                },
+                                "v_double": {
+                                  "name": "v_double",
+                                  "type": "float"
+                                },
+                                "v_binary": {
+                                  "name": "v_binary",
+                                  "type": "binary"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    }
+  }
+}
