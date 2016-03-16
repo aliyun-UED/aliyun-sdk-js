@@ -62,6 +62,66 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
 
         });
 
+        it('should create a cluster with Configs success too', function (done) {
+
+            var clusterDesc = {
+                "Name": "node-sdk-test-cluster",
+                "Description": "node-sdk test",
+                "ImageId": IMAGE_ID,
+                "Groups": {
+                    "group1": {
+                        "DesiredVMCount": 1,
+                        "InstanceType": INSTANCE_TYPE,
+                        "ResourceType": "OnDemand"
+                    }
+                },
+                "InstanceType": INSTANCE_TYPE,
+                "UserData": {"a":"b"},
+                "Configs": {
+                    "Disks": {
+                        "SystemDisk": {
+                            "Size": 80,
+                            "Type": "ephemeral"
+                        },
+                        "DataDisk": {
+                            "Size": 400,
+                            "Type": "ephemeral",
+                            "MountPoint": "/home/admin/xxx"
+                        }
+                    }
+                }
+            };
+
+            client.createCluster(clusterDesc, function (err, result) {
+
+                if (err) {
+                    console.log(err);
+                }
+
+                should(err === null).be.true;
+
+                result.should.have.properties(['requestId', 'code', 'message']);
+                result.code.should.be.exactly(201);
+
+
+                var clusterId = result.data.Id;
+
+                client.getCluster({ClusterId:clusterId}, function(err, result){
+                    var obj = result.data;
+
+                    obj.Configs.Disks.SystemDisk.Size.should.be.exactly(80);
+                    obj.Configs.Disks.DataDisk.Size.should.be.exactly(400);
+                    obj.Configs.Disks.DataDisk.Type.should.equal('ephemeral');
+
+                    obj.InstanceType.should.equal(INSTANCE_TYPE);
+
+                    client.deleteCluster({ClusterId:clusterId});
+                    done();
+                });
+            });
+
+        });
+
 
 
         it('should update cluster success', function (done) {
@@ -309,10 +369,25 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
                             //},
                             "Timeout": 21600,
                             "InstanceCount": 1,
+                            "WriteSupport": true,
                             "MaxRetryCount": 0,
                             "AutoCluster": {
                                 "ECSImageId": IMAGE_ID,
-                                "InstanceType": INSTANCE_TYPE
+                                "InstanceType": INSTANCE_TYPE,
+                                "UserData": {"a":"b"},
+                                "Configs": {
+                                    "Disks": {
+                                        "SystemDisk": {
+                                            "Size": 80,
+                                            "Type": "ephemeral"
+                                        },
+                                        "DataDisk": {
+                                            "Size": 400,
+                                            "Type": "ephemeral",
+                                            "MountPoint": "/home/admin/xxx"
+                                        }
+                                    }
+                                }
                             }
                         }
                     },
@@ -331,13 +406,30 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
 
                 should(err === null).be.true;
 
+                var  obj = result.data;
                 result.should.have.properties(['requestId']);
-                result.data.should.have.properties(['Id']);
+                obj.should.have.properties(['Id']);
 
                 jobId_autoCluster = result.data.Id;
                 console.log('======> Created:', jobId_autoCluster)
 
-                done();
+
+                client.getJobDescription({JobId:jobId_autoCluster}, function(err, result){
+
+                    should(result.data.DAG.Tasks.CountTask.WriteSupport==true).be.true;
+
+                    var obj = result.data.DAG.Tasks.CountTask.AutoCluster;
+
+                    obj.Configs.Disks.SystemDisk.Size.should.be.exactly(80);
+                    obj.Configs.Disks.DataDisk.Size.should.be.exactly(400);
+                    obj.Configs.Disks.DataDisk.Type.should.equal('ephemeral');
+
+                    obj.UserData.a.should.equal('b');
+
+                    done();
+                });
+
+
             });
 
         });

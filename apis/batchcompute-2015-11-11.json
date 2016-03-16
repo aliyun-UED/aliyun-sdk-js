@@ -16,7 +16,7 @@
         "uri": "/clusters"
       },
       "input": {
-        "payload": ["Name", "Description", "ImageId","UserData", "Groups"],
+        "payload": ["Name", "ImageId", "Description", "UserData","InstanceType", "Groups","Configs"],
         "members": {
           "Name":{
             "type": "string",
@@ -37,6 +37,10 @@
                "type": "string"
             }
           },
+          "InstanceType": {
+            "required": false,
+            "type": "string"
+          },
           "Groups": {
             "required":true,
             "type": "map",
@@ -48,12 +52,56 @@
                   "type": "integer"
                 },
                 "InstanceType": {
-                  "required": true,
+                  "required": false,
                   "type": "string"
                 },
                 "ResourceType": {
                   "required": false,
                   "type": "string"
+                }
+              }
+            }
+          },
+          "Configs": {
+            "required":false,
+            "type": "structure",
+            "members": {
+              "Disks": {
+                "required": false,
+                "type": "structure",
+                "members": {
+                  "DataDisk": {
+                    "required": false,
+                    "type": "structure",
+                    "members": {
+                      "Size": {
+                        "required": true,
+                        "type": "integer"
+                      },
+                      "Type": {
+                        "required": false,
+                        "type": "string"
+                      },
+                      "MountPoint": {
+                        "required": false,
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "SystemDisk": {
+                    "required": false,
+                    "type": "structure",
+                    "members": {
+                      "Size": {
+                        "required": true,
+                        "type": "integer"
+                      },
+                      "Type": {
+                        "required": false,
+                        "type": "string"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -352,7 +400,7 @@
         "uri": "/jobs"
       },
       "input": {
-        "payload": ["Name", "Description", "Priority", "JobFailOnInstanceFail","Type","DAG"],
+        "payload": ["Name", "Description", "Priority","WriteSupport", "JobFailOnInstanceFail","Type","DAG"],
         "members": {
           "Name":{
             "type": "string",
@@ -371,7 +419,7 @@
             "type": "string"
           },
           "JobFailOnInstanceFail": {
-            "required": true,
+            "required": false,
             "type": "boolean"
           },
           "DAG": {
@@ -391,6 +439,10 @@
                     "Timeout": {
                       "required": true,
                       "type": "integer"
+                    },
+                    "WriteSupport": {
+                      "required": false,
+                      "type": "boolean"
                     },
                     "MaxRetryCount": {
                       "required": false,
@@ -419,6 +471,57 @@
                         "ResourceType": {
                           "required": false,
                           "type": "string"
+                        },
+                        "UserData": {
+                          "required": false,
+                          "type": "map",
+                          "members": {
+                            "type": "string"
+                          }
+                        },
+                        "Configs": {
+                          "required":false,
+                          "type": "structure",
+                          "members": {
+                            "Disks": {
+                              "required": false,
+                              "type": "structure",
+                              "members": {
+                                "DataDisk": {
+                                  "required": false,
+                                  "type": "structure",
+                                  "members": {
+                                    "Size": {
+                                      "required": true,
+                                      "type": "integer"
+                                    },
+                                    "Type": {
+                                      "required": false,
+                                      "type": "string"
+                                    },
+                                    "MountPoint": {
+                                      "required": false,
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "SystemDisk": {
+                                  "required": false,
+                                  "type": "structure",
+                                  "members": {
+                                    "Size": {
+                                      "required": true,
+                                      "type": "integer"
+                                    },
+                                    "Type": {
+                                      "required": false,
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
                         }
                       }
                     },
