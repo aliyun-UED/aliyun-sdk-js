@@ -43,6 +43,54 @@
         }
       }
     },
+    "generateIotDevices": {
+      "name": "GenerateIotDevices",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "GenerateIotDevices"
+          },
+          "isDev": {
+            "required": true,
+            "type": "boolean"
+          },
+          "Number": {
+            "required": true,
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "generateIotDevicesArray": {
+      "name": "GenerateIotDevicesArray",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "GenerateIotDevicesArray"
+          },
+          "isDev": {
+            "required": true,
+            "type": "boolean"
+          },
+          "Number": {
+            "required": true,
+            "type": "integer"
+          }
+        }
+      }
+    },
     "revertRpc": {
       "name": "RevertRpc",
       "http": {
@@ -99,8 +147,8 @@
         }
       }
     },
-    "pushMessageToAndroid": {
-      "name": "PushMessageToAndroid",
+    "pushNoticeToAndroid": {
+      "name": "PushNoticeToAndroid",
       "http": {
         "method": "POST",
         "uri":"/"
@@ -110,7 +158,7 @@
         "members": {
           "Action": {
             "required": true,
-            "default": "PushMessageToAndroid"
+            "default": "PushNoticeToAndroid"
           },
           "AppKey": {
             "required": true,
@@ -121,9 +169,18 @@
             "type": "string"
           },
           "TargetValue": {
+            "required": true,
             "type": "string"
           },
-          "Message": {
+          "Summary": {
+            "required": true,
+            "type": "string"
+          },
+          "Title": {
+            "required": true,
+            "type": "string"
+          },
+          "AndroidExtParameters": {
             "type": "string"
           }
         }
@@ -162,8 +219,8 @@
         }
       }
     },
-    "pushNoticeToAndroid": {
-      "name": "PushNoticeToAndroid",
+    "pushMessageToAndroid": {
+      "name": "PushMessageToAndroid",
       "http": {
         "method": "POST",
         "uri":"/"
@@ -173,7 +230,7 @@
         "members": {
           "Action": {
             "required": true,
-            "default": "PushNoticeToAndroid"
+            "default": "PushMessageToAndroid"
           },
           "AppKey": {
             "required": true,
@@ -184,18 +241,9 @@
             "type": "string"
           },
           "TargetValue": {
-            "required": true,
             "type": "string"
           },
-          "Summary": {
-            "required": true,
-            "type": "string"
-          },
-          "Title": {
-            "required": true,
-            "type": "string"
-          },
-          "AndroidExtParameters": {
+          "Message": {
             "type": "string"
           }
         }
@@ -331,6 +379,142 @@
             "type": "string"
           },
           "ExpireTime": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "getDeviceInfos": {
+      "name": "GetDeviceInfos",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "GetDeviceInfos"
+          },
+          "Devices": {
+            "required": true,
+            "type": "string"
+          },
+          "AppKey": {
+            "required": true,
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "listTags": {
+      "name": "ListTags",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ListTags"
+          },
+          "AppKey": {
+            "required": true,
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "queryTags": {
+      "name": "QueryTags",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "QueryTags"
+          },
+          "AppKey": {
+            "required": true,
+            "type": "integer"
+          },
+          "ClientKey": {
+            "required": true,
+            "type": "string"
+          },
+          "KeyType": {
+            "required": true,
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "bindTag": {
+      "name": "BindTag",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "BindTag"
+          },
+          "AppKey": {
+            "required": true,
+            "type": "integer"
+          },
+          "ClientKey": {
+            "required": true,
+            "type": "string"
+          },
+          "KeyType": {
+            "required": true,
+            "type": "integer"
+          },
+          "TagName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "unbindTag": {
+      "name": "UnbindTag",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "UnbindTag"
+          },
+          "AppKey": {
+            "required": true,
+            "type": "integer"
+          },
+          "ClientKey": {
+            "required": true,
+            "type": "string"
+          },
+          "KeyType": {
+            "required": true,
+            "type": "integer"
+          },
+          "TagName": {
+            "required": true,
             "type": "string"
           }
         }
