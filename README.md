@@ -2,9 +2,6 @@
 
 **原来阿里云 SDK 还可以这样用 https://github.com/aliyun-UED/open5**
 
-## 技术支持
-请加旺旺群：1489391962
-
 ## 在浏览器端使用
 
 现在 aliyun sdk 支持在浏览器端调用, 只需要引入 dist/aliyun-sdk.js 即可, 使用参考 sample/browser/browser.html
