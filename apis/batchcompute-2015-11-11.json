@@ -9,6 +9,115 @@
   "timestampFormat": "rfc822",
   "xmlnamespace": "",
   "operations": {
+
+    "createImage": {
+      "name": "CreateImage",
+      "http": {
+        "method": "POST",
+        "uri": "/images"
+      },
+      "input": {
+        "payload": ["Name", "Platform", "EcsImageId","Description"],
+        "members": {
+          "Name":{
+            "type": "string",
+            "required": true
+          },
+          "EcsImageId": {
+            "required": true,
+            "type": "string"
+          },
+          "Description": {
+            "required": false,
+            "type": "string"
+          },
+          "Platform": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "JobId": {
+            "type": "string",
+            "name": "ResourceId"
+          }
+        }
+      }
+    },
+    "listImages": {
+      "name": "ListImages",
+      "http": {
+        "method": "GET",
+        "uri": "/images?Marker={Marker}&MaxItemCount={MaxItemCount}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Marker": {
+            "required": false,
+            "type":"string",
+            "location":"uri"
+          },
+          "MaxItemCount": {
+            "required": false,
+            "type":"integer",
+            "location":"uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
+    "getImage": {
+      "name": "GetImage",
+      "http": {
+        "method": "GET",
+        "uri": "/images/{ImageId}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "ImageId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
+    "deleteImage": {
+      "name": "DeleteImage",
+      "http": {
+        "method": "DELETE",
+        "uri": "/images/{ImageId}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "ImageId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
     "createCluster": {
       "name": "CreateCluster",
       "http": {
