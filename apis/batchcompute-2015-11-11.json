@@ -9,7 +9,20 @@
   "timestampFormat": "rfc822",
   "xmlnamespace": "",
   "operations": {
-
+    "getQuotas": {
+      "name": "GetQuotas",
+      "http": {
+        "method": "GET",
+        "uri": "/quotas"
+      },
+      "input": {
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
     "createImage": {
       "name": "CreateImage",
       "http": {
