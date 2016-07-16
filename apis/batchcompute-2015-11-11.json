@@ -9,7 +9,20 @@
   "timestampFormat": "rfc822",
   "xmlnamespace": "",
   "operations": {
-
+    "getQuotas": {
+      "name": "GetQuotas",
+      "http": {
+        "method": "GET",
+        "uri": "/quotas"
+      },
+      "input": {
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
     "createImage": {
       "name": "CreateImage",
       "http": {
@@ -125,7 +138,7 @@
         "uri": "/clusters"
       },
       "input": {
-        "payload": ["Name", "Description", "ImageId","UserData", "Groups"],
+        "payload": ["Name", "Description", "ImageId","InstanceType","UserData","Configs", "Groups"],
         "members": {
           "Name":{
             "type": "string",
@@ -133,6 +146,10 @@
           },
           "ImageId": {
             "required": true,
+            "type": "string"
+          },
+          "InstanceType": {
+            "required": false,
             "type": "string"
           },
           "Description": {
@@ -146,6 +163,50 @@
                "type": "string"
             }
           },
+          "Configs": {
+            "required": false,
+            "type": "structure",
+            "members": {
+              "Disks": {
+                "required": false,
+                "type": "structure",
+                "members": {
+                  "SystemDisk": {
+                    "required": false,
+                    "type": "structure",
+                    "members": {
+                      "Type": {
+                        "required": false,
+                        "type": "string"
+                      },
+                      "Size": {
+                        "required": false,
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "DataDisk": {
+                    "required": false,
+                    "type": "structure",
+                    "members": {
+                      "Type": {
+                        "required": false,
+                        "type": "string"
+                      },
+                      "Size": {
+                        "required": false,
+                        "type": "integer"
+                      },
+                      "MountPoint": {
+                        "required": false,
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           "Groups": {
             "required":true,
             "type": "map",
@@ -157,7 +218,7 @@
                   "type": "integer"
                 },
                 "InstanceType": {
-                  "required": true,
+                  "required": false,
                   "type": "string"
                 },
                 "ResourceType": {
@@ -497,6 +558,10 @@
                       "required": true,
                       "type": "integer"
                     },
+                    "WriteSupport": {
+                      "required": false,
+                      "type": "boolean"
+                    },
                     "Timeout": {
                       "required": true,
                       "type": "integer"
@@ -528,6 +593,57 @@
                         "ResourceType": {
                           "required": false,
                           "type": "string"
+                        },
+                        "UserData": {
+                          "required": false,
+                          "type": "map",
+                          "members": {
+                            "type": "string"
+                          }
+                        },
+                        "Configs": {
+                          "required": false,
+                          "type": "structure",
+                          "members": {
+                            "Disks": {
+                              "required": false,
+                              "type": "structure",
+                              "members": {
+                                "SystemDisk": {
+                                  "required": false,
+                                  "type": "structure",
+                                  "members": {
+                                    "Type": {
+                                      "required": false,
+                                      "type": "string"
+                                    },
+                                    "Size": {
+                                      "required": false,
+                                      "type": "integer"
+                                    }
+                                  }
+                                },
+                                "DataDisk": {
+                                  "required": false,
+                                  "type": "structure",
+                                  "members": {
+                                    "Type": {
+                                      "required": false,
+                                      "type": "string"
+                                    },
+                                    "Size": {
+                                      "required": false,
+                                      "type": "integer"
+                                    },
+                                    "MountPoint": {
+                                      "required": false,
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
                         }
                       }
                     },
