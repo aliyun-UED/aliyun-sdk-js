@@ -64,11 +64,16 @@
       "name": "ListImages",
       "http": {
         "method": "GET",
-        "uri": "/images?Marker={Marker}&MaxItemCount={MaxItemCount}"
+        "uri": "/images?Type={Type}&Marker={Marker}&MaxItemCount={MaxItemCount}"
       },
       "input": {
         "type": "structure",
         "members": {
+          "Type": {
+            "required": false,
+            "type": "string",
+            "location": "uri"
+          },
           "Marker": {
             "required": false,
             "type":"string",
