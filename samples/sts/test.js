@@ -21,3 +21,10 @@ sts.assumeRole({
 }, function (err, res) {
   console.log(err, res);
 });
+
+//构造GetCallerIdentity请求
+sts.getCallerIdentity({
+    Action : 'GetCallerIdentity'
+}, function (err, res) {
+    console.log(err, res);
+});

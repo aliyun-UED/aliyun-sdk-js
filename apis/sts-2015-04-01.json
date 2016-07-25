@@ -1,43 +1,59 @@
 {
-  "format": "pop",
-  "apiVersion": "2015-04-01",
-  "checksumFormat": "md5",
-  "endpointPrefix": "sts",
-  "serviceAbbreviation": "STS",
-  "serviceFullName": "Aliyun STS",
-  "signatureVersion": "pop",
-  "timestampFormat": "top",
-  "xmlnamespace": "",
-  "operations": {
-    "assumeRole": {
-      "name": "AssumeRole",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "AssumeRole"
-          },
-          "DurationSeconds": {
-            "type": "integer"
-          },
-          "Policy": {
-            "type": "string"
-          },
-          "RoleArn": {
-            "required": true,
-            "type": "string"
-          },
-          "RoleSessionName": {
-            "required": true,
-            "type": "string"
-          }
+    "format":"pop",
+    "apiVersion":"2015-04-01",
+    "checksumFormat":"md5",
+    "endpointPrefix":"sts",
+    "serviceAbbreviation":"STS",
+    "serviceFullName":"Aliyun STS",
+    "signatureVersion":"pop",
+    "timestampFormat":"top",
+    "xmlnamespace":"",
+    "operations":{
+        "assumeRole":{
+            "name":"AssumeRole",
+            "http":{
+                "method":"POST",
+                "uri":"/"
+            },
+            "input":{
+                "type":"structure",
+                "members":{
+                    "Action":{
+                        "required":true,
+                        "default":"AssumeRole"
+                    },
+                    "DurationSeconds":{
+                        "type":"integer"
+                    },
+                    "Policy":{
+                        "type":"string"
+                    },
+                    "RoleArn":{
+                        "required":true,
+                        "type":"string"
+                    },
+                    "RoleSessionName":{
+                        "required":true,
+                        "type":"string"
+                    }
+                }
+            }
+        },
+        "getCallerIdentity":{
+            "name":"AssumeRole",
+            "http":{
+                "method":"POST",
+                "uri":"/"
+            },
+            "input":{
+                "type":"structure",
+                "members":{
+                    "Action":{
+                        "required":true,
+                        "default":"GetCallerIdentity"
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }
