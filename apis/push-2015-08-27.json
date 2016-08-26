@@ -1,524 +1,603 @@
 {
-  "format": "pop",
-  "apiVersion": "2015-08-27",
-  "checksumFormat": "md5",
-  "endpointPrefix": "push",
-  "serviceAbbreviation": "PUSH",
-  "serviceFullName": "Aliyun PUSH",
-  "signatureVersion": "pop",
-  "timestampFormat": "top",
-  "xmlnamespace": "",
-  "operations": {
-    "pushByteMessage": {
-      "name": "PushByteMessage",
-      "http": {
-        "method": "POST",
-        "uri":"/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "PushByteMessage"
-          },
-          "AppId": {
-            "required": true,
-            "type": "integer"
-          },
-          "SendType": {
-            "required": true,
-            "type": "integer"
-          },
-          "Accounts": {
-            "type": "string"
-          },
-          "DeviceIds": {
-            "type": "string"
-          },
-          "PushContent": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "generateIotDevices": {
-      "name": "GenerateIotDevices",
-      "http": {
-        "method": "POST",
-        "uri":"/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "GenerateIotDevices"
-          },
-          "isDev": {
-            "required": true,
-            "type": "boolean"
-          },
-          "Number": {
-            "required": true,
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "generateIotDevicesArray": {
-      "name": "GenerateIotDevicesArray",
-      "http": {
-        "method": "POST",
-        "uri":"/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "GenerateIotDevicesArray"
-          },
-          "isDev": {
-            "required": true,
-            "type": "boolean"
-          },
-          "Number": {
-            "required": true,
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "revertRpc": {
-      "name": "RevertRpc",
-      "http": {
-        "method": "POST",
-        "uri":"/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "RevertRpc"
-          },
-          "AppId": {
-            "required": true,
-            "type": "integer"
-          },
-          "DeviceId": {
-            "required": true,
-            "type": "string"
-          },
-          "RpcContent": {
-            "required": true,
-            "type": "string"
-          },
-          "TimeOut": {
-            "required": true,
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "batchGetDevicesInfo": {
-      "name": "BatchGetDevicesInfo",
-      "http": {
-        "method": "POST",
-        "uri":"/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "BatchGetDevicesInfo"
-          },
-          "Devices": {
-            "required": true,
-            "type": "string"
-          },
-          "AppId": {
-            "required": true,
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "pushNoticeToAndroid": {
-      "name": "PushNoticeToAndroid",
-      "http": {
-        "method": "POST",
-        "uri":"/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "PushNoticeToAndroid"
-          },
-          "AppKey": {
-            "required": true,
-            "type": "integer"
-          },
-          "Target": {
-            "required": true,
-            "type": "string"
-          },
-          "TargetValue": {
-            "required": true,
-            "type": "string"
-          },
-          "Summary": {
-            "required": true,
-            "type": "string"
-          },
-          "Title": {
-            "required": true,
-            "type": "string"
-          },
-          "AndroidExtParameters": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "pushMessageToiOS": {
-      "name": "PushMessageToiOS",
-      "http": {
-        "method": "POST",
-        "uri":"/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "PushMessageToiOS"
-          },
-          "AppKey": {
-            "required": true,
-            "type": "integer"
-          },
-          "Target": {
-            "required": true,
-            "type": "string"
-          },
-          "TargetValue": {
-            "type": "string"
-          },
-          "Message": {
-            "type": "string"
-          },
-          "Summary": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "pushMessageToAndroid": {
-      "name": "PushMessageToAndroid",
-      "http": {
-        "method": "POST",
-        "uri":"/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "PushMessageToAndroid"
-          },
-          "AppKey": {
-            "required": true,
-            "type": "integer"
-          },
-          "Target": {
-            "required": true,
-            "type": "string"
-          },
-          "TargetValue": {
-            "type": "string"
-          },
-          "Message": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "pushNoticeToiOS": {
-      "name": "PushNoticeToiOS",
-      "http": {
-        "method": "POST",
-        "uri":"/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "PushNoticeToiOS"
-          },
-          "AppKey": {
-            "required": true,
-            "type": "integer"
-          },
-          "Target": {
-            "required": true,
-            "type": "string"
-          },
-          "TargetValue": {
-            "type": "string"
-          },
-          "Ext": {
-            "required": true,
-            "type": "string"
-          },
-          "Env": {
-            "required": true,
-            "type": "string"
-          },
-          "Summary": {
-            "required": true,
-            "type": "string"
-          },
-          "iOSExtParameters": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "push": {
-      "name": "Push",
-      "http": {
-        "method": "POST",
-        "uri":"/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "Push"
-          },
-          "AppKey": {
-            "required": true,
-            "type": "integer"
-          },
-          "Target": {
-            "required": true,
-            "type": "string"
-          },
-          "TargetValue": {
-            "type": "string"
-          },
-          "Type": {
-            "required": true,
-            "type": "integer"
-          },
-          "Title": {
-            "required": true,
-            "type": "string"
-          },
-          "Remind": {
-            "required": true,
-            "type": "boolean"
-          },
-          "StoreOffline": {
-            "required": true,
-            "type": "boolean"
-          },
-          "Body": {
-            "required": true,
-            "type": "string"
-          },
-          "DeviceType": {
-            "required": true,
-            "type": "integer"
-          },
-          "TimeOut": {
-            "type": "integer"
-          },
-          "Summary": {
-            "type": "string"
-          },
-          "AndroidActivity": {
-            "type": "string"
-          },
-          "AndroidOpenUrl": {
-            "type": "string"
-          },
-          "AndroidExtParameters": {
-            "type": "string"
-          },
-          "AndroidOpenType": {
-            "type": "string"
-          },
-          "AndroidMusic": {
-            "type": "string"
-          },
-          "BatchNumber": {
-            "type": "string"
-          },
-          "iOSMusic": {
-            "type": "string"
-          },
-          "iOSBadge": {
-            "type": "string"
-          },
-          "iOSExtParameters": {
-            "type": "string"
-          },
-          "PushTime": {
-            "type": "string"
-          },
-          "ApnsEnv": {
-            "type": "string"
-          },
-          "ExpireTime": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "getDeviceInfos": {
-      "name": "GetDeviceInfos",
-      "http": {
-        "method": "POST",
-        "uri":"/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "GetDeviceInfos"
-          },
-          "Devices": {
-            "required": true,
-            "type": "string"
-          },
-          "AppKey": {
-            "required": true,
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "listTags": {
-      "name": "ListTags",
-      "http": {
-        "method": "POST",
-        "uri":"/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "ListTags"
-          },
-          "AppKey": {
-            "required": true,
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "queryTags": {
-      "name": "QueryTags",
-      "http": {
-        "method": "POST",
-        "uri":"/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "QueryTags"
-          },
-          "AppKey": {
-            "required": true,
-            "type": "integer"
-          },
-          "ClientKey": {
-            "required": true,
-            "type": "string"
-          },
-          "KeyType": {
-            "required": true,
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "bindTag": {
-      "name": "BindTag",
-      "http": {
-        "method": "POST",
-        "uri":"/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "BindTag"
-          },
-          "AppKey": {
-            "required": true,
-            "type": "integer"
-          },
-          "ClientKey": {
-            "required": true,
-            "type": "string"
-          },
-          "KeyType": {
-            "required": true,
-            "type": "integer"
-          },
-          "TagName": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    },
-    "unbindTag": {
-      "name": "UnbindTag",
-      "http": {
-        "method": "POST",
-        "uri":"/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "UnbindTag"
-          },
-          "AppKey": {
-            "required": true,
-            "type": "integer"
-          },
-          "ClientKey": {
-            "required": true,
-            "type": "string"
-          },
-          "KeyType": {
-            "required": true,
-            "type": "integer"
-          },
-          "TagName": {
-            "required": true,
-            "type": "string"
-          }
-        }
-      }
-    }
+	"format": "pop",
+	"apiVersion": "2015-08-27", 
+	"checksumFormat": "md5",
+	"endpointPrefix": "push", 
+	"serviceAbbreviation": "PUSH", 
+	"serviceFullName": "Aliyun PUSH", 
+	"signatureVersion": "pop",
+	"timestampFormat": "top",
+	"xmlnamespace": "",
+	"operations": {
+		"pushByteMessage": {  
+			"name": "PushByteMessage",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "PushByteMessage"
+					},
+					"AppId": {
+						"required": true,
+						"type": "integer"
+					},
+					"SendType": {
+						"required": true,
+						"type": "integer"
+					},
+					"Accounts": {
+						"type": "string"
+					},
+					"DeviceIds": {
+						"type": "string"
+					},
+					"PushContent": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"revertRpc": {  
+			"name": "RevertRpc",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "RevertRpc"
+					},
+					"AppId": {
+						"required": true,
+						"type": "integer"
+					},
+					"DeviceId": {
+						"required": true,
+						"type": "string"
+					},
+					"RpcContent": {
+						"required": true,
+						"type": "string"
+					},
+					"TimeOut": {
+						"required": true,
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"batchGetDevicesInfo": {  
+			"name": "BatchGetDevicesInfo",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "BatchGetDevicesInfo"
+					},
+					"Devices": {
+						"required": true,
+						"type": "string"
+					},
+					"AppId": {
+						"required": true,
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"pushMessageToAndroid": {  
+			"name": "PushMessageToAndroid",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "PushMessageToAndroid"
+					},
+					"AppKey": {
+						"required": true,
+						"type": "integer"
+					},
+					"Target": {
+						"required": true,
+						"type": "string"
+					},
+					"TargetValue": {
+						"required": true,
+						"type": "string"
+					},
+					"Message": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"pushMessageToiOS": {  
+			"name": "PushMessageToiOS",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "PushMessageToiOS"
+					},
+					"AppKey": {
+						"required": true,
+						"type": "integer"
+					},
+					"Target": {
+						"required": true,
+						"type": "string"
+					},
+					"TargetValue": {
+						"required": true,
+						"type": "string"
+					},
+					"Message": {
+						"required": true,
+						"type": "string"
+					},
+					"Summary": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"pushNoticeToAndroid": {  
+			"name": "PushNoticeToAndroid",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "PushNoticeToAndroid"
+					},
+					"AppKey": {
+						"required": true,
+						"type": "integer"
+					},
+					"Target": {
+						"required": true,
+						"type": "string"
+					},
+					"TargetValue": {
+						"required": true,
+						"type": "string"
+					},
+					"Summary": {
+						"required": true,
+						"type": "string"
+					},
+					"Title": {
+						"required": true,
+						"type": "string"
+					},
+					"AndroidExtParameters": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"pushNoticeToiOS": {  
+			"name": "PushNoticeToiOS",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "PushNoticeToiOS"
+					},
+					"AppKey": {
+						"required": true,
+						"type": "integer"
+					},
+					"Target": {
+						"required": true,
+						"type": "string"
+					},
+					"TargetValue": {
+						"required": true,
+						"type": "string"
+					},
+					"Ext": {
+						"required": true,
+						"type": "string"
+					},
+					"Env": {
+						"required": true,
+						"type": "string"
+					},
+					"Summary": {
+						"required": true,
+						"type": "string"
+					},
+					"iOSExtParameters": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"push": {  
+			"name": "Push",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "Push"
+					},
+					"AppKey": {
+						"required": true,
+						"type": "integer"
+					},
+					"Target": {
+						"required": true,
+						"type": "string"
+					},
+					"TargetValue": {
+						"required": true,
+						"type": "string"
+					},
+					"Type": {
+						"required": true,
+						"type": "integer"
+					},
+					"Title": {
+						"required": true,
+						"type": "string"
+					},
+					"Remind": {
+						"type": "boolean"
+					},
+					"StoreOffline": {
+						"type": "boolean"
+					},
+					"Body": {
+						"required": true,
+						"type": "string"
+					},
+					"DeviceType": {
+						"required": true,
+						"type": "integer"
+					},
+					"TimeOut": {
+						"type": "integer"
+					},
+					"Summary": {
+						"type": "string"
+					},
+					"AndroidActivity": {
+						"type": "string"
+					},
+					"XiaomiActivity": {
+						"type": "string"
+					},
+					"AndroidOpenUrl": {
+						"type": "string"
+					},
+					"AndroidExtParameters": {
+						"type": "string"
+					},
+					"AndroidOpenType": {
+						"type": "string"
+					},
+					"AndroidMusic": {
+						"type": "string"
+					},
+					"BatchNumber": {
+						"type": "string"
+					},
+					"iOSMusic": {
+						"type": "string"
+					},
+					"iOSBadge": {
+						"type": "string"
+					},
+					"iOSExtParameters": {
+						"type": "string"
+					},
+					"PushTime": {
+						"type": "string"
+					},
+					"ApnsEnv": {
+						"type": "string"
+					},
+					"ExpireTime": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"getDeviceInfos": {  
+			"name": "GetDeviceInfos",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "GetDeviceInfos"
+					},
+					"Devices": {
+						"required": true,
+						"type": "string"
+					},
+					"AppKey": {
+						"required": true,
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"bindTag": {  
+			"name": "BindTag",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "BindTag"
+					},
+					"AppKey": {
+						"required": true,
+						"type": "integer"
+					},
+					"ClientKey": {
+						"required": true,
+						"type": "string"
+					},
+					"KeyType": {
+						"required": true,
+						"type": "integer"
+					},
+					"TagName": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"listTags": {  
+			"name": "ListTags",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "ListTags"
+					},
+					"AppKey": {
+						"required": true,
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"queryTags": {  
+			"name": "QueryTags",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "QueryTags"
+					},
+					"AppKey": {
+						"required": true,
+						"type": "integer"
+					},
+					"ClientKey": {
+						"required": true,
+						"type": "string"
+					},
+					"KeyType": {
+						"required": true,
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"unbindTag": {  
+			"name": "UnbindTag",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "UnbindTag"
+					},
+					"AppKey": {
+						"required": true,
+						"type": "integer"
+					},
+					"ClientKey": {
+						"required": true,
+						"type": "string"
+					},
+					"KeyType": {
+						"required": true,
+						"type": "integer"
+					},
+					"TagName": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"queryAppPushStat": {  
+			"name": "QueryAppPushStat",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "QueryAppPushStat"
+					},
+					"AppKey": {
+						"required": true,
+						"type": "integer"
+					},
+					"StartTime": {
+						"required": true,
+						"type": "string"
+					},
+					"EndTime": {
+						"required": true,
+						"type": "string"
+					},
+					"Granularity": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"queryDeviceStat": {  
+			"name": "QueryDeviceStat",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "QueryDeviceStat"
+					},
+					"AppKey": {
+						"required": true,
+						"type": "integer"
+					},
+					"StartTime": {
+						"required": true,
+						"type": "string"
+					},
+					"EndTime": {
+						"required": true,
+						"type": "string"
+					},
+					"DeviceType": {
+						"required": true,
+						"type": "string"
+					},
+					"QueryType": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"queryPushStat": {  
+			"name": "QueryPushStat",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "QueryPushStat"
+					},
+					"AppKey": {
+						"required": true,
+						"type": "integer"
+					},
+					"MessageId": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"queryUniqueDeviceStat": {  
+			"name": "QueryUniqueDeviceStat",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "QueryUniqueDeviceStat"
+					},
+					"AppKey": {
+						"required": true,
+						"type": "integer"
+					},
+					"StartTime": {
+						"required": true,
+						"type": "string"
+					},
+					"EndTime": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		}
   }
 }
