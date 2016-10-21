@@ -1,3 +1,4 @@
+// 更详细 sample 请参考 https://help.aliyun.com/document_detail/32402.html
 var ALY = require('../../index.js');
 
 var push = new ALY.PUSH({
