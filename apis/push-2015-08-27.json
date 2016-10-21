@@ -325,29 +325,29 @@
 						"required": true,
 						"type": "integer"
 					},
+					"DeviceType": {
+						"required": true,
+						"type": "integer"
+					},
 					"Title": {
 						"required": true,
 						"type": "string"
+					},
+					"Body": {
+						"required": true,
+						"type": "string"
+					},
+					"Summary": {
+						"type": "string"
+					},
+					"TimeOut": {
+						"type": "integer"
 					},
 					"Remind": {
 						"type": "boolean"
 					},
 					"StoreOffline": {
 						"type": "boolean"
-					},
-					"Body": {
-						"required": true,
-						"type": "string"
-					},
-					"DeviceType": {
-						"required": true,
-						"type": "integer"
-					},
-					"TimeOut": {
-						"type": "integer"
-					},
-					"Summary": {
-						"type": "string"
 					},
 					"AndroidActivity": {
 						"type": "string"
@@ -375,6 +375,18 @@
 					},
 					"iOSBadge": {
 						"type": "string"
+					},
+					"iOSTitle": {
+						"type": "string"
+					},
+					"iOSSubtitle": {
+						"type": "string"
+					},
+					"iOSNotificationCategory": {
+						"type": "string"
+					},
+					"iOSMutableContent": {
+						"type": "boolean"
 					},
 					"iOSExtParameters": {
 						"type": "string"
