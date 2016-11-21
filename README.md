@@ -125,6 +125,7 @@ SDK 目前支持下列服务:
 | Aliyun STS      | ALY.STS | 2015-04-01 | [STS API手册](http://docs.aliyun.com/#/pub/ram/sts-user-guide/intro) |
 | Aliyun MTS      | ALY.MTS | 2014-06-18 | [MTS API手册](https://docs.aliyun.com/#/pub/mts/API-Reference/summary) |
 | Aliyun PUSH      | ALY.PUSH | 2015-08-27 | [PUSH API手册](https://help.aliyun.com/document_detail/mobilepush/api-reference/openapi.html) |
+| Aldayu      | ALY.DAYU | 2015-12-16 | [DAYU API手册](https://api.alidayu.com/doc2/apiList.htm) |
 | Aliyun OpenSearch      | ALY.OpenSearch | 2015-01-01 | [OpenSearch API手册](http://docs.aliyun.com/#/opensearch/api-reference/terminology) |
 | Aliyun BatchCompute      | ALY.BatchCompute | 2015-06-30 | [BatchCompute API手册](http://docs.aliyun.com/#/pub/batchcompute) |
 | Aliyun OCS memcached      | ALY.MEMCACHED        | | [BinaryProtocolRevamped](https://code.google.com/p/memcached/wiki/BinaryProtocolRevamped) |
