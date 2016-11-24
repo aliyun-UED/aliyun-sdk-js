@@ -13,7 +13,7 @@
       "name": "RefreshObjectCaches",
       "http": {
         "method": "POST",
-        "uri": "/"
+        "uri":"/"
       },
       "input": {
         "type": "structure",
@@ -25,11 +25,8 @@
           "OwnerId": {
             "type": "integer"
           },
-          "ResourceOwnerAccount": {
+          "SecurityToken": {
             "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
           },
           "ObjectPath": {
             "required": true,
@@ -45,7 +42,7 @@
       "name": "StartCdnDomain",
       "http": {
         "method": "POST",
-        "uri": "/"
+        "uri":"/"
       },
       "input": {
         "type": "structure",
@@ -57,11 +54,8 @@
           "OwnerId": {
             "type": "integer"
           },
-          "ResourceOwnerAccount": {
+          "SecurityToken": {
             "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
           },
           "DomainName": {
             "required": true,
@@ -74,7 +68,7 @@
       "name": "StopCdnDomain",
       "http": {
         "method": "POST",
-        "uri": "/"
+        "uri":"/"
       },
       "input": {
         "type": "structure",
@@ -86,11 +80,8 @@
           "OwnerId": {
             "type": "integer"
           },
-          "ResourceOwnerAccount": {
+          "SecurityToken": {
             "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
           },
           "DomainName": {
             "required": true,
@@ -103,7 +94,7 @@
       "name": "DescribeCdnMonitorData",
       "http": {
         "method": "POST",
-        "uri": "/"
+        "uri":"/"
       },
       "input": {
         "type": "structure",
@@ -115,11 +106,8 @@
           "OwnerId": {
             "type": "integer"
           },
-          "ResourceOwnerAccount": {
+          "SecurityToken": {
             "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
           },
           "DomainName": {
             "required": true,
@@ -138,7 +126,7 @@
       "name": "DescribeCdnService",
       "http": {
         "method": "POST",
-        "uri": "/"
+        "uri":"/"
       },
       "input": {
         "type": "structure",
@@ -150,11 +138,8 @@
           "OwnerId": {
             "type": "integer"
           },
-          "ResourceOwnerAccount": {
+          "SecurityToken": {
             "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
           }
         }
       }
@@ -163,7 +148,7 @@
       "name": "DescribeOneMinuteData",
       "http": {
         "method": "POST",
-        "uri": "/"
+        "uri":"/"
       },
       "input": {
         "type": "structure",
@@ -195,7 +180,7 @@
       "name": "DescribeRefreshTasks",
       "http": {
         "method": "POST",
-        "uri": "/"
+        "uri":"/"
       },
       "input": {
         "type": "structure",
@@ -207,11 +192,8 @@
           "OwnerId": {
             "type": "integer"
           },
-          "ResourceOwnerAccount": {
+          "SecurityToken": {
             "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
           },
           "TaskId": {
             "type": "string"
@@ -224,6 +206,12 @@
           },
           "PageSize": {
             "type": "integer"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
           }
         }
       }
@@ -232,7 +220,7 @@
       "name": "DescribeUserDomains",
       "http": {
         "method": "POST",
-        "uri": "/"
+        "uri":"/"
       },
       "input": {
         "type": "structure",
@@ -244,17 +232,29 @@
           "OwnerId": {
             "type": "integer"
           },
-          "ResourceOwnerAccount": {
+          "SecurityToken": {
             "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
           },
           "PageSize": {
             "type": "integer"
           },
           "PageNumber": {
             "type": "integer"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "DomainStatus": {
+            "type": "string"
+          },
+          "DomainSearchType": {
+            "type": "string"
+          },
+          "Sources": {
+            "type": "string"
+          },
+          "CdnType": {
+            "type": "string"
           }
         }
       }
@@ -263,7 +263,7 @@
       "name": "ModifyCdnService",
       "http": {
         "method": "POST",
-        "uri": "/"
+        "uri":"/"
       },
       "input": {
         "type": "structure",
@@ -275,11 +275,8 @@
           "OwnerId": {
             "type": "integer"
           },
-          "ResourceOwnerAccount": {
+          "SecurityToken": {
             "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
           },
           "InternetChargeType": {
             "required": true,
@@ -292,7 +289,7 @@
       "name": "OpenCdnService",
       "http": {
         "method": "POST",
-        "uri": "/"
+        "uri":"/"
       },
       "input": {
         "type": "structure",
@@ -304,11 +301,8 @@
           "OwnerId": {
             "type": "integer"
           },
-          "ResourceOwnerAccount": {
+          "SecurityToken": {
             "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
           },
           "InternetChargeType": {
             "required": true,
@@ -321,7 +315,7 @@
       "name": "PushObjectCache",
       "http": {
         "method": "POST",
-        "uri": "/"
+        "uri":"/"
       },
       "input": {
         "type": "structure",
@@ -333,11 +327,8 @@
           "OwnerId": {
             "type": "integer"
           },
-          "ResourceOwnerAccount": {
+          "SecurityToken": {
             "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
           },
           "ObjectPath": {
             "required": true,
@@ -350,7 +341,7 @@
       "name": "AddCdnDomain",
       "http": {
         "method": "POST",
-        "uri": "/"
+        "uri":"/"
       },
       "input": {
         "type": "structure",
@@ -362,20 +353,13 @@
           "OwnerId": {
             "type": "integer"
           },
-          "ResourceOwnerAccount": {
+          "OwnerAccount": {
             "type": "string"
           },
-          "ResourceOwnerId": {
-            "type": "integer"
+          "SecurityToken": {
+            "type": "string"
           },
           "DomainName": {
-            "required": true,
-            "type": "string"
-          },
-          "SslFlag": {
-            "type": "string"
-          },
-          "SourceType": {
             "required": true,
             "type": "string"
           },
@@ -383,8 +367,19 @@
             "required": true,
             "type": "string"
           },
+          "SourceType": {
+            "type": "string"
+          },
           "Sources": {
-            "required": true,
+            "type": "string"
+          },
+          "SourcePort": {
+            "type": "integer"
+          },
+          "CheckUrl": {
+            "type": "string"
+          },
+          "Scope": {
             "type": "string"
           }
         }
@@ -394,7 +389,7 @@
       "name": "DeleteCdnDomain",
       "http": {
         "method": "POST",
-        "uri": "/"
+        "uri":"/"
       },
       "input": {
         "type": "structure",
@@ -406,11 +401,8 @@
           "OwnerId": {
             "type": "integer"
           },
-          "ResourceOwnerAccount": {
+          "SecurityToken": {
             "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
           },
           "DomainName": {
             "required": true,
@@ -423,7 +415,7 @@
       "name": "DescribeCdnDomainBaseDetail",
       "http": {
         "method": "POST",
-        "uri": "/"
+        "uri":"/"
       },
       "input": {
         "type": "structure",
@@ -435,11 +427,8 @@
           "OwnerId": {
             "type": "integer"
           },
-          "ResourceOwnerAccount": {
+          "SecurityToken": {
             "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
           },
           "DomainName": {
             "required": true,
@@ -452,7 +441,7 @@
       "name": "DescribeCdnDomainDetail",
       "http": {
         "method": "POST",
-        "uri": "/"
+        "uri":"/"
       },
       "input": {
         "type": "structure",
@@ -464,11 +453,8 @@
           "OwnerId": {
             "type": "integer"
           },
-          "ResourceOwnerAccount": {
+          "SecurityToken": {
             "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
           },
           "DomainName": {
             "required": true,
@@ -481,7 +467,7 @@
       "name": "DescribeCdnDomainLogs",
       "http": {
         "method": "POST",
-        "uri": "/"
+        "uri":"/"
       },
       "input": {
         "type": "structure",
@@ -493,17 +479,4035 @@
           "OwnerId": {
             "type": "integer"
           },
-          "ResourceOwnerAccount": {
+          "SecurityToken": {
             "type": "string"
-          },
-          "ResourceOwnerId": {
-            "type": "integer"
           },
           "DomainName": {
             "required": true,
             "type": "string"
           },
           "LogDay": {
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "describeLiveStreamsBlockList": {
+      "name": "DescribeLiveStreamsBlockList",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLiveStreamsBlockList"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLiveStreamsControlHistory": {
+      "name": "DescribeLiveStreamsControlHistory",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLiveStreamsControlHistory"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLiveStreamsOnlineList": {
+      "name": "DescribeLiveStreamsOnlineList",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLiveStreamsOnlineList"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLiveStreamsPublishList": {
+      "name": "DescribeLiveStreamsPublishList",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLiveStreamsPublishList"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "type": "string"
+          },
+          "StreamName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "forbidLiveStream": {
+      "name": "ForbidLiveStream",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ForbidLiveStream"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "LiveStreamType": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "required": true,
+            "type": "string"
+          },
+          "StreamName": {
+            "required": true,
+            "type": "string"
+          },
+          "ResumeTime": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "resumeLiveStream": {
+      "name": "ResumeLiveStream",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ResumeLiveStream"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "LiveStreamType": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "required": true,
+            "type": "string"
+          },
+          "StreamName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLiveStreamOnlineUserNum": {
+      "name": "DescribeLiveStreamOnlineUserNum",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLiveStreamOnlineUserNum"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "type": "string"
+          },
+          "StreamName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          },
+          "HlsSwitch": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setLiveStreamsNotifyUrlConfig": {
+      "name": "SetLiveStreamsNotifyUrlConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetLiveStreamsNotifyUrlConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "NotifyUrl": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteCacheExpiredConfig": {
+      "name": "DeleteCacheExpiredConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteCacheExpiredConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "CacheType": {
+            "required": true,
+            "type": "string"
+          },
+          "ConfigID": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteHttpHeaderConfig": {
+      "name": "DeleteHttpHeaderConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteHttpHeaderConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "ConfigID": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainBpsData": {
+      "name": "DescribeDomainBpsData",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainBpsData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          },
+          "TimeMerge": {
+            "type": "string"
+          },
+          "LocationNameEn": {
+            "type": "string"
+          },
+          "IspNameEn": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainCCAttackInfo": {
+      "name": "DescribeDomainCCAttackInfo",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainCCAttackInfo"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainCCData": {
+      "name": "DescribeDomainCCData",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainCCData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainConfigs": {
+      "name": "DescribeDomainConfigs",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainConfigs"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "ConfigList": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainFileSizeProportionData": {
+      "name": "DescribeDomainFileSizeProportionData",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainFileSizeProportionData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainFlowData": {
+      "name": "DescribeDomainFlowData",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainFlowData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          },
+          "TimeMerge": {
+            "type": "string"
+          },
+          "LocationNameEn": {
+            "type": "string"
+          },
+          "IspNameEn": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainHitRateData": {
+      "name": "DescribeDomainHitRateData",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainHitRateData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          },
+          "TimeMerge": {
+            "type": "string"
+          },
+          "LocationNameEn": {
+            "type": "string"
+          },
+          "IspNameEn": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainHttpCodeData": {
+      "name": "DescribeDomainHttpCodeData",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainHttpCodeData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          },
+          "TimeMerge": {
+            "type": "string"
+          },
+          "LocationNameEn": {
+            "type": "string"
+          },
+          "IspNameEn": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainISPData": {
+      "name": "DescribeDomainISPData",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainISPData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainPvData": {
+      "name": "DescribeDomainPvData",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainPvData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainQpsData": {
+      "name": "DescribeDomainQpsData",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainQpsData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          },
+          "TimeMerge": {
+            "type": "string"
+          },
+          "LocationNameEn": {
+            "type": "string"
+          },
+          "IspNameEn": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainRegionData": {
+      "name": "DescribeDomainRegionData",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainRegionData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainSrcBpsData": {
+      "name": "DescribeDomainSrcBpsData",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainSrcBpsData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          },
+          "TimeMerge": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainSrcFlowData": {
+      "name": "DescribeDomainSrcFlowData",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainSrcFlowData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          },
+          "TimeMerge": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainTopFileTypeVisit": {
+      "name": "DescribeDomainTopFileTypeVisit",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainTopFileTypeVisit"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainTopReferVisit": {
+      "name": "DescribeDomainTopReferVisit",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainTopReferVisit"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainTopUrlVisit": {
+      "name": "DescribeDomainTopUrlVisit",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainTopUrlVisit"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainUvData": {
+      "name": "DescribeDomainUvData",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainUvData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainWafAttackInfo": {
+      "name": "DescribeDomainWafAttackInfo",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainWafAttackInfo"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "describeDomainWafData": {
+      "name": "DescribeDomainWafData",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainWafData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeIpInfo": {
+      "name": "DescribeIpInfo",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeIpInfo"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "IP": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeRefreshQuota": {
+      "name": "DescribeRefreshQuota",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeRefreshQuota"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyFileCacheExpiredConfig": {
+      "name": "ModifyFileCacheExpiredConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyFileCacheExpiredConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "ConfigID": {
+            "required": true,
+            "type": "string"
+          },
+          "CacheContent": {
+            "required": true,
+            "type": "string"
+          },
+          "TTL": {
+            "required": true,
+            "type": "string"
+          },
+          "Weight": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyHttpHeaderConfig": {
+      "name": "ModifyHttpHeaderConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyHttpHeaderConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "HeaderKey": {
+            "required": true,
+            "type": "string"
+          },
+          "HeaderValue": {
+            "required": true,
+            "type": "string"
+          },
+          "ConfigID": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyPathCacheExpiredConfig": {
+      "name": "ModifyPathCacheExpiredConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyPathCacheExpiredConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "ConfigID": {
+            "required": true,
+            "type": "string"
+          },
+          "CacheContent": {
+            "required": true,
+            "type": "string"
+          },
+          "TTL": {
+            "required": true,
+            "type": "string"
+          },
+          "Weight": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "preloadObjectCaches": {
+      "name": "PreloadObjectCaches",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "PreloadObjectCaches"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "ObjectPath": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "purgeObjectCaches": {
+      "name": "PurgeObjectCaches",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "PurgeObjectCaches"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "ObjectPath": {
+            "required": true,
+            "type": "string"
+          },
+          "ObjectType": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setCcConfig": {
+      "name": "SetCcConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetCcConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "Enable": {
+            "required": true,
+            "type": "string"
+          },
+          "AllowIps": {
+            "type": "string"
+          },
+          "BlockIps": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setErrorPageConfig": {
+      "name": "SetErrorPageConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetErrorPageConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "PageType": {
+            "required": true,
+            "type": "string"
+          },
+          "CustomPageUrl": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setFileCacheExpiredConfig": {
+      "name": "SetFileCacheExpiredConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetFileCacheExpiredConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "CacheContent": {
+            "required": true,
+            "type": "string"
+          },
+          "TTL": {
+            "required": true,
+            "type": "string"
+          },
+          "Weight": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setHttpHeaderConfig": {
+      "name": "SetHttpHeaderConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetHttpHeaderConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "HeaderKey": {
+            "required": true,
+            "type": "string"
+          },
+          "HeaderValue": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setIgnoreQueryStringConfig": {
+      "name": "SetIgnoreQueryStringConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetIgnoreQueryStringConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "Enable": {
+            "required": true,
+            "type": "string"
+          },
+          "HashKeyArgs": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setOptimizeConfig": {
+      "name": "SetOptimizeConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetOptimizeConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "Enable": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setPageCompressConfig": {
+      "name": "SetPageCompressConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetPageCompressConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "Enable": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setPathCacheExpiredConfig": {
+      "name": "SetPathCacheExpiredConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetPathCacheExpiredConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "CacheContent": {
+            "required": true,
+            "type": "string"
+          },
+          "TTL": {
+            "required": true,
+            "type": "string"
+          },
+          "Weight": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setRangeConfig": {
+      "name": "SetRangeConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetRangeConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "Enable": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setRefererConfig": {
+      "name": "SetRefererConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetRefererConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "ReferType": {
+            "required": true,
+            "type": "string"
+          },
+          "ReferList": {
+            "type": "string"
+          },
+          "AllowEmpty": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setReqAuthConfig": {
+      "name": "SetReqAuthConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetReqAuthConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AuthType": {
+            "required": true,
+            "type": "string"
+          },
+          "Key1": {
+            "type": "string"
+          },
+          "Key2": {
+            "type": "string"
+          },
+          "TimeOut": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setSourceHostConfig": {
+      "name": "SetSourceHostConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetSourceHostConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "Enable": {
+            "type": "string"
+          },
+          "BackSrcDomain": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setVideoSeekConfig": {
+      "name": "SetVideoSeekConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetVideoSeekConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "Enable": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setWafConfig": {
+      "name": "SetWafConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetWafConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "Enable": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "isGreyUser": {
+      "name": "IsGreyUser",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "IsGreyUser"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "SecurityToken": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyCdnDomain": {
+      "name": "ModifyCdnDomain",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyCdnDomain"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "SourceType": {
+            "required": true,
+            "type": "string"
+          },
+          "SourcePort": {
+            "type": "integer"
+          },
+          "Sources": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setDomainServerCertificate": {
+      "name": "SetDomainServerCertificate",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetDomainServerCertificate"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "ServerCertificateStatus": {
+            "required": true,
+            "type": "string"
+          },
+          "ServerCertificate": {
+            "type": "string"
+          },
+          "PrivateKey": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeCdnTypes": {
+      "name": "DescribeCdnTypes",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeCdnTypes"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "SecurityToken": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainsUsageByDay": {
+      "name": "DescribeDomainsUsageByDay",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainsUsageByDay"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeTopDomainsByFlow": {
+      "name": "DescribeTopDomainsByFlow",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeTopDomainsByFlow"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          },
+          "Limit": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "migrateDomainToHttpsDelivery": {
+      "name": "MigrateDomainToHttpsDelivery",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "MigrateDomainToHttpsDelivery"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "ServerCertificate": {
+            "required": true,
+            "type": "string"
+          },
+          "PrivateKey": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "clearUserBlackList": {
+      "name": "ClearUserBlackList",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ClearUserBlackList"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "SecurityToken": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "clearUserDomainBlackList": {
+      "name": "ClearUserDomainBlackList",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ClearUserDomainBlackList"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "getUserDomainBlackList": {
+      "name": "GetUserDomainBlackList",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "GetUserDomainBlackList"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setUserBlackList": {
+      "name": "SetUserBlackList",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetUserBlackList"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "ConfigUrl": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setUserDomainBlackList": {
+      "name": "SetUserDomainBlackList",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetUserDomainBlackList"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setForceRedirectConfig": {
+      "name": "SetForceRedirectConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetForceRedirectConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "RedirectType": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLiveStreamStreamStatus": {
+      "name": "DescribeLiveStreamStreamStatus",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLiveStreamStreamStatus"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "required": true,
+            "type": "string"
+          },
+          "StreamName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "addLiveStreamTranscode": {
+      "name": "AddLiveStreamTranscode",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AddLiveStreamTranscode"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "Domain": {
+            "required": true,
+            "type": "string"
+          },
+          "Template": {
+            "required": true,
+            "type": "string"
+          },
+          "Record": {
+            "required": true,
+            "type": "string"
+          },
+          "Snapshot": {
+            "required": true,
+            "type": "string"
+          },
+          "App": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteLiveStreamTranscode": {
+      "name": "DeleteLiveStreamTranscode",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteLiveStreamTranscode"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "Domain": {
+            "required": true,
+            "type": "string"
+          },
+          "Template": {
+            "required": true,
+            "type": "string"
+          },
+          "App": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLiveStreamDomainAppInfo": {
+      "name": "DescribeLiveStreamDomainAppInfo",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLiveStreamDomainAppInfo"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "AppDomain": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLiveStreamLimitInfo": {
+      "name": "DescribeLiveStreamLimitInfo",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLiveStreamLimitInfo"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "LimitDomain": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLiveStreamTranscodeInfo": {
+      "name": "DescribeLiveStreamTranscodeInfo",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLiveStreamTranscodeInfo"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainTranscodeName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeCdnRegionAndIsp": {
+      "name": "DescribeCdnRegionAndIsp",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeCdnRegionAndIsp"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeCurrentCharge95Info": {
+      "name": "DescribeCurrentCharge95Info",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeCurrentCharge95Info"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeHistoryCharge95Info": {
+      "name": "DescribeHistoryCharge95Info",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeHistoryCharge95Info"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "ChargeItem": {
+            "required": true,
+            "type": "string"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeUserVipsByDomain": {
+      "name": "DescribeUserVipsByDomain",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeUserVipsByDomain"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainReqHitRateData": {
+      "name": "DescribeDomainReqHitRateData",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainReqHitRateData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeUserConfigs": {
+      "name": "DescribeUserConfigs",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeUserConfigs"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "Config": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setOssLogConfig": {
+      "name": "SetOssLogConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetOssLogConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "Enable": {
+            "required": true,
+            "type": "string"
+          },
+          "Bucket": {
+            "required": true,
+            "type": "string"
+          },
+          "Prefix": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setForwardSchemeConfig": {
+      "name": "SetForwardSchemeConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetForwardSchemeConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "Enable": {
+            "required": true,
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "SchemeOrigin": {
+            "required": true,
+            "type": "string"
+          },
+          "SchemeOriginPort": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "addLiveAppRecordConfig": {
+      "name": "AddLiveAppRecordConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AddLiveAppRecordConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "required": true,
+            "type": "string"
+          },
+          "OssEndpoint": {
+            "required": true,
+            "type": "string"
+          },
+          "OssBucket": {
+            "required": true,
+            "type": "string"
+          },
+          "OssObjectPrefix": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createLiveStreamRecordIndexFiles": {
+      "name": "CreateLiveStreamRecordIndexFiles",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateLiveStreamRecordIndexFiles"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "required": true,
+            "type": "string"
+          },
+          "StreamName": {
+            "required": true,
+            "type": "string"
+          },
+          "OssEndpoint": {
+            "required": true,
+            "type": "string"
+          },
+          "OssBucket": {
+            "required": true,
+            "type": "string"
+          },
+          "OssObject": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteLiveAppRecordConfig": {
+      "name": "DeleteLiveAppRecordConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteLiveAppRecordConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLiveAppRecordConfig": {
+      "name": "DescribeLiveAppRecordConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLiveAppRecordConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLiveRecordConfig": {
+      "name": "DescribeLiveRecordConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLiveRecordConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLiveStreamRecordContent": {
+      "name": "DescribeLiveStreamRecordContent",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLiveStreamRecordContent"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "required": true,
+            "type": "string"
+          },
+          "StreamName": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLiveStreamRecordIndexFile": {
+      "name": "DescribeLiveStreamRecordIndexFile",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLiveStreamRecordIndexFile"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "required": true,
+            "type": "string"
+          },
+          "StreamName": {
+            "required": true,
+            "type": "string"
+          },
+          "RecordId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLiveStreamRecordIndexFiles": {
+      "name": "DescribeLiveStreamRecordIndexFiles",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLiveStreamRecordIndexFiles"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "required": true,
+            "type": "string"
+          },
+          "StreamName": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLiveStreamsFrameRateAndBitRateData": {
+      "name": "DescribeLiveStreamsFrameRateAndBitRateData",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLiveStreamsFrameRateAndBitRateData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "type": "string"
+          },
+          "StreamName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainMax95BpsData": {
+      "name": "DescribeDomainMax95BpsData",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainMax95BpsData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "addLivePullStreamInfo": {
+      "name": "AddLivePullStreamInfo",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AddLivePullStreamInfo"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "required": true,
+            "type": "string"
+          },
+          "StreamName": {
+            "required": true,
+            "type": "string"
+          },
+          "SourceUrl": {
+            "required": true,
+            "type": "string"
+          },
+          "Always": {
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteLivePullStreamInfo": {
+      "name": "DeleteLivePullStreamInfo",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteLivePullStreamInfo"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "required": true,
+            "type": "string"
+          },
+          "StreamName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainBpsDataByTimeStamp": {
+      "name": "DescribeDomainBpsDataByTimeStamp",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainBpsDataByTimeStamp"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "LocationNames": {
+            "required": true,
+            "type": "string"
+          },
+          "IspNames": {
+            "required": true,
+            "type": "string"
+          },
+          "TimePoint": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainRealTimeData": {
+      "name": "DescribeDomainRealTimeData",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainRealTimeData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          },
+          "Field": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLiveStreamFrameLossRatio": {
+      "name": "DescribeLiveStreamFrameLossRatio",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLiveStreamFrameLossRatio"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "type": "string"
+          },
+          "StreamName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLiveStreamOnlineBps": {
+      "name": "DescribeLiveStreamOnlineBps",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLiveStreamOnlineBps"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "type": "string"
+          },
+          "StreamName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "startMixStreamsService": {
+      "name": "StartMixStreamsService",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "StartMixStreamsService"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "MainDomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "MainAppName": {
+            "required": true,
+            "type": "string"
+          },
+          "MainStreamName": {
+            "required": true,
+            "type": "string"
+          },
+          "MixDomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "MixAppName": {
+            "required": true,
+            "type": "string"
+          },
+          "MixStreamName": {
+            "required": true,
+            "type": "string"
+          },
+          "MixTemplate": {
+            "required": true,
+            "type": "string"
+          },
+          "MixType": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "stopMixStreamsService": {
+      "name": "StopMixStreamsService",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "StopMixStreamsService"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "MainDomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "MainAppName": {
+            "required": true,
+            "type": "string"
+          },
+          "MainStreamName": {
+            "required": true,
+            "type": "string"
+          },
+          "MixDomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "MixAppName": {
+            "required": true,
+            "type": "string"
+          },
+          "MixStreamName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLiveStreamNumberList": {
+      "name": "DescribeLiveStreamNumberList",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLiveStreamNumberList"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "addLiveAppSnapshotConfig": {
+      "name": "AddLiveAppSnapshotConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AddLiveAppSnapshotConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "required": true,
+            "type": "string"
+          },
+          "TimeInterval": {
+            "required": true,
+            "type": "integer"
+          },
+          "OssEndpoint": {
+            "required": true,
+            "type": "string"
+          },
+          "OssBucket": {
+            "required": true,
+            "type": "string"
+          },
+          "OverwriteOssObject": {
+            "type": "string"
+          },
+          "SequenceOssObject": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteLiveAppSnapshotConfig": {
+      "name": "DeleteLiveAppSnapshotConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteLiveAppSnapshotConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLiveSnapshotConfig": {
+      "name": "DescribeLiveSnapshotConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLiveSnapshotConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "type": "string"
+          },
+          "StreamName": {
+            "type": "string"
+          },
+          "PageNum": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "Order": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLiveStreamSnapshotInfo": {
+      "name": "DescribeLiveStreamSnapshotInfo",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLiveStreamSnapshotInfo"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "required": true,
+            "type": "string"
+          },
+          "StreamName": {
+            "type": "string"
+          },
+          "Limit": {
+            "type": "integer"
+          },
+          "StartTime": {
+            "type": "string"
+          },
+          "EndTime": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "updateLiveAppSnapshotConfig": {
+      "name": "UpdateLiveAppSnapshotConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "UpdateLiveAppSnapshotConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "required": true,
+            "type": "string"
+          },
+          "TimeInterval": {
+            "type": "integer"
+          },
+          "OssEndpoint": {
+            "type": "string"
+          },
+          "OssBucket": {
+            "type": "string"
+          },
+          "OverwriteOssObject": {
+            "type": "string"
+          },
+          "SequenceOssObject": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeRangeDataByLocateAndIspService": {
+      "name": "DescribeRangeDataByLocateAndIspService",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeRangeDataByLocateAndIspService"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainNames": {
+            "type": "string"
+          },
+          "LocationNames": {
+            "type": "string"
+          },
+          "IspNames": {
+            "type": "string"
+          },
+          "startTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainUpstreamBpsOfEdge": {
+      "name": "DescribeDomainUpstreamBpsOfEdge",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainUpstreamBpsOfEdge"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainUpstreamOfCenter": {
+      "name": "DescribeDomainUpstreamOfCenter",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainUpstreamOfCenter"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "batchAddCdnDomain": {
+      "name": "BatchAddCdnDomain",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "BatchAddCdnDomain"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainNames": {
+            "required": true,
+            "type": "string"
+          },
+          "CdnType": {
+            "required": true,
+            "type": "string"
+          },
+          "SourceType": {
+            "type": "string"
+          },
+          "Sources": {
+            "type": "string"
+          },
+          "SourcePort": {
+            "type": "integer"
+          },
+          "CheckUrl": {
+            "type": "string"
+          },
+          "Scope": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "batchDeleteCdnDomainConfig": {
+      "name": "BatchDeleteCdnDomainConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "BatchDeleteCdnDomainConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainNames": {
+            "required": true,
+            "type": "string"
+          },
+          "FunctionNames": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "batchSetCdnDomainConfig": {
+      "name": "BatchSetCdnDomainConfig",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "BatchSetCdnDomainConfig"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainNames": {
+            "required": true,
+            "type": "string"
+          },
+          "Functions": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "batchStartCdnDomain": {
+      "name": "BatchStartCdnDomain",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "BatchStartCdnDomain"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainNames": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "batchStopCdnDomain": {
+      "name": "BatchStopCdnDomain",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "BatchStopCdnDomain"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainNames": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "batchUpdateCdnDomain": {
+      "name": "BatchUpdateCdnDomain",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "BatchUpdateCdnDomain"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "OwnerAccount": {
+            "type": "string"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainNames": {
+            "required": true,
+            "type": "string"
+          },
+          "SourceType": {
+            "type": "string"
+          },
+          "Sources": {
+            "type": "string"
+          },
+          "SourcePort": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "describeDomainHttpsData": {
+      "name": "DescribeDomainHttpsData",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainHttpsData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainNames": {
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainOnlineUserNumber": {
+      "name": "DescribeDomainOnlineUserNumber",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainOnlineUserNumber"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeLiveStreamBpsData": {
+      "name": "DescribeLiveStreamBpsData",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeLiveStreamBpsData"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "AppName": {
+            "required": true,
+            "type": "string"
+          },
+          "StreamName": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainDownstreamBpsOfEdge": {
+      "name": "DescribeDomainDownstreamBpsOfEdge",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainDownstreamBpsOfEdge"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setLocationAccessRestriction": {
+      "name": "SetLocationAccessRestriction",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetLocationAccessRestriction"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "Location": {
+            "required": true,
+            "type": "string"
+          },
+          "Type": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setUserAgentAcessRestriction": {
+      "name": "SetUserAgentAcessRestriction",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SetUserAgentAcessRestriction"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "SecurityToken": {
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "UserAgent": {
+            "required": true,
+            "type": "string"
+          },
+          "Type": {
+            "required": true,
             "type": "string"
           }
         }
