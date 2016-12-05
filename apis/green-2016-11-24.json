@@ -1,0 +1,374 @@
+{
+	"format": "pop",
+	"apiVersion": "2016-11-24", 
+	"checksumFormat": "md5",
+	"endpointPrefix": "green", 
+	"serviceAbbreviation": "GREEN", 
+	"serviceFullName": "Aliyun GREEN", 
+	"signatureVersion": "pop",
+	"timestampFormat": "top",
+	"xmlnamespace": "",
+	"operations": {
+		"antispamResults": {  
+			"name": "AntispamResults",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "AntispamResults"
+					},
+					"RegionId": {
+						"type": "string"
+					},
+					"DataId": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"antispamDetection": {  
+			"name": "AntispamDetection",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "AntispamDetection"
+					},
+					"RegionId": {
+						"type": "string"
+					},
+					"DataId": {
+						"required": true,
+						"type": "string"
+					},
+					"PostId": {
+						"type": "string"
+					},
+					"SceneId": {
+						"type": "string"
+					},
+					"PostNick": {
+						"type": "string"
+					},
+					"PostIp": {
+						"type": "string"
+					},
+					"PostMac": {
+						"type": "string"
+					},
+					"PostTime": {
+						"type": "integer"
+					},
+					"MachineCode": {
+						"type": "string"
+					},
+					"ParentDataId": {
+						"type": "string"
+					},
+					"Title": {
+						"type": "string"
+					},
+					"PostContent": {
+						"type": "string"
+					},
+					"ImageUrl": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"imageDetection": {  
+			"name": "ImageDetection",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "ImageDetection"
+					},
+					"RegionId": {
+						"type": "string"
+					},
+					"Async": {
+						"type": "boolean"
+					},
+					"NotifyUrl": {
+						"type": "string"
+					},
+					"NotifySeed": {
+						"type": "string"
+					},
+					"ImageUrl": {
+						"required": true,
+						"type": "string"
+					},
+					"Scene": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"imageResults": {  
+			"name": "ImageResults",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "ImageResults"
+					},
+					"RegionId": {
+						"type": "string"
+					},
+					"TaskId": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"pluginAntispamFeedback": {  
+			"name": "PluginAntispamFeedback",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "PluginAntispamFeedback"
+					},
+					"RegionId": {
+						"type": "string"
+					},
+					"ClientVersion": {
+						"required": true,
+						"type": "string"
+					},
+					"ActionResult": {
+						"required": true,
+						"type": "string"
+					},
+					"Ids": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"pluginAntispamDetection": {  
+			"name": "PluginAntispamDetection",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "PluginAntispamDetection"
+					},
+					"RegionId": {
+						"type": "string"
+					},
+					"BizScene": {
+						"required": true,
+						"type": "string"
+					},
+					"ClientVersion": {
+						"required": true,
+						"type": "string"
+					},
+					"UserId": {
+						"type": "string"
+					},
+					"TopicId": {
+						"type": "string"
+					},
+					"FeedId": {
+						"required": true,
+						"type": "string"
+					},
+					"Title": {
+						"type": "string"
+					},
+					"PostTime": {
+						"type": "integer"
+					},
+					"PostContent": {
+						"required": true,
+						"type": "string"
+					},
+					"PostContentType": {
+						"required": true,
+						"type": "string"
+					},
+					"DynamicProp": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"sampleFeedback": {  
+			"name": "SampleFeedback",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "SampleFeedback"
+					},
+					"RegionId": {
+						"type": "string"
+					},
+					"Marking": {
+						"required": true,
+						"type": "string"
+					},
+					"Category": {
+						"type": "string"
+					},
+					"TaskId": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"pluginAntispamResults": {  
+			"name": "PluginAntispamResults",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "PluginAntispamResults"
+					},
+					"RegionId": {
+						"type": "string"
+					},
+					"BizScene": {
+						"required": true,
+						"type": "string"
+					},
+					"ClientVersion": {
+						"required": true,
+						"type": "string"
+					},
+					"PostContentType": {
+						"required": true,
+						"type": "string"
+					},
+					"PageIndex": {
+						"required": true,
+						"type": "string"
+					},
+					"PageSize": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"textKeywordFilter": {  
+			"name": "TextKeywordFilter",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "TextKeywordFilter"
+					},
+					"RegionId": {
+						"type": "string"
+					},
+					"Text": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"textAntispamDetection": {  
+			"name": "TextAntispamDetection",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "TextAntispamDetection"
+					},
+					"RegionId": {
+						"type": "string"
+					},
+					"DataItems": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"textWordCorrect": {  
+			"name": "TextWordCorrect",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "TextWordCorrect"
+					},
+					"RegionId": {
+						"type": "string"
+					},
+					"Text": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		}
+  }
+}
