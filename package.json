@@ -38,7 +38,8 @@
     "rds-2014-08-15.json": "./apis/rds-2014-08-15.json",
     "slb-2014-05-15.json": "./apis/slb-2014-05-15.json",
     "sls-2014-11-18.json": "./apis/sls-2014-11-18.json",
-    "sts-2015-04-01.json": "./apis/sts-2015-04-01.json"
+    "sts-2015-04-01.json": "./apis/sts-2015-04-01.json",
+    "ram-2015-05-01.json": "./apis/ram-2015-05-01.json"
   },
   "directories": {
     "lib": "lib"
