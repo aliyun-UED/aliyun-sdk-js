@@ -36,7 +36,14 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
                         "ResourceType": "OnDemand"
                     }
                 },
-                "UserData": {"a":"b"}
+                "UserData": {"a":"b"},
+                "Notification":{
+                  "Topic":{
+                    Name:"abc",
+                    Endpoint:"http://xx",
+                    Events: ["OnInstanceCreated"]
+                  }
+                }
             };
 
             client.createCluster(clusterDesc, function (err, result) {
@@ -96,7 +103,7 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
                     done();
                 });
 
- 
+
             });
 
         });
@@ -117,6 +124,13 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
 
                 result.data.Id.should.equal(clusterId);
                 result.data.UserData['a'].should.equal('b');
+
+
+                var topic = result.data.Notification.Topic;
+
+                topic.Events[0].should.equal('OnInstanceCreated')
+                topic.Name.should.equal('abc')
+                topic.Endpoint.should.equal('http://xx')
 
                 done();
             });
@@ -319,6 +333,13 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
                     "Dependencies": {
                         "CountTask": []
                     }
+                },
+                "Notification":{
+                  "Topic":{
+                    Name:"abc",
+                    Endpoint:"http://xx",
+                    Events: ["OnJobWaiting"]
+                  }
                 }
             };
 
@@ -405,6 +426,30 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
             });
 
         });
+        it('should get auto job description success', function (done) {
+
+
+            client.getJobDescription({JobId: jobId_autoCluster}, function (err, result) {
+
+                if (err) {
+                    console.log(err);
+                }
+
+                should(err === null).be.true;
+
+                result.should.have.properties(['requestId']);
+                result.data.should.have.properties(['Name', 'DAG', 'JobFailOnInstanceFail','Description','Priority','Type','Notification']);
+
+                var topic = result.data.Notification.Topic;
+
+                topic.Events[0].should.equal('OnJobWaiting')
+                topic.Name.should.equal('abc')
+                topic.Endpoint.should.equal('http://xx')
+                done();
+            });
+
+        });
+
 
         /*******************************************************/
         /*********************** tasks **************************/
@@ -655,6 +700,7 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
 
                 result.should.have.properties(['requestId', 'code', 'message']);
                 result.code.should.be.exactly(201);
+
 
 
                 client.deleteJob({JobId: jobId_autoCluster}, function (err, result) {
