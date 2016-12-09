@@ -356,11 +356,147 @@
       }
     },
 
+
+    "listClusterInstances": {
+      "name": "ListClusterInstances",
+      "http": {
+        "method": "GET",
+        "uri": "/clusters/{ClusterId}/groups/{GroupName}/instances?Marker={Marker}&MaxItemCount={MaxItemCount}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "ClusterId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          },
+          "GroupName": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          },
+          "Marker": {
+            "required": false,
+            "type":"string",
+            "location":"uri"
+          },
+          "MaxItemCount": {
+            "required": false,
+            "type":"integer",
+            "location":"uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
+
+    "getClusterInstance": {
+      "name": "GetClusterInstance",
+      "http": {
+        "method": "GET",
+        "uri": "/clusters/{ClusterId}/groups/{GroupName}/instances/{InstanceId}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "ClusterId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          },
+          "GroupName": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          },
+          "InstanceId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
+    "deleteClusterInstance": {
+      "name": "DeleteClusterInstance",
+      "http": {
+        "method": "DELETE",
+        "uri": "/clusters/{ClusterId}/groups/{GroupName}/instances/{InstanceId}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "ClusterId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          },
+          "GroupName": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          },
+          "InstanceId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
+    "recreateClusterInstance": {
+      "name": "RecreateClusterInstance",
+      "http": {
+        "method": "POST",
+        "uri": "/clusters/{ClusterId}/groups/{GroupName}/instances/{InstanceId}/recreate"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "ClusterId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          },
+          "GroupName": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          },
+          "InstanceId": {
+            "required": true,
+            "type":"string",
+            "location":"uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
+
     "listJobs": {
       "name": "ListJobs",
       "http": {
         "method": "GET",
-        "uri": "/jobs?Marker={Marker}&MaxItemCount={MaxItemCount}"
+        "uri": "/jobs?Marker={Marker}&MaxItemCount={MaxItemCount}&State={State}"
       },
       "input": {
         "type": "structure",
@@ -373,6 +509,11 @@
           "MaxItemCount": {
             "required": false,
             "type": "integer",
+            "location": "uri"
+          },
+          "State": {
+            "required": false,
+            "type": "string",
             "location": "uri"
           }
         }
@@ -527,7 +668,7 @@
         "uri": "/jobs"
       },
       "input": {
-        "payload": ["Name", "Description", "Priority", "JobFailOnInstanceFail","Type","DAG"],
+        "payload": ["Name", "Description", "Priority", "JobFailOnInstanceFail","Type","DAG","Notification"],
         "members": {
           "Name":{
             "type": "string",
@@ -548,6 +689,30 @@
           "JobFailOnInstanceFail": {
             "required": true,
             "type": "boolean"
+          },
+          "Notification": {
+            "required": false,
+            "type": "structure",
+            "members": {
+              "Topic": {
+                "required": false,
+                "type": "structure",
+                "members": {
+                  "Name": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "Endpoint": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "Events": {
+                    "required": false,
+                    "type": "list"
+                  }
+                }
+              }
+            }
           },
           "DAG": {
             "required":true,
