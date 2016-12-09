@@ -143,7 +143,7 @@
         "uri": "/clusters"
       },
       "input": {
-        "payload": ["Name", "Description", "ImageId","InstanceType","UserData","Configs", "Groups"],
+        "payload": ["Name", "Description", "ImageId","InstanceType","UserData","Configs", "Groups","Notification"],
         "members": {
           "Name":{
             "type": "string",
@@ -166,6 +166,30 @@
             "type": "map",
             "members": {
                "type": "string"
+            }
+          },
+          "Notification": {
+            "required": false,
+            "type": "structure",
+            "members": {
+              "Topic": {
+                "required": false,
+                "type": "structure",
+                "members": {
+                  "Name": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "Endpoint": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "Events": {
+                    "required": false,
+                    "type": "list"
+                  }
+                }
+              }
             }
           },
           "Configs": {

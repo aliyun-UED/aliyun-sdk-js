@@ -36,7 +36,14 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
                         "ResourceType": "OnDemand"
                     }
                 },
-                "UserData": {"a":"b"}
+                "UserData": {"a":"b"},
+                "Notification":{
+                  "Topic":{
+                    Name:"abc",
+                    Endpoint:"http://xx",
+                    Events: ["OnInstanceCreated"]
+                  }
+                }
             };
 
             client.createCluster(clusterDesc, function (err, result) {
@@ -117,6 +124,13 @@ describe('BatchCompute-2015-11-11 Function Test', function () {
 
                 result.data.Id.should.equal(clusterId);
                 result.data.UserData['a'].should.equal('b');
+
+
+                var topic = result.data.Notification.Topic;
+
+                topic.Events[0].should.equal('OnInstanceCreated')
+                topic.Name.should.equal('abc')
+                topic.Endpoint.should.equal('http://xx')
 
                 done();
             });
