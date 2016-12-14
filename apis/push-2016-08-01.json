@@ -1172,6 +1172,30 @@
 					}
 				}
 			}
+		},
+		"checkDevice": {  
+			"name": "CheckDevice",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "CheckDevice"
+					},
+					"AppKey": {
+						"required": true,
+						"type": "integer"
+					},
+					"DeviceId": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
 		}
   }
 }
