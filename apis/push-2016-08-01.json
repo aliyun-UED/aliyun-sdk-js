@@ -9,22 +9,6 @@
 	"timestampFormat": "top",
 	"xmlnamespace": "",
 	"operations": {
-		"listApps": {  
-			"name": "ListApps",
-			"http": {
-				"method": "POST",
-				"uri":"/"
-			},
-			"input": {
-				"type": "structure",
-				"members": {
-					"Action": {
-						"required": true,
-						"default": "ListApps"
-					}
-				}
-			}
-		},
 		"bindAlias": {  
 			"name": "BindAlias",
 			"http": {
@@ -109,32 +93,6 @@
 				}
 			}
 		},
-		"createApp": {  
-			"name": "CreateApp",
-			"http": {
-				"method": "POST",
-				"uri":"/"
-			},
-			"input": {
-				"type": "structure",
-				"members": {
-					"Action": {
-						"required": true,
-						"default": "CreateApp"
-					},
-					"AppName": {
-						"required": true,
-						"type": "string"
-					},
-					"IndustryId": {
-						"type": "integer"
-					},
-					"Description": {
-						"type": "string"
-					}
-				}
-			}
-		},
 		"deleteTag": {  
 			"name": "DeleteTag",
 			"http": {
@@ -155,85 +113,6 @@
 					"TagName": {
 						"required": true,
 						"type": "string"
-					}
-				}
-			}
-		},
-		"listPushRecords": {  
-			"name": "ListPushRecords",
-			"http": {
-				"method": "POST",
-				"uri":"/"
-			},
-			"input": {
-				"type": "structure",
-				"members": {
-					"Action": {
-						"required": true,
-						"default": "ListPushRecords"
-					},
-					"AppKey": {
-						"required": true,
-						"type": "integer"
-					},
-					"PushType": {
-						"required": true,
-						"type": "string"
-					},
-					"StartTime": {
-						"required": true,
-						"type": "string"
-					},
-					"EndTime": {
-						"required": true,
-						"type": "string"
-					},
-					"Page": {
-						"type": "integer"
-					},
-					"PageSize": {
-						"type": "integer"
-					}
-				}
-			}
-		},
-		"modifyAppConfig": {  
-			"name": "ModifyAppConfig",
-			"http": {
-				"method": "POST",
-				"uri":"/"
-			},
-			"input": {
-				"type": "structure",
-				"members": {
-					"Action": {
-						"required": true,
-						"default": "ModifyAppConfig"
-					},
-					"AppKey": {
-						"required": true,
-						"type": "integer"
-					},
-					"PackageName": {
-						"type": "string"
-					},
-					"DevCertKey": {
-						"type": "string"
-					},
-					"DevCertPass": {
-						"type": "string"
-					},
-					"ProductCertKey": {
-						"type": "string"
-					},
-					"ProductCertPass": {
-						"type": "string"
-					},
-					"BundleId": {
-						"type": "string"
-					},
-					"BoxFlag": {
-						"type": "boolean"
 					}
 				}
 			}
@@ -358,6 +237,9 @@
 					"iOSBadge": {
 						"type": "integer"
 					},
+					"iOSSilentNotification": {
+						"type": "boolean"
+					},
 					"iOSSubtitle": {
 						"type": "string"
 					},
@@ -368,35 +250,6 @@
 						"type": "boolean"
 					},
 					"iOSExtParameters": {
-						"type": "string"
-					}
-				}
-			}
-		},
-		"modifyAppExtensions": {  
-			"name": "ModifyAppExtensions",
-			"http": {
-				"method": "POST",
-				"uri":"/"
-			},
-			"input": {
-				"type": "structure",
-				"members": {
-					"Action": {
-						"required": true,
-						"default": "ModifyAppExtensions"
-					},
-					"AppKey": {
-						"required": true,
-						"type": "integer"
-					},
-					"XmAppSecretKey": {
-						"type": "string"
-					},
-					"HwAppKey": {
-						"type": "string"
-					},
-					"HwAppSecretKey": {
 						"type": "string"
 					}
 				}
@@ -555,46 +408,6 @@
 				}
 			}
 		},
-		"queryAppSecurityInfo": {  
-			"name": "QueryAppSecurityInfo",
-			"http": {
-				"method": "POST",
-				"uri":"/"
-			},
-			"input": {
-				"type": "structure",
-				"members": {
-					"Action": {
-						"required": true,
-						"default": "QueryAppSecurityInfo"
-					},
-					"AppKey": {
-						"required": true,
-						"type": "integer"
-					}
-				}
-			}
-		},
-		"queryAppInfo": {  
-			"name": "QueryAppInfo",
-			"http": {
-				"method": "POST",
-				"uri":"/"
-			},
-			"input": {
-				"type": "structure",
-				"members": {
-					"Action": {
-						"required": true,
-						"default": "QueryAppInfo"
-					},
-					"AppKey": {
-						"required": true,
-						"type": "integer"
-					}
-				}
-			}
-		},
 		"queryAlias": {  
 			"name": "QueryAlias",
 			"http": {
@@ -731,62 +544,6 @@
 				}
 			}
 		},
-		"validateAppCert": {  
-			"name": "ValidateAppCert",
-			"http": {
-				"method": "POST",
-				"uri":"/"
-			},
-			"input": {
-				"type": "structure",
-				"members": {
-					"Action": {
-						"required": true,
-						"default": "ValidateAppCert"
-					},
-					"AppKey": {
-						"required": true,
-						"type": "integer"
-					},
-					"CertPass": {
-						"required": true,
-						"type": "string"
-					},
-					"IsDevCert": {
-						"required": true,
-						"type": "boolean"
-					}
-				}
-			}
-		},
-		"uploadAppCert": {  
-			"name": "UploadAppCert",
-			"http": {
-				"method": "POST",
-				"uri":"/"
-			},
-			"input": {
-				"type": "structure",
-				"members": {
-					"Action": {
-						"required": true,
-						"default": "UploadAppCert"
-					},
-					"AppKey": {
-						"required": true,
-						"type": "integer"
-					},
-					"FileItem": {
-						"required": true,
-						"type": "string"
-					},
-					"IsDevCert": {
-						"required": true,
-						"type": "boolean"
-					}
-				}
-			}
-		},
 		"queryAppPushStat": {  
 			"name": "QueryAppPushStat",
 			"http": {
@@ -907,61 +664,6 @@
 					"Granularity": {
 						"required": true,
 						"type": "string"
-					}
-				}
-			}
-		},
-		"queryAppConfig": {  
-			"name": "QueryAppConfig",
-			"http": {
-				"method": "POST",
-				"uri":"/"
-			},
-			"input": {
-				"type": "structure",
-				"members": {
-					"Action": {
-						"required": true,
-						"default": "QueryAppConfig"
-					},
-					"AppKey": {
-						"required": true,
-						"type": "integer"
-					}
-				}
-			}
-		},
-		"certPreflight": {  
-			"name": "CertPreflight",
-			"http": {
-				"method": "POST",
-				"uri":"/"
-			},
-			"input": {
-				"type": "structure",
-				"members": {
-					"Action": {
-						"required": true,
-						"default": "CertPreflight"
-					},
-					"AppKey": {
-						"required": true,
-						"type": "integer"
-					},
-					"DeviceToken": {
-						"required": true,
-						"type": "string"
-					},
-					"Pass": {
-						"required": true,
-						"type": "string"
-					},
-					"Body": {
-						"type": "string"
-					},
-					"IsDevCert": {
-						"required": true,
-						"type": "boolean"
 					}
 				}
 			}
@@ -1102,53 +804,6 @@
 				}
 			}
 		},
-		"tracePush": {  
-			"name": "TracePush",
-			"http": {
-				"method": "POST",
-				"uri":"/"
-			},
-			"input": {
-				"type": "structure",
-				"members": {
-					"Action": {
-						"required": true,
-						"default": "TracePush"
-					},
-					"AppKey": {
-						"required": true,
-						"type": "integer"
-					},
-					"MessageId": {
-						"required": true,
-						"type": "string"
-					},
-					"DeviceId": {
-						"type": "string"
-					}
-				}
-			}
-		},
-		"deleteApp": {  
-			"name": "DeleteApp",
-			"http": {
-				"method": "POST",
-				"uri":"/"
-			},
-			"input": {
-				"type": "structure",
-				"members": {
-					"Action": {
-						"required": true,
-						"default": "DeleteApp"
-					},
-					"AppKey": {
-						"required": true,
-						"type": "integer"
-					}
-				}
-			}
-		},
 		"queryPushDetail": {  
 			"name": "QueryPushDetail",
 			"http": {
@@ -1168,7 +823,31 @@
 					},
 					"MessageId": {
 						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"checkDevice": {  
+			"name": "CheckDevice",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "CheckDevice"
+					},
+					"AppKey": {
+						"required": true,
 						"type": "integer"
+					},
+					"DeviceId": {
+						"required": true,
+						"type": "string"
 					}
 				}
 			}
