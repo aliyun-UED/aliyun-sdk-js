@@ -196,6 +196,39 @@ getObject": {         // sdk 中真正暴露的方法名称, 是服务定义名�
        "name": "x-oss-website-redirect-location"
      }
    },
-   "payload": "Body"
+ }
+```
+
+```javascript
+"createQueue": {
+   "name": "CreateQueue",
+   "http": {
+     "method": "PUT",
+     "uri": "/queues/{QueueName}"
+   },
+   "input": {
+     "payload": ["DelaySeconds", "MaximumMessageSize"],    // 在做 http put 请求时，如果需要将某些用户输入放在 http body 中，在 payload 中进行指定。payload 可以是数组，用来指定多个参数，也可以是单一的字符串，用来指定一个参数。
+     "wrapper": "Queue", // 如果 payload 是一个数组，并且 open api 的格式为 rest_xml，则需要定义 wrapper，作为 xml 根元素的值。
+     "type": "structure",
+     "members": {
+       "QueueName": {
+         "required": true,
+         "location": "uri"
+       },
+       "DelaySeconds": {
+         "type": "integer",
+         "required": false
+       },
+       "MaximumMessageSize": {
+         "type": "integer",
+         "required": false
+       }
+     }
+   },
+   "output": {
+     "type": "structure",
+     "members": {
+     }
+   }
  }
 ```
