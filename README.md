@@ -1,3 +1,7 @@
+## 原来 阿里云 js sdk 还能这么用
+
+Open5 - 基于阿里云 Open API 的开源 H5 生成工具　https://github.com/aliyun-UED/open5
+
 ## 在浏览器端使用
 
 现在 aliyun sdk 支持在浏览器端调用, 只需要引入 dist/aliyun-sdk.js 即可, 使用参考 sample/browser/browser.html
