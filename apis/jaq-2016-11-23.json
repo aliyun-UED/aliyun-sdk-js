@@ -1,0 +1,575 @@
+{
+	"format": "pop",
+	"apiVersion": "2016-11-23",
+	"checksumFormat": "md5",
+	"endpointPrefix": "jaq",
+	"serviceAbbreviation": "JAQ",
+	"serviceFullName": "Aliyun JAQ",
+	"signatureVersion": "pop",
+	"timestampFormat": "top",
+	"xmlnamespace": "",
+	"operations": {
+		"afsAppCheck": {
+			"name": "AfsAppCheck",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "AfsAppCheck"
+					},
+					"CallerName": {
+						"type": "string"
+					},
+					"Session": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"bbsPrevention": {
+			"name": "BbsPrevention",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "BbsPrevention"
+					},
+					"CallerName": {
+						"type": "string"
+					},
+					"Ip": {
+						"required": true,
+						"type": "string"
+					},
+					"ProtocolVersion": {
+						"required": true,
+						"type": "string"
+					},
+					"Source": {
+						"required": true,
+						"type": "integer"
+					},
+					"PhoneNumber": {
+						"type": "string"
+					},
+					"Email": {
+						"type": "string"
+					},
+					"UserId": {
+						"type": "string"
+					},
+					"IdType": {
+						"type": "integer"
+					},
+					"CurrentUrl": {
+						"type": "string"
+					},
+					"Agent": {
+						"type": "string"
+					},
+					"Cookie": {
+						"type": "string"
+					},
+					"SessionId": {
+						"type": "string"
+					},
+					"MacAddress": {
+						"type": "string"
+					},
+					"Referer": {
+						"type": "string"
+					},
+					"NickName": {
+						"type": "string"
+					},
+					"CompanyName": {
+						"type": "string"
+					},
+					"Address": {
+						"type": "string"
+					},
+					"JsToken": {
+						"type": "string"
+					},
+					"SDKToken": {
+						"type": "string"
+					},
+					"ExtendData": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"afsCheck": {
+			"name": "AfsCheck",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "AfsCheck"
+					},
+					"CallerName": {
+						"type": "string"
+					},
+					"Session": {
+						"required": true,
+						"type": "string"
+					},
+					"Token": {
+						"required": true,
+						"type": "string"
+					},
+					"Sig": {
+						"required": true,
+						"type": "string"
+					},
+					"Platform": {
+						"required": true,
+						"type": "integer"
+					},
+					"Scene": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"activityPrevention": {
+			"name": "ActivityPrevention",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "ActivityPrevention"
+					},
+					"CallerName": {
+						"type": "string"
+					},
+					"Ip": {
+						"required": true,
+						"type": "string"
+					},
+					"ProtocolVersion": {
+						"required": true,
+						"type": "string"
+					},
+					"Source": {
+						"required": true,
+						"type": "integer"
+					},
+					"ActivityDescription": {
+						"required": true,
+						"type": "string"
+					},
+					"ActivityId": {
+						"required": true,
+						"type": "string"
+					},
+					"Prize": {
+						"required": true,
+						"type": "string"
+					},
+					"PrizeType": {
+						"required": true,
+						"type": "integer"
+					},
+					"PhoneNumber": {
+						"type": "string"
+					},
+					"Email": {
+						"type": "string"
+					},
+					"UserId": {
+						"type": "string"
+					},
+					"IdType": {
+						"type": "integer"
+					},
+					"CurrentUrl": {
+						"type": "string"
+					},
+					"Agent": {
+						"type": "string"
+					},
+					"Cookie": {
+						"type": "string"
+					},
+					"SessionId": {
+						"type": "string"
+					},
+					"MacAddress": {
+						"type": "string"
+					},
+					"Referer": {
+						"type": "string"
+					},
+					"UserName": {
+						"type": "string"
+					},
+					"CompanyName": {
+						"type": "string"
+					},
+					"Address": {
+						"type": "string"
+					},
+					"IDNumber": {
+						"type": "string"
+					},
+					"BankCardNumber": {
+						"type": "string"
+					},
+					"RegisterIp": {
+						"type": "string"
+					},
+					"RegisterDate": {
+						"type": "integer"
+					},
+					"ExtendData": {
+						"type": "string"
+					},
+					"JsToken": {
+						"type": "string"
+					},
+					"SDKToken": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"checkAccountAndPasswordRisk": {
+			"name": "CheckAccountAndPasswordRisk",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "CheckAccountAndPasswordRisk"
+					},
+					"CallerName": {
+						"type": "string"
+					},
+					"AccountName": {
+						"required": true,
+						"type": "string"
+					},
+					"PasswordHash": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"otherPrevention": {
+			"name": "OtherPrevention",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "OtherPrevention"
+					},
+					"CallerName": {
+						"type": "string"
+					},
+					"Ip": {
+						"required": true,
+						"type": "string"
+					},
+					"ProtocolVersion": {
+						"required": true,
+						"type": "string"
+					},
+					"Source": {
+						"required": true,
+						"type": "integer"
+					},
+					"PhoneNumber": {
+						"type": "string"
+					},
+					"Email": {
+						"type": "string"
+					},
+					"UserId": {
+						"type": "string"
+					},
+					"IdType": {
+						"type": "integer"
+					},
+					"CurrentUrl": {
+						"type": "string"
+					},
+					"Agent": {
+						"type": "string"
+					},
+					"Cookie": {
+						"type": "string"
+					},
+					"SessionId": {
+						"type": "string"
+					},
+					"MacAddress": {
+						"type": "string"
+					},
+					"Referer": {
+						"type": "string"
+					},
+					"UserName": {
+						"type": "string"
+					},
+					"CompanyName": {
+						"type": "string"
+					},
+					"Address": {
+						"type": "string"
+					},
+					"IDNumber": {
+						"type": "string"
+					},
+					"BankCardNumber": {
+						"type": "string"
+					},
+					"RegisterIp": {
+						"type": "string"
+					},
+					"RegisterDate": {
+						"type": "integer"
+					},
+					"LoginIp": {
+						"type": "string"
+					},
+					"LoginDate": {
+						"type": "integer"
+					},
+					"ExtendData": {
+						"type": "string"
+					},
+					"PasswordHash": {
+						"type": "string"
+					},
+					"JsToken": {
+						"type": "string"
+					},
+					"SDKToken": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"loginPrevention": {
+			"name": "LoginPrevention",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "LoginPrevention"
+					},
+					"CallerName": {
+						"type": "string"
+					},
+					"Ip": {
+						"required": true,
+						"type": "string"
+					},
+					"ProtocolVersion": {
+						"required": true,
+						"type": "string"
+					},
+					"Source": {
+						"required": true,
+						"type": "integer"
+					},
+					"PhoneNumber": {
+						"type": "string"
+					},
+					"Email": {
+						"type": "string"
+					},
+					"UserId": {
+						"type": "string"
+					},
+					"IdType": {
+						"type": "integer"
+					},
+					"CurrentUrl": {
+						"type": "string"
+					},
+					"Agent": {
+						"type": "string"
+					},
+					"Cookie": {
+						"type": "string"
+					},
+					"SessionId": {
+						"type": "string"
+					},
+					"MacAddress": {
+						"type": "string"
+					},
+					"Referer": {
+						"type": "string"
+					},
+					"UserName": {
+						"type": "string"
+					},
+					"CompanyName": {
+						"type": "string"
+					},
+					"Address": {
+						"type": "string"
+					},
+					"IDNumber": {
+						"type": "string"
+					},
+					"BankCardNumber": {
+						"type": "string"
+					},
+					"RegisterIp": {
+						"type": "string"
+					},
+					"RegisterDate": {
+						"type": "integer"
+					},
+					"AccountExist": {
+						"type": "integer"
+					},
+					"ExtendData": {
+						"type": "string"
+					},
+					"JsToken": {
+						"type": "string"
+					},
+					"SDKToken": {
+						"type": "string"
+					},
+					"PasswordHash": {
+						"type": "string"
+					},
+					"LoginType": {
+						"type": "integer"
+					},
+					"PasswordCorrect": {
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"spamRegisterPrevention": {
+			"name": "SpamRegisterPrevention",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "SpamRegisterPrevention"
+					},
+					"CallerName": {
+						"type": "string"
+					},
+					"Ip": {
+						"required": true,
+						"type": "string"
+					},
+					"ProtocolVersion": {
+						"required": true,
+						"type": "string"
+					},
+					"Source": {
+						"required": true,
+						"type": "integer"
+					},
+					"PhoneNumber": {
+						"type": "string"
+					},
+					"Email": {
+						"type": "string"
+					},
+					"UserId": {
+						"type": "string"
+					},
+					"IdType": {
+						"type": "integer"
+					},
+					"CurrentUrl": {
+						"type": "string"
+					},
+					"Agent": {
+						"type": "string"
+					},
+					"Cookie": {
+						"type": "string"
+					},
+					"SessionId": {
+						"type": "string"
+					},
+					"MacAddress": {
+						"type": "string"
+					},
+					"Referer": {
+						"type": "string"
+					},
+					"NickName": {
+						"type": "string"
+					},
+					"CompanyName": {
+						"type": "string"
+					},
+					"Address": {
+						"type": "string"
+					},
+					"IDNumber": {
+						"type": "string"
+					},
+					"BankCardNumber": {
+						"type": "string"
+					},
+					"JsToken": {
+						"type": "string"
+					},
+					"SDKToken": {
+						"type": "string"
+					},
+					"ExtendData": {
+						"type": "string"
+					}
+				}
+			}
+		}
+  }
+}

@@ -75,7 +75,7 @@ npm install aliyun-sdk
  cd samples/oss
  node GetBucket.js
  ```
- 
+
 ***oss 支持 stream 请使用 https://github.com/berwin/aliyun-oss-upload-stream***
 
 ### SLS
@@ -134,6 +134,7 @@ SDK 目前支持下列服务:
 | Aliyun OpenSearch      | ALY.OpenSearch | 2015-01-01 | [OpenSearch API手册](http://docs.aliyun.com/#/opensearch/api-reference/terminology) |
 | Aliyun BatchCompute      | ALY.BatchCompute | 2015-06-30 | [BatchCompute API手册](http://docs.aliyun.com/#/pub/batchcompute) |
 | Aliyun OCS memcached      | ALY.MEMCACHED        | | [BinaryProtocolRevamped](https://code.google.com/p/memcached/wiki/BinaryProtocolRevamped) |
+| Aliyun JAQ      | ALY.JAQ        | | [数控风险](https://help.aliyun.com/product/28308.html) |
 
 #### 我们在代码中参考了 AWS SDK，在此声明。
 
