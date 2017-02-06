@@ -3,7 +3,7 @@
 	"apiVersion": "2016-08-01", 
 	"checksumFormat": "md5",
 	"endpointPrefix": "push", 
-	"serviceAbbreviation": "Aliyun", 
+	"serviceAbbreviation": "PUSH", 
 	"serviceFullName": "Aliyun PUSH", 
 	"signatureVersion": "pop",
 	"timestampFormat": "top",
