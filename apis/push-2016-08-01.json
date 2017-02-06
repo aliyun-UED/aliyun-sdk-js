@@ -3,7 +3,7 @@
 	"apiVersion": "2016-08-01", 
 	"checksumFormat": "md5",
 	"endpointPrefix": "push", 
-	"serviceAbbreviation": "PUSH", 
+	"serviceAbbreviation": "Aliyun", 
 	"serviceFullName": "Aliyun PUSH", 
 	"signatureVersion": "pop",
 	"timestampFormat": "top",
@@ -113,6 +113,44 @@
 					"TagName": {
 						"required": true,
 						"type": "string"
+					}
+				}
+			}
+		},
+		"listPushRecords": {  
+			"name": "ListPushRecords",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "ListPushRecords"
+					},
+					"AppKey": {
+						"required": true,
+						"type": "integer"
+					},
+					"PushType": {
+						"required": true,
+						"type": "string"
+					},
+					"StartTime": {
+						"required": true,
+						"type": "string"
+					},
+					"EndTime": {
+						"required": true,
+						"type": "string"
+					},
+					"Page": {
+						"type": "integer"
+					},
+					"PageSize": {
+						"type": "integer"
 					}
 				}
 			}
@@ -822,30 +860,6 @@
 						"type": "integer"
 					},
 					"MessageId": {
-						"required": true,
-						"type": "string"
-					}
-				}
-			}
-		},
-		"checkDevice": {  
-			"name": "CheckDevice",
-			"http": {
-				"method": "POST",
-				"uri":"/"
-			},
-			"input": {
-				"type": "structure",
-				"members": {
-					"Action": {
-						"required": true,
-						"default": "CheckDevice"
-					},
-					"AppKey": {
-						"required": true,
-						"type": "integer"
-					},
-					"DeviceId": {
 						"required": true,
 						"type": "string"
 					}
