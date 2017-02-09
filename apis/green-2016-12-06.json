@@ -1,6 +1,6 @@
 {
 	"format": "pop",
-	"apiVersion": "2016-11-24", 
+	"apiVersion": "2016-12-06", 
 	"checksumFormat": "md5",
 	"endpointPrefix": "green", 
 	"serviceAbbreviation": "GREEN", 
