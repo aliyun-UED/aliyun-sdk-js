@@ -1,6 +1,6 @@
 {
 	"format": "pop",
-	"apiVersion": "2016-12-06", 
+	"apiVersion": "2016-12-16", 
 	"checksumFormat": "md5",
 	"endpointPrefix": "green", 
 	"serviceAbbreviation": "GREEN", 
@@ -9,29 +9,6 @@
 	"timestampFormat": "top",
 	"xmlnamespace": "",
 	"operations": {
-		"antispamResults": {  
-			"name": "AntispamResults",
-			"http": {
-				"method": "POST",
-				"uri":"/"
-			},
-			"input": {
-				"type": "structure",
-				"members": {
-					"Action": {
-						"required": true,
-						"default": "AntispamResults"
-					},
-					"RegionId": {
-						"type": "string"
-					},
-					"DataId": {
-						"required": true,
-						"type": "string"
-					}
-				}
-			}
-		},
 		"antispamDetection": {  
 			"name": "AntispamDetection",
 			"http": {
@@ -44,6 +21,9 @@
 					"Action": {
 						"required": true,
 						"default": "AntispamDetection"
+					},
+					"ImageUrl": {
+						"type": "string"
 					},
 					"RegionId": {
 						"type": "string"
@@ -81,8 +61,28 @@
 					},
 					"PostContent": {
 						"type": "string"
+					}
+				}
+			}
+		},
+		"antispamResults": {  
+			"name": "AntispamResults",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "AntispamResults"
 					},
-					"ImageUrl": {
+					"DataId": {
+						"required": true,
+						"type": "string"
+					},
+					"RegionId": {
 						"type": "string"
 					}
 				}
@@ -101,6 +101,14 @@
 						"required": true,
 						"default": "ImageDetection"
 					},
+					"ImageUrl": {
+						"required": true,
+						"type": "string"
+					},
+					"Scene": {
+						"required": true,
+						"type": "string"
+					},
 					"RegionId": {
 						"type": "string"
 					},
@@ -111,14 +119,6 @@
 						"type": "string"
 					},
 					"NotifySeed": {
-						"type": "string"
-					},
-					"ImageUrl": {
-						"required": true,
-						"type": "string"
-					},
-					"Scene": {
-						"required": true,
 						"type": "string"
 					}
 				}
@@ -137,42 +137,11 @@
 						"required": true,
 						"default": "ImageResults"
 					},
-					"RegionId": {
-						"type": "string"
-					},
 					"TaskId": {
 						"required": true,
 						"type": "string"
-					}
-				}
-			}
-		},
-		"pluginAntispamFeedback": {  
-			"name": "PluginAntispamFeedback",
-			"http": {
-				"method": "POST",
-				"uri":"/"
-			},
-			"input": {
-				"type": "structure",
-				"members": {
-					"Action": {
-						"required": true,
-						"default": "PluginAntispamFeedback"
 					},
 					"RegionId": {
-						"type": "string"
-					},
-					"ClientVersion": {
-						"required": true,
-						"type": "string"
-					},
-					"ActionResult": {
-						"required": true,
-						"type": "string"
-					},
-					"Ids": {
-						"required": true,
 						"type": "string"
 					}
 				}
@@ -232,8 +201,8 @@
 				}
 			}
 		},
-		"sampleFeedback": {  
-			"name": "SampleFeedback",
+		"pluginAntispamFeedback": {  
+			"name": "PluginAntispamFeedback",
 			"http": {
 				"method": "POST",
 				"uri":"/"
@@ -243,19 +212,20 @@
 				"members": {
 					"Action": {
 						"required": true,
-						"default": "SampleFeedback"
+						"default": "PluginAntispamFeedback"
+					},
+					"Ids": {
+						"required": true,
+						"type": "string"
 					},
 					"RegionId": {
 						"type": "string"
 					},
-					"Marking": {
+					"ClientVersion": {
 						"required": true,
 						"type": "string"
 					},
-					"Category": {
-						"type": "string"
-					},
-					"TaskId": {
+					"ActionResult": {
 						"required": true,
 						"type": "string"
 					}
@@ -301,8 +271,8 @@
 				}
 			}
 		},
-		"textKeywordFilter": {  
-			"name": "TextKeywordFilter",
+		"sampleFeedback": {  
+			"name": "SampleFeedback",
 			"http": {
 				"method": "POST",
 				"uri":"/"
@@ -312,13 +282,20 @@
 				"members": {
 					"Action": {
 						"required": true,
-						"default": "TextKeywordFilter"
+						"default": "SampleFeedback"
+					},
+					"TaskId": {
+						"required": true,
+						"type": "string"
 					},
 					"RegionId": {
 						"type": "string"
 					},
-					"Text": {
+					"Marking": {
 						"required": true,
+						"type": "string"
+					},
+					"Category": {
 						"type": "string"
 					}
 				}
@@ -337,12 +314,44 @@
 						"required": true,
 						"default": "TextAntispamDetection"
 					},
+					"CustomDict": {
+						"type": "string"
+					},
 					"RegionId": {
 						"type": "string"
 					},
 					"DataItems": {
 						"required": true,
 						"type": "string"
+					}
+				}
+			}
+		},
+		"textKeywordFilter": {  
+			"name": "TextKeywordFilter",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "TextKeywordFilter"
+					},
+					"CustomDict": {
+						"type": "string"
+					},
+					"RegionId": {
+						"type": "string"
+					},
+					"Text": {
+						"required": true,
+						"type": "string"
+					},
+					"UseSysDic": {
+						"type": "boolean"
 					}
 				}
 			}
