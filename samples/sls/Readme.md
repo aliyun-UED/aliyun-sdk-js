@@ -22,7 +22,7 @@ var sls = new ALY.SLS({
     endpoint: 'http://cn-hangzhou.sls.aliyuncs.com',
 
     // 这是 sls sdk 目前支持最新的 api 版本, 不需要修改
-    apiVersion: '2014-11-18'
+    apiVersion: '2015-06-01'
 
     //以下是可选配置
     //,httpOptions: {
