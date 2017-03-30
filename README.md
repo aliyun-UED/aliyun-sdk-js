@@ -120,6 +120,7 @@ SDK 目前支持下列服务:
 | Aliyun ECS      | ALY.ECS | 2014-05-26 | [ECS API手册](http://aliyunecs.oss.aliyuncs.com/ECS-API-Reference%202014-05-26.pdf) |
 | Aliyun RDS      | ALY.RDS | 2014-08-15 | [RDS API手册](http://imgs-storage.cdn.aliyuncs.com/help/rds/RDS-API-Reference.pdf) |
 | Aliyun SLB      | ALY.SLB | 2014-05-15 | [SLB API手册](http://imgs-storage.cdn.aliyuncs.com/help/slb/SLB-API-Reference_2014-05-15.pdf) |
+| Aliyun ESS      | ALY.SLB | 2014-08-28 | [ESS API手册](https://help.aliyun.com/product/25855.html) |
 | Aliyun OSS      | ALY.OSS | 2013-10-15 | [OSS API手册](http://imgs-storage.cdn.aliyuncs.com/help/oss/oss%20api%2020140828.pdf) |
 | Aliyun OTS      | ALY.OTS | 2014-08-08 | [OTS API手册](https://help.aliyun.com/document_detail/ots/APIReference) |
 | Aliyun CDN      | ALY.CDN | 2014-11-11 | [CDN API手册](http://imgs-storage.cdn.aliyuncs.com/help/cdn/cdn%20open%20api%20v1.6.pdf) |
@@ -129,7 +130,7 @@ SDK 目前支持下列服务:
 | Aliyun STS      | ALY.STS | 2015-04-01 | [STS API手册](http://docs.aliyun.com/#/pub/ram/sts-user-guide/intro) |
 | Aliyun MTS      | ALY.MTS | 2014-06-18 | [MTS API手册](https://docs.aliyun.com/#/pub/mts/API-Reference/summary) |
 | Aliyun PUSH      | ALY.PUSH | 2015-08-27 | [PUSH API手册](https://help.aliyun.com/document_detail/mobilepush/api-reference/openapi.html) |
-| Aldayu      | ALY.DAYU | 2015-12-16 | [阿里大于 API手册](https://api.alidayu.com/doc2/apiList.htm) |
+| Alidayu      | ALY.DAYU | 2015-12-16 | [阿里大于 API手册](https://api.alidayu.com/doc2/apiList.htm) |
 | Alyun GREEN      | ALY.GREEN | 2016-11-24 | [阿里绿网 API手册](https://help.aliyun.com/document_detail/28427.html) |
 | Aliyun OpenSearch      | ALY.OpenSearch | 2015-01-01 | [OpenSearch API手册](http://docs.aliyun.com/#/opensearch/api-reference/terminology) |
 | Aliyun BatchCompute      | ALY.BatchCompute | 2015-06-30 | [BatchCompute API手册](http://docs.aliyun.com/#/pub/batchcompute) |
