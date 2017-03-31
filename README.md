@@ -128,7 +128,7 @@ SDK 目前支持下列服务:
 | Aliyun SLS      | ALY.SLS | 2014-11-18 | [SLS API手册](http://docs.aliyun.com/#/sls/api/overview) |
 | Aliyun RAM      | ALY.RAM | 2015-05-15 | [RAM API手册](https://docs.aliyun.com/#/pub/ram) |
 | Aliyun STS      | ALY.STS | 2015-04-01 | [STS API手册](http://docs.aliyun.com/#/pub/ram/sts-user-guide/intro) |
-| Aliyun MTS      | ALY.MTS | 2014-06-18 | [MTS API手册](https://docs.aliyun.com/#/pub/mts/API-Reference/summary) |
+| Aliyun MTS      | ALY.MTS | 2014-06-18 | [MTS API手册](https://help.aliyun.com/document_detail/29212.html) |
 | Aliyun PUSH      | ALY.PUSH | 2015-08-27 | [PUSH API手册](https://help.aliyun.com/document_detail/mobilepush/api-reference/openapi.html) |
 | Alidayu      | ALY.DAYU | 2015-12-16 | [阿里大于 API手册](https://api.alidayu.com/doc2/apiList.htm) |
 | Alyun GREEN      | ALY.GREEN | 2016-11-24 | [阿里绿网 API手册](https://help.aliyun.com/document_detail/28427.html) |
