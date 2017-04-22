@@ -5,7 +5,11 @@ var oss = require('./oss');
 // -------------------------------
 
 oss.createBucket({
-  Bucket: 'chylvina1'
+  Bucket: 'chylvina1',
+  
+  // CreateBucketConfiguration: {
+  // 	StorageClass: 'Archive' //归档bucket
+  // }
 }, function (err, data) {
   if (err) {
     console.log('error:', err);
