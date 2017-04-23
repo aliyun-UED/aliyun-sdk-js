@@ -275,6 +275,16 @@
           "GrantWriteACP": {
             "location": "header",
             "name": "x-oss-grant-write-acp"
+          },
+          "CreateBucketConfiguration": {
+            "type": "structure",
+            "name": "CreateBucketConfiguration",
+            "members": {
+               "StorageClass": {
+                 "type": "string",
+                 "name": "StorageClass"
+               }
+            }
           }
         }
       },
