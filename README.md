@@ -4,59 +4,6 @@ OSS Browser - 提供类似windows资源管理器功能 https://github.com/aliyun
 
 Open5 - 基于阿里云 Open API 的开源 H5 生成工具　https://github.com/aliyun-UED/open5
 
-## 在浏览器端使用
-
-现在 aliyun sdk 支持在浏览器端调用, 只需要引入 dist/aliyun-sdk.js 即可, 使用参考 sample/browser/browser.html
-
-目前支持在浏览器端调用除了 sls, ocs 以外的所有服务, 不过目前只有 oss 支持 sts 和 cors , 非 oss 服务只能使用根 accessKey 和 accessSecret 进行初始化, 存在泄露风险.
-
-### 如何 build
-
-考虑到文件大小, 目前 dist/aliyun-sdk.js 中仅包含 oss 服务, 如果需要 build 其他服务, 请按照以下步骤操作:
-
-- git clone git@github.com:aliyun-UED/aliyun-sdk-js.git
-- cd aliyun-sdk-js
-- npm install
-- bower install
-- npm install -g browserify
-- 构建仅包含 oss 的 aliyun-sdk.js
-
-```sh
-browserify -r oss-2013-10-15.json browser.js > dist/aliyun-sdk.js
-```
-
-- 如果需要编译多个服务, 如 oss, batchCompute
-
-```sh
-browserify -r oss-2013-10-15.json -r batchcompute-2015-06-30.json browser.js > dist/aliyun-sdk.js
-```
-
-目前在浏览器端运行的 sdk 还在测试阶段, 如果有问题请随时提出.
-
-## 初始化
-
-```javascript
-var oss = new ALY.OSS({
-  accessKeyId: "在阿里云OSS申请的 accessKeyId",
-  secretAccessKey: "在阿里云OSS申请的 secretAccessKey",
-  securityToken: "",
-  endpoint: 'http://oss-cn-hangzhou.aliyuncs.com',
-  apiVersion: '2013-10-15'
-});
-```
-
-可以使用 STS token 初始化 OSS, 后续 sts 会支持其他服务
-
-```javascript
-var oss = new ALY.OSS({
-  accessKeyId: "sts token 中的 accessKeyId",
-  secretAccessKey: "sts token 中的 secretAccessKey",
-  securityToken: "sts token 中的 securityToken",
-  endpoint: 'http://oss-cn-hangzhou.aliyuncs.com',
-  apiVersion: '2013-10-15'
-});
-```
-
 ## 安装
 
 ### Node.js 安装
@@ -64,6 +11,10 @@ var oss = new ALY.OSS({
 ```sh
 npm install aliyun-sdk
 ```
+
+### 浏览器端安装
+
+https://github.com/aliyun-UED/aliyun-sdk-js/blob/master/browser.md
 
 ## 使用方法及代码示例
 
@@ -79,39 +30,6 @@ npm install aliyun-sdk
  ```
 
 ***oss 支持 stream 请使用 https://github.com/berwin/aliyun-oss-upload-stream***
-
-### SLS
-在 samples/sls 目录下的代码示例，使用方法：
- - 将 samples/sls/sls.js 中需要的参数修改
- - 打开需要执行的某个实例文件，如 ListLogStores.js，将其中的参数改成你自己的 sls 实例参数
- - 执行示例文件即可, 如:
-
- ```javascript
- cd samples/sls
- node ListLogStores.js
- ```
-
-### ECS, RDS, SLB, CDN
-在 samples 对应目录下的有代码示例，使用方法：
- - 将 samples/ecs/test.js 中需要的参数修改
- - 执行示例文件即可, 如:
-
- ```javascript
- cd samples/ecs
- node test.js
- ```
-
-### OpenSearch
-在 samples/opensearch 目录下的代码示例，使用方法：
- - 修改 samples/opensearch/opensearch.js，填入代码中所需参数
- - 执行示例文件即可
-
-### MEMCACHED
-在 samples/memcached 目录下的代码示例，使用方法：
- - 修改 samples/memcached/memcached.js，填入代码中所需参数
- - 执行示例文件即可
-
-更多帮助参考 https://github.com/chylvina/node_memcached
 
 ## 目前支持的服务
 
