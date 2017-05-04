@@ -1,0 +1,1973 @@
+{
+	"format": "pop",
+	"apiVersion": "2015-11-23", 
+	"checksumFormat": "md5",
+	"endpointPrefix": "dm", 
+	"serviceAbbreviation": "DM",
+	"serviceFullName": "Aliyun DM", 
+	"signatureVersion": "pop",
+	"timestampFormat": "top",
+	"xmlnamespace": "",
+	"operations": {
+		"senderStatisticsByTagNameAndBatchID": {  
+			"name": "SenderStatisticsByTagNameAndBatchID",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "SenderStatisticsByTagNameAndBatchID"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"AccountName": {
+						"type": "string"
+					},
+					"StartTime": {
+						"required": true,
+						"type": "string"
+					},
+					"EndTime": {
+						"required": true,
+						"type": "string"
+					},
+					"TagName": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"sendTestByTemplate": {  
+			"name": "SendTestByTemplate",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "SendTestByTemplate"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"TemplateId": {
+						"required": true,
+						"type": "integer"
+					},
+					"AccountName": {
+						"required": true,
+						"type": "string"
+					},
+					"UserName": {
+						"type": "string"
+					},
+					"NickName": {
+						"type": "string"
+					},
+					"Birthday": {
+						"type": "string"
+					},
+					"Gender": {
+						"type": "string"
+					},
+					"Mobile": {
+						"type": "string"
+					},
+					"Email": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"singleSendMail": {  
+			"name": "SingleSendMail",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "SingleSendMail"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"AccountName": {
+						"required": true,
+						"type": "string"
+					},
+					"AddressType": {
+						"required": true,
+						"type": "integer"
+					},
+					"TagName": {
+						"type": "string"
+					},
+					"ReplyToAddress": {
+						"required": true,
+						"type": "boolean"
+					},
+					"ToAddress": {
+						"required": true,
+						"type": "string"
+					},
+					"Subject": {
+						"required": true,
+						"type": "string"
+					},
+					"HtmlBody": {
+						"type": "string"
+					},
+					"TextBody": {
+						"type": "string"
+					},
+					"FromAlias": {
+						"type": "string"
+					},
+					"ReplyAddress": {
+						"type": "string"
+					},
+					"ReplyAddressAlias": {
+						"type": "string"
+					},
+					"ClickTrace": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"modifyTemplate": {  
+			"name": "ModifyTemplate",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "ModifyTemplate"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"TemplateId": {
+						"required": true,
+						"type": "integer"
+					},
+					"TemplateName": {
+						"required": true,
+						"type": "string"
+					},
+					"TemplateSubject": {
+						"type": "string"
+					},
+					"TemplateNickName": {
+						"type": "string"
+					},
+					"TemplateText": {
+						"type": "string"
+					},
+					"SmsType": {
+						"type": "integer"
+					},
+					"SmsContent": {
+						"type": "string"
+					},
+					"Remark": {
+						"type": "string"
+					},
+					"FromType": {
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"queryDomainByParam": {  
+			"name": "QueryDomainByParam",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "QueryDomainByParam"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"PageNo": {
+						"type": "integer"
+					},
+					"PageSize": {
+						"type": "integer"
+					},
+					"KeyWord": {
+						"type": "string"
+					},
+					"Status": {
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"queryMailAddressByParam": {  
+			"name": "QueryMailAddressByParam",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "QueryMailAddressByParam"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"PageNo": {
+						"type": "integer"
+					},
+					"PageSize": {
+						"type": "integer"
+					},
+					"KeyWord": {
+						"type": "string"
+					},
+					"Sendtype": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"queryReceiverByParam": {  
+			"name": "QueryReceiverByParam",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "QueryReceiverByParam"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"PageNo": {
+						"type": "integer"
+					},
+					"PageSize": {
+						"type": "integer"
+					},
+					"KeyWord": {
+						"type": "string"
+					},
+					"Status": {
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"queryTagByParam": {  
+			"name": "QueryTagByParam",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "QueryTagByParam"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"PageNo": {
+						"type": "integer"
+					},
+					"PageSize": {
+						"type": "integer"
+					},
+					"KeyWord": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"queryTaskByParam": {  
+			"name": "QueryTaskByParam",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "QueryTaskByParam"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"PageNo": {
+						"type": "integer"
+					},
+					"PageSize": {
+						"type": "integer"
+					},
+					"KeyWord": {
+						"type": "string"
+					},
+					"Status": {
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"queryTemplateByParam": {  
+			"name": "QueryTemplateByParam",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "QueryTemplateByParam"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"PageNo": {
+						"type": "integer"
+					},
+					"PageSize": {
+						"type": "integer"
+					},
+					"KeyWord": {
+						"type": "string"
+					},
+					"Status": {
+						"type": "integer"
+					},
+					"FromType": {
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"saveReceiverDetail": {  
+			"name": "SaveReceiverDetail",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "SaveReceiverDetail"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"ReceiverId": {
+						"required": true,
+						"type": "string"
+					},
+					"Detail": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"createTemplate": {  
+			"name": "CreateTemplate",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "CreateTemplate"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"TemplateType": {
+						"type": "integer"
+					},
+					"TemplateName": {
+						"required": true,
+						"type": "string"
+					},
+					"TemplateSubject": {
+						"type": "string"
+					},
+					"TemplateNickName": {
+						"type": "string"
+					},
+					"TemplateText": {
+						"type": "string"
+					},
+					"SmsType": {
+						"type": "integer"
+					},
+					"SmsContent": {
+						"type": "string"
+					},
+					"Remark": {
+						"type": "string"
+					},
+					"FromType": {
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"deleteDomain": {  
+			"name": "DeleteDomain",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "DeleteDomain"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"DomainId": {
+						"required": true,
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"deleteReceiver": {  
+			"name": "DeleteReceiver",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "DeleteReceiver"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"ReceiverId": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"deleteTag": {  
+			"name": "DeleteTag",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "DeleteTag"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"TagId": {
+						"required": true,
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"deleteTemplate": {  
+			"name": "DeleteTemplate",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "DeleteTemplate"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"TemplateId": {
+						"required": true,
+						"type": "integer"
+					},
+					"FromType": {
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"descTemplate": {  
+			"name": "DescTemplate",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "DescTemplate"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"TemplateId": {
+						"required": true,
+						"type": "integer"
+					},
+					"FromType": {
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"modifyMailAddress": {  
+			"name": "ModifyMailAddress",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "ModifyMailAddress"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"MailAddressId": {
+						"required": true,
+						"type": "integer"
+					},
+					"ReplyAddress": {
+						"type": "string"
+					},
+					"Password": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"modifyTag": {  
+			"name": "ModifyTag",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "ModifyTag"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"TagId": {
+						"required": true,
+						"type": "integer"
+					},
+					"TagName": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"approveTemplate": {  
+			"name": "ApproveTemplate",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "ApproveTemplate"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"TemplateId": {
+						"required": true,
+						"type": "integer"
+					},
+					"FromType": {
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"batchSendMail": {  
+			"name": "BatchSendMail",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "BatchSendMail"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"TemplateName": {
+						"required": true,
+						"type": "string"
+					},
+					"AccountName": {
+						"required": true,
+						"type": "string"
+					},
+					"ReceiversName": {
+						"required": true,
+						"type": "string"
+					},
+					"AddressType": {
+						"required": true,
+						"type": "integer"
+					},
+					"TagName": {
+						"type": "string"
+					},
+					"ReplyAddress": {
+						"type": "string"
+					},
+					"ReplyAddressAlias": {
+						"type": "string"
+					},
+					"ClickTrace": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"checkDomain": {  
+			"name": "CheckDomain",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "CheckDomain"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"DomainId": {
+						"required": true,
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"checkReplyToMailAddress": {  
+			"name": "CheckReplyToMailAddress",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "CheckReplyToMailAddress"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"MailAddressId": {
+						"required": true,
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"createDomain": {  
+			"name": "CreateDomain",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "CreateDomain"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"DomainName": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"createMailAddress": {  
+			"name": "CreateMailAddress",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "CreateMailAddress"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"AccountName": {
+						"required": true,
+						"type": "string"
+					},
+					"ReplyAddress": {
+						"type": "string"
+					},
+					"Sendtype": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"createReceiver": {  
+			"name": "CreateReceiver",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "CreateReceiver"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"ReceiversName": {
+						"required": true,
+						"type": "string"
+					},
+					"ReceiversAlias": {
+						"required": true,
+						"type": "string"
+					},
+					"Desc": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"createTag": {  
+			"name": "CreateTag",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "CreateTag"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"TagName": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"approveReplyMailAddress": {  
+			"name": "ApproveReplyMailAddress",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "ApproveReplyMailAddress"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"Ticket": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"descAccountSummary": {  
+			"name": "DescAccountSummary",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "DescAccountSummary"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"queryInvalidAddress": {  
+			"name": "QueryInvalidAddress",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "QueryInvalidAddress"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"StartTime": {
+						"type": "string"
+					},
+					"EndTime": {
+						"type": "string"
+					},
+					"KeyWord": {
+						"type": "string"
+					},
+					"Length": {
+						"type": "integer"
+					},
+					"NextStart": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"senderStatisticsDetailByParam": {  
+			"name": "SenderStatisticsDetailByParam",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "SenderStatisticsDetailByParam"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"AccountName": {
+						"type": "string"
+					},
+					"ToAddress": {
+						"type": "string"
+					},
+					"Status": {
+						"type": "integer"
+					},
+					"StartTime": {
+						"type": "string"
+					},
+					"EndTime": {
+						"type": "string"
+					},
+					"TagName": {
+						"type": "string"
+					},
+					"Length": {
+						"type": "integer"
+					},
+					"NextStart": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"queryReceiverDetail": {  
+			"name": "QueryReceiverDetail",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "QueryReceiverDetail"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"ReceiverId": {
+						"required": true,
+						"type": "string"
+					},
+					"PageSize": {
+						"type": "integer"
+					},
+					"KeyWord": {
+						"type": "string"
+					},
+					"NextStart": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"deleteReceiverDetail": {  
+			"name": "DeleteReceiverDetail",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "DeleteReceiverDetail"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"ReceiverId": {
+						"required": true,
+						"type": "string"
+					},
+					"Email": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"createDayu": {  
+			"name": "CreateDayu",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "CreateDayu"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"AccountType": {
+						"required": true,
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"createSign": {  
+			"name": "CreateSign",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "CreateSign"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"SignName": {
+						"required": true,
+						"type": "string"
+					},
+					"Remark": {
+						"type": "string"
+					},
+					"SignType": {
+						"type": "integer"
+					},
+					"FileNames": {
+						"type": "string"
+					},
+					"FromType": {
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"deleteSign": {  
+			"name": "DeleteSign",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "DeleteSign"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"SignId": {
+						"required": true,
+						"type": "integer"
+					},
+					"FromType": {
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"querySignByParam": {  
+			"name": "QuerySignByParam",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "QuerySignByParam"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"PageNo": {
+						"type": "integer"
+					},
+					"PageSize": {
+						"type": "integer"
+					},
+					"KeyWord": {
+						"type": "string"
+					},
+					"FromType": {
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"querySmsStatistics": {  
+			"name": "QuerySmsStatistics",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "QuerySmsStatistics"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"StartTime": {
+						"required": true,
+						"type": "string"
+					},
+					"EndTime": {
+						"required": true,
+						"type": "string"
+					},
+					"FromType": {
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"singleSendSms": {  
+			"name": "SingleSendSms",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "SingleSendSms"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"SignName": {
+						"required": true,
+						"type": "string"
+					},
+					"TemplateCode": {
+						"required": true,
+						"type": "string"
+					},
+					"RecNum": {
+						"required": true,
+						"type": "string"
+					},
+					"ParamString": {
+						"required": true,
+						"type": "string"
+					},
+					"Version": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"approveSmsTemplate": {  
+			"name": "ApproveSmsTemplate",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "ApproveSmsTemplate"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"TemplateId": {
+						"required": true,
+						"type": "integer"
+					},
+					"FromType": {
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"approveMailTemplate": {  
+			"name": "ApproveMailTemplate",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "ApproveMailTemplate"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"TemplateId": {
+						"required": true,
+						"type": "integer"
+					},
+					"FromType": {
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"addIpfilter": {  
+			"name": "AddIpfilter",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "AddIpfilter"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"IpAddress": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"deleteIpfilterByEdmId": {  
+			"name": "DeleteIpfilterByEdmId",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "DeleteIpfilterByEdmId"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"FromType": {
+						"type": "integer"
+					},
+					"Id": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"getIpfilterList": {  
+			"name": "GetIpfilterList",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "GetIpfilterList"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"getIpProtection": {  
+			"name": "GetIpProtection",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "GetIpProtection"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"updateIpProtection": {  
+			"name": "UpdateIpProtection",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "UpdateIpProtection"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"IpProtection": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"descDomain": {  
+			"name": "DescDomain",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "DescDomain"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"DomainId": {
+						"required": true,
+						"type": "integer"
+					}
+				}
+			}
+		},
+		"getTrackList": {  
+			"name": "GetTrackList",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "GetTrackList"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"StartTime": {
+						"required": true,
+						"type": "string"
+					},
+					"EndTime": {
+						"required": true,
+						"type": "string"
+					},
+					"Total": {
+						"type": "string"
+					},
+					"Offset": {
+						"type": "string"
+					},
+					"PageSize": {
+						"type": "string"
+					},
+					"OffsetCreateTime": {
+						"type": "string"
+					},
+					"OffsetCreateTimeDesc": {
+						"type": "string"
+					},
+					"PageNumber": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"updateDomainTrackName": {  
+			"name": "UpdateDomainTrackName",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "UpdateDomainTrackName"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"DomainId": {
+						"required": true,
+						"type": "integer"
+					},
+					"CnameTrackRecord": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"getAccountList": {  
+			"name": "GetAccountList",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "GetAccountList"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"Total": {
+						"type": "string"
+					},
+					"Offset": {
+						"type": "string"
+					},
+					"PageSize": {
+						"type": "string"
+					},
+					"OffsetCreateTime": {
+						"type": "string"
+					},
+					"OffsetCreateTimeDesc": {
+						"type": "string"
+					},
+					"PageNumber": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"getRegionList": {  
+			"name": "GetRegionList",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "GetRegionList"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"Total": {
+						"type": "string"
+					},
+					"Offset": {
+						"type": "string"
+					},
+					"PageSize": {
+						"type": "string"
+					},
+					"OffsetCreateTime": {
+						"type": "string"
+					},
+					"OffsetCreateTimeDesc": {
+						"type": "string"
+					},
+					"PageNumber": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"getSenderAddressList": {  
+			"name": "GetSenderAddressList",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "GetSenderAddressList"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"Total": {
+						"type": "string"
+					},
+					"Offset": {
+						"type": "string"
+					},
+					"PageSize": {
+						"type": "string"
+					},
+					"PageNo": {
+						"type": "string"
+					},
+					"Keyword": {
+						"type": "string"
+					},
+					"NotifyUrl": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"modifyAccountNotification": {  
+			"name": "ModifyAccountNotification",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "ModifyAccountNotification"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"Region": {
+						"type": "string"
+					},
+					"Status": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"modifySenderAddressNotification": {  
+			"name": "ModifySenderAddressNotification",
+			"http": {
+				"method": "POST",
+				"uri":"/"
+			},
+			"input": {
+				"type": "structure",
+				"members": {
+					"Action": {
+						"required": true,
+						"default": "ModifySenderAddressNotification"
+					},
+					"OwnerId": {
+						"type": "integer"
+					},
+					"ResourceOwnerAccount": {
+						"type": "string"
+					},
+					"ResourceOwnerId": {
+						"type": "integer"
+					},
+					"SenderAddressId": {
+						"required": true,
+						"type": "string"
+					},
+					"SenderAddress": {
+						"required": true,
+						"type": "string"
+					},
+					"Region": {
+						"required": true,
+						"type": "string"
+					},
+					"Status": {
+						"required": true,
+						"type": "string"
+					}
+				}
+			}
+		}
+  }
+}
