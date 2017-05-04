@@ -2631,7 +2631,7 @@
         "members": {
           "ACL": {
             "location": "header",
-            "name": "x-oss-acl"
+            "name": "x-oss-object-acl"
           },
           "AccessControlPolicy": {
             "type": "structure",
