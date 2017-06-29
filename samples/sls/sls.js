@@ -3,6 +3,7 @@ var ALY = require('../../index.js');
 var sls = new ALY.SLS({
 	"accessKeyId": "",
 	"secretAccessKey": "=",
+    "securityToken" :"tokens",
 
 	// 根据你的 sls project所在地区选择填入
 	// 北京：http://cn-beijing.sls.aliyuncs.com
