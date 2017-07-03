@@ -2878,6 +2878,118 @@
           }
         }
       }
+    },
+    "appendObject": {
+      "name": "AppendObject",
+      "http": {
+        "method": "POST",
+        "uri": "/{Key}?append&position={Position}"
+      },
+      "input": {
+        "payload": "Body",
+        "type": "structure",
+        "members": {
+          "Body": {
+            "type": "binary",
+            "streaming": true
+          },
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          },
+          "CacheControl": {
+            "location": "header",
+            "name": "Cache-Control"
+          },
+          "ContentDisposition": {
+            "location": "header",
+            "name": "Content-Disposition"
+          },
+          "ContentEncoding": {
+            "location": "header",
+            "name": "Content-Encoding"
+          },
+          "ContentLanguage": {
+            "location": "header",
+            "name": "Content-Language"
+          },
+          "ContentLength": {
+            "type": "integer",
+            "location": "header",
+            "name": "Content-Length"
+          },
+          "ContentMD5": {
+            "location": "header",
+            "name": "Content-MD5"
+          },
+          "ContentType": {
+            "location": "header",
+            "name": "Content-Type"
+          },
+          "Expires": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "Expires"
+          },
+          "GrantFullControl": {
+            "location": "header",
+            "name": "x-oss-grant-full-control"
+          },
+          "GrantRead": {
+            "location": "header",
+            "name": "x-oss-grant-read"
+          },
+          "GrantReadACP": {
+            "location": "header",
+            "name": "x-oss-grant-read-acp"
+          },
+          "GrantWriteACP": {
+            "location": "header",
+            "name": "x-oss-grant-write-acp"
+          },
+          "Key": {
+            "required": true,
+            "location": "uri"
+          },
+          "Metadata": {
+            "type": "map",
+            "location": "header",
+            "name": "x-oss-meta-",
+            "members": {},
+            "keys": {}
+          },
+          "Position": {
+            "required": true,
+            "location": "uri",
+            "type": "integer"
+          },
+          "ServerSideEncryption": {
+            "location": "header",
+            "name": "x-oss-server-side-encryption"
+          },
+          "StorageClass": {
+            "location": "header",
+            "name": "x-oss-storage-class"
+          },
+          "WebsiteRedirectLocation": {
+            "location": "header",
+            "name": "x-oss-website-redirect-location"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NextAppendPosition": {
+            "location": "header",
+            "name": "x-oss-next-append-position"
+          },
+          "HashCrc64Ecma": {
+            "location": "header",
+            "name": "x-oss-hash-crc64ecma"
+          }
+        }
+      }
     }
   },
   "pagination": {
