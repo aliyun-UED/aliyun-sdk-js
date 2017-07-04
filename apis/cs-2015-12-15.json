@@ -1,0 +1,640 @@
+{
+  "format": "rest-json",
+  "apiVersion": "2015-12-15",
+  "checksumFormat": "md5",
+  "endpointPrefix": "cs",
+  "serviceAbbreviation": "CS",
+  "serviceFullName": "Aliyun CS",
+  "signatureVersion": "pop-json",
+  "timestampFormat": "top",
+  "xmlnamespace": "",
+  "operations": {
+    "describeApiVersion": {
+      "name": "DescribeApiVersion",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeApiVersion"
+          }
+        }
+      }
+    },
+    "deleteCluster": {
+      "name": "DeleteCluster",
+      "http": {
+        "method": "DELETE",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteCluster"
+          },
+          "ClusterId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeClusterCerts": {
+      "name": "DescribeClusterCerts",
+      "http": {
+        "method": "GET",
+        "uri": "/clusters/{ClusterId}/certs"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "ClusterId": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          }
+        }
+      }
+    },
+    "describeClusterDetail": {
+      "name": "DescribeClusterDetail",
+      "http": {
+        "method": "GET",
+        "uri": "/clusters/{ClusterId}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "ClusterId": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          }
+        }
+      }
+    },
+    "describeClusters": {
+      "name": "DescribeClusters",
+      "http": {
+        "method": "GET",
+        "uri": "/clusters?name={Name}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Name": {
+            "type": "string",
+            "location": "uri"
+          }
+        }
+      }
+    },
+    "scaleCluster": {
+      "name": "ScaleCluster",
+      "http": {
+        "method": "PUT",
+        "uri": "/clusters/{ClusterId}"
+      },
+      "input": {
+        "payload": ["ecs_image_id", "password", "instance_type", "size", "data_disk_category", "data_disk_size", "io_optimized",  "system_disk_category", "system_disk_size"],
+        "type": "structure",
+        "members": {
+          "ClusterId": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          },
+          "ecs_image_id": {
+            "required": true,
+            "type": "string"
+          },
+          "password": {
+            "required": true,
+            "type": "string"
+          },
+          "instance_type": {
+            "required": true,
+            "type": "string"
+          },
+          "size": {
+            "required": true,
+            "type": "integer"
+          },
+          "data_disk_category": {
+            "type": "string"
+          },
+          "data_disk_size": {
+            "type": "integer"
+          },
+          "io_optimized": {
+            "type": "string"
+          },
+          "system_disk_category": {
+            "type": "string"
+          },
+          "system_disk_size": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "createCluster": {
+      "name": "CreateCluster",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateCluster"
+          }
+        }
+      }
+    },
+    "describeUserContainers": {
+      "name": "DescribeUserContainers",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeUserContainers"
+          },
+          "RegionId": {
+            "required": true,
+            "type": "string"
+          },
+          "ServiceId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "getTriggerHook": {
+      "name": "GetTriggerHook",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "GetTriggerHook"
+          },
+          "ClusterId": {
+            "required": true,
+            "type": "string"
+          },
+          "ProjectId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyClusterName": {
+      "name": "ModifyClusterName",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ModifyClusterName"
+          }
+        }
+      }
+    },
+    "describeClusterHosts": {
+      "name": "DescribeClusterHosts",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeClusterHosts"
+          },
+          "ClusterId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeClusterServices": {
+      "name": "DescribeClusterServices",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeClusterServices"
+          },
+          "ClusterId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeServiceContainers": {
+      "name": "DescribeServiceContainers",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeServiceContainers"
+          },
+          "ClusterId": {
+            "required": true,
+            "type": "string"
+          },
+          "ServiceId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "getClusterProjects": {
+      "name": "GetClusterProjects",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "GetClusterProjects"
+          },
+          "ClusterId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "getProjectEvents": {
+      "name": "GetProjectEvents",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "GetProjectEvents"
+          },
+          "ClusterId": {
+            "required": true,
+            "type": "string"
+          },
+          "ProjectId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createTemplate": {
+      "name": "CreateTemplate",
+      "http": {
+        "method": "PUT",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateTemplate"
+          }
+        }
+      }
+    },
+    "describeTemplateAttribute": {
+      "name": "DescribeTemplateAttribute",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeTemplateAttribute"
+          },
+          "TemplateId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeTemplates": {
+      "name": "DescribeTemplates",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeTemplates"
+          }
+        }
+      }
+    },
+    "attachInstances": {
+      "name": "AttachInstances",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AttachInstances"
+          },
+          "ClusterId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "callbackClusterToken": {
+      "name": "CallbackClusterToken",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CallbackClusterToken"
+          },
+          "Token": {
+            "required": true,
+            "type": "string"
+          },
+          "ReqOnce": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "createClusterToken": {
+      "name": "CreateClusterToken",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateClusterToken"
+          },
+          "ClusterId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeClusterNodeInfo": {
+      "name": "DescribeClusterNodeInfo",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeClusterNodeInfo"
+          },
+          "Token": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeClusterNodeInfoWithInstance": {
+      "name": "DescribeClusterNodeInfoWithInstance",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeClusterNodeInfoWithInstance"
+          },
+          "InstanceId": {
+            "required": true,
+            "type": "string"
+          },
+          "Token": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeClusterTokens": {
+      "name": "DescribeClusterTokens",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeClusterTokens"
+          },
+          "ClusterId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "downloadClusterNodeCerts": {
+      "name": "DownloadClusterNodeCerts",
+      "http": {
+        "method": "GET",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DownloadClusterNodeCerts"
+          },
+          "NodeId": {
+            "required": true,
+            "type": "string"
+          },
+          "Token": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "revokeClusterToken": {
+      "name": "RevokeClusterToken",
+      "http": {
+        "method": "DELETE",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "RevokeClusterToken"
+          },
+          "Token": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteClusterNode": {
+      "name": "DeleteClusterNode",
+      "http": {
+        "method": "DELETE",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteClusterNode"
+          },
+          "Force": {
+            "required": true,
+            "type": "string"
+          },
+          "Ip": {
+            "required": true,
+            "type": "string"
+          },
+          "ClusterId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "scaleInCluster": {
+      "name": "ScaleInCluster",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "ScaleInCluster"
+          },
+          "ClusterId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeTaskInfo": {
+      "name": "DescribeTaskInfo",
+      "http": {
+        "method": "GET",
+        "uri": "/tasks/{TaskId}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "TaskId": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          }
+        }
+      }
+    },
+    "updateSubUserResouces": {
+      "name": "UpdateSubUserResouces",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "UpdateSubUserResouces"
+          }
+        }
+      }
+    }
+  }
+}
