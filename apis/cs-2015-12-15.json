@@ -140,7 +140,10 @@
           },
           "system_disk_size": {
             "type": "integer"
-          }
+          },
+          "release_eip_flag": {
+            "type": "boolean"
+          },
         }
       }
     },
