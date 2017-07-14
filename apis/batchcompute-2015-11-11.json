@@ -196,6 +196,116 @@
             "required": false,
             "type": "structure",
             "members": {
+              "Mounts": {
+                "required": false,
+                "type": "structure",
+                "members": {
+                  "Entries": {
+                    "required": false,
+                    "type": "list",
+                    "members": {
+                      "required": false,
+                      "type":"structure",
+                      "members": {
+                        "Destination": {
+                          "required": true,
+                          "type": "string"
+                        },
+                        "Source": {
+                          "required": true,
+                          "type": "string"
+                        },
+                        "WriteSupport": {
+                          "required": true,
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  },
+                  "Locale": {
+                    "required": false,
+                    "type": "string"
+                  },
+                  "Lock": {
+                    "required": false,
+                    "type": "boolean"
+                  },
+                  "CacheSupport": {
+                    "required": false,
+                    "type": "boolean"
+                  },
+                  "NAS": {
+                    "required": false,
+                    "type": "structure",
+                    "members": {
+                      "AccessGroup": {
+                        "required": false,
+                        "type": "list"
+                      },
+                      "FileSystem": {
+                        "required": false,
+                        "type": "list"
+                      }
+                    }
+                  },
+                  "OSS": {
+                    "required": false,
+                    "type": "structure",
+                    "members": {
+                      "AccessKeyId": {
+                        "required": false,
+                        "type": "string"
+                      },
+                      "AccessKeySecret": {
+                        "required": false,
+                        "type": "string"
+                      },
+                      "AccessSecurityToken": {
+                        "required": false,
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "Networks": {
+                    "required": false,
+                    "type": "structure",
+                    "members": {
+                      "Classic": {
+                        "required": false,
+                        "type": "structure",
+                        "members": {
+                          "AllowIpAddress": {
+                            "required": false,
+                            "type": "list"
+                          },
+                          "AllowIpAddressEgress": {
+                            "required": false,
+                            "type": "list"
+                          },
+                          "AllowSecurityGroup": {
+                            "required": false,
+                            "type": "list"
+                          },
+                          "AllowSecurityGroupEgress": {
+                            "required": false,
+                            "type": "list"
+                          }
+                        }
+                      },
+                      "VPC": {
+                        "required": false,
+                        "type": "structure",
+                        "members": {
+                          "CidrBlock": {
+                            "required": false,
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
               "Disks": {
                 "required": false,
                 "type": "structure",
@@ -714,6 +824,10 @@
             "required": true,
             "type": "boolean"
           },
+          "AutoRelease": {
+            "required": false,
+            "type": "boolean"
+          },
           "Notification": {
             "required": false,
             "type": "structure",
@@ -768,10 +882,124 @@
                       "required": false,
                       "type": "string"
                     },
+                    "Mounts": {
+                      "required": false,
+                      "type": "structure",
+                      "members": {
+                        "Entries": {
+                          "required": false,
+                          "type": "list",
+                          "members": {
+                            "required": false,
+                            "type":"structure",
+                            "members": {
+                              "Destination": {
+                                "required": true,
+                                "type": "string"
+                              },
+                              "Source": {
+                                "required": true,
+                                "type": "string"
+                              },
+                              "WriteSupport": {
+                                "required": true,
+                                "type": "boolean"
+                              }
+                            }
+                          }
+                        },
+                        "Locale": {
+                          "required": false,
+                          "type": "string"
+                        },
+                        "Lock": {
+                          "required": false,
+                          "type": "boolean"
+                        },
+                        "CacheSupport": {
+                          "required": false,
+                          "type": "boolean"
+                        },
+                        "NAS": {
+                          "required": false,
+                          "type": "structure",
+                          "members": {
+                            "AccessGroup": {
+                              "required": false,
+                              "type": "list"
+                            },
+                            "FileSystem": {
+                              "required": false,
+                              "type": "list"
+                            }
+                          }
+                        },
+                        "OSS": {
+                          "required": false,
+                          "type": "structure",
+                          "members": {
+                            "AccessKeyId": {
+                              "required": false,
+                              "type": "string"
+                            },
+                            "AccessKeySecret": {
+                              "required": false,
+                              "type": "string"
+                            },
+                            "AccessSecurityToken": {
+                              "required": false,
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "Networks": {
+                          "required": false,
+                          "type": "structure",
+                          "members": {
+                            "Classic": {
+                              "required": false,
+                              "type": "structure",
+                              "members": {
+                                "AllowIpAddress": {
+                                  "required": false,
+                                  "type": "list"
+                                },
+                                "AllowIpAddressEgress": {
+                                  "required": false,
+                                  "type": "list"
+                                },
+                                "AllowSecurityGroup": {
+                                  "required": false,
+                                  "type": "list"
+                                },
+                                "AllowSecurityGroupEgress": {
+                                  "required": false,
+                                  "type": "list"
+                                }
+                              }
+                            },
+                            "VPC": {
+                              "required": false,
+                              "type": "structure",
+                              "members": {
+                                "CidrBlock": {
+                                  "required": false,
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "AutoCluster": {
                       "required": false,
                       "type": "structure",
                       "members": {
+                        "ReserveOnFail": {
+                          "required": false,
+                          "type": "boolean"
+                        },
                         "ImageId": {
                           "required": false,
                           "type": "string"
@@ -799,6 +1027,116 @@
                           "required": false,
                           "type": "structure",
                           "members": {
+                            "Mounts": {
+                              "required": false,
+                              "type": "structure",
+                              "members": {
+                                "Entries": {
+                                  "required": false,
+                                  "type": "list",
+                                  "members": {
+                                    "required": false,
+                                    "type":"structure",
+                                    "members": {
+                                      "Destination": {
+                                        "required": true,
+                                        "type": "string"
+                                      },
+                                      "Source": {
+                                        "required": true,
+                                        "type": "string"
+                                      },
+                                      "WriteSupport": {
+                                        "required": true,
+                                        "type": "boolean"
+                                      }
+                                    }
+                                  }
+                                },
+                                "Locale": {
+                                  "required": false,
+                                  "type": "string"
+                                },
+                                "Lock": {
+                                  "required": false,
+                                  "type": "boolean"
+                                },
+                                "CacheSupport": {
+                                  "required": false,
+                                  "type": "boolean"
+                                },
+                                "NAS": {
+                                  "required": false,
+                                  "type": "structure",
+                                  "members": {
+                                    "AccessGroup": {
+                                      "required": false,
+                                      "type": "list"
+                                    },
+                                    "FileSystem": {
+                                      "required": false,
+                                      "type": "list"
+                                    }
+                                  }
+                                },
+                                "OSS": {
+                                  "required": false,
+                                  "type": "structure",
+                                  "members": {
+                                    "AccessKeyId": {
+                                      "required": false,
+                                      "type": "string"
+                                    },
+                                    "AccessKeySecret": {
+                                      "required": false,
+                                      "type": "string"
+                                    },
+                                    "AccessSecurityToken": {
+                                      "required": false,
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "Networks": {
+                                  "required": false,
+                                  "type": "structure",
+                                  "members": {
+                                    "Classic": {
+                                      "required": false,
+                                      "type": "structure",
+                                      "members": {
+                                        "AllowIpAddress": {
+                                          "required": false,
+                                          "type": "list"
+                                        },
+                                        "AllowIpAddressEgress": {
+                                          "required": false,
+                                          "type": "list"
+                                        },
+                                        "AllowSecurityGroup": {
+                                          "required": false,
+                                          "type": "list"
+                                        },
+                                        "AllowSecurityGroupEgress": {
+                                          "required": false,
+                                          "type": "list"
+                                        }
+                                      }
+                                    },
+                                    "VPC": {
+                                      "required": false,
+                                      "type": "structure",
+                                      "members": {
+                                        "CidrBlock": {
+                                          "required": false,
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
                             "Disks": {
                               "required": false,
                               "type": "structure",
