@@ -1403,8 +1403,7 @@
             "location": "header",
             "name": "Last-Modified"
           }
-        },
-        "payload": "Body"
+        }
       }
     },
     "getObjectTorrent": {
