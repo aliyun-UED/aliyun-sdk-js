@@ -1323,6 +1323,90 @@
         }
       }
     },
+    "getObjectMeta": {
+      "name": "GetObjectMeta",
+      "http": {
+        "method": "GET",
+        "uri": "/{Bucket}/{Key}?objectMeta&versionId={VersionId}&response-content-type={ResponseContentType}&response-content-language={ResponseContentLanguage}&response-expires={ResponseExpires}&response-cache-control={ResponseCacheControl}&response-content-disposition={ResponseContentDisposition}&response-content-encoding={ResponseContentEncoding}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          },
+          "IfMatch": {
+            "location": "header",
+            "name": "If-Match"
+          },
+          "IfModifiedSince": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "If-Modified-Since"
+          },
+          "IfNoneMatch": {
+            "location": "header",
+            "name": "If-None-Match"
+          },
+          "IfUnmodifiedSince": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "If-Unmodified-Since"
+          },
+          "Key": {
+            "required": true,
+            "location": "uri"
+          },
+          "Range": {
+            "location": "header",
+            "name": "Range"
+          },
+          "ResponseCacheControl": {
+            "location": "uri"
+          },
+          "ResponseContentDisposition": {
+            "location": "uri"
+          },
+          "ResponseContentEncoding": {
+            "location": "uri"
+          },
+          "ResponseContentLanguage": {
+            "location": "uri"
+          },
+          "ResponseContentType": {
+            "location": "uri"
+          },
+          "ResponseExpires": {
+            "type": "timestamp",
+            "location": "uri"
+          },
+          "VersionId": {
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Size": {
+            "type": "integer",
+            "location": "header",
+            "name": "Content-Length"
+          },
+          "ETag": {
+            "location": "header",
+            "name": "ETag"
+          },
+          "LastModified": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "Last-Modified"
+          }
+        },
+        "payload": "Body"
+      }
+    },
     "getObjectTorrent": {
       "name": "GetObjectTorrent",
       "http": {
