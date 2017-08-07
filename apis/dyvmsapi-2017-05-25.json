@@ -1,0 +1,148 @@
+{
+  "format": "pop",
+  "apiVersion": "2017-05-25",
+  "checksumFormat": "md5",
+  "endpointPrefix": "dyvmsapi",
+  "serviceAbbreviation": "DYVMSAPI",
+  "serviceFullName": "Aliyun DYVMSAPI",
+  "signatureVersion": "pop",
+  "timestampFormat": "top",
+  "xmlnamespace": "",
+  "operations": {
+    "singleCallByTts": {
+      "name": "SingleCallByTts",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SingleCallByTts"
+          },
+          "CalledNumber": {
+            "required": true,
+            "type": "string"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "TtsParam": {
+            "type": "string"
+          },
+          "TtsCode": {
+            "required": true,
+            "type": "string"
+          },
+          "CalledShowNumber": {
+            "required": true,
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "OutId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "singleCallByVoice": {
+      "name": "SingleCallByVoice",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "SingleCallByVoice"
+          },
+          "CalledNumber": {
+            "required": true,
+            "type": "string"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "VoiceCode": {
+            "required": true,
+            "type": "string"
+          },
+          "CalledShowNumber": {
+            "required": true,
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "OutId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ivrCall": {
+      "name": "IvrCall",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "IvrCall"
+          },
+          "StartCode": {
+            "required": true,
+            "type": "string"
+          },
+          "StartTtsParams": {
+            "type": "string"
+          },
+          "PlayTimes": {
+            "type": "integer"
+          },
+          "OwnerId": {
+            "type": "integer"
+          },
+          "OutId": {
+            "type": "string"
+          },
+          "CalledNumber": {
+            "required": true,
+            "type": "string"
+          },
+          "MenuKeyMap": {
+            "type": "repeatlist"
+          },
+          "ResourceOwnerAccount": {
+            "type": "string"
+          },
+          "CalledShowNumber": {
+            "required": true,
+            "type": "string"
+          },
+          "ResourceOwnerId": {
+            "type": "integer"
+          },
+          "ByeCode": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
