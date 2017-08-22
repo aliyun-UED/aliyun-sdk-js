@@ -59,7 +59,7 @@
     "describeDomainRecords": {
       "name": "DescribeDomainRecords",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri":"/"
       },
       "input": {
@@ -94,7 +94,7 @@
     "addDomainRecord": {
       "name": "AddDomainRecord",
       "http": {
-        "method": "GET",
+        "method": "POST",
         "uri":"/"
       },
       "input": {
@@ -127,6 +127,46 @@
             "type": "integer"
           },
           "Line": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainRecordInfo": {
+      "name": "DescribeDomainRecordInfo",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainRecordInfo"
+          },
+          "RecordId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteDomainRecord": {
+      "name": "DeleteDomainRecord",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteDomainRecord"
+          },
+          "RecordId": {
+            "required": true,
             "type": "string"
           }
         }
