@@ -682,6 +682,7 @@ ALY.RDS = ALY.Service.defineService('rds', ['2014-08-15']);
 ALY.SLB = ALY.Service.defineService('slb', ['2014-05-15']);
 ALY.CDN = ALY.Service.defineService('cdn', ['2014-11-11']);
 ALY.STS = ALY.Service.defineService('sts', ['2015-04-01']);
+ALY.ESS = ALY.Service.defineService('ess', ['2014-08-28']);
 
 },{"./lib/core":5,"./lib/http/xhr":8,"./lib/services/batchcompute":21,"./lib/services/opensearch":22,"./lib/services/oss":23}],4:[function(require,module,exports){
 var ALY = require('./core');
@@ -743,6 +744,7 @@ ALY.Config = ALY.util.inherit({
     apiVersions: {},
     apiVersion: null,
     endpoint: undefined,
+    endpointFixed: undefined, // 目前仅对 ots 有效
     httpOptions: {},
     maxRetries: undefined,
     maxRedirects: 10,
@@ -788,7 +790,7 @@ require('./param_validator');
 
 ALY.events = new ALY.SequentialExecutor();
 
-},{"./config":4,"./event_listeners":6,"./http":7,"./param_validator":10,"./request":11,"./sequential_executor":12,"./service":13,"./signers/request_signer":30,"./util":33}],6:[function(require,module,exports){
+},{"./config":4,"./event_listeners":6,"./http":7,"./param_validator":10,"./request":11,"./sequential_executor":12,"./service":13,"./signers/request_signer":31,"./util":34}],6:[function(require,module,exports){
 var ALY = require('./core');
 require('./sequential_executor');
 require('./service_interface/json');
@@ -1039,7 +1041,7 @@ ALY.EventListeners = {
   })
 };
 
-},{"./core":5,"./sequential_executor":12,"./service_interface/json":14,"./service_interface/pop":15,"./service_interface/query":16,"./service_interface/rest":17,"./service_interface/rest_json":18,"./service_interface/rest_xml":19,"./service_interface/top":20,"util":110}],7:[function(require,module,exports){
+},{"./core":5,"./sequential_executor":12,"./service_interface/json":14,"./service_interface/pop":15,"./service_interface/query":16,"./service_interface/rest":17,"./service_interface/rest_json":18,"./service_interface/rest_xml":19,"./service_interface/top":20,"util":111}],7:[function(require,module,exports){
 (function (process){
 var ALY = require('./core');
 var inherit = ALY.util.inherit;
@@ -1133,7 +1135,7 @@ ALY.HttpClient.getInstance = function getInstance() {
 };
 
 }).call(this,require('_process'))
-},{"./core":5,"_process":88}],8:[function(require,module,exports){
+},{"./core":5,"_process":89}],8:[function(require,module,exports){
 var ALY = require('../core');
 var EventEmitter = require('events').EventEmitter;
 require('../http');
@@ -1248,7 +1250,7 @@ ALY.HttpClient.prototype = ALY.XHRClient.prototype;
  */
 ALY.HttpClient.streamsApiVersion = 1;
 
-},{"../core":5,"../http":7,"events":85}],9:[function(require,module,exports){
+},{"../core":5,"../http":7,"events":86}],9:[function(require,module,exports){
 var ALY = require('../core');
 var inherit = ALY.util.inherit;
 
@@ -1514,7 +1516,7 @@ ALY.ParamValidator = ALY.util.inherit({
   }
 });
 
-},{"./core":5,"stream":106}],11:[function(require,module,exports){
+},{"./core":5,"stream":107}],11:[function(require,module,exports){
 (function (process){
 var ALY = require('./core');
 var inherit = ALY.util.inherit;
@@ -2017,7 +2019,7 @@ ALY.Response = inherit({
 });
 
 }).call(this,require('_process'))
-},{"./core":5,"_process":88,"stream":106}],12:[function(require,module,exports){
+},{"./core":5,"_process":89,"stream":107}],12:[function(require,module,exports){
 (function (process){
 var ALY = require('./core');
 var domain = ALY.util.nodeRequire('domain');
@@ -2274,7 +2276,7 @@ ALY.SequentialExecutor.prototype.addListener = ALY.SequentialExecutor.prototype.
 ALY.SequentialExecutor.prototype.addAsyncListener = ALY.SequentialExecutor.prototype.onAsync;
 
 }).call(this,require('_process'))
-},{"./core":5,"_process":88}],13:[function(require,module,exports){
+},{"./core":5,"_process":89}],13:[function(require,module,exports){
 (function (__dirname){
 var ALY = require('./core');
 var inherit = ALY.util.inherit;
@@ -2655,7 +2657,7 @@ ALY.util.update(ALY.Service, {
 });
 
 }).call(this,"/lib")
-},{"./core":5,"fs":79}],14:[function(require,module,exports){
+},{"./core":5,"fs":80}],14:[function(require,module,exports){
 var ALY = require('../core');
 require('../json/builder');
 
@@ -2674,8 +2676,6 @@ ALY.ServiceInterface.Json = {
 
     httpRequest.path = '/';
     httpRequest.body = builder.build(req.params || {});
-    httpRequest.headers['Content-Type'] = 'application/x-amz-json-' + version;
-    httpRequest.headers['X-Amz-Target'] = target;
   },
 
   extractError: function extractError(resp) {
@@ -2684,8 +2684,8 @@ ALY.ServiceInterface.Json = {
 
     if (httpResponse.body.length > 0) {
       var e = JSON.parse(httpResponse.body.toString());
-      if (e.__type || e.code) {
-        error.code = (e.__type || e.code).split('#').pop();
+      if (e.__type || e.code || e.Code) {
+        error.code = (e.__type || e.code || e.Code).split('#').pop();
       } else {
         error.code = 'UnknownError';
       }
@@ -2713,6 +2713,14 @@ var ALY = require('../core');
 require('./rest');
 require('./json');
 
+function randomNumbers(count) {
+  var num = '';
+  for (var i = 0; i < count; i++) {
+    num += Math.floor(Math.random() * 10);
+  }
+  return num;
+}
+
 /**
  * @api private
  */
@@ -2734,14 +2742,15 @@ ALY.ServiceInterface.Pop = {
     req.httpRequest.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
     var body = req.params;
+    var date = ALY.util.date.getDate();
 
     body.Format = "JSON";
     body.Version = req.service.api.apiVersion;
     body.AccessKeyId = req.service.config.accessKeyId;
     body.SignatureVersion = "1.0";
     body.SignatureMethod = "HMAC-SHA1";
-    body.SignatureNonce = Math.round(Math.random() * 1000000);
-    body.Timestamp = ALY.util.date.iso8601(ALY.util.date.getDate());
+    body.SignatureNonce = String(date.getTime()) + randomNumbers(4);
+    body.Timestamp = ALY.util.date.iso8601(date);
 
     // sign
     var headers = [];
@@ -2751,7 +2760,7 @@ ALY.ServiceInterface.Pop = {
     });
 
     headers.sort(function (a, b) {
-      return a.toLowerCase() < b.toLowerCase() ? -1 : 1;
+      return a < b ? -1 : 1;
     });
 
     var canonicalizedQueryString = "";
@@ -2974,7 +2983,7 @@ ALY.ServiceInterface.Rest = {
       ALY.ServiceInterface.Rest.escapeQuerystringParam;
 
     ALY.util.each.call(this, rules, function (name, rule) {
-      if (rule.location == 'uri' && req.params[name]) {
+      if (rule.location == 'uri' && req.params[name] != null) {
         // if the value is being inserted into the path portion of the
         // URI, then we need to use a different (potentially) escaping
         // pattern, this is especially true for S3 path params like Key.
@@ -3218,7 +3227,7 @@ ALY.ServiceInterface.RestXml = {
   }
 };
 
-},{"../core":5,"../xml/builder":34,"../xml/parser":35,"./rest":17}],20:[function(require,module,exports){
+},{"../core":5,"../xml/builder":35,"../xml/parser":36,"./rest":17}],20:[function(require,module,exports){
 var ALY = require('../core');
 require('./rest');
 require('./json');
@@ -3356,17 +3365,18 @@ ALY.BatchCompute = ALY.Service.defineService('batchcompute', ['2015-06-30','2015
         delete result['RequestId'];
 
 
-        var reqId = resp.httpResponse.headers['request-id'];
+        var headers = resp.httpResponse.headers;
+        var reqId = headers['x-acs-request-id'] || headers['request-id'];
 
 
         resp.data = {
             code: resp.httpResponse.statusCode,
-            message: resp.httpResponse.headers.status,
-            headers: resp.httpResponse.headers,
+            message: headers.status,
+            headers: headers,
             requestId: reqId || ''
         };
 
-        if(resp.request.httpRequest.headers['x-acs-version']=='2015-06-30') {
+        if(headers['x-acs-version']==='2015-06-30') {
 
             switch (operation) {
                 case 'listJobs':
@@ -3541,14 +3551,14 @@ ALY.BatchCompute = ALY.Service.defineService('batchcompute', ['2015-06-30','2015
         resp.error = ALY.util.error(new Error(error.Message), {
             code: error.Code || error.ErrorCode,
             headers: headers,
-            requestId: headers['request-id']
+            requestId: headers['x-acs-request-id'] || headers['request-id']
         });
     }
 });
 
 module.exports = ALY.BatchCompute;
 
-},{"../core":5,"url":108}],22:[function(require,module,exports){
+},{"../core":5,"url":109}],22:[function(require,module,exports){
 var ALY = require('../core');
 var parseURL = require('url').parse;
 
@@ -3752,7 +3762,7 @@ ALY.OpenSearch = ALY.Service.defineService('opensearch', ['2015-01-01'], {
 
 module.exports = ALY.OpenSearch;
 
-},{"../core":5,"url":108}],23:[function(require,module,exports){
+},{"../core":5,"url":109}],23:[function(require,module,exports){
 var ALY = require('../core');
 
 ALY.OSS = ALY.Service.defineService('oss', ['2013-10-15'], {
@@ -3870,6 +3880,19 @@ ALY.OSS = ALY.Service.defineService('oss', ['2013-10-15'], {
       if (match) {
         delete resp.data['_'];
         resp.data.LocationConstraint = match[1];
+      }
+    }
+
+    for(var k in resp.httpResponse.headers){
+      if(k.indexOf('x-oss-')==0){
+        var arr = k.substring('x-oss-'.length).split('-');
+        for(var i=0;i<arr.length;i++){
+          arr[i] = arr[i][0].toUpperCase()+arr[i].substring(1);
+        }
+        resp.data[arr.join('')] = resp.httpResponse.headers[k];
+      }
+      else if(k=='content-md5'){
+        resp.data['ContentMD5'] = resp.httpResponse.headers['content-md5'];
       }
     }
 
@@ -4039,8 +4062,8 @@ ALY.Signers.BatchCompute = inherit(ALY.Signers.RequestSigner, {
     var r = this.request;
 
     //fix signature not match in browser
-    if(r.method!='GET' && r.method!='HEAD'){
-       r.headers['Content-Type'] = r.headers['Content-Type'] || 'text/plain;charset=UTF-8';
+    if (r.method !== 'GET' && r.method !== 'HEAD') {
+      r.headers['Content-Type'] = r.headers['Content-Type'] || 'text/plain;charset=UTF-8';
     }
 
     var parts = [];
@@ -4048,7 +4071,7 @@ ALY.Signers.BatchCompute = inherit(ALY.Signers.RequestSigner, {
     parts.push(r.headers['Accept'] || '');
     parts.push(r.headers['Content-MD5'] || '');
     parts.push(r.headers['Content-Type'] || '');
-    parts.push(r.headers['x-acs-date'] || r.headers['Date'] ||'');
+    parts.push(r.headers['x-acs-date'] || r.headers['Date'] || '');
 
     var headers = this.canonicalizedAmzHeaders();
     if (headers) parts.push(headers);
@@ -4098,7 +4121,7 @@ ALY.Signers.BatchCompute = inherit(ALY.Signers.RequestSigner, {
       // collect a list of sub resources and query params that need to be signed
       var resources = [];
 
-      var arr = querystring.replace(/(^&*)|(&*$)/g,'').split('&');
+      var arr = querystring.replace(/(^&*)|(&*$)/g, '').split('&');
 
 
       ALY.util.arrayEach.call(this, arr, function (param) {
@@ -4106,10 +4129,10 @@ ALY.Signers.BatchCompute = inherit(ALY.Signers.RequestSigner, {
 
         var name = kv[0];
 
-        var value = (kv.length>1)? decodeURIComponent(kv[1]):'';
+        var value = (kv.length > 1) ? decodeURIComponent(kv[1]) : '';
         /*jshint undef:false */
 
-        var resource = { name: name };
+        var resource = {name: name};
         if (value !== undefined) {
           resource.value = value;
         }
@@ -4117,7 +4140,9 @@ ALY.Signers.BatchCompute = inherit(ALY.Signers.RequestSigner, {
 
       });
 
-      resources.sort(function (a, b) { return a.name < b.name ? -1 : 1; });
+      resources.sort(function (a, b) {
+        return a.name < b.name ? -1 : 1;
+      });
 
       if (resources.length) {
 
@@ -4127,9 +4152,9 @@ ALY.Signers.BatchCompute = inherit(ALY.Signers.RequestSigner, {
             querystring.push(resource.name);
           else {
 
-            if(resource.value!=null && resource.value!=''){
+            if (resource.value != null && resource.value != '') {
               querystring.push(resource.name + '=' + resource.value);
-            }else{
+            } else {
               querystring.push(resource.name);
             }
           }
@@ -4145,7 +4170,7 @@ ALY.Signers.BatchCompute = inherit(ALY.Signers.RequestSigner, {
   },
 
   sign: function sign(secret, string) {
-    if(process.env.DEBUG == 'aliyun') {
+    if (process.env.DEBUG == 'aliyun') {
       console.log('----------- sign string start -----------');
       console.log(string);
       console.log('----------- sign string end -----------');
@@ -4157,7 +4182,7 @@ ALY.Signers.BatchCompute = inherit(ALY.Signers.RequestSigner, {
 module.exports = ALY.Signers.BatchCompute;
 
 }).call(this,require('_process'))
-},{"../core":5,"_process":88}],25:[function(require,module,exports){
+},{"../core":5,"_process":89}],25:[function(require,module,exports){
 (function (process){
 var ALY = require('../core');
 var inherit = ALY.util.inherit;
@@ -4285,7 +4310,7 @@ ALY.Signers.CMS = inherit(ALY.Signers.RequestSigner, {
 
 module.exports = ALY.Signers.CMS;
 }).call(this,require('_process'))
-},{"../core":5,"_process":88}],26:[function(require,module,exports){
+},{"../core":5,"_process":89}],26:[function(require,module,exports){
 (function (process){
 var ALY = require('../core');
 var inherit = ALY.util.inherit;
@@ -4402,7 +4427,7 @@ ALY.Signers.OpenSearch = inherit(ALY.Signers.RequestSigner, {
 
 module.exports = ALY.Signers.OpenSearch;
 }).call(this,require('_process'))
-},{"../core":5,"_process":88}],27:[function(require,module,exports){
+},{"../core":5,"_process":89}],27:[function(require,module,exports){
 (function (process){
 var ALY = require('../core');
 var inherit = ALY.util.inherit;
@@ -4413,25 +4438,46 @@ var inherit = ALY.util.inherit;
 ALY.Signers.OSS = inherit(ALY.Signers.RequestSigner, {
 
   subResources: {
-    'acl': 1,
-    'cors': 1,
-    'lifecycle': 1,
-    'delete': 1,
-    'location': 1,
-    'logging': 1,
-    'notification': 1,
-    'partNumber': 1,
-    'policy': 1,
-    'requestPayment': 1,
+    "acl": 1,
+    "uploads": 1,
+    "location": 1,
+    "cors": 1,
+    "logging": 1,
+    "website": 1,
+    "referer": 1,
+    "lifecycle": 1,
+    "delete": 1,
+    "append": 1,
+    "tagging": 1,
+    "objectMeta": 1,
+    "uploadId": 1,
+    "partNumber": 1,
+    "security-token": 1,
+    "position": 1,
+    "img": 1,
+    "style": 1,
+    "styleName": 1,
+    "replication": 1,
+    "replicationProgress": 1,
+    "replicationLocation": 1,
     'restore': 1,
-    'tagging': 1,
-    'torrent': 1,
-    'uploadId': 1,
-    'uploads': 1,
-    'versionId': 1,
-    'versioning': 1,
-    'versions': 1,
-    'website': 1
+    "cname": 1,
+    "bucketInfo": 1,
+    "comp": 1,
+    "qos": 1,
+    "live": 1,
+    "status": 1,
+    "vod": 1,
+    "startTime": 1,
+    "endTime": 1,
+    "symlink": 1,
+    "x-oss-process": 1,
+    "response-content-type": 1,
+    "response-content-language": 1,
+    "response-expires": 1,
+    "response-cache-control": 1,
+    "response-content-disposition": 1,
+    "response-content-encoding": 1
   },
 
   // when building the stringToSign, these querystring params should be
@@ -4448,7 +4494,7 @@ ALY.Signers.OSS = inherit(ALY.Signers.RequestSigner, {
   addAuthorization: function addAuthorization(credentials, date) {
     if (!this.request.headers['presigned-expires']) {
       // 在浏览器中不能设置 date header
-      if(ALY.util.isBrowser()) {
+      if (ALY.util.isBrowser()) {
         this.request.headers['x-oss-date'] = ALY.util.date.rfc822(date);
       }
       else {
@@ -4533,7 +4579,7 @@ ALY.Signers.OSS = inherit(ALY.Signers.RequestSigner, {
         var name = param.split('=')[0];
         var value = param.split('=')[1];
         if (this.subResources[name] || this.responseHeaders[name]) {
-          var subresource = { name: name };
+          var subresource = {name: name};
           if (value !== undefined) {
             if (this.subResources[name]) {
               subresource.value = value;
@@ -4545,7 +4591,9 @@ ALY.Signers.OSS = inherit(ALY.Signers.RequestSigner, {
         }
       });
 
-      resources.sort(function (a, b) { return a.name < b.name ? -1 : 1; });
+      resources.sort(function (a, b) {
+        return a.name < b.name ? -1 : 1;
+      });
 
       if (resources.length) {
 
@@ -4563,11 +4611,10 @@ ALY.Signers.OSS = inherit(ALY.Signers.RequestSigner, {
     }
 
     return resource;
-
   },
 
   sign: function sign(secret, string) {
-    if(process.env.DEBUG == 'aliyun') {
+    if (process.env.DEBUG == 'aliyun') {
       console.log('----------- sign string start -----------');
       console.log(string);
       console.log('----------- sign string end -----------');
@@ -4579,7 +4626,7 @@ ALY.Signers.OSS = inherit(ALY.Signers.RequestSigner, {
 module.exports = ALY.Signers.OSS;
 
 }).call(this,require('_process'))
-},{"../core":5,"_process":88}],28:[function(require,module,exports){
+},{"../core":5,"_process":89}],28:[function(require,module,exports){
 (function (process){
 var ALY = require('../core');
 var inherit = ALY.util.inherit;
@@ -4740,7 +4787,7 @@ ALY.Signers.OTS = inherit(ALY.Signers.RequestSigner, {
 module.exports = ALY.Signers.OSS;
 
 }).call(this,require('_process'))
-},{"../core":5,"_process":88}],29:[function(require,module,exports){
+},{"../core":5,"_process":89}],29:[function(require,module,exports){
 var ALY = require('../core');
 var inherit = ALY.util.inherit;
 
@@ -4754,6 +4801,153 @@ ALY.Signers.POP = inherit(ALY.Signers.RequestSigner, {
 module.exports = ALY.Signers.POP;
 
 },{"../core":5}],30:[function(require,module,exports){
+(function (process){
+var ALY = require('../core');
+var inherit = ALY.util.inherit;
+
+/**
+ * @api private
+ */
+ALY.Signers.PopJson = inherit(ALY.Signers.RequestSigner, {
+
+  //entry
+  addAuthorization: function addAuthorization(credentials, date) {
+    var headers = this.request.headers;
+
+    headers['x-acs-date'] = ALY.util.date.rfc822(date);
+
+    headers['x-acs-signature-method'] = 'HMAC-SHA1';
+    headers['x-acs-signature-version'] = '1.0';
+    //headers['x-acs-version'] = API_VERSION;
+    headers['x-sdk-client'] = 'node.js/1.0.0';
+    headers['Accept'] = 'application/json';
+
+    var signature = this.sign(credentials.secretAccessKey, this.stringToSign());
+
+    headers['Authorization'] = 'acs ' + credentials.accessKeyId + ':' + signature;
+  },
+
+  stringToSign: function stringToSign() {
+    var r = this.request;
+
+    //fix signature not match in browser
+    if (r.method !== 'GET' && r.method !== 'HEAD') {
+      r.headers['Content-Type'] = 'application/json;charset=utf-8';
+    }
+
+    var parts = [];
+    parts.push(r.method);
+    parts.push(r.headers['Accept'] || '');
+    parts.push(r.headers['Content-MD5'] || '');
+    parts.push(r.headers['Content-Type'] || '');
+    parts.push(r.headers['x-acs-date'] || r.headers['Date'] || '');
+
+    var headers = this.canonicalizedAcsHeaders();
+    if (headers) parts.push(headers);
+    parts.push(this.canonicalizedResource());
+
+    return parts.join('\n');
+  },
+
+  canonicalizedAcsHeaders: function canonicalizedAcsHeaders() {
+
+    var acsHeaders = [];
+
+    ALY.util.each(this.request.headers, function (name) {
+      if (name.match(/^x-acs-/i))
+        acsHeaders.push(name);
+    });
+
+    acsHeaders.sort(function (a, b) {
+      return a.toLowerCase() < b.toLowerCase() ? -1 : 1;
+    });
+
+    var parts = [];
+    ALY.util.arrayEach.call(this, acsHeaders, function (name) {
+      parts.push(name.toLowerCase() + ':' + String(this.request.headers[name]));
+    });
+
+    return parts.join('\n');
+
+  },
+
+  canonicalizedResource: function canonicalizedResource() {
+
+    var r = this.request;
+
+    var parts = r.path.split('?');
+    var path = parts[0];
+    var querystring = parts[1];
+
+    var resource = '';
+
+    resource += decodeURIComponent(path);
+
+    if (querystring) {
+
+      // collect a list of sub resources and query params that need to be signed
+      var resources = [];
+
+      var arr = querystring.replace(/(^&*)|(&*$)/g, '').split('&');
+
+      ALY.util.arrayEach.call(this, arr, function (param) {
+        var kv = param.split('=');
+
+        var name = kv[0];
+
+        var value = (kv.length > 1) ? decodeURIComponent(kv[1]) : '';
+        /*jshint undef:false */
+
+        var resource = {name: name};
+        if (value !== undefined) {
+          resource.value = value;
+        }
+        resources.push(resource);
+
+      });
+
+      resources.sort(function (a, b) {
+        return a.name < b.name ? -1 : 1;
+      });
+
+      if (resources.length) {
+
+        querystring = [];
+        ALY.util.arrayEach(resources, function (resource) {
+          if (resource.value === undefined)
+            querystring.push(resource.name);
+          else {
+
+            if (resource.value !== null && resource.value !== '') {
+              querystring.push(resource.name + '=' + resource.value);
+            } else {
+              querystring.push(resource.name);
+            }
+          }
+        });
+
+        resource += '?' + querystring.join('&');
+      }
+
+    }
+
+    return resource;
+
+  },
+
+  sign: function sign(secret, string) {
+    if (process.env.DEBUG === 'aliyun') {
+      console.log('----------- sign string start -----------');
+      console.log(string);
+      console.log('----------- sign string end -----------');
+    }
+    return ALY.util.crypto.hmac(secret, string, 'base64', 'sha1');
+  }
+});
+
+module.exports = ALY.Signers.PopJson;
+}).call(this,require('_process'))
+},{"../core":5,"_process":89}],31:[function(require,module,exports){
 var ALY = require('../core');
 var inherit = ALY.util.inherit;
 
@@ -4773,6 +4967,7 @@ ALY.Signers.RequestSigner.getVersion = function getVersion(version) {
     case 'sls': return ALY.Signers.SLS;
     case 'top': return ALY.Signers.TOP;
     case 'pop': return ALY.Signers.POP;
+    case 'pop-json': return ALY.Signers.PopJson;
     case 'opensearch': return ALY.Signers.OpenSearch;
     case 'batchcompute': return ALY.Signers.BatchCompute;
     case 'cms': return ALY.Signers.CMS;
@@ -4786,9 +4981,10 @@ require('./sls');
 require('./opensearch');
 require('./top');
 require('./pop');
+require('./pop_json');
 require('./batchcompute');
 require('./cms');
-},{"../core":5,"./batchcompute":24,"./cms":25,"./opensearch":26,"./oss":27,"./ots":28,"./pop":29,"./sls":31,"./top":32}],31:[function(require,module,exports){
+},{"../core":5,"./batchcompute":24,"./cms":25,"./opensearch":26,"./oss":27,"./ots":28,"./pop":29,"./pop_json":30,"./sls":32,"./top":33}],32:[function(require,module,exports){
 (function (process){
 var ALY = require('../core');
 var inherit = ALY.util.inherit;
@@ -4811,6 +5007,8 @@ ALY.Signers.SLS = inherit(ALY.Signers.RequestSigner, {
 
   addAuthorization: function addAuthorization(credentials, date) {
     this.request.headers['Date'] = ALY.util.date.rfc822(date);
+    if(credentials.securityToken)
+        this.request.headers['x-acs-security-token'] = credentials.securityToken;
 
     var signature = this.sign(credentials.secretAccessKey, this.stringToSign());
     var auth = 'LOG ' + credentials.accessKeyId + ':' + signature;
@@ -4847,7 +5045,7 @@ ALY.Signers.SLS = inherit(ALY.Signers.RequestSigner, {
     var amzHeaders = [];
 
     ALY.util.each(this.request.headers, function (name) {
-      if (name.match(/^x-log-/i))
+      if (name.match(/^x-log-/i) || name=='x-acs-security-token')
         amzHeaders.push(name);
     });
 
@@ -4936,7 +5134,7 @@ ALY.Signers.SLS = inherit(ALY.Signers.RequestSigner, {
 module.exports = ALY.Signers.SLS;
 
 }).call(this,require('_process'))
-},{"../core":5,"_process":88}],32:[function(require,module,exports){
+},{"../core":5,"_process":89}],33:[function(require,module,exports){
 var ALY = require('../core');
 var inherit = ALY.util.inherit;
 
@@ -4951,7 +5149,7 @@ ALY.Signers.TOP = inherit(ALY.Signers.RequestSigner, {
 
 module.exports = ALY.Signers.TOP;
 
-},{"../core":5}],33:[function(require,module,exports){
+},{"../core":5}],34:[function(require,module,exports){
 (function (process){
 /*global escape:true */
 
@@ -5677,7 +5875,7 @@ ALY.util = {
 module.exports = ALY.util;
 
 }).call(this,require('_process'))
-},{"../bower_components/jsSHA/src/sha.js":1,"../bower_components/spark-md5/spark-md5.js":2,"./core":5,"_process":88,"buffer":81,"fs":79,"url":108}],34:[function(require,module,exports){
+},{"../bower_components/jsSHA/src/sha.js":1,"../bower_components/spark-md5/spark-md5.js":2,"./core":5,"_process":89,"buffer":82,"fs":80,"url":109}],35:[function(require,module,exports){
 var ALY = require('../core');
 var builder = require('xmlbuilder');
 var inherit = ALY.util.inherit;
@@ -5758,7 +5956,7 @@ ALY.XML.Builder = inherit({
 
 });
 
-},{"../core":5,"xmlbuilder":56}],35:[function(require,module,exports){
+},{"../core":5,"xmlbuilder":57}],36:[function(require,module,exports){
 var ALY = require('../core');
 var inherit = ALY.util.inherit;
 var xml2js = require('xml2js');
@@ -5959,7 +6157,7 @@ ALY.XML.Parser = inherit({
 
 });
 
-},{"../core":5,"xml2js":38}],36:[function(require,module,exports){
+},{"../core":5,"xml2js":39}],37:[function(require,module,exports){
 // Generated by CoffeeScript 1.7.1
 (function() {
   var xml2js;
@@ -5976,7 +6174,7 @@ ALY.XML.Parser = inherit({
 
 }).call(this);
 
-},{"../lib/xml2js":38}],37:[function(require,module,exports){
+},{"../lib/xml2js":39}],38:[function(require,module,exports){
 // Generated by CoffeeScript 1.7.1
 (function() {
   var prefixMatch;
@@ -5997,7 +6195,7 @@ ALY.XML.Parser = inherit({
 
 }).call(this);
 
-},{}],38:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 (function (process){
 // Generated by CoffeeScript 1.7.1
 (function() {
@@ -6437,7 +6635,7 @@ ALY.XML.Parser = inherit({
 }).call(this);
 
 }).call(this,require('_process'))
-},{"./bom":36,"./processors":37,"_process":88,"events":85,"sax":39,"xmlbuilder":56}],39:[function(require,module,exports){
+},{"./bom":37,"./processors":38,"_process":89,"events":86,"sax":40,"xmlbuilder":57}],40:[function(require,module,exports){
 (function (Buffer){
 // wrapper for non-node envs
 ;(function (sax) {
@@ -7851,7 +8049,7 @@ if (!String.fromCodePoint) {
 })(typeof exports === "undefined" ? sax = {} : exports);
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":81,"stream":106,"string_decoder":107}],40:[function(require,module,exports){
+},{"buffer":82,"stream":107,"string_decoder":108}],41:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLAttribute, create;
@@ -7885,7 +8083,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"lodash-node/modern/objects/create":69}],41:[function(require,module,exports){
+},{"lodash-node/modern/objects/create":70}],42:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLBuilder, XMLDeclaration, XMLDocType, XMLElement, XMLStringifier;
@@ -7956,7 +8154,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"./XMLDeclaration":48,"./XMLDocType":49,"./XMLElement":50,"./XMLStringifier":54}],42:[function(require,module,exports){
+},{"./XMLDeclaration":49,"./XMLDocType":50,"./XMLElement":51,"./XMLStringifier":55}],43:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLCData, XMLNode, create,
@@ -8007,7 +8205,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"./XMLNode":51,"lodash-node/modern/objects/create":69}],43:[function(require,module,exports){
+},{"./XMLNode":52,"lodash-node/modern/objects/create":70}],44:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLComment, XMLNode, create,
@@ -8058,7 +8256,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"./XMLNode":51,"lodash-node/modern/objects/create":69}],44:[function(require,module,exports){
+},{"./XMLNode":52,"lodash-node/modern/objects/create":70}],45:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLDTDAttList, create;
@@ -8132,7 +8330,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"lodash-node/modern/objects/create":69}],45:[function(require,module,exports){
+},{"lodash-node/modern/objects/create":70}],46:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLDTDElement, create, isArray;
@@ -8186,7 +8384,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"lodash-node/modern/objects/create":69,"lodash-node/modern/objects/isArray":71}],46:[function(require,module,exports){
+},{"lodash-node/modern/objects/create":70,"lodash-node/modern/objects/isArray":72}],47:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLDTDEntity, create, isObject;
@@ -8276,7 +8474,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"lodash-node/modern/objects/create":69,"lodash-node/modern/objects/isObject":74}],47:[function(require,module,exports){
+},{"lodash-node/modern/objects/create":70,"lodash-node/modern/objects/isObject":75}],48:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLDTDNotation, create;
@@ -8338,7 +8536,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"lodash-node/modern/objects/create":69}],48:[function(require,module,exports){
+},{"lodash-node/modern/objects/create":70}],49:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLDeclaration, XMLNode, create, isObject,
@@ -8413,7 +8611,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"./XMLNode":51,"lodash-node/modern/objects/create":69,"lodash-node/modern/objects/isObject":74}],49:[function(require,module,exports){
+},{"./XMLNode":52,"lodash-node/modern/objects/create":70,"lodash-node/modern/objects/isObject":75}],50:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLCData, XMLComment, XMLDTDAttList, XMLDTDElement, XMLDTDEntity, XMLDTDNotation, XMLDocType, XMLProcessingInstruction, create, isObject;
@@ -8607,7 +8805,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"./XMLCData":42,"./XMLComment":43,"./XMLDTDAttList":44,"./XMLDTDElement":45,"./XMLDTDEntity":46,"./XMLDTDNotation":47,"./XMLProcessingInstruction":52,"lodash-node/modern/objects/create":69,"lodash-node/modern/objects/isObject":74}],50:[function(require,module,exports){
+},{"./XMLCData":43,"./XMLComment":44,"./XMLDTDAttList":45,"./XMLDTDElement":46,"./XMLDTDEntity":47,"./XMLDTDNotation":48,"./XMLProcessingInstruction":53,"lodash-node/modern/objects/create":70,"lodash-node/modern/objects/isObject":75}],51:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLAttribute, XMLElement, XMLNode, XMLProcessingInstruction, create, isArray, isFunction, isObject,
@@ -8816,7 +9014,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"./XMLAttribute":40,"./XMLNode":51,"./XMLProcessingInstruction":52,"lodash-node/modern/objects/create":69,"lodash-node/modern/objects/isArray":71,"lodash-node/modern/objects/isFunction":73,"lodash-node/modern/objects/isObject":74}],51:[function(require,module,exports){
+},{"./XMLAttribute":41,"./XMLNode":52,"./XMLProcessingInstruction":53,"lodash-node/modern/objects/create":70,"lodash-node/modern/objects/isArray":72,"lodash-node/modern/objects/isFunction":74,"lodash-node/modern/objects/isObject":75}],52:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLCData, XMLComment, XMLDeclaration, XMLDocType, XMLElement, XMLNode, XMLRaw, XMLText, isArray, isEmpty, isFunction, isObject,
@@ -9152,7 +9350,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"./XMLCData":42,"./XMLComment":43,"./XMLDeclaration":48,"./XMLDocType":49,"./XMLElement":50,"./XMLRaw":53,"./XMLText":55,"lodash-node/modern/objects/isArray":71,"lodash-node/modern/objects/isEmpty":72,"lodash-node/modern/objects/isFunction":73,"lodash-node/modern/objects/isObject":74}],52:[function(require,module,exports){
+},{"./XMLCData":43,"./XMLComment":44,"./XMLDeclaration":49,"./XMLDocType":50,"./XMLElement":51,"./XMLRaw":54,"./XMLText":56,"lodash-node/modern/objects/isArray":72,"lodash-node/modern/objects/isEmpty":73,"lodash-node/modern/objects/isFunction":74,"lodash-node/modern/objects/isObject":75}],53:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLProcessingInstruction, create;
@@ -9205,7 +9403,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"lodash-node/modern/objects/create":69}],53:[function(require,module,exports){
+},{"lodash-node/modern/objects/create":70}],54:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLNode, XMLRaw, create,
@@ -9256,7 +9454,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"./XMLNode":51,"lodash-node/modern/objects/create":69}],54:[function(require,module,exports){
+},{"./XMLNode":52,"lodash-node/modern/objects/create":70}],55:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLStringifier,
@@ -9425,7 +9623,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{}],55:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLNode, XMLText, create,
@@ -9477,7 +9675,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"./XMLNode":51,"lodash-node/modern/objects/create":69}],56:[function(require,module,exports){
+},{"./XMLNode":52,"lodash-node/modern/objects/create":70}],57:[function(require,module,exports){
 // Generated by CoffeeScript 1.6.3
 (function() {
   var XMLBuilder, assign;
@@ -9493,7 +9691,7 @@ if (!String.fromCodePoint) {
 
 }).call(this);
 
-},{"./XMLBuilder":41,"lodash-node/modern/objects/assign":68}],57:[function(require,module,exports){
+},{"./XMLBuilder":42,"lodash-node/modern/objects/assign":69}],58:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9535,7 +9733,7 @@ function bind(func, thisArg) {
 
 module.exports = bind;
 
-},{"../internals/createWrapper":62,"../internals/slice":67}],58:[function(require,module,exports){
+},{"../internals/createWrapper":63,"../internals/slice":68}],59:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9599,7 +9797,7 @@ function baseBind(bindData) {
 
 module.exports = baseBind;
 
-},{"../objects/isObject":74,"./baseCreate":59,"./setBindData":65,"./slice":67}],59:[function(require,module,exports){
+},{"../objects/isObject":75,"./baseCreate":60,"./setBindData":66,"./slice":68}],60:[function(require,module,exports){
 (function (global){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
@@ -9645,7 +9843,7 @@ if (!nativeCreate) {
 module.exports = baseCreate;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../objects/isObject":74,"../utilities/noop":78,"./isNative":63}],60:[function(require,module,exports){
+},{"../objects/isObject":75,"../utilities/noop":79,"./isNative":64}],61:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9727,7 +9925,7 @@ function baseCreateCallback(func, thisArg, argCount) {
 
 module.exports = baseCreateCallback;
 
-},{"../functions/bind":57,"../support":76,"../utilities/identity":77,"./setBindData":65}],61:[function(require,module,exports){
+},{"../functions/bind":58,"../support":77,"../utilities/identity":78,"./setBindData":66}],62:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9807,7 +10005,7 @@ function baseCreateWrapper(bindData) {
 
 module.exports = baseCreateWrapper;
 
-},{"../objects/isObject":74,"./baseCreate":59,"./setBindData":65,"./slice":67}],62:[function(require,module,exports){
+},{"../objects/isObject":75,"./baseCreate":60,"./setBindData":66,"./slice":68}],63:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9915,7 +10113,7 @@ function createWrapper(func, bitmask, partialArgs, partialRightArgs, thisArg, ar
 
 module.exports = createWrapper;
 
-},{"../objects/isFunction":73,"./baseBind":58,"./baseCreateWrapper":61,"./slice":67}],63:[function(require,module,exports){
+},{"../objects/isFunction":74,"./baseBind":59,"./baseCreateWrapper":62,"./slice":68}],64:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9951,7 +10149,7 @@ function isNative(value) {
 
 module.exports = isNative;
 
-},{}],64:[function(require,module,exports){
+},{}],65:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -9973,7 +10171,7 @@ var objectTypes = {
 
 module.exports = objectTypes;
 
-},{}],65:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -10018,7 +10216,7 @@ var setBindData = !defineProperty ? noop : function(func, value) {
 
 module.exports = setBindData;
 
-},{"../utilities/noop":78,"./isNative":63}],66:[function(require,module,exports){
+},{"../utilities/noop":79,"./isNative":64}],67:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -10058,7 +10256,7 @@ var shimKeys = function(object) {
 
 module.exports = shimKeys;
 
-},{"./objectTypes":64}],67:[function(require,module,exports){
+},{"./objectTypes":65}],68:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -10098,7 +10296,7 @@ function slice(array, start, end) {
 
 module.exports = slice;
 
-},{}],68:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -10170,7 +10368,7 @@ var assign = function(object, source, guard) {
 
 module.exports = assign;
 
-},{"../internals/baseCreateCallback":60,"../internals/objectTypes":64,"./keys":75}],69:[function(require,module,exports){
+},{"../internals/baseCreateCallback":61,"../internals/objectTypes":65,"./keys":76}],70:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -10220,7 +10418,7 @@ function create(prototype, properties) {
 
 module.exports = create;
 
-},{"../internals/baseCreate":59,"./assign":68}],70:[function(require,module,exports){
+},{"../internals/baseCreate":60,"./assign":69}],71:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -10272,7 +10470,7 @@ var forOwn = function(collection, callback, thisArg) {
 
 module.exports = forOwn;
 
-},{"../internals/baseCreateCallback":60,"../internals/objectTypes":64,"./keys":75}],71:[function(require,module,exports){
+},{"../internals/baseCreateCallback":61,"../internals/objectTypes":65,"./keys":76}],72:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -10319,7 +10517,7 @@ var isArray = nativeIsArray || function(value) {
 
 module.exports = isArray;
 
-},{"../internals/isNative":63}],72:[function(require,module,exports){
+},{"../internals/isNative":64}],73:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -10384,7 +10582,7 @@ function isEmpty(value) {
 
 module.exports = isEmpty;
 
-},{"./forOwn":70,"./isFunction":73}],73:[function(require,module,exports){
+},{"./forOwn":71,"./isFunction":74}],74:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -10413,7 +10611,7 @@ function isFunction(value) {
 
 module.exports = isFunction;
 
-},{}],74:[function(require,module,exports){
+},{}],75:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -10454,7 +10652,7 @@ function isObject(value) {
 
 module.exports = isObject;
 
-},{"../internals/objectTypes":64}],75:[function(require,module,exports){
+},{"../internals/objectTypes":65}],76:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -10492,7 +10690,7 @@ var keys = !nativeKeys ? shimKeys : function(object) {
 
 module.exports = keys;
 
-},{"../internals/isNative":63,"../internals/shimKeys":66,"./isObject":74}],76:[function(require,module,exports){
+},{"../internals/isNative":64,"../internals/shimKeys":67,"./isObject":75}],77:[function(require,module,exports){
 (function (global){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
@@ -10536,7 +10734,7 @@ support.funcNames = typeof Function.name == 'string';
 module.exports = support;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./internals/isNative":63}],77:[function(require,module,exports){
+},{"./internals/isNative":64}],78:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -10566,7 +10764,7 @@ function identity(value) {
 
 module.exports = identity;
 
-},{}],78:[function(require,module,exports){
+},{}],79:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="node" -o ./modern/`
@@ -10594,11 +10792,11 @@ function noop() {
 
 module.exports = noop;
 
-},{}],79:[function(require,module,exports){
-
 },{}],80:[function(require,module,exports){
-arguments[4][79][0].apply(exports,arguments)
-},{"dup":79}],81:[function(require,module,exports){
+
+},{}],81:[function(require,module,exports){
+arguments[4][80][0].apply(exports,arguments)
+},{"dup":80}],82:[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -12037,7 +12235,7 @@ function decodeUtf8Char (str) {
   }
 }
 
-},{"base64-js":82,"ieee754":83,"is-array":84}],82:[function(require,module,exports){
+},{"base64-js":83,"ieee754":84,"is-array":85}],83:[function(require,module,exports){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 ;(function (exports) {
@@ -12163,7 +12361,7 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 	exports.fromByteArray = uint8ToBase64
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
-},{}],83:[function(require,module,exports){
+},{}],84:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -12249,7 +12447,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],84:[function(require,module,exports){
+},{}],85:[function(require,module,exports){
 
 /**
  * isArray
@@ -12284,7 +12482,7 @@ module.exports = isArray || function (val) {
   return !! val && '[object Array]' == str.call(val);
 };
 
-},{}],85:[function(require,module,exports){
+},{}],86:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -12587,7 +12785,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],86:[function(require,module,exports){
+},{}],87:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -12612,12 +12810,12 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],87:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 module.exports = Array.isArray || function (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]';
 };
 
-},{}],88:[function(require,module,exports){
+},{}],89:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -12709,7 +12907,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],89:[function(require,module,exports){
+},{}],90:[function(require,module,exports){
 (function (global){
 /*! https://mths.be/punycode v1.3.2 by @mathias */
 ;(function(root) {
@@ -13243,7 +13441,7 @@ process.umask = function() { return 0; };
 }(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],90:[function(require,module,exports){
+},{}],91:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -13329,7 +13527,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],91:[function(require,module,exports){
+},{}],92:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -13416,16 +13614,16 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],92:[function(require,module,exports){
+},{}],93:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":90,"./encode":91}],93:[function(require,module,exports){
+},{"./decode":91,"./encode":92}],94:[function(require,module,exports){
 module.exports = require("./lib/_stream_duplex.js")
 
-},{"./lib/_stream_duplex.js":94}],94:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":95}],95:[function(require,module,exports){
 // a duplex stream is just a stream that is both readable and writable.
 // Since JS doesn't have multiple prototypal inheritance, this class
 // prototypally inherits from Readable, and then parasitically from
@@ -13509,7 +13707,7 @@ function forEach (xs, f) {
   }
 }
 
-},{"./_stream_readable":96,"./_stream_writable":98,"core-util-is":99,"inherits":86,"process-nextick-args":100}],95:[function(require,module,exports){
+},{"./_stream_readable":97,"./_stream_writable":99,"core-util-is":100,"inherits":87,"process-nextick-args":101}],96:[function(require,module,exports){
 // a passthrough stream.
 // basically just the most minimal sort of Transform stream.
 // Every written chunk gets output as-is.
@@ -13538,7 +13736,7 @@ PassThrough.prototype._transform = function(chunk, encoding, cb) {
   cb(null, chunk);
 };
 
-},{"./_stream_transform":97,"core-util-is":99,"inherits":86}],96:[function(require,module,exports){
+},{"./_stream_transform":98,"core-util-is":100,"inherits":87}],97:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -14501,7 +14699,7 @@ function indexOf (xs, x) {
 }
 
 }).call(this,require('_process'))
-},{"./_stream_duplex":94,"_process":88,"buffer":81,"core-util-is":99,"events":85,"inherits":86,"isarray":87,"process-nextick-args":100,"string_decoder/":107,"util":80}],97:[function(require,module,exports){
+},{"./_stream_duplex":95,"_process":89,"buffer":82,"core-util-is":100,"events":86,"inherits":87,"isarray":88,"process-nextick-args":101,"string_decoder/":108,"util":81}],98:[function(require,module,exports){
 // a transform stream is a readable/writable stream where you do
 // something with the data.  Sometimes it's called a "filter",
 // but that's not a great name for it, since that implies a thing where
@@ -14700,7 +14898,7 @@ function done(stream, er) {
   return stream.push(null);
 }
 
-},{"./_stream_duplex":94,"core-util-is":99,"inherits":86}],98:[function(require,module,exports){
+},{"./_stream_duplex":95,"core-util-is":100,"inherits":87}],99:[function(require,module,exports){
 // A bit simpler than readable streams.
 // Implement an async ._write(chunk, cb), and it'll handle all
 // the drain event emission and buffering.
@@ -15222,7 +15420,7 @@ function endWritable(stream, state, cb) {
   state.ended = true;
 }
 
-},{"./_stream_duplex":94,"buffer":81,"core-util-is":99,"events":85,"inherits":86,"process-nextick-args":100,"util-deprecate":101}],99:[function(require,module,exports){
+},{"./_stream_duplex":95,"buffer":82,"core-util-is":100,"events":86,"inherits":87,"process-nextick-args":101,"util-deprecate":102}],100:[function(require,module,exports){
 (function (Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -15332,7 +15530,7 @@ function objectToString(o) {
   return Object.prototype.toString.call(o);
 }
 }).call(this,require("buffer").Buffer)
-},{"buffer":81}],100:[function(require,module,exports){
+},{"buffer":82}],101:[function(require,module,exports){
 (function (process){
 'use strict';
 module.exports = nextTick;
@@ -15349,7 +15547,7 @@ function nextTick(fn) {
 }
 
 }).call(this,require('_process'))
-},{"_process":88}],101:[function(require,module,exports){
+},{"_process":89}],102:[function(require,module,exports){
 (function (global){
 
 /**
@@ -15415,10 +15613,10 @@ function config (name) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],102:[function(require,module,exports){
+},{}],103:[function(require,module,exports){
 module.exports = require("./lib/_stream_passthrough.js")
 
-},{"./lib/_stream_passthrough.js":95}],103:[function(require,module,exports){
+},{"./lib/_stream_passthrough.js":96}],104:[function(require,module,exports){
 var Stream = (function (){
   try {
     return require('st' + 'ream'); // hack to fix a circular dependency issue when used with browserify
@@ -15432,13 +15630,13 @@ exports.Duplex = require('./lib/_stream_duplex.js');
 exports.Transform = require('./lib/_stream_transform.js');
 exports.PassThrough = require('./lib/_stream_passthrough.js');
 
-},{"./lib/_stream_duplex.js":94,"./lib/_stream_passthrough.js":95,"./lib/_stream_readable.js":96,"./lib/_stream_transform.js":97,"./lib/_stream_writable.js":98}],104:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":95,"./lib/_stream_passthrough.js":96,"./lib/_stream_readable.js":97,"./lib/_stream_transform.js":98,"./lib/_stream_writable.js":99}],105:[function(require,module,exports){
 module.exports = require("./lib/_stream_transform.js")
 
-},{"./lib/_stream_transform.js":97}],105:[function(require,module,exports){
+},{"./lib/_stream_transform.js":98}],106:[function(require,module,exports){
 module.exports = require("./lib/_stream_writable.js")
 
-},{"./lib/_stream_writable.js":98}],106:[function(require,module,exports){
+},{"./lib/_stream_writable.js":99}],107:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -15567,7 +15765,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"events":85,"inherits":86,"readable-stream/duplex.js":93,"readable-stream/passthrough.js":102,"readable-stream/readable.js":103,"readable-stream/transform.js":104,"readable-stream/writable.js":105}],107:[function(require,module,exports){
+},{"events":86,"inherits":87,"readable-stream/duplex.js":94,"readable-stream/passthrough.js":103,"readable-stream/readable.js":104,"readable-stream/transform.js":105,"readable-stream/writable.js":106}],108:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -15790,7 +15988,7 @@ function base64DetectIncompleteChar(buffer) {
   this.charLength = this.charReceived ? 3 : 0;
 }
 
-},{"buffer":81}],108:[function(require,module,exports){
+},{"buffer":82}],109:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -16499,14 +16697,14 @@ function isNullOrUndefined(arg) {
   return  arg == null;
 }
 
-},{"punycode":89,"querystring":92}],109:[function(require,module,exports){
+},{"punycode":90,"querystring":93}],110:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],110:[function(require,module,exports){
+},{}],111:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -17096,7 +17294,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":109,"_process":88,"inherits":86}],"oss-2013-10-15.json":[function(require,module,exports){
+},{"./support/isBuffer":110,"_process":89,"inherits":87}],"oss-2013-10-15.json":[function(require,module,exports){
 module.exports={
   "format": "rest-xml",
   "apiVersion": "2013-10-15",
@@ -17374,6 +17572,16 @@ module.exports={
           "GrantWriteACP": {
             "location": "header",
             "name": "x-oss-grant-write-acp"
+          },
+          "CreateBucketConfiguration": {
+            "type": "structure",
+            "name": "CreateBucketConfiguration",
+            "members": {
+               "StorageClass": {
+                 "type": "string",
+                 "name": "StorageClass"
+               }
+            }
           }
         }
       },
@@ -19720,7 +19928,7 @@ module.exports={
         "members": {
           "ACL": {
             "location": "header",
-            "name": "x-oss-acl"
+            "name": "x-oss-object-acl"
           },
           "AccessControlPolicy": {
             "type": "structure",
@@ -19967,6 +20175,118 @@ module.exports={
           }
         }
       }
+    },
+    "appendObject": {
+      "name": "AppendObject",
+      "http": {
+        "method": "POST",
+        "uri": "/{Key}?append&position={Position}"
+      },
+      "input": {
+        "payload": "Body",
+        "type": "structure",
+        "members": {
+          "Body": {
+            "type": "binary",
+            "streaming": true
+          },
+          "Bucket": {
+            "required": true,
+            "location": "uri"
+          },
+          "CacheControl": {
+            "location": "header",
+            "name": "Cache-Control"
+          },
+          "ContentDisposition": {
+            "location": "header",
+            "name": "Content-Disposition"
+          },
+          "ContentEncoding": {
+            "location": "header",
+            "name": "Content-Encoding"
+          },
+          "ContentLanguage": {
+            "location": "header",
+            "name": "Content-Language"
+          },
+          "ContentLength": {
+            "type": "integer",
+            "location": "header",
+            "name": "Content-Length"
+          },
+          "ContentMD5": {
+            "location": "header",
+            "name": "Content-MD5"
+          },
+          "ContentType": {
+            "location": "header",
+            "name": "Content-Type"
+          },
+          "Expires": {
+            "type": "timestamp",
+            "location": "header",
+            "name": "Expires"
+          },
+          "GrantFullControl": {
+            "location": "header",
+            "name": "x-oss-grant-full-control"
+          },
+          "GrantRead": {
+            "location": "header",
+            "name": "x-oss-grant-read"
+          },
+          "GrantReadACP": {
+            "location": "header",
+            "name": "x-oss-grant-read-acp"
+          },
+          "GrantWriteACP": {
+            "location": "header",
+            "name": "x-oss-grant-write-acp"
+          },
+          "Key": {
+            "required": true,
+            "location": "uri"
+          },
+          "Metadata": {
+            "type": "map",
+            "location": "header",
+            "name": "x-oss-meta-",
+            "members": {},
+            "keys": {}
+          },
+          "Position": {
+            "required": true,
+            "location": "uri",
+            "type": "integer"
+          },
+          "ServerSideEncryption": {
+            "location": "header",
+            "name": "x-oss-server-side-encryption"
+          },
+          "StorageClass": {
+            "location": "header",
+            "name": "x-oss-storage-class"
+          },
+          "WebsiteRedirectLocation": {
+            "location": "header",
+            "name": "x-oss-website-redirect-location"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NextAppendPosition": {
+            "location": "header",
+            "name": "x-oss-next-append-position"
+          },
+          "HashCrc64Ecma": {
+            "location": "header",
+            "name": "x-oss-hash-crc64ecma"
+          }
+        }
+      }
     }
   },
   "pagination": {
@@ -20014,4 +20334,5 @@ module.exports={
     }
   }
 }
+
 },{}]},{},[3]);
