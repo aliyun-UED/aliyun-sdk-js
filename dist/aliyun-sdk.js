@@ -3884,6 +3884,7 @@ ALY.OSS = ALY.Service.defineService('oss', ['2013-10-15'], {
     }
 
     for(var k in resp.httpResponse.headers){
+      console.log(k);
       if(k.indexOf('x-oss-')==0){
         var arr = k.substring('x-oss-'.length).split('-');
         for(var i=0;i<arr.length;i++){
