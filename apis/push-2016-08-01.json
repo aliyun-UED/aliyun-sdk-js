@@ -1,15 +1,15 @@
 {
 	"format": "pop",
-	"apiVersion": "2016-08-01", 
+	"apiVersion": "2016-08-01",
 	"checksumFormat": "md5",
-	"endpointPrefix": "push", 
-	"serviceAbbreviation": "PUSH", 
-	"serviceFullName": "Aliyun PUSH", 
+	"endpointPrefix": "push",
+	"serviceAbbreviation": "PUSH",
+	"serviceFullName": "Aliyun PUSH",
 	"signatureVersion": "pop",
 	"timestampFormat": "top",
 	"xmlnamespace": "",
 	"operations": {
-		"bindAlias": {  
+		"bindAlias": {
 			"name": "BindAlias",
 			"http": {
 				"method": "POST",
@@ -37,7 +37,7 @@
 				}
 			}
 		},
-		"bindTag": {  
+		"bindTag": {
 			"name": "BindTag",
 			"http": {
 				"method": "POST",
@@ -69,7 +69,7 @@
 				}
 			}
 		},
-		"clearAlias": {  
+		"clearAlias": {
 			"name": "ClearAlias",
 			"http": {
 				"method": "POST",
@@ -93,7 +93,7 @@
 				}
 			}
 		},
-		"deleteTag": {  
+		"deleteTag": {
 			"name": "DeleteTag",
 			"http": {
 				"method": "POST",
@@ -117,7 +117,7 @@
 				}
 			}
 		},
-		"listPushRecords": {  
+		"listPushRecords": {
 			"name": "ListPushRecords",
 			"http": {
 				"method": "POST",
@@ -155,7 +155,7 @@
 				}
 			}
 		},
-		"listTags": {  
+		"listTags": {
 			"name": "ListTags",
 			"http": {
 				"method": "POST",
@@ -175,7 +175,7 @@
 				}
 			}
 		},
-		"push": {  
+		"push": {
 			"name": "Push",
 			"http": {
 				"method": "POST",
@@ -248,6 +248,15 @@
 					"AndroidXiaoMiNotifyBody": {
 						"type": "string"
 					},
+					"AndroidPopupActivity": {
+			      "type": "string"
+			     },
+			     "AndroidPopupTitle": {
+			      "type": "string"
+			     },
+			     "AndroidPopupBody": {
+			      "type": "string"
+			     },
 					"AndroidMusic": {
 						"type": "string"
 					},
@@ -293,7 +302,7 @@
 				}
 			}
 		},
-		"pushMessageToAndroid": {  
+		"pushMessageToAndroid": {
 			"name": "PushMessageToAndroid",
 			"http": {
 				"method": "POST",
@@ -329,7 +338,7 @@
 				}
 			}
 		},
-		"pushMessageToiOS": {  
+		"pushMessageToiOS": {
 			"name": "PushMessageToiOS",
 			"http": {
 				"method": "POST",
@@ -365,7 +374,7 @@
 				}
 			}
 		},
-		"pushNoticeToiOS": {  
+		"pushNoticeToiOS": {
 			"name": "PushNoticeToiOS",
 			"http": {
 				"method": "POST",
@@ -407,7 +416,7 @@
 				}
 			}
 		},
-		"pushNoticeToAndroid": {  
+		"pushNoticeToAndroid": {
 			"name": "PushNoticeToAndroid",
 			"http": {
 				"method": "POST",
@@ -446,7 +455,7 @@
 				}
 			}
 		},
-		"queryAlias": {  
+		"queryAlias": {
 			"name": "QueryAlias",
 			"http": {
 				"method": "POST",
@@ -470,7 +479,7 @@
 				}
 			}
 		},
-		"queryTags": {  
+		"queryTags": {
 			"name": "QueryTags",
 			"http": {
 				"method": "POST",
@@ -498,7 +507,7 @@
 				}
 			}
 		},
-		"queryDeviceInfo": {  
+		"queryDeviceInfo": {
 			"name": "QueryDeviceInfo",
 			"http": {
 				"method": "POST",
@@ -522,7 +531,7 @@
 				}
 			}
 		},
-		"unbindTag": {  
+		"unbindTag": {
 			"name": "UnbindTag",
 			"http": {
 				"method": "POST",
@@ -554,7 +563,7 @@
 				}
 			}
 		},
-		"unbindAlias": {  
+		"unbindAlias": {
 			"name": "UnbindAlias",
 			"http": {
 				"method": "POST",
@@ -582,7 +591,7 @@
 				}
 			}
 		},
-		"queryAppPushStat": {  
+		"queryAppPushStat": {
 			"name": "QueryAppPushStat",
 			"http": {
 				"method": "POST",
@@ -614,7 +623,7 @@
 				}
 			}
 		},
-		"queryPushStat": {  
+		"queryPushStat": {
 			"name": "QueryPushStat",
 			"http": {
 				"method": "POST",
@@ -638,7 +647,7 @@
 				}
 			}
 		},
-		"queryDeviceStat": {  
+		"queryDeviceStat": {
 			"name": "QueryDeviceStat",
 			"http": {
 				"method": "POST",
@@ -674,7 +683,7 @@
 				}
 			}
 		},
-		"queryUniqueDeviceStat": {  
+		"queryUniqueDeviceStat": {
 			"name": "QueryUniqueDeviceStat",
 			"http": {
 				"method": "POST",
@@ -706,7 +715,7 @@
 				}
 			}
 		},
-		"listTinyApps": {  
+		"listTinyApps": {
 			"name": "ListTinyApps",
 			"http": {
 				"method": "POST",
@@ -722,7 +731,7 @@
 				}
 			}
 		},
-		"listSummaryApps": {  
+		"listSummaryApps": {
 			"name": "ListSummaryApps",
 			"http": {
 				"method": "POST",
@@ -738,7 +747,7 @@
 				}
 			}
 		},
-		"queryPushStatByApp": {  
+		"queryPushStatByApp": {
 			"name": "QueryPushStatByApp",
 			"http": {
 				"method": "POST",
@@ -770,7 +779,7 @@
 				}
 			}
 		},
-		"queryPushStatByMsg": {  
+		"queryPushStatByMsg": {
 			"name": "QueryPushStatByMsg",
 			"http": {
 				"method": "POST",
@@ -794,7 +803,7 @@
 				}
 			}
 		},
-		"queryAliases": {  
+		"queryAliases": {
 			"name": "QueryAliases",
 			"http": {
 				"method": "POST",
@@ -818,7 +827,7 @@
 				}
 			}
 		},
-		"cancelPush": {  
+		"cancelPush": {
 			"name": "CancelPush",
 			"http": {
 				"method": "POST",
@@ -842,7 +851,7 @@
 				}
 			}
 		},
-		"queryPushDetail": {  
+		"queryPushDetail": {
 			"name": "QueryPushDetail",
 			"http": {
 				"method": "POST",
@@ -866,7 +875,7 @@
 				}
 			}
 		},
-		"checkDevice": {  
+		"checkDevice": {
 			"name": "CheckDevice",
 			"http": {
 				"method": "POST",
