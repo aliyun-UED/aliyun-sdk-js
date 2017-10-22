@@ -9,7 +9,7 @@ apis/push-2016-08-01.json增加
      "AndroidPopupBody": {
       "type": "string"
      },
-     
+
 ## 原来 阿里云 js sdk 还能这么用
 
 OSS Browser - 提供类似windows资源管理器功能 https://github.com/aliyun/oss-browser
@@ -21,7 +21,7 @@ Open5 - 基于阿里云 Open API 的开源 H5 生成工具　https://github.com/
 ### Node.js 安装
 
 ```sh
-npm install aliyun-sdk
+npm install aliyun-sdk-push
 ```
 
 ### 浏览器端安装
