@@ -1,3 +1,15 @@
+基于阿里云sdk，fix支持push辅助通道参数
+apis/push-2016-08-01.json增加
+"AndroidPopupActivity": {
+      "type": "string"
+     },
+     "AndroidPopupTitle": {
+      "type": "string"
+     },
+     "AndroidPopupBody": {
+      "type": "string"
+     },
+     
 ## 原来 阿里云 js sdk 还能这么用
 
 OSS Browser - 提供类似windows资源管理器功能 https://github.com/aliyun/oss-browser
