@@ -1,12 +1,12 @@
 {
-  "name": "aliyun-sdk",
-  "description": "Aliyun SDK for JavaScript",
-  "version": "1.10.18",
+  "name": "aliyun-sdk-push",
+  "description": "fix push:Aliyun SDK for JavaScript",
+  "version": "1.10.19",
   "author": {
-    "name": "chylvina",
-    "email": "chylvina@gmail.com"
+    "name": "pail",
+    "email": "pail.jin@gmail.com"
   },
-  "homepage": "https://github.com/aliyun-UED/aliyun-sdk-js.git",
+  "homepage": "https://github.com/pailjin/aliyun-sdk-js",
   "contributors": [],
   "devDependencies": {
     "coffee-script": "1.6.3",
@@ -49,13 +49,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:aliyun-UED/aliyun-sdk-js.git"
+    "url": "git@github.com:pailjin/aliyun-sdk-js.git"
   },
   "bugs": {
-    "url": "https://github.com/aliyun-UED/aliyun-sdk-js/issues",
+    "url": "https://github.com/pailjin/aliyun-sdk-js/issues",
     "mail": ""
   },
-  "keywords": [],
+  "keywords": ["push","aliyun-sdk-js"],
   "scripts": {
     "test": "mocha test"
   }
