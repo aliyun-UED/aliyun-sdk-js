@@ -15,12 +15,274 @@
         "method": "GET",
         "uri": "/quotas"
       },
+      "input": {},
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "createApp": {
+      "name": "CreateApp",
+      "http": {
+        "method": "POST",
+        "uri": "/apps"
+      },
       "input": {
+        "payload": [
+          "Name",
+          "CommandLine",
+          "Description",
+          "Daemonize",
+          "Docker",
+          "VM",
+          "EnvVars",
+          "Config",
+          "InputParameters",
+          "OutputParameters"
+        ],
+        "members": {
+          "Name": {
+            "type": "string",
+            "required": true
+          },
+          "CommandLine": {
+            "required": true,
+            "type": "string"
+          },
+          "Description": {
+            "required": false,
+            "type": "string"
+          },
+          "Daemonize": {
+            "required": true,
+            "type": "boolean"
+          },
+          "Docker": {
+            "required": false,
+            "type": "structure"
+          },
+          "VM": {
+            "required": false,
+            "type": "structure"
+          },
+          "EnvVars": {
+            "required": false,
+            "type": "structure"
+          },
+          "Config": {
+            "required": false,
+            "type": "structure"
+          },
+          "InputParameters": {
+            "required": false,
+            "type": "structure"
+          },
+          "OutputParameters": {
+            "required": false,
+            "type": "structure"
+          }
+        }
       },
       "output": {
         "type": "structure",
         "members": {
+          "JobId": {
+            "type": "string",
+            "name": "ResourceId"
+          }
         }
+      }
+    },
+    "updateApp": {
+      "name": "UpdateApp",
+      "http": {
+        "method": "PUT",
+        "uri": "/apps/{AppName}"
+      },
+      "input": {
+        "payload": [
+          "Name",
+          "CommandLine",
+          "Description",
+          "Daemonize",
+          "Docker",
+          "VM",
+          "EnvVars"
+        ],
+        "members": {
+          "AppName": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "Name": {
+            "type": "string",
+            "required": false
+          },
+          "CommandLine": {
+            "required": true,
+            "type": "string"
+          },
+          "Description": {
+            "required": false,
+            "type": "string"
+          },
+          "Daemonize": {
+            "required": false,
+            "type": "boolean"
+          },
+          "Docker": {
+            "required": false,
+            "type": "structure"
+          },
+          "VM": {
+            "required": false,
+            "type": "structure"
+          },
+          "EnvVars": {
+            "required": false,
+            "type": "structure"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "JobId": {
+            "type": "string",
+            "name": "ResourceId"
+          }
+        }
+      }
+    },
+    "listApps": {
+      "name": "ListApps",
+      "http": {
+        "method": "GET",
+        "uri": "/apps?Scope={Scope}&Marker={Marker}&MaxItemCount={MaxItemCount}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Scope": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          },
+          "Marker": {
+            "required": false,
+            "type": "string",
+            "location": "uri"
+          },
+          "MaxItemCount": {
+            "required": false,
+            "type": "integer",
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "getApp": {
+      "name": "GetApp",
+      "http": {
+        "method": "GET",
+        "uri": "/apps/{AppName}?Scope={Scope}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "AppName": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          },
+          "Scope": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "getAppDetail": {
+      "name": "GetAppDetail",
+      "http": {
+        "method": "GET",
+        "uri": "/apps/{AppName}?Detail=True&Qualifier={Qualifier}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "AppName": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          },
+          "Qualifier": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "getAppRevisions": {
+      "name": "GetAppRevisions",
+      "http": {
+        "method": "GET",
+        "uri": "/apps/{AppName}?Revisions=True"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "AppName": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "deleteApp": {
+      "name": "DeleteApp",
+      "http": {
+        "method": "DELETE",
+        "uri": "/apps/{AppName}?Qualifier={Qualifier}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "AppName": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          },
+          "Qualifier": {
+            "required": false,
+            "type": "string",
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
       }
     },
     "createImage": {
@@ -30,9 +292,14 @@
         "uri": "/images"
       },
       "input": {
-        "payload": ["Name", "Platform", "EcsImageId","Description"],
+        "payload": [
+          "Name",
+          "Platform",
+          "EcsImageId",
+          "Description"
+        ],
         "members": {
-          "Name":{
+          "Name": {
             "type": "string",
             "required": true
           },
@@ -76,20 +343,19 @@
           },
           "Marker": {
             "required": false,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           },
           "MaxItemCount": {
             "required": false,
-            "type":"integer",
-            "location":"uri"
+            "type": "integer",
+            "location": "uri"
           }
         }
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     },
     "getImage": {
@@ -103,15 +369,14 @@
         "members": {
           "ImageId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           }
         }
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     },
     "deleteImage": {
@@ -125,15 +390,14 @@
         "members": {
           "ImageId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           }
         }
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     },
     "createCluster": {
@@ -143,9 +407,18 @@
         "uri": "/clusters"
       },
       "input": {
-        "payload": ["Name", "Description", "ImageId","InstanceType","UserData","Configs", "Groups","Notification"],
+        "payload": [
+          "Name",
+          "Description",
+          "ImageId",
+          "InstanceType",
+          "UserData",
+          "Configs",
+          "Groups",
+          "Notification"
+        ],
         "members": {
-          "Name":{
+          "Name": {
             "type": "string",
             "required": true
           },
@@ -165,7 +438,7 @@
             "required": false,
             "type": "map",
             "members": {
-               "type": "string"
+              "type": "string"
             }
           },
           "Notification": {
@@ -205,7 +478,7 @@
                     "type": "list",
                     "members": {
                       "required": false,
-                      "type":"structure",
+                      "type": "structure",
                       "members": {
                         "Destination": {
                           "required": true,
@@ -347,7 +620,7 @@
             }
           },
           "Groups": {
-            "required":true,
+            "required": true,
             "type": "map",
             "members": {
               "type": "structure",
@@ -363,6 +636,14 @@
                 "ResourceType": {
                   "required": false,
                   "type": "string"
+                },
+                "SpotStrategy": {
+                  "required": false,
+                  "type": "string"
+                },
+                "SpotPriceLimit": {
+                  "required": false,
+                  "type": "float"
                 }
               }
             }
@@ -394,20 +675,19 @@
         "members": {
           "Marker": {
             "required": false,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           },
           "MaxItemCount": {
             "required": false,
-            "type":"integer",
-            "location":"uri"
+            "type": "integer",
+            "location": "uri"
           }
         }
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     },
     "getCluster": {
@@ -421,15 +701,14 @@
         "members": {
           "ClusterId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           }
         }
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     },
     "deleteCluster": {
@@ -443,15 +722,14 @@
         "members": {
           "ClusterId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           }
         }
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     },
     "changeClusterDesiredVMCount": {
@@ -461,15 +739,17 @@
         "uri": "/clusters/{ClusterId}"
       },
       "input": {
-        "payload": ["Groups"],
+        "payload": [
+          "Groups"
+        ],
         "members": {
           "ClusterId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           },
           "Groups": {
-            "required":true,
+            "required": true,
             "type": "map",
             "members": {
               "type": "structure",
@@ -485,12 +765,53 @@
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     },
-
-
+    "updateCluster": {
+      "name": "UpdateCluster",
+      "http": {
+        "method": "PUT",
+        "uri": "/clusters/{ClusterId}"
+      },
+      "input": {
+        "payload": [
+          "Groups"
+        ],
+        "members": {
+          "ClusterId": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          },
+          "Groups": {
+            "required": true,
+            "type": "map",
+            "members": {
+              "type": "structure",
+              "members": {
+                "DesiredVMCount": {
+                  "required": false,
+                  "type": "integer"
+                },
+                "SpotStrategy": {
+                  "required": false,
+                  "type": "string"
+                },
+                "SpotPriceLimit": {
+                  "required": false,
+                  "type": "float"
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
     "listClusterInstances": {
       "name": "ListClusterInstances",
       "http": {
@@ -502,33 +823,31 @@
         "members": {
           "ClusterId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           },
           "GroupName": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           },
           "Marker": {
             "required": false,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           },
           "MaxItemCount": {
             "required": false,
-            "type":"integer",
-            "location":"uri"
+            "type": "integer",
+            "location": "uri"
           }
         }
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     },
-
     "getClusterInstance": {
       "name": "GetClusterInstance",
       "http": {
@@ -540,25 +859,24 @@
         "members": {
           "ClusterId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           },
           "GroupName": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           },
           "InstanceId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           }
         }
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     },
     "deleteClusterInstance": {
@@ -572,25 +890,24 @@
         "members": {
           "ClusterId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           },
           "GroupName": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           },
           "InstanceId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           }
         }
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     },
     "recreateClusterInstance": {
@@ -604,28 +921,26 @@
         "members": {
           "ClusterId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           },
           "GroupName": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           },
           "InstanceId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           }
         }
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     },
-
     "listJobs": {
       "name": "ListJobs",
       "http": {
@@ -654,8 +969,7 @@
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     },
     "getJob": {
@@ -669,15 +983,14 @@
         "members": {
           "JobId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           }
         }
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     },
     "getJobDescription": {
@@ -691,15 +1004,14 @@
         "members": {
           "JobId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           }
         }
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     },
     "deleteJob": {
@@ -713,15 +1025,14 @@
         "members": {
           "JobId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           }
         }
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     },
     "startJob": {
@@ -735,15 +1046,14 @@
         "members": {
           "JobId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           }
         }
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     },
     "stopJob": {
@@ -757,15 +1067,14 @@
         "members": {
           "JobId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           }
         }
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     },
     "changeJobPriority": {
@@ -775,26 +1084,26 @@
         "uri": "/jobs/{JobId}"
       },
       "input": {
-        "payload": ["Priority"],
+        "payload": [
+          "Priority"
+        ],
         "members": {
           "JobId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           },
           "Priority": {
             "required": true,
-            "type":"integer"
+            "type": "integer"
           }
         }
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     },
-
     "createJob": {
       "name": "CreateJob",
       "http": {
@@ -802,9 +1111,19 @@
         "uri": "/jobs"
       },
       "input": {
-        "payload": ["Name", "Description", "Priority", "JobFailOnInstanceFail","Type","DAG","Notification"],
+        "payload": [
+          "Name",
+          "Description",
+          "Priority",
+          "JobFailOnInstanceFail",
+          "AutoRelease",
+          "Type",
+          "App",
+          "DAG",
+          "Notification"
+        ],
         "members": {
-          "Name":{
+          "Name": {
             "type": "string",
             "required": true
           },
@@ -852,12 +1171,17 @@
               }
             }
           },
+          "App": {
+            "required": false,
+            "type": "structure",
+            "members": {}
+          },
           "DAG": {
-            "required":true,
+            "required": false,
             "type": "structure",
             "members": {
               "Tasks": {
-                "required":true,
+                "required": true,
                 "type": "map",
                 "members": {
                   "type": "structure",
@@ -891,7 +1215,7 @@
                           "type": "list",
                           "members": {
                             "required": false,
-                            "type":"structure",
+                            "type": "structure",
                             "members": {
                               "Destination": {
                                 "required": true,
@@ -1023,6 +1347,14 @@
                             "type": "string"
                           }
                         },
+                        "SpotStrategy": {
+                          "required": false,
+                          "type": "string"
+                        },
+                        "SpotPriceLimit": {
+                          "required": false,
+                          "type": "float"
+                        },
                         "Configs": {
                           "required": false,
                           "type": "structure",
@@ -1036,7 +1368,7 @@
                                   "type": "list",
                                   "members": {
                                     "required": false,
-                                    "type":"structure",
+                                    "type": "structure",
                                     "members": {
                                       "Destination": {
                                         "required": true,
@@ -1179,30 +1511,27 @@
                         }
                       }
                     },
-
-
                     "InputMapping": {
                       "required": false,
                       "type": "map",
-                      "members":{
-                        "type":"string"
+                      "members": {
+                        "type": "string"
                       }
                     },
                     "OutputMapping": {
                       "required": false,
                       "type": "map",
-                      "members":{
-                        "type":"string"
+                      "members": {
+                        "type": "string"
                       }
                     },
                     "LogMapping": {
                       "required": false,
                       "type": "map",
-                      "members":{
-                        "type":"string"
+                      "members": {
+                        "type": "string"
                       }
                     },
-
                     "Parameters": {
                       "type": "structure",
                       "required": true,
@@ -1244,8 +1573,8 @@
                             "EnvVars": {
                               "required": false,
                               "type": "map",
-                              "members":{
-                                "type":"string"
+                              "members": {
+                                "type": "string"
                               }
                             }
                           }
@@ -1291,8 +1620,8 @@
         "members": {
           "JobId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           },
           "Marker": {
             "required": false,
@@ -1308,8 +1637,7 @@
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     },
     "getTask": {
@@ -1323,8 +1651,8 @@
         "members": {
           "JobId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           },
           "TaskName": {
             "required": true,
@@ -1335,8 +1663,7 @@
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     },
     "listInstances": {
@@ -1350,13 +1677,13 @@
         "members": {
           "JobId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           },
           "TaskName": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           },
           "Marker": {
             "required": false,
@@ -1372,8 +1699,7 @@
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     },
     "getInstance": {
@@ -1387,8 +1713,8 @@
         "members": {
           "JobId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           },
           "TaskName": {
             "required": true,
@@ -1397,19 +1723,16 @@
           },
           "InstanceId": {
             "required": true,
-            "type":"string",
-            "location":"uri"
+            "type": "string",
+            "location": "uri"
           }
         }
       },
       "output": {
         "type": "structure",
-        "members": {
-        }
+        "members": {}
       }
     }
   },
-  "pagination": {
-
-  }
+  "pagination": {}
 }
