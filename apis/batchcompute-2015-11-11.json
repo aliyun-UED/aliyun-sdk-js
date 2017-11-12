@@ -572,6 +572,10 @@
                           "CidrBlock": {
                             "required": false,
                             "type": "string"
+                          },
+                          "VpcId": {
+                            "required": false,
+                            "type": "string"
                           }
                         }
                       }
@@ -1309,6 +1313,10 @@
                                 "CidrBlock": {
                                   "required": false,
                                   "type": "string"
+                                },
+                                "VpcId": {
+                                  "required": false,
+                                  "type": "string"
                                 }
                               }
                             }
@@ -1460,6 +1468,10 @@
                                       "type": "structure",
                                       "members": {
                                         "CidrBlock": {
+                                          "required": false,
+                                          "type": "string"
+                                        },
+                                        "VpcId": {
                                           "required": false,
                                           "type": "string"
                                         }
