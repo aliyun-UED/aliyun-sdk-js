@@ -1,0 +1,176 @@
+{
+  "format": "pop",
+  "apiVersion": "2015-01-09",
+  "checksumFormat": "md5",
+  "endpointPrefix": "alidns",
+  "serviceAbbreviation": "DNS",
+  "serviceFullName": "Aliyun DNS",
+  "signatureVersion": "pop",
+  "timestampFormat": "top",
+  "xmlnamespace": "",
+  "operations": {
+    "describeDomains": {
+      "name": "DescribeDomains",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomains"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "KeyWord": {
+            "type": "string"
+          },
+          "GroupId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainInfo": {
+      "name": "DescribeDomainInfo",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainInfo"
+          },
+          "DomainName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainRecords": {
+      "name": "DescribeDomainRecords",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainRecords"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "PageNumber": {
+            "type": "integer"
+          },
+          "PageSize": {
+            "type": "integer"
+          },
+          "RRKeyWord": {
+            "type": "string"
+          },
+          "TypeKeyWord": {
+            "type": "string"
+          },
+          "ValueKeyWord": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "addDomainRecord": {
+      "name": "AddDomainRecord",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AddDomainRecord"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "RR": {
+            "required": true,
+            "type": "string"
+          },
+          "Type": {
+            "required": true,
+            "type": "string"
+          },
+          "Value": {
+            "required": true,
+            "type": "string"
+          },
+          "TTL": {
+            "type": "integer"
+          },
+          "Priority": {
+            "type": "integer"
+          },
+          "Line": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "describeDomainRecordInfo": {
+      "name": "DescribeDomainRecordInfo",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DescribeDomainRecordInfo"
+          },
+          "RecordId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteDomainRecord": {
+      "name": "DeleteDomainRecord",
+      "http": {
+        "method": "POST",
+        "uri":"/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteDomainRecord"
+          },
+          "RecordId": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
