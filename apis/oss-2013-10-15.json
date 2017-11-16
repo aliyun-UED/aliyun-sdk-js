@@ -1508,11 +1508,19 @@
       "alias": "GetService",
       "http": {
         "method": "GET",
-        "uri": "/"
+        "uri": "/?marker={Marker}&max-keys={MaxKeys}"
       },
       "input": {
         "type": "structure",
-        "members": {}
+        "members": {
+          "Marker": {
+            "location": "uri"
+          },
+          "MaxKeys": {
+            "location": "uri",
+            "type": "integer"
+          }
+        }
       },
       "output": {
         "type": "structure",
