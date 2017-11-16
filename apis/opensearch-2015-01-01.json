@@ -115,6 +115,38 @@
           }
         }
       }
+    },
+    "suggest": {
+      "name": "suggest",
+      "http": {
+        "method": "GET",
+        "uri": "/suggest?query={query}&index_name={index_name}&suggest_name={suggest_name}&hit={hit}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "query":{
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "index_name": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "suggest_name": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "hit": {
+            "type": "integer",
+            "required": false,
+            "location": "uri"
+          }
+        }
+      }
     }
   },
   "pagination": {
