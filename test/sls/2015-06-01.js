@@ -237,6 +237,7 @@ describe('SLS Function Test', function() {
   describe('CreateConfig', function() {
     it('should create config successfully', function(done) {
       var params = {
+        projectName: projectName,
         configDetail: {
           "configName": "testcategory1",
           "inputType": "file",
@@ -257,13 +258,12 @@ describe('SLS Function Test', function() {
           "outputType": "LogService",
           "outputDetail":
             {
-              "logstoreName": "perfcounter"
+              "logstoreName": logStoreName
             }
         }
       };
       sls.createConfig(params, function(err, data) {
         should(err === null).be.true;
-        console.log(data);
         data.should.have.properties(['request_id', 'headers']);
 
         done();
