@@ -842,17 +842,19 @@
       "name": "ListConfig",
       "http": {
         "method": "GET",
-        "uri": "/configs?offset={Offset}&size={Size}"
+        "uri": "/configs?offset={offset}&size={size}"
       },
       "input": {
         "type": "structure",
         "members": {
-          "Offset": {
+          "offset": {
             "required": false,
+            "type": "integer",
             "location": "uri"
           },
-          "Size": {
+          "size": {
             "required": false,
+            "type": "integer",
             "location": "uri"
           }
         }
@@ -969,13 +971,14 @@
       "name": "getAppliedMachineGroups",
       "http": {
         "method": "GET",
-        "uri": "/configs/{ConfigName}/machinegroups"
+        "uri": "/configs/{configName}/machinegroups"
       },
       "input": {
         "type": "structure",
         "members": {
-          "ConfigName": {
+          "configName": {
             "required": true,
+            "type": "string",
             "location": "uri"
           }
         }
@@ -994,13 +997,14 @@
       "name": "GetConfig",
       "http": {
         "method": "GET",
-        "uri": "/configs/{ConfigName}"
+        "uri": "/configs/{configName}"
       },
       "input": {
         "type": "structure",
         "members": {
-          "ConfigName": {
+          "configName": {
             "required": true,
+            "type": "integer",
             "location": "uri"
           }
         }
@@ -1019,13 +1023,14 @@
       "name": "DeleteConfig",
       "http": {
         "method": "DELETE",
-        "uri": "/configs/{ConfigName}"
+        "uri": "/configs/{configName}"
       },
       "input": {
         "type": "structure",
         "members": {
-          "ConfigName": {
+          "configName": {
             "required": true,
+            "type": "integer",
             "location": "uri"
           }
         }
@@ -1044,7 +1049,7 @@
       "name": "UpdateConfig",
       "http": {
         "method": "PUT",
-        "uri": "/configs/{ConfigName}"
+        "uri": "/configs/{configName}"
       },
       "input": {
         "payload": "configDetail",
