@@ -847,6 +847,11 @@
       "input": {
         "type": "structure",
         "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
           "offset": {
             "required": false,
             "type": "integer",
@@ -880,6 +885,11 @@
         "payload": "configDetail",
         "type": "structure",
         "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
           "configDetail": {
             "type": "structure",
             "required": true,
@@ -895,46 +905,60 @@
                 "type": "structure",
                 "members": {
                   "logType": {
-                    "required": true
+                    "required": true,
+                    "type": "string"
                   },
                   "logPath": {
-                    "required": true
+                    "required": true,
+                    "type": "string"
                   },
                   "filePattern": {
-                    "required": true
+                    "required": true,
+                    "type": "string"
                   },
                   "localStorage": {
-                    "required": true
+                    "required": true,
+                    "type": "boolean"
                   },
                   "timeFormat": {
-                    "required": true
+                    "required": true,
+                    "type": "string"
                   },
                   "logBeginRegex": {
-                    "required": true
+                    "required": true,
+                    "type": "string"
                   },
                   "regex": {
-                    "required": true
+                    "required": true,
+                    "type": "string"
                   },
                   "key": {
-                    "required": true
+                    "required": true,
+                    "type": "list"
                   },
                   "filterKey": {
-                    "required": true
+                    "required": true,
+                    "type": "list"
                   },
                   "filterRegex": {
-                    "required": true
+                    "required": true,
+                    "type": "list"
                   },
                   "topicFormat": {
-                    "required": false
+                    "required": false,
+                    "type": "string"
                   },
                   "preserve": {
-                    "required": false
+                    "required": false,
+                    "type": "boolean"
                   },
                   "preserveDepth": {
-                    "required": false
+                    "required": false,
+                    "type": "integer"
                   },
                   "fileEncoding": {
-                    "required": false
+                    "required": false,
+                    "type": "string"
                   }
                 }
               },
@@ -977,6 +1001,11 @@
       "input": {
         "type": "structure",
         "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
           "configName": {
             "required": true,
             "type": "string",
@@ -1003,6 +1032,11 @@
       "input": {
         "type": "structure",
         "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
           "configName": {
             "required": true,
             "type": "integer",
@@ -1029,6 +1063,11 @@
       "input": {
         "type": "structure",
         "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
           "configName": {
             "required": true,
             "type": "integer",
@@ -1057,6 +1096,11 @@
         "type": "structure",
         "ContentMD5": true,
         "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
           "configName": {
             "type": "string",
             "required": true,
@@ -1160,6 +1204,11 @@
         "ContentMD5": true,
         "payload": "machineGroupDetail",
         "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
           "machineGroupDetail": {
             "type": "structure",
             "required": true,
@@ -1217,6 +1266,11 @@
       "input": {
         "type": "structure",
         "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
           "groupName": {
             "required": true,
             "location": "uri"
@@ -1244,6 +1298,11 @@
         "ContentMD5": true,
         "payload": "machineGroupDetail",
         "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
           "groupName": {
             "required": true,
             "type": "string",
@@ -1306,6 +1365,11 @@
       "input": {
         "type": "structure",
         "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
           "offset": {
             "required": false,
             "location": "uri",
@@ -1342,6 +1406,11 @@
       "input": {
         "type": "structure",
         "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
           "groupName": {
             "required": true,
             "location": "uri",
@@ -1368,6 +1437,11 @@
       "input": {
         "type": "structure",
         "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
           "groupName": {
             "required": true,
             "location": "uri",
@@ -1399,6 +1473,11 @@
       "input": {
         "type": "structure",
         "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
           "groupName": {
             "required": true,
             "location": "uri",
@@ -1430,6 +1509,11 @@
       "input": {
         "type": "structure",
         "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
           "offset": {
             "required": false,
             "location": "uri",
@@ -1466,6 +1550,11 @@
       "input": {
         "type": "structure",
         "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
           "groupName": {
             "required": true,
             "location": "uri",
@@ -1492,6 +1581,11 @@
       "input": {
         "type": "structure",
         "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
           "logstoreName": {
             "required": true,
             "type": "string",
@@ -1549,6 +1643,11 @@
         "payload": "tasks",
         "type": "structure",
         "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
           "logstoreName": {
             "required": true,
             "type": "string",
