@@ -951,7 +951,8 @@
                 }
               },
               "logSample": {
-                "required": true
+                "required": false,
+                "type": "string"
               }
             }
           }
