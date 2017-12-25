@@ -11,6 +11,7 @@ var sls = new ALY.SLS({
 
 var projectName = config.projectName;
 var logStoreName = config.logStoreName;
+var configName = 'testcategory1';
 var TOPIC = 'test/test2';
 
 
@@ -233,18 +234,103 @@ describe('SLS Function Test', function() {
   //   });
   // });
 
-
   describe('CreateConfig', function() {
+    var params = {
+      projectName: projectName,
+      configDetail: {
+        "configName": configName,
+        "inputType": "file",
+        "inputDetail": {
+          "logType": "common_reg_log",
+          "logPath": "/var/log/httpd/",
+          "filePattern": "access*.log",
+          "localStorage": true,
+          "timeFormat": "%Y/%m/%d %H:%M:%S",
+          "logBeginRegex": ".*",
+          "regex": "(\w+)(\s+)",
+          "key" :["key1", "key2"],
+          "filterKey":["key1"],
+          "filterRegex":["regex1"],
+          "fileEncoding":"utf8",
+          "topicFormat": "none"
+        },
+        "outputType": "LogService",
+        "outputDetail":
+          {
+            "logstoreName": logStoreName
+          }
+      }
+    };
     it('should create config successfully', function(done) {
-      var params = {
+      sls.createConfig(params, function(err, data) {
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+
+        done();
+      });
+    });
+
+    it('should fail when create the same config again', function (done) {
+      sls.createConfig(params, function(err, data) {
+        err.code.should.be.exactly(400);
+        err.should.have.property('errorCode', 'ConfigAlreadyExist');
+        err.should.have.properties(['request_id', 'headers', 'errorMessage']);
+        done();
+      });
+    });
+  });
+
+  describe('ListConfig', function () {
+    it('should return config list', function (done) {
+      sls.listConfig({
         projectName: projectName,
+        offset: 0,
+        size: 10
+      }, function (err, data) {
+        should(err === null).be.true;
+        data.body.configs.should.containEql(configName);
+        done();
+      });
+    });
+  });
+
+  describe('GetConfig', function () {
+    it('should return config details when config exists', function (done) {
+      sls.getConfig({
+        projectName: projectName,
+        configName: configName
+      }, function (err, data) {
+        should(err === null).be.true;
+        data.body.configName.should.equal(configName);
+        done();
+      });
+    });
+
+    it('should return error when config not exist', function (done) {
+      sls.getConfig({
+        projectName: projectName,
+        configName: 'xvsdfsdfsdfasfasfsdafsdf'
+      }, function (err, data) {
+        err.code.should.be.exactly(404);
+        err.should.have.property('errorCode', 'ConfigNotExist');
+        err.should.have.properties(['request_id', 'headers', 'errorMessage']);
+        done();
+      });
+    });
+  });
+
+  describe('UpdateConfig', function () {
+    it('should update successfully', function (done) {
+      sls.updateConfig({
+        projectName: projectName,
+        configName: configName,
         configDetail: {
-          "configName": "testcategory1",
+          "configName": configName,
           "inputType": "file",
           "inputDetail": {
             "logType": "common_reg_log",
             "logPath": "/var/log/httpd/",
-            "filePattern": "access*.log",
+            "filePattern": "access.log",
             "localStorage": true,
             "timeFormat": "%Y/%m/%d %H:%M:%S",
             "logBeginRegex": ".*",
@@ -252,7 +338,6 @@ describe('SLS Function Test', function() {
             "key" :["key1", "key2"],
             "filterKey":["key1"],
             "filterRegex":["regex1"],
-            "fileEncoding":"utf8",
             "topicFormat": "none"
           },
           "outputType": "LogService",
@@ -261,13 +346,46 @@ describe('SLS Function Test', function() {
               "logstoreName": logStoreName
             }
         }
-      };
-      sls.createConfig(params, function(err, data) {
+      }, function (err, data) {
         should(err === null).be.true;
         data.should.have.properties(['request_id', 'headers']);
+        done();
+      });
+    });
 
+    it('should return error when config not exists', function (done) {
+      sls.updateConfig({
+        projectName: projectName,
+        configName: 'sfsfsdfsafsaf',
+        configDetail: {
+          "configName": configName,
+          "inputType": "file",
+          "inputDetail": {
+            "logType": "common_reg_log",
+            "logPath": "/var/log/httpd/",
+            "filePattern": "access.log",
+            "localStorage": true,
+            "timeFormat": "%Y/%m/%d %H:%M:%S",
+            "logBeginRegex": ".*",
+            "regex": "(\w+)(\s+)",
+            "key" :["key1", "key2"],
+            "filterKey":["key1"],
+            "filterRegex":["regex1"],
+            "topicFormat": "none"
+          },
+          "outputType": "LogService",
+          "outputDetail":
+            {
+              "logstoreName": logStoreName
+            }
+        }
+      }, function (err, data) {
+        err.code.should.be.exactly(404);
+        err.should.have.property('errorCode', 'ConfigNotExist');
+        err.should.have.properties(['request_id', 'headers', 'errorMessage']);
         done();
       });
     });
   });
+
 });

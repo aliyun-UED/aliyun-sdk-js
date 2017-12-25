@@ -1039,7 +1039,7 @@
           },
           "configName": {
             "required": true,
-            "type": "integer",
+            "type": "string",
             "location": "uri"
           }
         }
@@ -1107,8 +1107,8 @@
             "location": "uri"
           },
           "configDetail": {
-            "required": true,
             "type": "structure",
+            "required": true,
             "members": {
               "configName": {
                 "required": true
@@ -1121,46 +1121,60 @@
                 "type": "structure",
                 "members": {
                   "logType": {
-                    "required": true
+                    "required": true,
+                    "type": "string"
                   },
                   "logPath": {
-                    "required": true
+                    "required": true,
+                    "type": "string"
                   },
                   "filePattern": {
-                    "required": true
+                    "required": true,
+                    "type": "string"
                   },
                   "localStorage": {
-                    "required": true
+                    "required": true,
+                    "type": "boolean"
                   },
                   "timeFormat": {
-                    "required": true
+                    "required": true,
+                    "type": "string"
                   },
                   "logBeginRegex": {
-                    "required": true
+                    "required": true,
+                    "type": "string"
                   },
                   "regex": {
-                    "required": true
+                    "required": true,
+                    "type": "string"
                   },
                   "key": {
-                    "required": true
+                    "required": true,
+                    "type": "list"
                   },
                   "filterKey": {
-                    "required": true
+                    "required": true,
+                    "type": "list"
                   },
                   "filterRegex": {
-                    "required": true
+                    "required": true,
+                    "type": "list"
                   },
                   "topicFormat": {
-                    "required": false
+                    "required": false,
+                    "type": "string"
                   },
                   "preserve": {
-                    "required": false
+                    "required": false,
+                    "type": "boolean"
                   },
                   "preserveDepth": {
-                    "required": false
+                    "required": false,
+                    "type": "integer"
                   },
                   "fileEncoding": {
-                    "required": false
+                    "required": false,
+                    "type": "string"
                   }
                 }
               },
@@ -1177,7 +1191,8 @@
                 }
               },
               "logSample": {
-                "required": true
+                "required": false,
+                "type": "string"
               }
             }
           }
