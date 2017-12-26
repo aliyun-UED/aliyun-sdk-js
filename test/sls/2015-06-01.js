@@ -16,7 +16,17 @@ var groupName = 'testgroup';
 var TOPIC = 'test/test2';
 
 function debugLog(err) {
-  // console.log(err);
+  if (err && err.message) {
+    var msg = err.message;
+    try {
+      msg = JSON.parse(msg);
+    } catch (e) {
+      msg = null;
+    }
+    if (msg) {
+      console.log(msg);
+    }
+  }
 }
 
 describe('SLS Function Test', function() {
