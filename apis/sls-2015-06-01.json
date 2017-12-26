@@ -10,7 +10,7 @@
   "xmlnamespace": "",
   "operations": {
     "putLogs": {
-      "name": "putLogs",
+      "name": "PutLogs",
       "http": {
         "method": "POST",
         "uri": "/logstores/{logStoreName}/shards/lb"
@@ -88,7 +88,7 @@
       }
     },
     "createLogstore": {
-      "name": "createLogstore",
+      "name": "CreateLogstore",
       "http": {
         "method": "POST",
         "uri": "/logstores"
@@ -134,7 +134,7 @@
       }
     },
     "updateLogstore": {
-      "name": "updateLogstore",
+      "name":"UpdateLogstore",
       "http": {
         "method": "PUT",
         "uri": "/logstores/{logstoreName}"
@@ -185,7 +185,7 @@
       }
     },
     "deleteLogstore": {
-      "name": "deleteLogstore",
+      "name": "DeleteLogstore",
       "http": {
         "method": "DELETE",
         "uri": "/logstores/{LogStoreName}"
@@ -215,7 +215,7 @@
       }
     },
     "getLogstore": {
-      "name": "getLogstore",
+      "name": "GetLogstore",
       "http": {
         "method": "GET",
         "uri": "/logstores/{LogStoreName}"
@@ -320,7 +320,7 @@
       }
     },
     "listShards": {
-      "name": "listShards",
+      "name": "ListShards",
       "http": {
         "method": "GET",
         "uri": "/logstores/{logStoreName}/shards"
@@ -341,7 +341,7 @@
       }
     },
     "splitShard": {
-      "name": "splitShard",
+      "name": "SplitShard",
       "http": {
         "method": "POST",
         "uri": "/logstores/{logStoreName}/shards/{ShardId}?action=split&key={HashKey}"
@@ -380,7 +380,7 @@
       }
     },
     "mergeShards": {
-      "name": "mergeShard",
+      "name": "MergeShard",
       "http": {
         "method": "POST",
         "uri": "/logstores/{logStoreName}/shards/{ShardId}?action=merge"
@@ -414,43 +414,8 @@
         }
       }
     },
-    "deleteShard": {
-      "name": "deleteShard",
-      "http": {
-        "method": "DELETE",
-        "uri": "/logstores/{logStoreName}/shards/{ShardId}"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "projectName":{
-            "type": "string",
-            "required": true,
-            "location": "header"
-          },
-          "logStoreName": {
-            "required": true,
-            "location": "uri"
-          },
-          "ShardId": {
-            "required": true,
-            "type":"integer",
-            "location": "uri"
-          }
-        }
-      },
-      "output":{
-        "type": "structure",
-        "members": {
-          "request_id": {
-            "location": "header",
-            "name": "x-log-requestid"
-          }
-        }
-      }
-    },
     "getCursor": {
-      "name": "getCursor",
+      "name": "GetCursor",
       "http": {
         "method": "GET",
         "uri": "/logstores/{logStoreName}/shards/{ShardId}?type=cursor&from={FromTime}"
@@ -490,7 +455,7 @@
       }
     },
     "batchGetLogs": {
-      "name": "batchGetLogs",
+      "name": "BatchGetLogs",
       "http": {
         "method": "GET",
         "uri": "/logstores/{logStoreName}/shards/{ShardId}?type=log&cursor={cursor}&count={count}"
@@ -534,7 +499,7 @@
       }
     },
     "createIndex": {
-      "name": "createIndex",
+      "name": "CreateIndex",
       "http": {
         "method": "POST",
         "uri": "/logstores/{logstoreName}/index"
@@ -597,7 +562,7 @@
       }
     },
     "updateIndex": {
-      "name": "updateIndex",
+      "name": "UpdateIndex",
       "http": {
         "method": "PUT",
         "uri": "/logstores/{logstoreName}/index"
@@ -660,7 +625,7 @@
       }
     },
     "deleteIndex": {
-      "name": "deleteIndex",
+      "name": "DeleteIndex",
       "http": {
         "method": "DELETE",
         "uri": "/logstores/{logstoreName}/index"
@@ -690,7 +655,7 @@
       }
     },
     "getIndex": {
-      "name": "getIndex",
+      "name": "GetIndex",
       "http": {
         "method": "GET",
         "uri": "/logstores/{logstoreName}/index"
@@ -829,6 +794,858 @@
         }
       },
       "output":{
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "listConfig": {
+      "name": "ListConfig",
+      "http": {
+        "method": "GET",
+        "uri": "/configs?offset={offset}&size={size}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "offset": {
+            "required": false,
+            "type": "integer",
+            "location": "uri"
+          },
+          "size": {
+            "required": false,
+            "type": "integer",
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "createConfig": {
+      "name": "CreateConfig",
+      "http": {
+        "method": "POST",
+        "uri": "/configs"
+      },
+      "input": {
+        "ContentMD5": true,
+        "payload": "configDetail",
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "configDetail": {
+            "type": "structure",
+            "required": true,
+            "members": {
+              "configName": {
+                "required": true
+              },
+              "inputType": {
+                "required": true
+              },
+              "inputDetail": {
+                "required": true,
+                "type": "structure",
+                "members": {
+                  "logType": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "logPath": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "filePattern": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "localStorage": {
+                    "required": true,
+                    "type": "boolean"
+                  },
+                  "timeFormat": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "logBeginRegex": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "regex": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "key": {
+                    "required": true,
+                    "type": "list"
+                  },
+                  "filterKey": {
+                    "required": true,
+                    "type": "list"
+                  },
+                  "filterRegex": {
+                    "required": true,
+                    "type": "list"
+                  },
+                  "topicFormat": {
+                    "required": false,
+                    "type": "string"
+                  },
+                  "preserve": {
+                    "required": false,
+                    "type": "boolean"
+                  },
+                  "preserveDepth": {
+                    "required": false,
+                    "type": "integer"
+                  },
+                  "fileEncoding": {
+                    "required": false,
+                    "type": "string"
+                  }
+                }
+              },
+              "outputType": {
+                "required": true
+              },
+              "outputDetail": {
+                "required": true,
+                "type": "structure",
+                "members": {
+                  "logstoreName": {
+                    "required": true
+                  }
+                }
+              },
+              "logSample": {
+                "required": false,
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "getAppliedMachineGroups": {
+      "name": "GetAppliedMachineGroups",
+      "http": {
+        "method": "GET",
+        "uri": "/configs/{configName}/machinegroups"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "configName": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "getConfig": {
+      "name": "GetConfig",
+      "http": {
+        "method": "GET",
+        "uri": "/configs/{configName}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "configName": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "deleteConfig": {
+      "name": "DeleteConfig",
+      "http": {
+        "method": "DELETE",
+        "uri": "/configs/{configName}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "configName": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "updateConfig": {
+      "name": "UpdateConfig",
+      "http": {
+        "method": "PUT",
+        "uri": "/configs/{configName}"
+      },
+      "input": {
+        "payload": "configDetail",
+        "type": "structure",
+        "ContentMD5": true,
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "configName": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "configDetail": {
+            "type": "structure",
+            "required": true,
+            "members": {
+              "configName": {
+                "required": true
+              },
+              "inputType": {
+                "required": true
+              },
+              "inputDetail": {
+                "required": true,
+                "type": "structure",
+                "members": {
+                  "logType": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "logPath": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "filePattern": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "localStorage": {
+                    "required": true,
+                    "type": "boolean"
+                  },
+                  "timeFormat": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "logBeginRegex": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "regex": {
+                    "required": true,
+                    "type": "string"
+                  },
+                  "key": {
+                    "required": true,
+                    "type": "list"
+                  },
+                  "filterKey": {
+                    "required": true,
+                    "type": "list"
+                  },
+                  "filterRegex": {
+                    "required": true,
+                    "type": "list"
+                  },
+                  "topicFormat": {
+                    "required": false,
+                    "type": "string"
+                  },
+                  "preserve": {
+                    "required": false,
+                    "type": "boolean"
+                  },
+                  "preserveDepth": {
+                    "required": false,
+                    "type": "integer"
+                  },
+                  "fileEncoding": {
+                    "required": false,
+                    "type": "string"
+                  }
+                }
+              },
+              "outputType": {
+                "required": true
+              },
+              "outputDetail": {
+                "required": true,
+                "type": "structure",
+                "members": {
+                  "logstoreName": {
+                    "required": true
+                  }
+                }
+              },
+              "logSample": {
+                "required": false,
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "createMachineGroup": {
+      "name": "CreateMachineGroup",
+      "http": {
+        "method": "POST",
+        "uri": "/machinegroups"
+      },
+      "input": {
+        "type": "structure",
+        "ContentMD5": true,
+        "payload": "machineGroupDetail",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "machineGroupDetail": {
+            "type": "structure",
+            "required": true,
+            "members": {
+              "groupName": {
+                "type": "string",
+                "required": true
+              },
+              "groupType": {
+                "type": "string",
+                "required": false
+              },
+              "machineIdentifyType": {
+                "type": "string",
+                "required": true
+              },
+              "groupAttribute": {
+                "required": true,
+                "type": "structure",
+                "members": {
+                  "groupTopic": {
+                    "type": "string",
+                    "required": false
+                  },
+                  "externalName": {
+                    "type": "string",
+                    "required": false
+                  }
+                }
+              },
+              "machineList": {
+                "required": true,
+                "type": "list"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "deleteMachineGroup": {
+      "name": "DeleteMachineGroup",
+      "http": {
+        "method": "DELETE",
+        "uri": "/machinegroups/{groupName}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "groupName": {
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "updateMachineGroup": {
+      "name": "UpdateMachineGroup",
+      "http": {
+        "method": "PUT",
+        "uri": "/machinegroups/{groupName}"
+      },
+      "input": {
+        "type": "structure",
+        "ContentMD5": true,
+        "payload": "machineGroupDetail",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "groupName": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          },
+          "machineGroupDetail": {
+            "type": "structure",
+            "required": true,
+            "members": {
+              "groupName": {
+                "type": "string",
+                "required": true
+              },
+              "groupType": {
+                "type": "string",
+                "required": false
+              },
+              "machineIdentifyType": {
+                "type": "string",
+                "required": true
+              },
+              "groupAttribute": {
+                "required": true,
+                "type": "structure",
+                "members": {
+                  "groupTopic": {
+                    "type": "string",
+                    "required": false
+                  },
+                  "externalName": {
+                    "type": "string",
+                    "required": false
+                  }
+                }
+              },
+              "machineList": {
+                "required": true,
+                "type": "list"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "listMachineGroup": {
+      "name": "ListMachineGroup",
+      "http": {
+        "method": "GET",
+        "uri": "/machinegroups?offset={offset}&size={size}&groupName={groupName}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "offset": {
+            "required": false,
+            "location": "uri",
+            "type": "integer"
+          },
+          "size": {
+            "required": false,
+            "location": "uri",
+            "type": "integer"
+          },
+          "groupName": {
+            "required": false,
+            "location": "uri",
+            "type": "string"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "getMachineGroup": {
+      "name": "GetMachineGroup",
+      "http": {
+        "method": "GET",
+        "uri": "/machinegroups/{groupName}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "groupName": {
+            "required": true,
+            "location": "uri",
+            "type": "string"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "applyConfigToMachineGroup": {
+      "name": "ApplyConfigToMachineGroup",
+      "http": {
+        "method": "PUT",
+        "uri": "/machinegroups/{groupName}/configs/{configName}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "groupName": {
+            "required": true,
+            "location": "uri",
+            "type": "string"
+          },
+          "configName": {
+            "required": true,
+            "location": "uri",
+            "type": "string"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "removeConfigFromMachineGroup": {
+      "name": "RemoveConfigFromMachineGroup",
+      "http": {
+        "method": "DELETE",
+        "uri": "/machinegroups/{groupName}/configs/{configName}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "groupName": {
+            "required": true,
+            "location": "uri",
+            "type": "string"
+          },
+          "configName": {
+            "required": true,
+            "location": "uri",
+            "type": "string"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "listMachines": {
+      "name": "ListMachines",
+      "http": {
+        "method": "GET",
+        "uri": "/machinegroups/{groupName}/machines?offset={offset}&size={size}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "offset": {
+            "required": false,
+            "location": "uri",
+            "type": "integer"
+          },
+          "size": {
+            "required": false,
+            "location": "uri",
+            "type": "integer"
+          },
+          "groupName": {
+            "required": true,
+            "location": "uri",
+            "type": "string"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "getAppliedConfigs": {
+      "name": "GetAppliedConfigs",
+      "http": {
+        "method": "GET",
+        "uri": "/machinegroups/{groupName}/configs"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "groupName": {
+            "required": true,
+            "location": "uri",
+            "type": "string"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "getShipperStatus": {
+      "name": "GetShipperStatus",
+      "http": {
+        "method": "GET",
+        "uri": "/logstores/{logstoreName}/shipper/{shipperName}/tasks?from={from}&to={to}&status={status}&offset={offset}&size={size}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logstoreName": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          },
+          "shipperName": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          },
+          "from": {
+            "required": true,
+            "type": "integer",
+            "location": "uri"
+          },
+          "to": {
+            "required": true,
+            "type": "integer",
+            "location": "uri"
+          },
+          "status": {
+            "required": false,
+            "type": "string",
+            "location": "uri"
+          },
+          "offset": {
+            "required": false,
+            "type": "integer",
+            "location": "uri"
+          },
+          "size": {
+            "required": false,
+            "type": "integer",
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "retryShipperTask": {
+      "name": "RetryShipperTask",
+      "http": {
+        "method": "PUT",
+        "uri": "/logstores/{logstoreName}/shipper/{shipperName}/tasks"
+      },
+      "input": {
+        "payload": "tasks",
+        "type": "structure",
+        "ContentMD5": true,
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logstoreName": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          },
+          "shipperName": {
+            "required": true,
+            "type": "string",
+            "location": "uri"
+          },
+          "tasks": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      },
+      "output": {
         "type": "structure",
         "members": {
           "request_id": {
