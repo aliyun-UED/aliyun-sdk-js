@@ -10,7 +10,7 @@
   "xmlnamespace": "",
   "operations": {
     "putLogs": {
-      "name": "putLogs",
+      "name": "PutLogs",
       "http": {
         "method": "POST",
         "uri": "/logstores/{logStoreName}/shards/lb"
@@ -88,7 +88,7 @@
       }
     },
     "createLogstore": {
-      "name": "createLogstore",
+      "name": "CreateLogstore",
       "http": {
         "method": "POST",
         "uri": "/logstores"
@@ -134,7 +134,7 @@
       }
     },
     "updateLogstore": {
-      "name": "updateLogstore",
+      "name":"UpdateLogstore",
       "http": {
         "method": "PUT",
         "uri": "/logstores/{logstoreName}"
@@ -185,7 +185,7 @@
       }
     },
     "deleteLogstore": {
-      "name": "deleteLogstore",
+      "name": "DeleteLogstore",
       "http": {
         "method": "DELETE",
         "uri": "/logstores/{LogStoreName}"
@@ -215,7 +215,7 @@
       }
     },
     "getLogstore": {
-      "name": "getLogstore",
+      "name": "GetLogstore",
       "http": {
         "method": "GET",
         "uri": "/logstores/{LogStoreName}"
@@ -320,7 +320,7 @@
       }
     },
     "listShards": {
-      "name": "listShards",
+      "name": "ListShards",
       "http": {
         "method": "GET",
         "uri": "/logstores/{logStoreName}/shards"
@@ -341,7 +341,7 @@
       }
     },
     "splitShard": {
-      "name": "splitShard",
+      "name": "SplitShard",
       "http": {
         "method": "POST",
         "uri": "/logstores/{logStoreName}/shards/{ShardId}?action=split&key={HashKey}"
@@ -380,7 +380,7 @@
       }
     },
     "mergeShards": {
-      "name": "mergeShard",
+      "name": "MergeShard",
       "http": {
         "method": "POST",
         "uri": "/logstores/{logStoreName}/shards/{ShardId}?action=merge"
@@ -414,43 +414,8 @@
         }
       }
     },
-    "deleteShard": {
-      "name": "deleteShard",
-      "http": {
-        "method": "DELETE",
-        "uri": "/logstores/{logStoreName}/shards/{ShardId}"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "projectName":{
-            "type": "string",
-            "required": true,
-            "location": "header"
-          },
-          "logStoreName": {
-            "required": true,
-            "location": "uri"
-          },
-          "ShardId": {
-            "required": true,
-            "type":"integer",
-            "location": "uri"
-          }
-        }
-      },
-      "output":{
-        "type": "structure",
-        "members": {
-          "request_id": {
-            "location": "header",
-            "name": "x-log-requestid"
-          }
-        }
-      }
-    },
     "getCursor": {
-      "name": "getCursor",
+      "name": "GetCursor",
       "http": {
         "method": "GET",
         "uri": "/logstores/{logStoreName}/shards/{ShardId}?type=cursor&from={FromTime}"
@@ -490,7 +455,7 @@
       }
     },
     "batchGetLogs": {
-      "name": "batchGetLogs",
+      "name": "BatchGetLogs",
       "http": {
         "method": "GET",
         "uri": "/logstores/{logStoreName}/shards/{ShardId}?type=log&cursor={cursor}&count={count}"
@@ -534,7 +499,7 @@
       }
     },
     "createIndex": {
-      "name": "createIndex",
+      "name": "CreateIndex",
       "http": {
         "method": "POST",
         "uri": "/logstores/{logstoreName}/index"
@@ -597,7 +562,7 @@
       }
     },
     "updateIndex": {
-      "name": "updateIndex",
+      "name": "UpdateIndex",
       "http": {
         "method": "PUT",
         "uri": "/logstores/{logstoreName}/index"
@@ -660,7 +625,7 @@
       }
     },
     "deleteIndex": {
-      "name": "deleteIndex",
+      "name": "DeleteIndex",
       "http": {
         "method": "DELETE",
         "uri": "/logstores/{logstoreName}/index"
@@ -690,7 +655,7 @@
       }
     },
     "getIndex": {
-      "name": "getIndex",
+      "name": "GetIndex",
       "http": {
         "method": "GET",
         "uri": "/logstores/{logstoreName}/index"
