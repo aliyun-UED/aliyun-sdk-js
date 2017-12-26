@@ -993,7 +993,7 @@
       }
     },
     "getAppliedMachineGroups": {
-      "name": "getAppliedMachineGroups",
+      "name": "GetAppliedMachineGroups",
       "http": {
         "method": "GET",
         "uri": "/configs/{configName}/machinegroups"
@@ -1070,7 +1070,7 @@
           },
           "configName": {
             "required": true,
-            "type": "integer",
+            "type": "string",
             "location": "uri"
           }
         }
