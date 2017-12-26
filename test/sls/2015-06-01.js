@@ -388,4 +388,59 @@ describe('SLS Function Test', function() {
     });
   });
 
+  describe('GetAppliedMachineGroups', function() {
+    it('should return empty', function(done) {
+      sls.getAppliedMachineGroups({
+        projectName: projectName,
+        configName: configName,
+      }, function(err, data) {
+        should(err === null).be.true;
+        data.body.count.should.equal(0);
+        data.should.have.properties(['request_id', 'headers']);
+        done();
+      });
+    });
+
+    it('should return error when group not exists', function(done) {
+      sls.getAppliedMachineGroups({
+        projectName: projectName,
+        configName: 'sfsdfsdfsdfsdfsdf'
+      }, function(err, data) {
+        err.code.should.be.exactly(404);
+        err.should.have.property('errorCode', 'ConfigNotExist');
+        done();
+      });
+    });
+  });
+
+  describe('DeleteConfig', function() {
+    it('should remove config if exists', function(done) {
+      var params = {
+        projectName: projectName,
+        configName: configName
+      };
+      sls.deleteConfig(params, function(err, data) {
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+
+        sls.getConfig(params, function(err2, data2) {
+          err2.code.should.be.exactly(404);
+          err2.should.have.property('errorCode', 'ConfigNotExist');
+          done();
+        });
+      });
+    });
+
+    it('should return error when config not exist', function(done) {
+      sls.deleteConfig({
+        projectName: projectName,
+        configName: 'testsdfsdfsdfsdf'
+      }, function(err, data) {
+        err.code.should.be.exactly(404);
+        err.should.have.property('errorCode', 'ConfigNotExist');
+        done();
+      });
+    });
+  });
+
 });
