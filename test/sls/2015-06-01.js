@@ -15,225 +15,293 @@ var configName = 'testcategory1';
 var groupName = 'testgroup';
 var TOPIC = 'test/test2';
 
+function debugLog(err) {
+  // console.log(err);
+}
 
 describe('SLS Function Test', function() {
 
-  this.timeout(60000);
+  this.timeout(1000 * 60 * 30);
 
-  // describe('PutLogs', function() {
-  //
-  //   it('should put logs success, loop 10 times', function(done) {
-  //
-  //     function loopPutLogs(fn) {
-  //       var logs = [];
-  //       var nowT = Math.floor(new Date().getTime() / 1000);
-  //
-  //       for (var i = 101; i > 0; i--) {
-  //         logs.push({
-  //           time: nowT - i,
-  //           contents: [{
-  //             key: 'a',
-  //             value: '1'
-  //           }, {
-  //             key: 'b',
-  //             value: '2'
-  //           }, {
-  //             key: 'c',
-  //             value: '' + Math.random()
-  //           }]
-  //         });
-  //       }
-  //
-  //       var logGroup = {
-  //         logs: logs,
-  //         topic: TOPIC,
-  //         source: '127.0.0.1'
-  //       };
-  //
-  //       sls.putLogs({
-  //         projectName: projectName,
-  //         logStoreName: logStoreName,
-  //         logGroup: logGroup
-  //       }, function(err, data) {
-  //         if (err) {
-  //           console.log(err);
-  //         }
-  //
-  //         should(err === null).be.true;
-  //         data.should.have.properties(['request_id', 'headers']);
-  //
-  //         fn();
-  //       });
-  //     };
-  //
-  //
-  //     var len = 10;
-  //     var _dig = function() {
-  //       console.log('\tloop put logs,', len)
-  //       loopPutLogs(function() {
-  //         len--;
-  //         if (len <= 0) {
-  //           done();
-  //           return;
-  //         }
-  //         setTimeout(function() {
-  //           _dig();
-  //         });
-  //       });
-  //     };
-  //     _dig();
-  //
-  //   });
-  //
-  //
-  //   it('should put logs failed with logstore does not exists ', function(done) {
-  //
-  //     var logGroup = {
-  //       logs: [{
-  //         time: Math.floor(new Date().getTime() / 1000),
-  //         contents: [{
-  //           key: 'a',
-  //           value: '1'
-  //         }, {
-  //           key: 'a',
-  //           value: '2'
-  //         }, {
-  //           key: 'a',
-  //           value: '3'
-  //         }]
-  //       }],
-  //       topic: TOPIC,
-  //       source: '127.0.0.1'
-  //     };
-  //
-  //     sls.putLogs({
-  //       projectName: projectName,
-  //       logStoreName: 'not_exists_logstore',
-  //       logGroup: logGroup
-  //     }, function(err, data) {
-  //
-  //       err.code.should.be.exactly(404);
-  //       err.should.have.property('error_code', 'SLSLogStoreNotExist');
-  //       err.should.have.properties(['request_id', 'headers', 'error_message']);
-  //       done();
-  //     });
-  //   });
-  //
-  //
-  //   afterEach(function(done) {
-  //     setTimeout(done, 2000);
-  //   });
-  //
-  // });
-  //
-  // describe('ListLogStores', function() {
-  //
-  //   it('should list logstores success', function(done) {
-  //
-  //     sls.listLogStores({
-  //       projectName: projectName
-  //     }, function(err, data) {
-  //
-  //       should(err === null).be.true;
-  //       data.count.should.be.above(0);
-  //       data.logstores.should.containEql(logStoreName);
-  //       data.should.have.properties(['request_id', 'headers']);
-  //
-  //       done();
-  //     });
-  //   });
-  // });
-  //
-  // describe('ListTopics', function() {
-  //
-  //   it('should list topics success', function(done) {
-  //
-  //     sls.listTopics({
-  //       projectName: projectName,
-  //       logStoreName: logStoreName
-  //     }, function(err, data) {
-  //
-  //       should(err === null).be.true;
-  //       data.count.should.be.above(0);
-  //       data.topics.should.containEql(TOPIC);
-  //       data.should.have.properties(['request_id', 'headers']);
-  //
-  //       done();
-  //     });
-  //   });
-  // });
-  //
-  // describe('GetHistograms', function() {
-  //
-  //   it('should get histograms success', function(done) {
-  //     var to = Math.floor(new Date().getTime() / 1000);
-  //     var from = to - 1000;
-  //
-  //     sls.getHistograms({
-  //       projectName: projectName,
-  //       logStoreName: logStoreName,
-  //       from: from,
-  //       to: to,
-  //       topic: TOPIC
-  //     }, function(err, data) {
-  //
-  //       should(err === null).be.true;
-  //       data.count.should.be.above(1);
-  //       data.histograms.should.be.an.Array;
-  //
-  //       data.should.have.properties(['progress', 'request_id', 'headers']);
-  //
-  //       done();
-  //     });
-  //   });
-  // });
-  //
-  //
-  // describe('GetLogs', function() {
-  //
-  //   it('should get logs success', function(done) {
-  //     var to = Math.floor(new Date().getTime() / 1000);
-  //     var from = to - 1000;
-  //
-  //     sls.getLogs({
-  //       projectName: projectName,
-  //       logStoreName: logStoreName,
-  //       from: from,
-  //       to: to,
-  //       topic: TOPIC,
-  //       offset: 0,
-  //       line: 2
-  //     }, function(err, data) {
-  //
-  //       should(err === null).be.true;
-  //       data.count.should.be.below(3);
-  //
-  //       data.should.have.properties(['logs', 'request_id', 'headers']);
-  //
-  //       done();
-  //     });
-  //   });
-  //   it('should get logs failed with logstore does not exists ', function(done) {
-  //     var to = Math.floor(new Date().getTime() / 1000);
-  //     var from = to - 1000;
-  //
-  //     sls.getLogs({
-  //       projectName: projectName,
-  //       logStoreName: 'xxoo_not_exists_aslds',
-  //       from: from,
-  //       to: to,
-  //       topic: TOPIC,
-  //       offset: 0,
-  //       line: 2
-  //     }, function(err, data) {
-  //
-  //       err.code.should.be.exactly(404);
-  //       err.should.have.property('error_code', 'SLSLogStoreNotExist');
-  //       err.should.have.properties(['request_id', 'headers', 'error_message']);
-  //       done();
-  //     });
-  //   });
-  // });
+  beforeEach(function(done) {
+    setTimeout(done, 15000);
+  });
+
+  describe('CreateLogStore', function() {
+    it('should return success', function(done) {
+      sls.createLogstore({
+        projectName: projectName,
+        logstoreDetail: {
+          logstoreName: logStoreName,
+          ttl: 1,
+          shardCount: 1
+        }
+      }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        done();
+      });
+    });
+
+    it('should return error if logstore exists', function(done) {
+      sls.createLogstore({
+        projectName: projectName,
+        logstoreDetail: {
+          logstoreName: logStoreName,
+          ttl: 1,
+          shardCount: 1
+        }
+      }, function(err, data) {
+        err.code.should.be.exactly(404);
+        err.should.have.property('errorCode', 'LogStoreAlreadyExist');
+        done();
+      });
+    });
+  });
+
+  describe('UpdateLogstore', function() {
+    it('should return success', function(done) {
+      sls.updateLogstore({
+        projectName: projectName,
+        logstoreName: logStoreName,
+        logstoreDetail: {
+          logstoreName: logStoreName,
+          ttl: 2,
+          shardCount: 1
+        }
+      }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        done();
+      });
+    });
+
+    it('should return error if logstore not exists', function(done) {
+      sls.updateLogstore({
+        projectName: projectName,
+        logstoreName: 'sdfsdfsdfasfdsafsdf',
+        logstoreDetail: {
+          logstoreName: 'sdfsdfsdfasfdsafsdf',
+          ttl: 1,
+          shardCount: 1
+        }
+      }, function(err, data) {
+        err.code.should.be.exactly(404);
+        err.should.have.property('errorCode', 'LogStoreNotExist');
+        done();
+      });
+    });
+  });
+
+  describe('GetLogstore', function() {
+    it('should return log store detail when found', function(done) {
+      sls.getLogstore({
+        projectName: projectName,
+        LogStoreName: logStoreName,
+      }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        data.body.logstoreName.should.equal(logStoreName);
+        done();
+      });
+    });
+  });
+
+  describe('ListLogStores', function() {
+
+    it('should list logstores success', function(done) {
+
+      sls.listLogStores({
+        projectName: projectName
+      }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
+        should(err === null).be.true;
+        data.body.count.should.be.above(0);
+        data.body.logstores.should.containEql(logStoreName);
+        data.should.have.properties(['request_id', 'headers']);
+
+        done();
+      });
+    });
+  });
+
+  describe('ListShards', function() {
+    it('should return success if logstore exists', function(done) {
+      sls.listShards({
+        projectName: projectName,
+        logStoreName: logStoreName,
+      }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        done();
+      });
+    });
+  });
+
+  describe('SplitShard', function() {
+    it('should return success if logstore exists', function(done) {
+      sls.splitShard({
+        projectName: projectName,
+        logStoreName: logStoreName,
+        ShardId: 0,
+        HashKey: 'ef000000000000000000000000000000'
+      }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        done();
+      });
+    });
+  });
+
+  describe('MergeShard', function() {
+    it('should return success if logstore exists', function(done) {
+      sls.mergeShards({
+        projectName: projectName,
+        logStoreName: logStoreName,
+        ShardId: 1,
+      }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        done();
+      });
+    });
+  });
+
+  describe('GetCursor', function() {
+    it('should return success if logstore exists', function(done) {
+      sls.getCursor({
+        projectName: projectName,
+        logStoreName: logStoreName,
+        ShardId: 1,
+        FromTime: Math.floor(new Date().getTime() / 1000)
+      }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
+        should(err === null).be.true;
+        data.body.should.have.property('cursor');
+        data.should.have.properties(['request_id', 'headers']);
+        done();
+      });
+    });
+  });
+
+  describe('BatchGetLogs', function() {
+    it('should return error if cursor is invalid', function(done) {
+      sls.batchGetLogs({
+        projectName: projectName,
+        logStoreName: logStoreName,
+        ShardId: 0,
+        cursor: 'xxxxxx',
+        count: 10
+      }, function(err, data) {
+        err.code.should.be.exactly(400);
+        err.should.have.property('errorCode', 'InvalidCursor');
+        done();
+      });
+    });
+  });
+
+  describe('CreateIndex', function() {
+    it('should return success if logstore exists', function(done) {
+      sls.createIndex({
+        projectName: projectName,
+        logstoreName: logStoreName,
+        indexDetail: {
+          ttl: 30,
+          line: {
+            token: [';'],
+            include_keys: ['key2', 'key3'],
+            caseSensitive: false
+          }
+        }
+      }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        done();
+      });
+    });
+  });
+
+  describe('UpdateIndex', function() {
+    it('should return success if logstore exists', function(done) {
+      sls.updateIndex({
+        projectName: projectName,
+        logstoreName: logStoreName,
+        indexDetail: {
+          ttl: 20,
+          line: {
+            token: [';'],
+            include_keys: ['key2', 'key3'],
+            caseSensitive: false
+          }
+        }
+      }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        done();
+      });
+    });
+  });
+
+  describe('GetIndex', function() {
+    it('should return success if logstore exists', function(done) {
+      sls.getIndex({
+        projectName: projectName,
+        logstoreName: logStoreName,
+      }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        data.body.should.have.properties(['ttl']);
+        done();
+      });
+    });
+  });
+
+  describe('ListTopics', function() {
+    it('should list topics success', function(done) {
+      sls.listTopics({
+        projectName: projectName,
+        logStoreName: logStoreName
+      }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        done();
+      });
+    });
+  });
 
   describe('CreateConfig', function() {
     var params = {
@@ -264,6 +332,9 @@ describe('SLS Function Test', function() {
     };
     it('should create config successfully', function(done) {
       sls.createConfig(params, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
         should(err === null).be.true;
         data.should.have.properties(['request_id', 'headers']);
 
@@ -288,6 +359,9 @@ describe('SLS Function Test', function() {
         offset: 0,
         size: 10
       }, function (err, data) {
+        if (err) {
+          debugLog(err);
+        }
         should(err === null).be.true;
         data.body.configs.should.containEql(configName);
         done();
@@ -301,6 +375,9 @@ describe('SLS Function Test', function() {
         projectName: projectName,
         configName: configName
       }, function (err, data) {
+        if (err) {
+          debugLog(err);
+        }
         should(err === null).be.true;
         data.body.configName.should.equal(configName);
         done();
@@ -348,6 +425,9 @@ describe('SLS Function Test', function() {
             }
         }
       }, function (err, data) {
+        if (err) {
+          debugLog(err);
+        }
         should(err === null).be.true;
         data.should.have.properties(['request_id', 'headers']);
         done();
@@ -359,7 +439,7 @@ describe('SLS Function Test', function() {
         projectName: projectName,
         configName: 'sfsfsdfsafsaf',
         configDetail: {
-          "configName": configName,
+          "configName": 'sfsfsdfsafsaf',
           "inputType": "file",
           "inputDetail": {
             "logType": "common_reg_log",
@@ -395,6 +475,9 @@ describe('SLS Function Test', function() {
         projectName: projectName,
         configName: configName,
       }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
         should(err === null).be.true;
         data.body.count.should.equal(0);
         data.should.have.properties(['request_id', 'headers']);
@@ -406,36 +489,6 @@ describe('SLS Function Test', function() {
       sls.getAppliedMachineGroups({
         projectName: projectName,
         configName: 'sfsdfsdfsdfsdfsdf'
-      }, function(err, data) {
-        err.code.should.be.exactly(404);
-        err.should.have.property('errorCode', 'ConfigNotExist');
-        done();
-      });
-    });
-  });
-
-  describe('DeleteConfig', function() {
-    it('should remove config if exists', function(done) {
-      var params = {
-        projectName: projectName,
-        configName: configName
-      };
-      sls.deleteConfig(params, function(err, data) {
-        should(err === null).be.true;
-        data.should.have.properties(['request_id', 'headers']);
-
-        sls.getConfig(params, function(err2, data2) {
-          err2.code.should.be.exactly(404);
-          err2.should.have.property('errorCode', 'ConfigNotExist');
-          done();
-        });
-      });
-    });
-
-    it('should return error when config not exist', function(done) {
-      sls.deleteConfig({
-        projectName: projectName,
-        configName: 'testsdfsdfsdfsdf'
       }, function(err, data) {
         err.code.should.be.exactly(404);
         err.should.have.property('errorCode', 'ConfigNotExist');
@@ -463,6 +516,9 @@ describe('SLS Function Test', function() {
     };
     it('should return success', function(done) {
       sls.createMachineGroup(params, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
         should(err === null).be.true;
         data.should.have.properties(['request_id', 'headers']);
         done();
@@ -482,6 +538,7 @@ describe('SLS Function Test', function() {
     it('should return success', function(done) {
       sls.updateMachineGroup({
         projectName: projectName,
+        groupName: groupName,
         machineGroupDetail: {
           "groupName" : groupName,
           "groupType" : "",
@@ -497,6 +554,9 @@ describe('SLS Function Test', function() {
           ]
         }
       }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
         should(err === null).be.true;
         data.should.have.properties(['request_id', 'headers']);
         done();
@@ -506,6 +566,7 @@ describe('SLS Function Test', function() {
     it('should return error when group not exist', function(done) {
       sls.updateMachineGroup({
         projectName: projectName,
+        groupName: 'dsfsdsdfsdfsdfsdf',
         machineGroupDetail: {
           "groupName" : 'dsfsdsdfsdfsdfsdf',
           "groupType" : "",
@@ -535,6 +596,9 @@ describe('SLS Function Test', function() {
         offset: 0,
         size: 10
       }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
         should(err === null).be.true;
         data.should.have.properties(['request_id', 'headers']);
         data.body.machinegroups.should.containEql(groupName);
@@ -562,6 +626,9 @@ describe('SLS Function Test', function() {
         projectName: projectName,
         groupName: groupName
       }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
         should(err === null).be.true;
         data.should.have.properties(['request_id', 'headers']);
         data.body.groupName.should.equal(groupName);
@@ -584,42 +651,17 @@ describe('SLS Function Test', function() {
   describe('ApplyConfigToMachineGroup', function() {
 
     it('should return success when group and config exist', function(done) {
-      var params = {
+      sls.applyConfigToMachineGroup({
         projectName: projectName,
-        configDetail: {
-          "configName": configName,
-          "inputType": "file",
-          "inputDetail": {
-            "logType": "common_reg_log",
-            "logPath": "/var/log/httpd/",
-            "filePattern": "access*.log",
-            "localStorage": true,
-            "timeFormat": "%Y/%m/%d %H:%M:%S",
-            "logBeginRegex": ".*",
-            "regex": "(\w+)(\s+)",
-            "key" :["key1", "key2"],
-            "filterKey":["key1"],
-            "filterRegex":["regex1"],
-            "fileEncoding":"utf8",
-            "topicFormat": "none"
-          },
-          "outputType": "LogService",
-          "outputDetail":
-            {
-              "logstoreName": logStoreName
-            }
+        groupName: groupName,
+        configName: configName
+      }, function(err, data) {
+        if (err) {
+          debugLog(err);
         }
-      };
-      sls.createConfig(params, function() {
-        sls.applyConfigToMachineGroup({
-          projectName: projectName,
-          groupName: groupName,
-          configName: configName
-        }, function(err, data) {
-          should(err === null).be.true;
-          data.should.have.properties(['request_id', 'headers']);
-          done();
-        });
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        done();
       });
     });
 
@@ -636,19 +678,14 @@ describe('SLS Function Test', function() {
     });
 
     it('should return error when config not found', function() {
-      sls.deleteConfig({
+      sls.applyConfigToMachineGroup({
         projectName: projectName,
-        configName: configName
-      }, function() {
-        sls.applyConfigToMachineGroup({
-          projectName: projectName,
-          groupName: groupName,
-          configName: configName
-        }, function(err, data) {
-          err.code.should.be.exactly(404);
-          err.should.have.property('errorCode', 'ConfigNotExist');
-          done();
-        });
+        groupName: groupName,
+        configName: 'sdfsdfsdfsdfsdfsdfsdsdf'
+      }, function(err, data) {
+        err.code.should.be.exactly(404);
+        err.should.have.property('errorCode', 'ConfigNotExist');
+        done();
       });
     });
 
@@ -661,6 +698,9 @@ describe('SLS Function Test', function() {
         groupName: groupName,
         configName: configName
       }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
         should(err === null).be.true;
         data.should.have.properties(['request_id', 'headers']);
         done();
@@ -676,6 +716,9 @@ describe('SLS Function Test', function() {
         size: 10,
         groupName: groupName
       }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
         should(err === null).be.true;
         data.should.have.properties(['request_id', 'headers']);
         data.body.count.should.equal(0);
@@ -690,22 +733,12 @@ describe('SLS Function Test', function() {
         projectName: projectName,
         groupName: groupName
       }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
         should(err === null).be.true;
         data.should.have.properties(['request_id', 'headers']);
         data.body.count.should.equal(0);
-        done();
-      });
-    });
-  });
-
-  describe('DeleteMachineGroup', function() {
-    it('should return success', function(done) {
-      sls.deleteMachineGroup({
-        projectName: projectName,
-        groupName: groupName
-      }, function(err, data) {
-        should(err === null).be.true;
-        data.should.have.properties(['request_id', 'headers']);
         done();
       });
     });
@@ -738,6 +771,259 @@ describe('SLS Function Test', function() {
       }, function(err, data) {
         err.code.should.be.exactly(400);
         err.should.have.property('errorCode', 'ParameterInvalid');
+        done();
+      });
+    });
+  });
+
+  describe('GetHistograms', function() {
+
+    it('should get histograms success', function(done) {
+      var to = Math.floor(new Date().getTime() / 1000);
+      var from = to - 1000;
+
+      sls.getHistograms({
+        projectName: projectName,
+        logStoreName: logStoreName,
+        from: from,
+        to: to,
+        topic: TOPIC
+      }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
+        should(err === null).be.true;
+        data.body.should.be.an.Object;
+
+        data.should.have.properties(['request_id', 'headers']);
+
+        done();
+      });
+    });
+  });
+
+  describe('PutLogs', function() {
+
+    it('should put logs success, loop 10 times', function(done) {
+
+      function loopPutLogs(fn) {
+        var logs = [];
+        var nowT = Math.floor(new Date().getTime() / 1000);
+
+        for (var i = 101; i > 0; i--) {
+          logs.push({
+            time: nowT - i,
+            contents: [{
+              key: 'a',
+              value: '1'
+            }, {
+              key: 'b',
+              value: '2'
+            }, {
+              key: 'c',
+              value: '' + Math.random()
+            }]
+          });
+        }
+
+        var logGroup = {
+          logs: logs,
+          topic: TOPIC,
+          source: '127.0.0.1'
+        };
+
+        sls.putLogs({
+          projectName: projectName,
+          logStoreName: logStoreName,
+          logGroup: logGroup
+        }, function(err, data) {
+          if (err) {
+            debugLog(err);
+          }
+
+          should(err === null).be.true;
+          data.should.have.properties(['request_id', 'headers']);
+
+          fn();
+        });
+      };
+
+
+      var len = 10;
+      var _dig = function() {
+        debugLog('\tloop put logs,', len)
+        loopPutLogs(function() {
+          len--;
+          if (len <= 0) {
+            done();
+            return;
+          }
+          setTimeout(function() {
+            _dig();
+          });
+        });
+      };
+      _dig();
+
+    });
+
+
+    it('should put logs failed with logstore does not exists ', function(done) {
+
+      var logGroup = {
+        logs: [{
+          time: Math.floor(new Date().getTime() / 1000),
+          contents: [{
+            key: 'a',
+            value: '1'
+          }, {
+            key: 'a',
+            value: '2'
+          }, {
+            key: 'a',
+            value: '3'
+          }]
+        }],
+        topic: TOPIC,
+        source: '127.0.0.1'
+      };
+
+      sls.putLogs({
+        projectName: projectName,
+        logStoreName: 'not_exists_logstore',
+        logGroup: logGroup
+      }, function(err, data) {
+
+        err.code.should.be.exactly(404);
+        err.should.have.property('errorCode', 'LogStoreNotExist');
+        err.should.have.properties(['request_id', 'headers', 'errorMessage']);
+        done();
+      });
+    });
+  });
+
+  describe('GetLogs', function() {
+
+    it('should get logs success', function(done) {
+      var to = Math.floor(new Date().getTime() / 1000);
+      var from = to - 1000;
+
+      sls.getLogs({
+        projectName: projectName,
+        logStoreName: logStoreName,
+        from: from,
+        to: to,
+        topic: TOPIC,
+        offset: 0,
+        line: 2
+      }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+
+        done();
+      });
+    });
+    it('should get logs failed with logstore does not exists ', function(done) {
+      var to = Math.floor(new Date().getTime() / 1000);
+      var from = to - 1000;
+
+      sls.getLogs({
+        projectName: projectName,
+        logStoreName: 'xxoo_not_exists_aslds',
+        from: from,
+        to: to,
+        topic: TOPIC,
+        offset: 0,
+        line: 2
+      }, function(err, data) {
+
+        err.code.should.be.exactly(404);
+        err.should.have.property('errorCode', 'LogStoreNotExist');
+        err.should.have.properties(['request_id', 'headers', 'errorMessage']);
+        done();
+      });
+    });
+  });
+
+  describe('DeleteConfig', function() {
+    it('should remove config if exists', function(done) {
+      var params = {
+        projectName: projectName,
+        configName: configName
+      };
+      sls.deleteConfig(params, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+
+        sls.getConfig(params, function(err2, data2) {
+          err2.code.should.be.exactly(404);
+          err2.should.have.property('errorCode', 'ConfigNotExist');
+          done();
+        });
+      });
+    });
+
+    it('should return error when config not exist', function(done) {
+      sls.deleteConfig({
+        projectName: projectName,
+        configName: 'testsdfsdfsdfsdf'
+      }, function(err, data) {
+        err.code.should.be.exactly(404);
+        err.should.have.property('errorCode', 'ConfigNotExist');
+        done();
+      });
+    });
+  });
+
+  describe('DeleteMachineGroup', function() {
+    it('should return success', function(done) {
+      sls.deleteMachineGroup({
+        projectName: projectName,
+        groupName: groupName
+      }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        done();
+      });
+    });
+  });
+
+  describe('DeleteIndex', function() {
+    it('should list topics success', function(done) {
+      sls.deleteIndex({
+        projectName: projectName,
+        logstoreName: logStoreName
+      }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        done();
+      });
+    });
+  });
+
+  describe('DeleteLogstore', function() {
+    it('should list topics success', function(done) {
+      sls.deleteLogstore({
+        projectName: projectName,
+        LogStoreName: logStoreName
+      }, function(err, data) {
+        if (err) {
+          debugLog(err);
+        }
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
         done();
       });
     });
