@@ -12,6 +12,7 @@ var sls = new ALY.SLS({
 var projectName = config.projectName;
 var logStoreName = config.logStoreName;
 var configName = 'testcategory1';
+var groupName = 'testgroup';
 var TOPIC = 'test/test2';
 
 
@@ -438,6 +439,305 @@ describe('SLS Function Test', function() {
       }, function(err, data) {
         err.code.should.be.exactly(404);
         err.should.have.property('errorCode', 'ConfigNotExist');
+        done();
+      });
+    });
+  });
+
+  describe('CreateMachineGroup', function() {
+    var params = {
+      projectName: projectName,
+      machineGroupDetail: {
+        "groupName" : groupName,
+        "groupType" : "",
+        "groupAttribute" : {
+          "externalName" : groupName,
+          "groupTopic": "testgrouptopic"
+        },
+        "machineIdentifyType" : "userdefined",
+        "machineList" : [
+          "test-ip1",
+          "test-ip2"
+        ]
+      }
+    };
+    it('should return success', function(done) {
+      sls.createMachineGroup(params, function(err, data) {
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        done();
+      });
+    });
+
+    it('should return error when group exists', function(done) {
+      sls.createMachineGroup(params, function(err, data) {
+        err.code.should.be.exactly(400);
+        err.should.have.property('errorCode', 'MachineGroupAlreadyExist');
+        done();
+      });
+    });
+  });
+
+  describe('UpdateMachineGroup', function() {
+    it('should return success', function(done) {
+      sls.updateMachineGroup({
+        projectName: projectName,
+        machineGroupDetail: {
+          "groupName" : groupName,
+          "groupType" : "",
+          "groupAttribute" : {
+            "externalName" : groupName,
+            "groupTopic": "testgrouptopic"
+          },
+          "machineIdentifyType" : "userdefined",
+          "machineList" : [
+            "test-ip1",
+            "test-ip2",
+            "test-ip3"
+          ]
+        }
+      }, function(err, data) {
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        done();
+      });
+    });
+
+    it('should return error when group not exist', function(done) {
+      sls.updateMachineGroup({
+        projectName: projectName,
+        machineGroupDetail: {
+          "groupName" : 'dsfsdsdfsdfsdfsdf',
+          "groupType" : "",
+          "groupAttribute" : {
+            "externalName" : 'dsfsdsdfsdfsdfsdf',
+            "groupTopic": "testgrouptopic"
+          },
+          "machineIdentifyType" : "userdefined",
+          "machineList" : [
+            "test-ip1",
+            "test-ip2",
+            "test-ip3"
+          ]
+        }
+      }, function(err, data) {
+        err.code.should.be.exactly(404);
+        err.should.have.property('errorCode', 'MachineGroupNotExist');
+        done();
+      });
+    });
+  });
+
+  describe('ListMachineGroup', function() {
+    it('should return the group we just created', function(done) {
+      sls.listMachineGroup({
+        projectName: projectName,
+        offset: 0,
+        size: 10
+      }, function(err, data) {
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        data.body.machinegroups.should.containEql(groupName);
+        done();
+      });
+    });
+    it('should return empty result when groupName not match', function(done) {
+      sls.listMachineGroup({
+        projectName: projectName,
+        offset: 0,
+        size: 10,
+        groupName: 'sdfsdfsdfsdfsdfsdfsdfaaf'
+      }, function(err, data) {
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        data.body.count.should.equal(0);
+        done();
+      });
+    });
+  });
+
+  describe('GetMachineGroup', function() {
+    it('should return machine group detail when found', function(done) {
+      sls.getMachineGroup({
+        projectName: projectName,
+        groupName: groupName
+      }, function(err, data) {
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        data.body.groupName.should.equal(groupName);
+        done();
+      });
+    });
+
+    it('should return error when group not found', function(done) {
+      sls.getMachineGroup({
+        projectName: projectName,
+        groupName: 'sfsdfsdfasfdsafsafasdfsadfasdf'
+      }, function(err, data) {
+        err.code.should.be.exactly(404);
+        err.should.have.property('errorCode', 'MachineGroupNotExist');
+        done();
+      });
+    });
+  });
+
+  describe('ApplyConfigToMachineGroup', function() {
+
+    it('should return success when group and config exist', function(done) {
+      var params = {
+        projectName: projectName,
+        configDetail: {
+          "configName": configName,
+          "inputType": "file",
+          "inputDetail": {
+            "logType": "common_reg_log",
+            "logPath": "/var/log/httpd/",
+            "filePattern": "access*.log",
+            "localStorage": true,
+            "timeFormat": "%Y/%m/%d %H:%M:%S",
+            "logBeginRegex": ".*",
+            "regex": "(\w+)(\s+)",
+            "key" :["key1", "key2"],
+            "filterKey":["key1"],
+            "filterRegex":["regex1"],
+            "fileEncoding":"utf8",
+            "topicFormat": "none"
+          },
+          "outputType": "LogService",
+          "outputDetail":
+            {
+              "logstoreName": logStoreName
+            }
+        }
+      };
+      sls.createConfig(params, function() {
+        sls.applyConfigToMachineGroup({
+          projectName: projectName,
+          groupName: groupName,
+          configName: configName
+        }, function(err, data) {
+          should(err === null).be.true;
+          data.should.have.properties(['request_id', 'headers']);
+          done();
+        });
+      });
+    });
+
+    it('should return error when group not found', function() {
+      sls.applyConfigToMachineGroup({
+        projectName: projectName,
+        groupName: 'sdfsdfsdfsdfadsdfsdf',
+        configName: configName
+      }, function(err, data) {
+        err.code.should.be.exactly(404);
+        err.should.have.property('errorCode', 'MachineGroupNotExist');
+        done();
+      });
+    });
+
+    it('should return error when config not found', function() {
+      sls.deleteConfig({
+        projectName: projectName,
+        configName: configName
+      }, function() {
+        sls.applyConfigToMachineGroup({
+          projectName: projectName,
+          groupName: groupName,
+          configName: configName
+        }, function(err, data) {
+          err.code.should.be.exactly(404);
+          err.should.have.property('errorCode', 'ConfigNotExist');
+          done();
+        });
+      });
+    });
+
+  });
+
+  describe('RemoveConfigFromMachineGroup', function() {
+    it('should return success', function(done) {
+      sls.removeConfigFromMachineGroup({
+        projectName: projectName,
+        groupName: groupName,
+        configName: configName
+      }, function(err, data) {
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        done();
+      });
+    });
+  });
+
+  describe('ListMachines', function() {
+    it('should return success', function(done) {
+      sls.listMachines({
+        projectName: projectName,
+        offset: 0,
+        size: 10,
+        groupName: groupName
+      }, function(err, data) {
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        data.body.count.should.equal(0);
+        done();
+      });
+    });
+  });
+
+  describe('GetAppliedConfigs', function() {
+    it('should return success', function(done) {
+      sls.getAppliedConfigs({
+        projectName: projectName,
+        groupName: groupName
+      }, function(err, data) {
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        data.body.count.should.equal(0);
+        done();
+      });
+    });
+  });
+
+  describe('DeleteMachineGroup', function() {
+    it('should return success', function(done) {
+      sls.deleteMachineGroup({
+        projectName: projectName,
+        groupName: groupName
+      }, function(err, data) {
+        should(err === null).be.true;
+        data.should.have.properties(['request_id', 'headers']);
+        done();
+      });
+    });
+  });
+
+  describe('GetShipperStatus', function() {
+    it('should return error when shipper not exists', function(done) {
+      var to = +new Date();
+      sls.getShipperStatus({
+        projectName: projectName,
+        logstoreName: logStoreName,
+        shipperName: 'test',
+        from: to - 900,
+        to: to
+      }, function(err, data) {
+        err.code.should.be.exactly(400);
+        err.should.have.property('errorCode', 'ParameterInvalid');
+        done();
+      });
+    });
+  });
+
+  describe('RetryShipperTask', function() {
+    it('should return error when shipper not exist', function(done) {
+      sls.retryShipperTask({
+        projectName: projectName,
+        logstoreName: logStoreName,
+        shipperName: 'test',
+        tasks: '["task-id-1", "task-id-2", "task-id-2"]'
+      }, function(err, data) {
+        err.code.should.be.exactly(400);
+        err.should.have.property('errorCode', 'ParameterInvalid');
         done();
       });
     });

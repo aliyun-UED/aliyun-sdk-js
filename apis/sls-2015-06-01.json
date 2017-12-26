@@ -1657,6 +1657,7 @@
       "input": {
         "payload": "tasks",
         "type": "structure",
+        "ContentMD5": true,
         "members": {
           "projectName":{
             "type": "string",
@@ -1675,7 +1676,7 @@
           },
           "tasks": {
             "required": true,
-            "type": "list"
+            "type": "string"
           }
         }
       },
