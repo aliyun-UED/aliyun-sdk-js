@@ -1,8 +1,4 @@
-## 原来 阿里云 js sdk 还能这么用
-
-OSS Browser - 提供类似windows资源管理器功能 https://github.com/aliyun/oss-browser
-
-Open5 - 基于阿里云 Open API 的开源 H5 生成工具　https://github.com/aliyun-UED/open5
+> 注意：该仓库因无人维护及支持，我们将迁移到新的 Node.js SDK 架构下，新的 SDK 采用基础内核 SDK 和各个产品 SDK 独立的形式。新的 Node.js SDK 入口：https://github.com/aliyun/aliyun-openapi-nodejs-sdk 。
 
 ## 安装
 
