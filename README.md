@@ -1,5 +1,3 @@
-> 注意：该仓库因无人维护及支持，我们将迁移到新的 Node.js SDK 架构下，新的 SDK 采用基础内核 SDK 和各个产品 SDK 独立的形式。新的 Node.js SDK 入口：https://github.com/aliyun/aliyun-openapi-nodejs-sdk 。
-
 ## 安装
 
 ### Node.js 安装
