@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 > 注意：该仓库因无人维护及支持，我们将迁移到新的 Node.js SDK 架构下，新的 SDK 采用基础内核 SDK 和各个产品 SDK 独立的形式。新的 Node.js SDK 入口：https://github.com/aliyun/aliyun-openapi-nodejs-sdk 。
 
+=======
+>>>>>>> af5e30182e4f75702fc0b63631fb837309fdd66c
 ## 安装
 
 ### Node.js 安装
@@ -42,8 +45,8 @@ SDK 目前支持下列服务:
 | Aliyun CDN      | ALY.CDN | 2014-11-11 | [CDN API手册](http://imgs-storage.cdn.aliyuncs.com/help/cdn/cdn%20open%20api%20v1.6.pdf) |
 | Aliyun CMS      | ALY.CMS | 2015-10-20 | [CMS API手册](https://help.aliyun.com/document_detail/cms/API_References/New_Metric_OpenAPI_Reference.html?spm=5176.product8314972_cms.6.89.O1ENDP) |
 | Aliyun SLS      | ALY.SLS | 2014-11-18 | [SLS API手册](https://help.aliyun.com/document_detail/29007.html) |
-| Aliyun RAM      | ALY.RAM | 2015-05-15 | [RAM API手册](https://docs.aliyun.com/#/pub/ram) |
-| Aliyun STS      | ALY.STS | 2015-04-01 | [STS API手册](http://docs.aliyun.com/#/pub/ram/sts-user-guide/intro) |
+| Aliyun RAM      | ALY.RAM | 2015-05-15 | [RAM API手册](https://help.aliyun.com/document_detail/28672.html) |
+| Aliyun STS      | ALY.STS | 2015-04-01 | [STS API手册](https://help.aliyun.com/document_detail/28756.html) |
 | Aliyun MTS      | ALY.MTS | 2014-06-18 | [MTS API手册](https://help.aliyun.com/document_detail/29212.html) |
 | Aliyun PUSH      | ALY.PUSH | 2015-08-27 | [PUSH API手册](https://help.aliyun.com/document_detail/mobilepush/api-reference/openapi.html) |
 | Alidayu      | ALY.DAYU | 2015-12-16 | [阿里大于 API手册](https://api.alidayu.com/doc2/apiList.htm) |
