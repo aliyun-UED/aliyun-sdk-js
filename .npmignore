@@ -5,3 +5,6 @@ bower_components/
 
 test*
 
+.idea
+.DS_Store
+.jshintrc
