@@ -1,0 +1,59 @@
+{
+  "format": "pop",
+  "apiVersion": "2018-01-12",
+  "checksumFormat": "md5",
+  "endpointPrefix": "afs",
+  "serviceAbbreviation": "AFS",
+  "serviceFullName": "Aliyun AFS",
+  "signatureVersion": "pop",
+  "timestampFormat": "top",
+  "xmlnamespace": "",
+  "operations": {
+    "authenticateSig": {
+      "name": "AuthenticateSig",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AuthenticateSig"
+          },
+          "ResourceOwnerId": {
+            "type": "string"
+          },
+          "RemoteIp": {
+            "required": true,
+            "type": "string"
+          },
+          "SourceIp": {
+            "type": "string"
+          },
+          "AppKey": {
+            "required": true,
+            "type": "string"
+          },
+          "SessionId": {
+            "required": true,
+            "type": "string"
+          },
+          "Token": {
+            "required": true,
+            "type": "string"
+          },
+          "Sig": {
+            "required": true,
+            "type": "string"
+          },
+          "Scene": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
