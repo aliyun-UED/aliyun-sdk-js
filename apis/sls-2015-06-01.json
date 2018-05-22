@@ -544,7 +544,7 @@
                         }
                     }
                 },
-                "key":{
+                "keys":{
                     "type": "structure"
                 }
             }
