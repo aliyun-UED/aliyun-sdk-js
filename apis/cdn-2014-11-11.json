@@ -2294,6 +2294,12 @@
           "SecurityToken": {
             "type": "string"
           },
+          "CertName": {
+            "type": "string"
+          },
+          "Region": {
+            "type": "string"
+          },
           "DomainName": {
             "required": true,
             "type": "string"
