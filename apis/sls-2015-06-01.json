@@ -9,6 +9,68 @@
   "timestampFormat": "rfc822",
   "xmlnamespace": "",
   "operations": {
+    "createProject": {
+      "name": "CreateProject",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "payload": "projectDetail",
+        "type": "structure",
+        "ContentMD5": true,
+        "members": {
+          "projectDetail":{
+            "required":true,
+            "type": "structure",
+            "members": {
+              "projectName":{
+                  "type":"string",
+                  "required":true
+              },
+              "description":{
+                  "type": "string",
+                  "required": true
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "getProject": {
+      "name": "GetProject",
+      "http": {
+        "method": "GET" ,
+        "uri": "/"
+      },
+      "input": {
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
     "putLogs": {
       "name": "PutLogs",
       "http": {
