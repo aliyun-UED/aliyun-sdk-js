@@ -74,7 +74,7 @@
       "name": "Search",
       "http": {
         "method": "GET",
-        "uri": "/search?query={query}&index_name={index_name}&fetch_fields={fetch_fields}&qp={qp}&disable={disable}&first_formula_name={first_formula_name}&formula_name={formula_name}&summary={summary}"
+        "uri": "/search?query={query}&index_name={index_name}&fetch_fields={fetch_fields}&qp={qp}&disable={disable}&first_formula_name={first_formula_name}&formula_name={formula_name}&summary={summary}&search_type={search_type}&scroll={scroll}&scroll_id={scroll_id}"
       },
       "input": {
         "type": "structure",
@@ -110,6 +110,18 @@
             "location": "uri"
           },
           "summary": {
+            "type": "string",
+            "location": "uri"
+          },
+          "search_type": {
+            "type": "string",
+            "location": "uri"
+          },
+          "scroll": {
+            "type": "string",
+            "location": "uri"
+          },
+          "scroll_id": {
             "type": "string",
             "location": "uri"
           }
