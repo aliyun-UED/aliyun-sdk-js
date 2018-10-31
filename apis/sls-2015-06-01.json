@@ -1716,6 +1716,468 @@
           }
         }
       }
+    },
+    "listAlert": {
+      "name": "ListAlert",
+      "http": {
+        "method": "GET",
+        "uri": "/alerts"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName": {
+            "type": "string",
+            "required": true,
+            "location": "header"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "getAlert": {
+      "name": "GetAlert",
+      "http": {
+        "method": "GET",
+        "uri": "/alerts/{alertName}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName": {
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "alertName": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "createAlert": {
+      "name": "CreateAlert",
+      "http": {
+        "method": "POST",
+        "uri": "/alerts"
+      },
+      "input": {
+        "payload": "alertDetail",
+        "type": "structure",
+        "ContentMD5": true,
+        "members": {
+          "projectName": {
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "alertDetail": {
+            "required": true,
+            "type": "structure",
+            "members": {
+              "actionType": {
+                "type": "string",
+                "requied": true
+              },
+              "alertName": {
+                "type": "string"
+              },
+              "savedsearchName": {
+                "type": "string"
+              },
+              "from": {
+                "type": "string"
+              },
+              "to": {
+                "type": "string"
+              },
+              "roleArn": {
+                "type": "string"
+              },
+              "count": {
+                "type": "integer"
+              },
+              "checkInterval": {
+                "type": "integer"
+              },
+              "alertDetail": {
+                "type": "structure",
+                "required": true,
+                "members": {
+                  "alertKey": {
+                    "type": "string"
+                  },
+                  "comparator": {
+                    "type": "string"
+                  },
+                  "alertValue": {
+                    "type": "string"
+                  }
+                }
+              },
+              "actionDetail": {
+                "type": "structure",
+                "required": true,
+                "members": {
+                  "message": {
+                    "type": "string"
+                  },
+                  "webhook": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "string"
+                  },
+                  "phoneNumber": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "updateAlert": {
+      "name": "UpdateAlert",
+      "http": {
+        "method": "PUT",
+        "uri": "/alerts/{alertName}"
+      },
+      "input": {
+        "payload": "alertDetail",
+        "type": "structure",
+        "ContentMD5": true,
+        "members": {
+          "projectName": {
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "alertName": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "alertDetail": {
+            "required": true,
+            "type": "structure",
+            "members": {
+              "actionType": {
+                "type": "string",
+                "requied": true
+              },
+              "alertName": {
+                "type": "string"
+              },
+              "savedsearchName": {
+                "type": "string"
+              },
+              "from": {
+                "type": "string"
+              },
+              "to": {
+                "type": "string"
+              },
+              "roleArn": {
+                "type": "string"
+              },
+              "count": {
+                "type": "integer"
+              },
+              "checkInterval": {
+                "type": "integer"
+              },
+              "alertDetail": {
+                "type": "structure",
+                "required": true,
+                "members": {
+                  "alertKey": {
+                    "type": "string"
+                  },
+                  "comparator": {
+                    "type": "string"
+                  },
+                  "alertValue": {
+                    "type": "string"
+                  }
+                }
+              },
+              "actionDetail": {
+                "type": "structure",
+                "required": true,
+                "members": {
+                  "message": {
+                    "type": "string"
+                  },
+                  "webhook": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "string"
+                  },
+                  "phoneNumber": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "deleteAlert": {
+      "name": "DeleteAlert",
+      "http": {
+        "method": "DELETE",
+        "uri": "/alerts/{alertName}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName": {
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "alertName": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "listSavedsearch": {
+      "name": "ListSavedsearch",
+      "http": {
+        "method": "GET",
+        "uri": "/savedsearches"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName": {
+            "type": "string",
+            "required": true,
+            "location": "header"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "getSavedsearch": {
+      "name": "GetSavedsearch",
+      "http": {
+        "method": "GET",
+        "uri": "/savedsearches/{savedsearchName}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName": {
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "savedsearchName": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "deleteSavedsearch": {
+      "name": "DeleteSavedsearch",
+      "http": {
+        "method": "DELETE",
+        "uri": "/savedsearches/{savedsearchName}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName": {
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "savedsearchName": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "createSavedsearch": {
+      "name": "CreateSavedsearch",
+      "http": {
+        "method": "POST",
+        "uri": "/savedsearches"
+      },
+      "input": {
+        "payload": "savedsearchDetail",
+        "type": "structure",
+        "ContentMD5": true,
+        "members": {
+          "projectName": {
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "savedsearchDetail": {
+            "required": true,
+            "type": "structure",
+            "members": {
+              "savedsearchName": {
+                "type": "string"
+              },
+              "logstore": {
+                "type": "string"
+              },
+              "topic": {
+                "type": "string"
+              },
+              "searchQuery": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "updateSavedsearch": {
+      "name": "UpdateSavedsearch",
+      "http": {
+        "method": "PUT",
+        "uri": "/savedsearches/{savedsearchName}"
+      },
+      "input": {
+        "payload": "savedsearchDetail",
+        "type": "structure",
+        "ContentMD5": true,
+        "members": {
+          "projectName": {
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "savedsearchName": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "savedsearchDetail": {
+            "required": true,
+            "type": "structure",
+            "members": {
+              "savedsearchName": {
+                "type": "string"
+              },
+              "logstore": {
+                "type": "string"
+              },
+              "topic": {
+                "type": "string"
+              },
+              "searchQuery": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
     }
   },
   "pagination": {
