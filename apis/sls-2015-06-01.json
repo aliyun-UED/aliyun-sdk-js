@@ -2088,8 +2088,8 @@
         }
       }
     },
-    "deleteJob": {
-      "name": "DeleteJob",
+    "deleteAlert": {
+      "name": "DeleteAlert",
       "http": {
         "method": "DELETE",
         "uri": "/jobs/{alertName}"
