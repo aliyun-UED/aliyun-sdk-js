@@ -1721,7 +1721,7 @@
       "name": "ListAlert",
       "http": {
         "method": "GET",
-        "uri": "/alerts"
+        "uri": "/jobs?jobName={alertName}&offset={offset}&size={size}&jobType=Alert&resourceProvider={resourceProvider}"
       },
       "input": {
         "type": "structure",
@@ -1730,6 +1730,22 @@
             "type": "string",
             "required": true,
             "location": "header"
+          },
+          "alertName": {
+            "type": "string",
+            "location": "uri"
+          },
+          "offset": {
+            "type": "string",
+            "location": "uri"
+          },
+          "size": {
+            "type": "string",
+            "location": "uri"
+          },
+          "resourceProvider": {
+            "type": "string",
+            "location": "uri"
           }
         }
       },
@@ -1747,7 +1763,7 @@
       "name": "GetAlert",
       "http": {
         "method": "GET",
-        "uri": "/alerts/{alertName}"
+        "uri": "/jobs/{alertName}"
       },
       "input": {
         "type": "structure",
@@ -1778,7 +1794,7 @@
       "name": "CreateAlert",
       "http": {
         "method": "POST",
-        "uri": "/alerts"
+        "uri": "/jobs"
       },
       "input": {
         "payload": "alertDetail",
@@ -1794,61 +1810,112 @@
             "required": true,
             "type": "structure",
             "members": {
-              "actionType": {
+              "name": {
                 "type": "string",
-                "requied": true
+                "required": true
               },
-              "alertName": {
+              "displayName": {
+                "type": "string",
+                "required": true
+              },
+              "type": {
+                "type": "string",
+                "required": true
+              },
+              "state": {
                 "type": "string"
               },
-              "savedsearchName": {
-                "type": "string"
-              },
-              "from": {
-                "type": "string"
-              },
-              "to": {
-                "type": "string"
-              },
-              "roleArn": {
-                "type": "string"
-              },
-              "count": {
-                "type": "integer"
-              },
-              "checkInterval": {
-                "type": "integer"
-              },
-              "alertDetail": {
+              "schedule": {
                 "type": "structure",
                 "required": true,
                 "members": {
-                  "alertKey": {
-                    "type": "string"
+                  "interval": {
+                    "type": "string",
+                    "required": true
                   },
-                  "comparator": {
-                    "type": "string"
-                  },
-                  "alertValue": {
-                    "type": "string"
+                  "type": {
+                    "type": "string",
+                    "required": true
                   }
                 }
               },
-              "actionDetail": {
+              "configuration": {
                 "type": "structure",
                 "required": true,
                 "members": {
-                  "message": {
-                    "type": "string"
+                  "dashboard": {
+                    "type": "string",
+                    "required": true
                   },
-                  "webhook": {
-                    "type": "string"
+                  "condition": {
+                    "type": "string",
+                    "required": true
                   },
-                  "param": {
-                    "type": "string"
+                  "queryList": {
+                    "type": "list",
+                    "required": true,
+                    "members": {
+                      "type": "structure",
+                      "members": {
+                        "chartTitle": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "query": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "start": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "end": {
+                          "type": "string"
+                        },
+                        "timeSpanType": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "logStore": {
+                          "type": "string",
+                          "required": true
+                        }
+                      }
+                    }
                   },
-                  "phoneNumber": {
-                    "type": "string"
+                  "notificationList": {
+                    "type": "list",
+                    "required": true,
+                    "members": {
+                      "type": "structure",
+                      "members": {
+                        "type": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "content": {
+                          "type": "string"
+                        },
+                        "emailList": {
+                          "type": "list",
+                          "members": {
+                            "type": "string"
+                          }
+                        },
+                        "mobileList": {
+                          "type": "list",
+                          "members": {
+                            "type": "string"
+                          }
+                        },
+                        "serviceUri": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        }
+                      }
+                    }
                   }
                 }
               }
@@ -1870,7 +1937,7 @@
       "name": "UpdateAlert",
       "http": {
         "method": "PUT",
-        "uri": "/alerts/{alertName}"
+        "uri": "/jobs/{alertName}"
       },
       "input": {
         "payload": "alertDetail",
@@ -1891,61 +1958,112 @@
             "required": true,
             "type": "structure",
             "members": {
-              "actionType": {
+              "name": {
                 "type": "string",
-                "requied": true
+                "required": true
               },
-              "alertName": {
+              "displayName": {
+                "type": "string",
+                "required": true
+              },
+              "type": {
+                "type": "string",
+                "required": true
+              },
+              "state": {
                 "type": "string"
               },
-              "savedsearchName": {
-                "type": "string"
-              },
-              "from": {
-                "type": "string"
-              },
-              "to": {
-                "type": "string"
-              },
-              "roleArn": {
-                "type": "string"
-              },
-              "count": {
-                "type": "integer"
-              },
-              "checkInterval": {
-                "type": "integer"
-              },
-              "alertDetail": {
+              "schedule": {
                 "type": "structure",
                 "required": true,
                 "members": {
-                  "alertKey": {
-                    "type": "string"
+                  "interval": {
+                    "type": "string",
+                    "required": true
                   },
-                  "comparator": {
-                    "type": "string"
-                  },
-                  "alertValue": {
-                    "type": "string"
+                  "type": {
+                    "type": "string",
+                    "required": true
                   }
                 }
               },
-              "actionDetail": {
+              "configuration": {
                 "type": "structure",
                 "required": true,
                 "members": {
-                  "message": {
-                    "type": "string"
+                  "dashboard": {
+                    "type": "string",
+                    "required": true
                   },
-                  "webhook": {
-                    "type": "string"
+                  "condition": {
+                    "type": "string",
+                    "required": true
                   },
-                  "param": {
-                    "type": "string"
+                  "queryList": {
+                    "type": "list",
+                    "required": true,
+                    "members": {
+                      "type": "structure",
+                      "members": {
+                        "chartTitle": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "query": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "start": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "end": {
+                          "type": "string"
+                        },
+                        "timeSpanType": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "logStore": {
+                          "type": "string",
+                          "required": true
+                        }
+                      }
+                    }
                   },
-                  "phoneNumber": {
-                    "type": "string"
+                  "notificationList": {
+                    "type": "list",
+                    "required": true,
+                    "members": {
+                      "type": "structure",
+                      "members": {
+                        "type": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "content": {
+                          "type": "string"
+                        },
+                        "emailList": {
+                          "type": "list",
+                          "members": {
+                            "type": "string"
+                          }
+                        },
+                        "mobileList": {
+                          "type": "list",
+                          "members": {
+                            "type": "string"
+                          }
+                        },
+                        "serviceUri": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        }
+                      }
+                    }
                   }
                 }
               }
@@ -1967,7 +2085,69 @@
       "name": "DeleteAlert",
       "http": {
         "method": "DELETE",
-        "uri": "/alerts/{alertName}"
+        "uri": "/jobs/{alertName}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName": {
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "alertName": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "disableAlert": {
+      "name": "DisableAlert",
+      "http": {
+        "method": "PUT",
+        "uri": "/jobs/{alertName}?action=disable"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName": {
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "alertName": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "enableAlert": {
+      "name": "EnableAlert",
+      "http": {
+        "method": "PUT",
+        "uri": "/jobs/{alertName}?action=enable"
       },
       "input": {
         "type": "structure",
