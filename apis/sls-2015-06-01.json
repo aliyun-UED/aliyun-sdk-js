@@ -1898,25 +1898,21 @@
                         },
                         "emailList": {
                           "type": "list",
-                          "required": true,
                           "members": {
                             "type": "string"
                           }
                         },
                         "mobileList": {
                           "type": "list",
-                          "required": true,
                           "members": {
                             "type": "string"
                           }
                         },
                         "serviceUri": {
-                          "type": "string",
-                          "required": true
+                          "type": "string"
                         },
                         "method": {
-                          "type": "string",
-                          "required": true
+                          "type": "string"
                         }
                       }
                     }
@@ -2050,21 +2046,18 @@
                         },
                         "emailList": {
                           "type": "list",
-                          "required": true,
                           "members": {
                             "type": "string"
                           }
                         },
                         "mobileList": {
                           "type": "list",
-                          "required": true,
                           "members": {
                             "type": "string"
                           }
                         },
                         "serviceUri": {
-                          "type": "string",
-                          "required": true
+                          "type": "string"
                         },
                         "method": {
                           "type": "string"
