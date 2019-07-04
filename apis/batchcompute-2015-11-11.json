@@ -9,6 +9,20 @@
   "timestampFormat": "rfc822",
   "xmlnamespace": "",
   "operations": {
+    "getAvailable": {
+      "name": "GetAvailable",
+      "http": {
+        "method": "GET",
+        "uri": "/available"
+      },
+      "input": {
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+        }
+      }
+    },
     "getQuotas": {
       "name": "GetQuotas",
       "http": {
