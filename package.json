@@ -14,17 +14,21 @@
     "cucumber": "",
     "jasmine-node": "",
     "jshint": "",
-    "mocha": "~2.1.0",
+    "mocha": "^6.2.0",
     "repl.history": "",
     "semver": "",
     "should": "~4.6.3"
   },
   "dependencies": {
+    "cucumber": "^5.1.0",
+    "jasmine-node": "^3.0.0",
+    "jshint": "^2.10.2",
     "node_memcached": "1.1.3",
     "pomelo-protobuf": "^0.4.0",
-    "protobufjs": "^4.1.2",
+    "protobufjs": ">=5.0.3",
+    "semver": "^6.3.0",
     "xml2js": "0.4.4",
-    "xmlbuilder": "^2.4.5"
+    "xmlbuilder": "^13.0.2"
   },
   "main": "index.js",
   "browser": {
