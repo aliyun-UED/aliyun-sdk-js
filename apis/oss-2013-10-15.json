@@ -2598,7 +2598,7 @@
         "members": {
           "ACL": {
             "location": "header",
-            "name": "x-oss-acl"
+            "name": "x-oss-object-acl"
           },
           "AccessControlAllowOrigin": {
             "location": "header",
