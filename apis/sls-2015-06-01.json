@@ -520,7 +520,7 @@
       "name": "BatchGetLogs",
       "http": {
         "method": "GET",
-        "uri": "/logstores/{logStoreName}/shards/{ShardId}?type=log&cursor={cursor}&count={count}"
+        "uri": "/logstores/{logStoreName}/shards/{ShardId}?type=log&cursor={cursor}&count={count}&end_cursor={end_cursor}"
       },
       "input": {
         "type": "structure",
@@ -541,6 +541,10 @@
           },
           "cursor": {
             "required": true,
+            "location": "uri"
+          },
+          "end_cursor": {
+            "required": false,
             "location": "uri"
           },
           "count": {
