@@ -8,6 +8,7 @@
 
 考虑到文件大小, 目前 dist/aliyun-sdk.js 中仅包含 oss 服务, 如果需要 build 其他服务, 请按照以下步骤操作:
 
+
 - git clone git@github.com:aliyun-UED/aliyun-sdk-js.git
 - cd aliyun-sdk-js
 - npm install
