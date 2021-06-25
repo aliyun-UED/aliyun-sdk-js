@@ -3446,6 +3446,9 @@
             "required": true,
             "type": "string"
           },
+          "DeletionProtection": {
+            "type": "boolean"
+          },
           "Password": {
             "type": "string"
           },
