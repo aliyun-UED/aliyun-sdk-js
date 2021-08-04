@@ -1,5 +1,5 @@
 {
-  "name": "aliyun-sdk",
+  "name": "@ali/alihealth-aliyun",
   "description": "Aliyun SDK for JavaScript",
   "version": "1.12.3",
   "author": {
@@ -58,5 +58,8 @@
   "keywords": [],
   "scripts": {
     "test": "mocha test"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npm.alibaba-inc.com"
   }
 }
