@@ -801,7 +801,7 @@
       "name": "GetLogs",
       "http": {
         "method": "GET",
-        "uri": "/logstores/{logStoreName}?type=log&from={from}&to={to}&topic={topic}&query={query}&line={line}&offset={offset}&reverse={reverse}"
+        "uri": "/logstores/{logStoreName}?type=log&from={from}&to={to}&topic={topic}&query={query}&line={line}&offset={offset}&reverse={reverse}&powerSql={powerSql}"
       },
       "input": {
         "type": "structure",
@@ -852,6 +852,11 @@
             "required": false,
             "location": "uri",
             "type": "boolean"
+          },
+          "powerSql":{
+            "required": false,
+            "location": "uri",
+            "type": "boolean"
           }
         }
       },
@@ -861,6 +866,200 @@
           "request_id": {
             "location": "header",
             "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "executeLogStoreSql": {
+      "name": "executeLogStoreSql",
+      "http": {
+        "method": "GET",
+        "uri": "/logstores/{logStoreName}?type=log&from={from}&to={to}&topic={topic}&query={query}&line={line}&offset={offset}&reverse={reverse}&powerSql={powerSql}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "logStoreName": {
+            "required": true,
+            "location": "uri"
+          },
+          "from": {
+            "required": false,
+            "location": "uri",
+            "type": "integer"
+          },
+          "to": {
+            "required": false,
+            "location": "uri",
+            "type": "integer"
+          },
+          "query": {
+            "required": false,
+            "location": "uri",
+            "type": "string"
+          },
+          "powerSql":{
+            "required": false,
+            "location": "uri",
+            "type": "boolean"
+          }
+        }
+      },
+      "output":{
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "executeProjectSql": {
+      "name": "executeProjectSql",
+      "http": {
+        "method": "GET",
+        "uri": "/logs?query={query}&powerSql={powerSql}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "query": {
+            "required": false,
+            "location": "uri",
+            "type": "string"
+          },
+          "powerSql":{
+            "required": false,
+            "location": "uri",
+            "type": "boolean"
+          }
+        }
+      },
+      "output":{
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "updateSqlInstance": {
+      "name": "UpdateSqlInstance",
+      "http": {
+        "method": "PUT",
+        "uri": "/sqlinstance"
+      },
+      "input": {
+        "payload": "sqlinstanceDetail",
+        "type": "structure",
+        "ContentMD5": true,
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "sqlinstanceDetail":{
+            "required":true,
+            "type": "structure",
+            "members": {
+                "cu":{
+                    "type": "integer",
+                    "required": true
+                }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+
+    "createSqlInstance": {
+      "name": "CreateSqlInstance",
+      "http": {
+        "method": "POST",
+        "uri": "/sqlinstance"
+      },
+      "input": {
+        "payload": "sqlinstanceDetail",
+        "type": "structure",
+        "ContentMD5": true,
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "sqlinstanceDetail":{
+            "required":true,
+            "type": "structure",
+            "members": {
+                "cu":{
+                    "type": "integer",
+                    "required": true
+                }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "getSqlInstance": {
+      "name": "GetSqlInstance",
+      "http": {
+        "method": "GET",
+        "uri": "/sqlinstance"
+      },
+      "input": {
+        "members": {
+          "projectName":{
+            "type": "string",
+            "required": true,
+            "location": "header"
+          }
+        }
+      },
+      "output": {
+        "type": "list",
+        "members": {
+          "type":"structure",
+          "members":{
+              "name":{
+                  "type":"string"
+              },
+              "cu":{
+                  "type":"integer"
+              }
+              
           }
         }
       }
