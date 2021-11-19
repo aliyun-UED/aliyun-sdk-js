@@ -1,7 +1,7 @@
 {
   "name": "aliyun-sdk",
   "description": "Aliyun SDK for JavaScript",
-  "version": "1.12.3",
+  "version": "1.12.4",
   "author": {
     "name": "chylvina",
     "email": "chylvina@gmail.com"
