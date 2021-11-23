@@ -71,6 +71,42 @@
         }
       }
     },
+    "listProject": {
+      "name": "ListProject",
+      "http": {
+        "method": "GET",
+        "uri": "/?offset={offset}&size={size}&projectName={projectName}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "projectName": {
+            "type": "string",
+            "required": false,
+            "location": "uri"
+          },
+          "offset": {
+            "required": false,
+            "type": "integer",
+            "location": "uri"
+          },
+          "size": {
+            "required": false,
+            "type": "integer",
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
     "putLogs": {
       "name": "PutLogs",
       "http": {
