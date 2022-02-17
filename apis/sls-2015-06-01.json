@@ -170,6 +170,23 @@
               "source": {
                 "type": "string",
                 "required": false
+              },
+              "LogTags": {
+                "type": "list",
+                "required": false,
+                "members": {
+                  "type":"structure",
+                  "members": {
+                    "Key": {
+                      "type": "string",
+                      "required": true
+                    },
+                    "Value": {
+                      "type": "string",
+                      "required": true
+                    }
+                  }
+                }
               }
             }
           }
@@ -1095,7 +1112,7 @@
               "cu":{
                   "type":"integer"
               }
-              
+
           }
         }
       }
