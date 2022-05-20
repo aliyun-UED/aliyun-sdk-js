@@ -9,17 +9,17 @@ var sls = new ALY.SLS({
     "secretAccessKey": "在阿里云sls申请的 secretAccessKey",
 
     // 根据你的 sls project所在地区选择填入
-  	// 北京：http://cn-beijing.sls.aliyuncs.com
-  	// 杭州：http://cn-hangzhou.sls.aliyuncs.com
-  	// 青岛：http://cn-qingdao.sls.aliyuncs.com
-    // 深圳：http://cn-shenzhen.sls.aliyuncs.com
+        // 北京：http://cn-beijing.log.aliyuncs.com
+        // 杭州：http://cn-hangzhou.log.aliyuncs.com
+        // 青岛：http://cn-qingdao.log.aliyuncs.com
+        // 深圳：http://cn-shenzhen.log.aliyuncs.com
 
     // 注意：如果你是在 ECS 上连接 SLS，可以使用内网地址，速度快，没有带宽限制。
-  	// 北京：cn-hangzhou-intranet.sls.aliyuncs.com
-  	// 杭州：cn-beijing-intranet.sls.aliyuncs.com
-  	// 青岛：cn-qingdao-intranet.sls.aliyuncs.com
-    // 深圳：cn-shenzhen-intranet.sls.aliyuncs.com
-    endpoint: 'http://cn-hangzhou.sls.aliyuncs.com',
+        // 北京：cn-hangzhou-intranet.log.aliyuncs.com
+        // 杭州：cn-beijing-intranet.log.aliyuncs.com
+        // 青岛：cn-qingdao-intranet.log.aliyuncs.com
+        // 深圳：cn-shenzhen-intranet.log.aliyuncs.com
+    endpoint: 'http://cn-hangzhou.log.aliyuncs.com',
 
     // 这是 sls sdk 目前支持最新的 api 版本, 不需要修改
     apiVersion: '2015-06-01'
@@ -49,7 +49,6 @@ sls.getLogs(opt, function(error, data){
 | ------| ----|
 | listLogStores | 列出Project下的所有Logstore名称。|
 | putLogs | 向指定的Logstore写入日志。|
-| listTopics | 列出Logstore中的日志主题。|
 | getHistograms | 查询Logstore中的日志在时间轴上的分布。|
 | getLogs | 查询Logstore中的日志数据。|
 
@@ -135,37 +134,7 @@ var logGroup = {
 ```
 
 
-### (3) sls.listTopics(opt, fn)
-#### 参数
-| 参数 | 类型 | 描述 |
-| ------ | ---- | ----- |
-| opt | object | 必选参数 |
-| opt.projectName | string | 必选参数,project名称 |
-| opt.logStoreName | string | 必选参数,logStore名称 |
-| opt.token | string | 可选参数，从某个 topic开始列出,按照字典序,默认为空 |
-| opt.line | int | 可选参数，读取的行数,默认值为 100;范围 0-100 |
-| fn | function | 回调方法,有2个参数(err, data), 详情请看下面的返回格式 |
-
-
-#### 返回data格式
-| 参数 | 类型 | 描述 |
-| ------ | ---- | ----- |
-| request_id | string | request id |
-| count | int | 返回topic总数 |
-| topics | array | 字符串数组 |
-| headers | object | 返回响应头，map |
-
-#### 返回data样例:
-```js
-{
-  request_id: '54D46D27410323AE311F5A2E',
-  count: 2,
-  topics: [ 'topic1', 'topic2' ],
-  headers: { ... }
-}
-```
-
-### (4) sls.getHistograms(opt, fn)
+### (3) sls.getHistograms(opt, fn)
 #### 参数
 | 参数 | 类型 | 描述 |
 | ------ | ---- | ----- |
@@ -209,7 +178,7 @@ var logGroup = {
 ```
 
 
-### (5) sls.getLogs(opt, fn)
+### (4) sls.getLogs(opt, fn)
 #### 参数
 |参数|类型|描述|
 | ------ | ---- | ----- |
