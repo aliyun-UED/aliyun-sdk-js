@@ -837,7 +837,7 @@
       "name": "GetLogs",
       "http": {
         "method": "GET",
-        "uri": "/logstores/{logStoreName}?type=log&from={from}&to={to}&topic={topic}&query={query}&line={line}&offset={offset}&reverse={reverse}&powerSql={powerSql}"
+        "uri": "/logstores/{logStoreName}?type=log&from={from}&to={to}&topic={topic}&query={query}&line={line}&offset={offset}&reverse={reverse}&powerSql={powerSql}&forward={forward}&session={session}"
       },
       "input": {
         "type": "structure",
@@ -893,6 +893,16 @@
             "required": false,
             "location": "uri",
             "type": "boolean"
+          },
+          "forward": {
+            "required": false,
+            "location": "uri",
+            "type": "boolean"
+          },
+          "session": {
+            "required": false,
+            "location": "uri",
+            "type": "string"
           }
         }
       },
