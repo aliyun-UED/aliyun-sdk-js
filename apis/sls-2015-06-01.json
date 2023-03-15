@@ -2423,6 +2423,734 @@
         }
       }
     },
+    "createAlertV2": {
+      "name": "CreateAlert",
+      "http": {
+        "method": "POST",
+        "uri": "/jobs"
+      },
+      "input": {
+        "payload": "alertDetail",
+        "type": "structure",
+        "ContentMD5": true,
+        "members": {
+          "projectName": {
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "alertDetail": {
+            "required": true,
+            "type": "structure",
+            "members": {
+              "name": {
+                "type": "string",
+                "required": true
+              },
+              "displayName": {
+                "type": "string",
+                "required": true
+              },
+              "type": {
+                "type": "string",
+                "required": true
+              },
+              "state": {
+                "type": "string"
+              },
+              "schedule": {
+                "type": "structure",
+                "required": true,
+                "members": {
+                  "type": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "interval": {
+                    "type": "string"
+                  },
+                  "cronExpression": {
+                    "type": "string"
+                  },
+                  "dayOfWeek": {
+                    "type": "integer"
+                  },
+                  "hour": {
+                    "type": "integer"
+                  },
+                  "runImmediately": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "configuration": {
+                "type": "structure",
+                "required": true,
+                "members": {
+                  "version": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "type": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "dashboard": {
+                    "type": "string"
+                  },
+                  "queryList": {
+                    "type": "list",
+                    "required": true,
+                    "members": {
+                      "type": "structure",
+                      "members": {
+                        "storeType": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "region": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "project": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "store": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "roleArn": {
+                          "type": "string"
+                        },
+                        "query": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "timeSpanType": {
+                          "type": "string"
+                        },
+                        "start": {
+                          "type": "string"
+                        },
+                        "end": {
+                          "type": "string"
+                        },
+                        "powerSqlMode": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "groupConfiguration": {
+                    "type": "structure",
+                    "required": true,
+                    "members": {
+                      "type": {
+                        "type": "string",
+                        "required": true
+                      },
+                      "fields": {
+                        "type": "list",
+                        "members": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "joinConfigurations": {
+                    "type": "list",
+                    "members": {
+                      "type": "structure",
+                      "members": {
+                        "type": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "condition": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "severityConfigurations": {
+                    "type": "list",
+                    "required": true,
+                    "members": {
+                      "type": "structure",
+                      "members": {
+                        "severity": {
+                          "type": "integer",
+                          "required": true
+                        },
+                        "evalCondition": {
+                          "type": "structure",
+                          "members": {
+                            "condition": {
+                              "type": "string",
+                              "required": true
+                            },
+                            "countCondition": {
+                              "type": "string",
+                              "required": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "labels": {
+                    "type": "list",
+                    "members": {
+                      "type": "structure",
+                      "required": true,
+                      "members": {
+                        "key": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "value": {
+                          "type": "string",
+                          "required": true
+                        }
+                      }
+                    }
+                  },
+                  "annotations": {
+                    "type": "list",
+                    "members": {
+                      "type": "structure",
+                      "required": true,
+                      "members": {
+                        "key": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "value": {
+                          "type": "string",
+                          "required": true
+                        }
+                      }
+                    }
+                  },
+                  "autoAnnotation": {
+                    "type": "boolean",
+                    "required": true
+                  },
+                  "sendResolved": {
+                    "type": "boolean"
+                  },
+                  "threshold": {
+                    "type": "integer",
+                    "required": true
+                  },
+                  "noDataFire": {
+                    "type": "boolean"
+                  },
+                  "noDataSeverity": {
+                    "type": "integer"
+                  },
+                  "policyConfiguration": {
+                    "type": "structure",
+                    "required": true,
+                    "members": {
+                      "alertPolicyId": {
+                        "type": "string",
+                        "required": true
+                      },
+                      "actionPolicyId": {
+                        "type": "string",
+                        "required": true
+                      },
+                      "repeatInterval": {
+                        "type": "string",
+                        "required": true
+                      },
+                      "useDefault": {
+                        "type": "boolean",
+                        "required": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "updateAlertV2": {
+      "name": "UpdateAlert",
+      "http": {
+        "method": "PUT",
+        "uri": "/jobs/{alertName}"
+      },
+      "input": {
+        "payload": "alertDetail",
+        "type": "structure",
+        "ContentMD5": true,
+        "members": {
+          "projectName": {
+            "type": "string",
+            "required": true,
+            "location": "header"
+          },
+          "alertName": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "alertDetail": {
+            "required": true,
+            "type": "structure",
+            "members": {
+              "name": {
+                "type": "string",
+                "required": true
+              },
+              "displayName": {
+                "type": "string",
+                "required": true
+              },
+              "type": {
+                "type": "string",
+                "required": true
+              },
+              "state": {
+                "type": "string"
+              },
+              "schedule": {
+                "type": "structure",
+                "required": true,
+                "members": {
+                  "type": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "interval": {
+                    "type": "string"
+                  },
+                  "cronExpression": {
+                    "type": "string"
+                  },
+                  "dayOfWeek": {
+                    "type": "integer"
+                  },
+                  "hour": {
+                    "type": "integer"
+                  },
+                  "runImmediately": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "configuration": {
+                "type": "structure",
+                "required": true,
+                "members": {
+                  "version": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "type": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "dashboard": {
+                    "type": "string"
+                  },
+                  "queryList": {
+                    "type": "list",
+                    "required": true,
+                    "members": {
+                      "type": "structure",
+                      "members": {
+                        "storeType": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "region": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "project": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "store": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "roleArn": {
+                          "type": "string"
+                        },
+                        "query": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "timeSpanType": {
+                          "type": "string"
+                        },
+                        "start": {
+                          "type": "string"
+                        },
+                        "end": {
+                          "type": "string"
+                        },
+                        "powerSqlMode": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "groupConfiguration": {
+                    "type": "structure",
+                    "required": true,
+                    "members": {
+                      "type": {
+                        "type": "string",
+                        "required": true
+                      },
+                      "fields": {
+                        "type": "list",
+                        "members": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "joinConfigurations": {
+                    "type": "list",
+                    "members": {
+                      "type": "structure",
+                      "members": {
+                        "type": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "condition": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "severityConfigurations": {
+                    "type": "list",
+                    "required": true,
+                    "members": {
+                      "type": "structure",
+                      "members": {
+                        "severity": {
+                          "type": "integer",
+                          "required": true
+                        },
+                        "evalCondition": {
+                          "type": "structure",
+                          "members": {
+                            "condition": {
+                              "type": "string",
+                              "required": true
+                            },
+                            "countCondition": {
+                              "type": "string",
+                              "required": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "labels": {
+                    "type": "list",
+                    "members": {
+                      "type": "structure",
+                      "required": true,
+                      "members": {
+                        "key": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "value": {
+                          "type": "string",
+                          "required": true
+                        }
+                      }
+                    }
+                  },
+                  "annotations": {
+                    "type": "list",
+                    "members": {
+                      "type": "structure",
+                      "required": true,
+                      "members": {
+                        "key": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "value": {
+                          "type": "string",
+                          "required": true
+                        }
+                      }
+                    }
+                  },
+                  "autoAnnotation": {
+                    "type": "boolean",
+                    "required": true
+                  },
+                  "sendResolved": {
+                    "type": "boolean"
+                  },
+                  "threshold": {
+                    "type": "integer",
+                    "required": true
+                  },
+                  "noDataFire": {
+                    "type": "boolean"
+                  },
+                  "noDataSeverity": {
+                    "type": "integer"
+                  },
+                  "policyConfiguration": {
+                    "type": "structure",
+                    "required": true,
+                    "members": {
+                      "alertPolicyId": {
+                        "type": "string",
+                        "required": true
+                      },
+                      "actionPolicyId": {
+                        "type": "string",
+                        "required": true
+                      },
+                      "repeatInterval": {
+                        "type": "string",
+                        "required": true
+                      },
+                      "useDefault": {
+                        "type": "boolean",
+                        "required": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "createResourceRecord": {
+      "name": "CreateResourceRecord",
+      "http": {
+        "method": "POST",
+        "uri": "/resources/{resourceName}/records"
+      },
+      "input": {
+        "payload": "record",
+        "type": "structure",
+        "ContentMD5": true,
+        "members": {
+          "resourceName": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "record": {
+            "type": "structure",
+            "required": true,
+            "members": {
+              "id": {
+                "type": "string",
+                "required": true
+              },
+              "tag": {
+                "type": "string",
+                "required": true
+              },
+              "value": {
+                "type": "string",
+                "required": true
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "updateResourceRecord": {
+      "name": "UpdateResourceRecord",
+      "http": {
+        "method": "PUT",
+        "uri": "/resources/{resourceName}/records/{recordId}"
+      },
+      "input": {
+        "payload": "record",
+        "type": "structure",
+        "ContentMD5": true,
+        "members": {
+          "resourceName": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "recordId": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "record": {
+            "type": "structure",
+            "required": true,
+            "members": {
+              "id": {
+                "type": "string",
+                "required": true
+              },
+              "tag": {
+                "type": "string",
+                "required": true
+              },
+              "value": {
+                "type": "string",
+                "required": true
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "getResourceRecord": {
+      "name": "GetResourceRecord",
+      "http": {
+        "method": "GET",
+        "uri": "/resources/{resourceName}/records/{recordId}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "resourceName": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "recordId": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "listResourceRecord": {
+      "name": "listResourceRecord",
+      "http": {
+        "method": "GET",
+        "uri": "/resources/{resourceName}/records?offset={offset}&size={size}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "resourceName": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "offset": {
+            "type": "string",
+            "location": "uri"
+          },
+          "size": {
+            "type": "string",
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
+    "deleteResourceRecord": {
+      "name": "DeleteResourceRecord",
+      "http": {
+        "method": "DELETE",
+        "uri": "/resources/{resourceName}/records?ids={recordId}"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "resourceName": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          },
+          "recordId": {
+            "type": "string",
+            "required": true,
+            "location": "uri"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "request_id": {
+            "location": "header",
+            "name": "x-log-requestid"
+          }
+        }
+      }
+    },
     "listSavedsearch": {
       "name": "ListSavedsearch",
       "http": {
