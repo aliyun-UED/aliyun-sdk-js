@@ -139,7 +139,7 @@ var logGroup = {
 | 参数 | 类型 | 描述 |
 | ------ | ---- | ----- |
 | opt | object | 必选参数 |
-| opt.progress|string|必选参数,project名称|
+| opt.projectName|string|必选参数,project名称|
 | opt.logStoreName|string|必选参数,logStore名称|
 | opt.from | int | 必选参数, 开始时间(精度为秒,从 1970-1-1 00:00:00 UTC 计算起的秒数)|
 | opt.to|int | 必选参数,结束时间(精度为秒,从 1970-1-1 00:00:00 UTC 计算起的秒数)|
@@ -183,7 +183,7 @@ var logGroup = {
 |参数|类型|描述|
 | ------ | ---- | ----- |
 |opt|object|必选参数|
-|opt.progress|string|必选参数,project名称|
+|opt.projectName|string|必选参数,project名称|
 |opt.logStoreName|string|必选参数,logStore名称|
 |opt.from|int|必选参数, 开始时间(精度为秒,从 1970-1-1 00:00:00 UTC 计算起的秒数)|
 |opt.to|int|必选参数,结束时间(精度为秒,从 1970-1-1 00:00:00 UTC 计算起的秒数)|
