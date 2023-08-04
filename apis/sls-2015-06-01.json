@@ -639,6 +639,9 @@
                         },
                         "caseSensitive":{
                             "type":"boolean"
+                        },
+                        "chn":{
+                            "type":"boolean"
                         }
                     }
                 },
@@ -701,6 +704,9 @@
                             "type":"list"
                         },
                         "caseSensitive":{
+                            "type":"boolean"
+                        },
+                        "chn":{
                             "type":"boolean"
                         }
                     }
