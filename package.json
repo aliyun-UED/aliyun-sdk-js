@@ -14,7 +14,7 @@
     "cucumber": "^5.1.0",
     "jasmine-node": "^3.0.0",
     "jshint": "^2.10.2",
-    "mocha": "^6.2.0",
+    "mocha": "^10.2.0",
     "repl.history": "",
     "semver": "^6.3.0",
     "should": "~4.6.3"
