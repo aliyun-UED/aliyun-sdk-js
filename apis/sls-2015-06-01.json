@@ -688,8 +688,7 @@
             "type": "structure",
             "members": {
                 "ttl":{
-                    "type":"integer",
-                    "required":true
+                    "type":"integer"
                 },
                 "line":{
                     "type":"structure",
@@ -711,8 +710,8 @@
                         }
                     }
                 },
-                "key":{
-                    "type": "structure"
+                "keys":{
+                    "type": "any"
                 }
             }
           }
