@@ -2073,12 +2073,22 @@
                 "type": "string",
                 "required": true
               },
+              "description": {
+                "type": "string",
+                "required": true
+              },
               "type": {
                 "type": "string",
                 "required": true
               },
               "state": {
                 "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "recyclable": {
+                "type": "boolean"
               },
               "schedule": {
                 "type": "structure",
@@ -2091,6 +2101,14 @@
                   "type": {
                     "type": "string",
                     "required": true
+                  },
+                  "delay": {
+                    "type": "integer",
+                    "required": true
+                  },
+                  "runImmediately": {
+                    "type": "boolean",
+                    "required": true
                   }
                 }
               },
@@ -2098,79 +2116,168 @@
                 "type": "structure",
                 "required": true,
                 "members": {
+                  "annotations": {
+                    "type": "list",
+                    "required": true,
+                    "members": {
+                      "type": "structure",
+                      "members": {
+                        "key": {
+                          "type":"string",
+                          "required": true
+                        },
+                        "value": {
+                          "type":"string",
+                          "required": true
+                        }
+                      }
+                    }
+                  },
+                  "autoAnnotation": {
+                    "type": "boolean",
+                    "required": true
+                  },
+                  "conditionConfiguration": {
+                    "type": "structure",
+                    "required": true,
+                    "members": {
+                      "countCondition": {
+                        "type": "string"
+                      },
+                      "condition": {
+                        "type": "string"
+                      }
+                    }
+                  },
                   "dashboard": {
                     "type": "string",
                     "required": true
                   },
-                  "condition": {
-                    "type": "string",
+                  "groupConfiguration": {
+                    "type": "structure",
+                    "required": true,
+                    "members": {
+                      "fields": {
+                        "type": "list"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "joinConfigurations": {
+                    "type": "list"
+                  },
+                  "labels": {
+                    "type": "list"
+                  },
+                  "noDataFire": {
+                    "type": "boolean",
                     "required": true
+                  },
+                  "noDataSeverity": {
+                    "type": "integer",
+                    "required": true
+                  },
+                  "notifyThreshold": {
+                    "type": "integer",
+                    "required": true
+                  },
+                  "policyConfiguration": {
+                    "type": "structure",
+                    "required": true,
+                    "members": {
+                      "actionPolicyId": {
+                        "type": "string"
+                      },
+                      "alertPolicyId": {
+                        "type": "string"
+                      },
+                      "repeatInterval": {
+                        "type": "string"
+                      },
+                      "useDefault": {
+                        "type": "boolean"
+                      }
+                    }
                   },
                   "queryList": {
                     "type": "list",
-                    "required": true,
                     "members": {
                       "type": "structure",
                       "members": {
-                        "chartTitle": {
-                          "type": "string",
-                          "required": true
-                        },
-                        "query": {
-                          "type": "string",
-                          "required": true
-                        },
-                        "start": {
-                          "type": "string",
-                          "required": true
-                        },
                         "end": {
                           "type": "string"
                         },
-                        "timeSpanType": {
-                          "type": "string",
-                          "required": true
+                        "project": {
+                          "type": "string"
                         },
-                        "logStore": {
-                          "type": "string",
-                          "required": true
+                        "query": {
+                          "type": "string"
+                        },
+                        "region": {
+                          "type": "string"
+                        },
+                        "roleArn": {
+                          "type": "string"
+                        },
+                        "start": {
+                          "type": "string"
+                        },
+                        "store": {
+                          "type": "string"
+                        },
+                        "storeType": {
+                          "type": "string"
+                        },
+                        "timeSpanType": {
+                          "type": "string"
+                        },
+                        "ui": {
+                          "type": "string"
                         }
                       }
                     }
                   },
-                  "notificationList": {
-                    "type": "list",
-                    "required": true,
+                  "sendRecoveryMessage": {
+                    "type":"boolean"
+                  },
+                  "sendResolved": {
+                    "type":"boolean"
+                  },
+                  "severityConfigurations": {
+                    "type":"list",
                     "members": {
                       "type": "structure",
                       "members": {
-                        "type": {
-                          "type": "string",
-                          "required": true
-                        },
-                        "content": {
-                          "type": "string"
-                        },
-                        "emailList": {
-                          "type": "list",
+                        "evalCondition": {
+                          "type": "structure",
                           "members": {
-                            "type": "string"
+                            "condition": {
+                              "type": "string"
+                            },
+                            "countCondition": {
+                              "type": "string"
+                            }
                           }
                         },
-                        "mobileList": {
-                          "type": "list",
-                          "members": {
-                            "type": "string"
-                          }
-                        },
-                        "serviceUri": {
-                          "type": "string"
-                        },
-                        "method": {
-                          "type": "string"
+                        "severity": {
+                          "type": "integer"
                         }
-                      }
+                      } 
                     }
+                  },
+                  "threshold": {
+                    "type": "integer"
+                  },
+                  "throttling": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "version": {
+                    "type": "string"
                   }
                 }
               }
